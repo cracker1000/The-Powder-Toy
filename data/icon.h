@@ -19,4 +19,5 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 #pragma once
+#include "Config.h"
 extern const unsigned char app_icon[];

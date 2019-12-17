@@ -17,3 +17,7 @@ Interface General:
 
 Interface Elements:
 	Vertical Scrolling for Textbox,
+
+Meson:
+	Move FontEditor to its own main
+	Get library pack with wraps

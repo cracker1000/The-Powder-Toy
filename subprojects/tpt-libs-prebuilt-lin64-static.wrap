@@ -1,0 +1,6 @@
+[wrap-file]
+directory = tpt-libs-prebuilt-lin64-static
+
+source_url = https://trigraph.net/powdertoy/tpt-libs-prebuilt-lin64-static.zip
+source_filename = tpt-libs-prebuilt-lin64-static.zip
+source_hash = 4640615a4b9783e7068c187df896ce59f5c01b63a9e7736438adfeffac21bbe4

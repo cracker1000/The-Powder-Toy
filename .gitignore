@@ -19,6 +19,7 @@ scripts/*
 generated/*
 includes/*
 recordings/
+subprojects/
 font/*
 generate
 Makefile.me

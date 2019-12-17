@@ -104,11 +104,13 @@ Client::Client():
 
 void Client::Initialise(ByteString proxyString, bool disableNetwork)
 {
+#if !defined(FONTEDITOR) && !defined(RENDERER)
 	if (GetPrefBool("version.update", false))
 	{
 		SetPref("version.update", false);
 		update_finish();
 	}
+#endif
 
 #ifndef NOHTTP
 	if (!disableNetwork)

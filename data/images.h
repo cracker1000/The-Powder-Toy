@@ -19,5 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 #pragma once
+#include "Config.h"
+
 extern const unsigned char save_to_server_image[];
 extern const unsigned char save_to_disk_image[];

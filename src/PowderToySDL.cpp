@@ -1,6 +1,6 @@
-#ifndef RENDERER
-
+#include "Config.h"
 #include "common/tpt-minmax.h"
+
 #include <map>
 #include <ctime>
 #include <climits>
@@ -44,7 +44,6 @@
 
 #include "gui/game/GameController.h"
 #include "gui/game/GameView.h"
-#include "gui/font/FontEditor.h"
 #include "gui/dialogues/ErrorMessage.h"
 #include "gui/dialogues/ConfirmPrompt.h"
 #include "gui/interface/Keys.h"
@@ -288,12 +287,17 @@ std::map<ByteString, ByteString> readArguments(int argc, char * argv[])
 	arguments["open"] = "";
 	arguments["ddir"] = "";
 	arguments["ptsave"] = "";
+	arguments["font"] = "";
 
 	for (int i=1; i<argc; i++)
 	{
 		if (!strncmp(argv[i], "scale:", 6) && argv[i]+6)
 		{
 			arguments["scale"] = argv[i]+6;
+		}
+		if (!strncmp(argv[i], "font:", 5) && argv[i]+5)
+		{
+			arguments["font"] = argv[i]+5;
 		}
 		else if (!strncmp(argv[i], "proxy:", 6))
 		{
@@ -783,7 +787,6 @@ int main(int argc, char * argv[])
 	try {
 #endif
 
-#ifndef FONTEDITOR
 		gameController = new GameController();
 		engine->ShowWindow(gameController->GetView());
 
@@ -871,14 +874,7 @@ int main(int argc, char * argv[])
 			}
 		}
 
-#else // FONTEDITOR
-		if(argc <= 1)
-			throw std::runtime_error("Not enough arguments");
-		engine->ShowWindow(new FontEditor(argv[1]));
-#endif
-
 		EngineProcess();
-
 		SaveWindowPosition();
 
 #if !defined(DEBUG) && !defined(_DEBUG)
@@ -896,5 +892,3 @@ int main(int argc, char * argv[])
 	Client::Ref().Shutdown();
 	return 0;
 }
-
-#endif

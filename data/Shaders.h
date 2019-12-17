@@ -1,4 +1,5 @@
 #pragma once
+#include "Config.h"
 
 const char *const fireFragment = "#version 120\n\
 uniform sampler2D fireAlpha;\
