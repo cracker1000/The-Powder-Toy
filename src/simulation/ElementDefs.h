@@ -14,7 +14,7 @@
 #define TYPE_LIQUID			0x00002  //2 Liquids
 #define TYPE_SOLID			0x00004  //4 Solids
 #define TYPE_GAS			0x00008  //8 Gases (Includes plasma)
-#define TYPE_ENERGY			0x00010  //16 Energy (Thunder, Light, Neutrons etc.)
+#define TYPE_ENERGY			0x00010  //16 Energy (Thunder, Light, Neutrons etc)
 #define STATE_FLAGS			0x0001F
 #define PROP_CONDUCTS		0x00020  //32 Conducts electricity
 #define PROP_BLACK			0x00040  //64 Absorbs Photons (not currently implemented or used, a photwl attribute might be better)
