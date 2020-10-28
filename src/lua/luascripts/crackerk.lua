@@ -65,6 +65,9 @@ local autohide= Button:new(203,156,80,30, "Auto Hide HUD", "Hide.")
 local autohidey= Button:new(293,156,75,20, "On", "Hide.")
 local autohiden= Button:new(293,176,75,20, "Off", "Hide.")
 
+
+local chud = Button:new(203,188,80,30, "Texter", "Hide.")
+
 local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
 
 function clearm()
@@ -82,6 +85,7 @@ newmenu:removeComponent(bar)
 newmenu:removeComponent(bare)
 newmenu:removeComponent(wiki)
 newmenu:removeComponent(autohide)
+newmenu:removeComponent(chud)
 end
 
 function clearsb()
@@ -119,6 +123,13 @@ newmenu:removeComponent(info2)
 newmenu:removeComponent(autohidey)
 newmenu:removeComponent(autohiden)
 end
+
+function chudf()
+end
+
+chud:action(function(sender)
+clearsb()
+end)
 
 function autohidehud()
 	if tpt.mousey <= 55 then tpt.hud(0) else tpt.hud(1)
@@ -682,7 +693,7 @@ end)
 FPS2:action(function(sender)
 newmenu:removeComponent(FPS1)
 newmenu:removeComponent(FPS2)
-tpt.setfpscap(160)
+tpt.setfpscap(2)
 end)
 
 reset:action(function(sender)
@@ -728,42 +739,16 @@ tpt.setdebug(0X0)
 sim.clearSim()
 end)
 
-hide:action(function(sender)
+function close()
 ui.closeWindow(newmenu) 
 newmenu:addComponent(toggle)
 clearsb()
 clearm()
 tpt.hud(1)
 tpt.set_pause(0)
-end)
-
-
-
-function keyclicky(key)
-    if (key == "j") then 
-  ui.showWindow(newmenu) 
-tpt.set_pause(1)
-tpt.hud(0)
-newmenu:addComponent(deletesparkButton)
-newmenu:addComponent(FPS)
-newmenu:addComponent(info)
-newmenu:addComponent(reset)
-newmenu:addComponent(hide)
-newmenu:addComponent(Ruler)
-newmenu:addComponent(rc)
-newmenu:addComponent(bg)
-newmenu:addComponent(mp)
-newmenu:addComponent(bug)
-newmenu:addComponent(bar)
-newmenu:addComponent(bare)
-newmenu:addComponent(wiki)
-newmenu:addComponent(autohide)
-newmenu:removeComponent(toggle)
-    end
 end
-tpt.register_keypress(keyclicky) 
 
-toggle:action(function(sender)
+function open()
 ui.showWindow(newmenu) 
 tpt.set_pause(1)
 tpt.hud(0)
@@ -781,6 +766,24 @@ newmenu:addComponent(bar)
 newmenu:addComponent(bare)
 newmenu:addComponent(wiki)
 newmenu:addComponent(autohide)
+newmenu:addComponent(chud)
 newmenu:removeComponent(toggle)
+end
+
+hide:action(function(sender)
+close()
 end)
+
+function keyclicky(key)
+    if (key == "j")  then 
+open()
+end
+end
+
+tpt.register_keypress(keyclicky) 
+
+toggle:action(function(sender)
+open()
+end)
+
 interface.addComponent(toggle)

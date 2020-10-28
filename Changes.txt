@@ -12,6 +12,9 @@ J as a key can now be used as a shortcut..
 Add option for in game save feedback (accessible via feedback button.)
 
 todo
+make J also close the menu.
+Add rock
 Update LSNS and HSWC.
+Complete texter.
 
  
