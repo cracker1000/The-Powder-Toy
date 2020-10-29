@@ -2262,6 +2262,7 @@ void GameView::OnDraw()
 				sampleInfo <<"Temp: "<<sample.particle.temp << " f" << ", ";
 				sampleInfo << "Vx: " << sample.particle.vx;
 				sampleInfo << ", Vy: " << sample.particle.vy << ", ";
+				sampleInfo << ", CLR:" << sample.particle.dcolour << ", ";
 				sampleInfo << "#" << sample.ParticleID << ", ";
 			}
 			sampleInfo << "X:" << sample.PositionX << " Y:" << sample.PositionY;
