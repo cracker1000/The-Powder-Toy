@@ -1,4 +1,4 @@
---Cracker1000's custom script 
+--Cracker1000's custom script version 2.0
 
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
@@ -177,11 +177,14 @@ local mouseX, mouseY = tpt.mousex, tpt.mousey
 local text, element, font = '', 'ARAY', '5x7'
 clearsb()
 clearm()
-
+local textTextboxs = Textbox:new(98, 55, 40, 20, '', 'element')
 local textTextbox = Textbox:new(10, 30, 590, 20, '', 'Text')
+local scripthelp = Label:new(3,70,500, 40,"Type the desired output element in element textbox. Press Enter to place the text once you are done. ")
 local place = Button:new(10,55,40,20,"Enter", "Toggle hidden elements.")
 local cancel= Button:new(52,55,40,20,"Cancel", "Shows hidden elements")
 newmenu:addComponent(textTextbox)
+newmenu:addComponent(textTextboxs)
+newmenu:addComponent(scripthelp)
 newmenu:addComponent(place)
 newmenu:addComponent(cancel)
 
@@ -191,15 +194,26 @@ newmenu:addComponent(cancel)
                     end
                 )
 
+ textTextboxs:onTextChanged(
+                    function(sender)
+                            element = textTextboxs:text();
+                    end
+                )
+
+
 cancel:action(function(sender)
+newmenu:removeComponent(scripthelp)
 newmenu:removeComponent(textTextbox)
+newmenu:removeComponent(textTextboxs)
 newmenu:removeComponent(place)
 newmenu:removeComponent(cancel)
 close()
 end)
 
 place:action(function(sender)
+newmenu:removeComponent(scripthelp)
 newmenu:removeComponent(textTextbox)
+newmenu:removeComponent(textTextboxs)
 newmenu:removeComponent(place)
 newmenu:removeComponent(cancel)
 close()
