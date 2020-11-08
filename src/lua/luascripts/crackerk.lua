@@ -2,7 +2,7 @@
 
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
-local creditstxt1 = Label:new(140,-20,80, 60,"Welcome to the Crackerk script 2.0. Tip: 'J' can be used as a shortcut.")
+local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
 newmenu:addComponent(creditstxt1)
 
 local deletesparkButton =  Button:new(10,28,75,30,"Interface", "shows UI related stuff.")
@@ -179,12 +179,12 @@ clearsb()
 clearm()
 local textTextboxs = Textbox:new(98, 55, 40, 20, '', 'element')
 local textTextbox = Textbox:new(10, 30, 590, 20, '', 'Text')
-local scripthelp = Label:new(3,70,500, 40,"Type the desired output element in element textbox. Press Enter to place the text once you are done. ")
+local scripthelp = Label:new(3,70,400, 60,"\n\nTexter help:\nType the desired output element in element textbox. You can also insert newlines.\nPress Enter to place the text once you are done.")
 local place = Button:new(10,55,40,20,"Enter", "Toggle hidden elements.")
 local cancel= Button:new(52,55,40,20,"Cancel", "Shows hidden elements")
 newmenu:addComponent(textTextbox)
 newmenu:addComponent(textTextboxs)
-newmenu:addComponent(scripthelp)
+newmenu:addComponent(scripthelp) 
 newmenu:addComponent(place)
 newmenu:addComponent(cancel)
 
@@ -323,9 +323,9 @@ clearsb()
 end)
 
 wiki:action(function(sender)
-local creditw = Window:new(-15,-15, 624, 422)
+local creditw = Window:new(-15,-15, 626, 422)
 local close2 = Button:new(512, 400, 100, 15, "Close wiki")
-local creditstxt = Label:new(6,-25, 598, 418, " WELCOME TO THE OFFLINE WIKI VERSION 2.0.\n\n CWIR: Customisable wire, conducts sprk at variable speed. Use .tmp to customise. (Range 0 to 30).\n C-16: A powerful explosive. Explodes creating pressure about 40 units when above 65C.\n TIMC: Time based convertor, converts into it's ctype when sparked with PSCN. Timer set using .tmp, default is 100.\n FUEL: FUEL. Fuel having high calorific value.\n THRM: Thermostat. Sets the temp of surrounding according to its own temp.\n CLNT: Coolant. Cools down the temp of the system, Use .tmp to configure the cooling/heating power. \n DMRN: Demron. Radioactive shielding material and a better insulator.\n FNTC & FPTC: Faster versions of NTCT and PTCT.\n PINV: Powered Invisible, allows particles to move through when activated.\n UV: Ultra violet rays, heals stkm and figh, grows plnt, can sprk pscn and evaporates watr.\n SUN.: Sun, PLNT grow in direction of sunlight, emits radiation, makes PSCN spark and heals STKMs.\n LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\n Reacts with different elements like O2, WATR, ACID etc as IRL.\n LED:  Light Emmiting Diode. Use with PSCN and NSCN. Temp sets the brightness.\n Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow and 5 = pink. \n QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp.\n PHOS: White, slowly turns into red phosphorus with time. When in contact with O2, burns blue or red based on .tmp.\n Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n CMNT: Cement, heats up when mixed with water and gets solidified, darkens when solidified.\n NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n PRMT: Promethium, radioactive. Catches fire at high velocity (>12), creats NEUT when in reacted with PLUT. \n Explodes at low temp and emits neut at high temp.\n CLUD: Realistic cloud, rains and creates LIGH after sometime.\n BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n ECLR: Electronic eraser, clears the defined radius when sparked with PSCN. NSCN clears everything. Use.tmp as radius.")
+local creditstxt = Label:new(6,-25, 598, 418, " WELCOME TO THE OFFLINE WIKI VERSION 2.0.\n\n CWIR: Customisable wire, conducts sprk at variable speed. Use .tmp to customise (Range is 0 to 20).\n C-16: A powerful explosive. Explodes creating pressure about 40 units when above 65C.\n TIMC: Time based convertor, converts into it's ctype when sparked with PSCN. Timer set using .tmp, default is 100.\n FUEL: FUEL. Fuel having high calorific value.\n THRM: Thermostat. Sets the temp of surrounding according to its own temp.\n CLNT: Coolant. Cools down the temp of the system, Use .tmp to configure the cooling/heating power. \n DMRN: Demron. Radioactive shielding material and a better insulator.\n FNTC & FPTC: Faster versions of NTCT and PTCT.\n PINV: Powered Invisible, allows particles to move through when activated.\n UV: Ultra violet rays, heals stkm and figh, grows plnt, can sprk pscn and evaporates watr.\n SUN.: Sun, PLNT grow in direction of sunlight, emits radiation, makes PSCN spark and heals STKMs.\n LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\n Reacts with different elements like O2, WATR, ACID etc as IRL.\n LED:  Light Emmiting Diode. Use with PSCN and NSCN. Temp sets the brightness.\n Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow and 5 = pink. \n QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp.\n PHOS: White, slowly turns into red phosphorus with time. When in contact with O2, burns blue or red based on .tmp.\n Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n CMNT: Cement, heats up when mixed with water and gets solidified, darkens when solidified.\n NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n PRMT: Promethium, radioactive. Catches fire at high velocity (>12), creats NEUT when in reacted with PLUT. \n Explodes at low temp and emits neut at high temp.\n CLUD: Realistic cloud, rains and creates LIGH after sometime.\n BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n ECLR: Electronic eraser, clears the defined radius when sparked with PSCN. NSCN clears everything. Use.tmp as radius.")
 creditw:addComponent(creditstxt)
 creditw:addComponent(close2)
 close2:action(function() ui.closeWindow(creditw) end)
@@ -468,7 +468,6 @@ newmenu:removeComponent(rc2)
 end)
 
 function theme()
-if MANAGER.getsetting("CRK", "savergb") == "0" then 
 ar = MANAGER.getsetting("CRK", "ar")
 ag = MANAGER.getsetting("CRK", "ag")
 ab = MANAGER.getsetting("CRK", "ab")
@@ -512,14 +511,9 @@ tpt.drawline(613,359,627,359,ar,ag,ab,al)
 tpt.drawline(613,375,627,375,ar,ag,ab,al)
 tpt.drawline(613,391,627,391,ar,ag,ab,al)
 end
-end
 
 frameCount,colourRED,colourGRN,colourBLU = 0,0,0,0
 function colourblender()
-if MANAGER.getsetting("CRK", "savergb") == nil then
-savergb = 1
-end 
-
  colourRGB = {colourRED,colourGRN,colourBLU}
  if frameCount > 1529 then frameCount = 0 else frameCount = frameCount + 1 end
  if frameCount > 0 and frameCount < 255 then
@@ -584,12 +578,10 @@ tpt.drawline(613,343,627,343,colourRED,colourGRN,colourBLU,255)
 tpt.drawline(613,359,627,359,colourRED,colourGRN,colourBLU,255)
 tpt.drawline(613,375,627,375,colourRED,colourGRN,colourBLU,255)
 tpt.drawline(613,391,627,391,colourRED,colourGRN,colourBLU,255)
-tpt.drawline(1, 0, 310, 0, colourRED,colourGRN,colourBLU,255)
-tpt.drawline(340, 0, 610, 0,colourRED,colourGRN,colourBLU,255)
+tpt.drawline(1,0, 312,0,colourRED,colourGRN,colourBLU,250)
+tpt.drawline(338,0, 611,0,colourRED,colourGRN,colourBLU,250)
 end
 
-tpt.register_step(colourblender)
-tpt.register_step(theme)
 mp:action(function(sender)
 clearsb()
 fs.makeDirectory("scripts")
@@ -615,7 +607,7 @@ newmenu:removeComponent(mp8)
 end
 
 mp1:action(function(sender)
-MANAGER.savesetting("CRK","savergb",0)
+MANAGER.savesetting("CRK","savergb",2)
 MANAGER.savesetting("CRK","ar",70)
 MANAGER.savesetting("CRK","ag",70)
 MANAGER.savesetting("CRK","ab",70)
@@ -626,7 +618,7 @@ mpremove()
 end)
 
 mp2:action(function(sender)
-MANAGER.savesetting("CRK","savergb",0)
+MANAGER.savesetting("CRK","savergb",2)
 MANAGER.savesetting("CRK","ar",255)
 MANAGER.savesetting("CRK","ag",0)
 MANAGER.savesetting("CRK","ab",0)
@@ -637,7 +629,7 @@ mpremove()
 end)
 
 mp3:action(function(sender)
-MANAGER.savesetting("CRK","savergb",0)
+MANAGER.savesetting("CRK","savergb",2)
 MANAGER.savesetting("CRK","ar",0)
 MANAGER.savesetting("CRK","ag",0)
 MANAGER.savesetting("CRK","ab",255)
@@ -648,7 +640,7 @@ mpremove()
 end)
 
 mp4:action(function(sender)
-MANAGER.savesetting("CRK","savergb",0)
+MANAGER.savesetting("CRK","savergb",2)
 MANAGER.savesetting("CRK","ar",0)
 MANAGER.savesetting("CRK","ag",255)
 MANAGER.savesetting("CRK","ab",0)
@@ -659,7 +651,7 @@ mpremove()
 end)
 
 mp5:action(function(sender)
-MANAGER.savesetting("CRK","savergb",0)
+MANAGER.savesetting("CRK","savergb",2)
 MANAGER.savesetting("CRK","ar",255)
 MANAGER.savesetting("CRK","ag",255)
 MANAGER.savesetting("CRK","ab",0)
@@ -670,23 +662,24 @@ mpremove()
 end)
 
 mp6:action(function(sender)
-MANAGER.savesetting("CRK","savergb",0)
+MANAGER.savesetting("CRK","savergb",2)
 MANAGER.savesetting("CRK","ar",255)
 MANAGER.savesetting("CRK","ag",150)
 MANAGER.savesetting("CRK","ab",0)
 MANAGER.savesetting("CRK","al",255)
+tpt.register_step(topbar)
 tpt.register_step(theme)
 tpt.unregister_step(colourblender)
 mpremove()
 end)
 
 mp7:action(function(sender)
-MANAGER.savesetting("CRK","savergb",0)
+MANAGER.savesetting("CRK","savergb",2)
 MANAGER.savesetting("CRK","ar",255)
 MANAGER.savesetting("CRK","ag",255)
 MANAGER.savesetting("CRK","ab",255)
 MANAGER.savesetting("CRK","al",255)
-tpt.register_step(theme)
+tpt.register_step(topbar)
 tpt.unregister_step(colourblender)
 mpremove()
 end)
@@ -694,16 +687,15 @@ end)
 mp8:action(function(sender)
 MANAGER.savesetting("CRK","savergb",1)
 tpt.register_step(colourblender)
+tpt.unregister_step(topbar)
 tpt.unregister_step(theme)
 mpremove()
 end)
 
 function topbar()
-tpt.drawline(1, 0, 310, 0, ar, ag, ab,150)
-tpt.drawline(340, 0, 610, 0,ar, ag, ab,150)
+tpt.drawline(1,0, 312,0, ar, ag, ab,200)
+tpt.drawline(338,0, 611,0, ar, ag, ab,200)
 end
-
-tpt.register_step(topbar)
 
 bar:action(function(sender)
 clearsb()
@@ -721,6 +713,17 @@ tpt.unregister_step(topbar)
 clearsb()
 end)
 
+function startupcheck()
+
+if MANAGER.getsetting("CRK", "savergb") == "2" then
+tpt.register_step(theme)
+tpt.register_step(topbar)
+else
+tpt.register_step(colourblender)
+end
+end
+
+startupcheck()
 
 Ruler:action(function(sender)
 clearsb()
@@ -866,8 +869,8 @@ hide:action(function(sender)
 close()
 end)
 
-function keyclicky(key)
-    if (key == "j")  then 
+function keyclicky(key, nkey, modifier, event)
+    if (key =="j" and event == 1)  then 
 open()
 end
 end

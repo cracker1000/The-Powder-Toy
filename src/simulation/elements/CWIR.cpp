@@ -51,7 +51,7 @@ static int update(UPDATE_FUNC_ARGS)
 {
 	int rx, ry, r;
 	int cust = parts[i].tmp;
-	if (parts[i].tmp < 0 || parts[i].tmp > 30)
+	if (parts[i].tmp < 0 || parts[i].tmp > 20)
 	{
 		parts[i].tmp = 4;
 	}
