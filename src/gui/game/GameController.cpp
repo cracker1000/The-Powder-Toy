@@ -779,6 +779,12 @@ void GameController::Tick()
 #endif
 		firstTick = false;
 	}
+	if (gameModel->SelectNextIdentifier.length())
+	{
+		gameModel->BuildMenus();
+		gameModel->SetActiveTool(gameModel->SelectNextTool, gameModel->GetToolFromIdentifier(gameModel->SelectNextIdentifier));
+		gameModel->SelectNextIdentifier.clear();
+	}
 	for(std::vector<DebugInfo*>::iterator iter = debugInfo.begin(), end = debugInfo.end(); iter != end; iter++)
 	{
 		if ((*iter)->debugID & debugFlags)
@@ -835,7 +841,7 @@ void GameController::ResetSpark()
 
 void GameController::SwitchGravity()
 {
-	gameModel->GetSimulation()->gravityMode = (gameModel->GetSimulation()->gravityMode+1)%5;
+	gameModel->GetSimulation()->gravityMode = (gameModel->GetSimulation()->gravityMode + 1) % 5;
 
 	switch (gameModel->GetSimulation()->gravityMode)
 	{
@@ -1120,6 +1126,10 @@ void GameController::SetActiveTool(int toolSelection, Tool * tool)
 	}
 	if(tool->GetIdentifier() == "DEFAULT_UI_PROPERTY")
 		((PropertyTool *)tool)->OpenWindow(gameModel->GetSimulation());
+	if(tool->GetIdentifier() == "DEFAULT_UI_ADDLIFE")
+	{
+		((GOLTool *)tool)->OpenWindow(gameModel->GetSimulation(), toolSelection);
+	}
 }
 
 void GameController::SetActiveTool(int toolSelection, ByteString identifier)
@@ -1306,8 +1316,13 @@ void GameController::OpenElementSearch()
 {
 	std::vector<Tool*> toolList;
 	std::vector<Menu*> menuList = gameModel->GetMenuList();
-	for(auto *mm : menuList)
+	for (auto i = 0U; i < menuList.size(); ++i)
 	{
+		if (i == SC_FAVORITES)
+		{
+			continue;
+		}
+		auto *mm = menuList[i];
 		if(!mm)
 			continue;
 		std::vector<Tool*> menuToolList = mm->GetToolList();
@@ -1672,4 +1687,9 @@ void GameController::RunUpdater()
 bool GameController::GetMouseClickRequired()
 {
 	return gameModel->GetMouseClickRequired();
+}
+
+void GameController::RemoveCustomGOLType(const ByteString &identifier)
+{
+	gameModel->RemoveCustomGOLType(identifier);
 }

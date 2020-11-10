@@ -487,37 +487,27 @@ bool GameView::GetPlacingZoom()
 
 void GameView::NotifyActiveToolsChanged(GameModel * sender)
 {
-	decoBrush = false;
 	for (size_t i = 0; i < toolButtons.size(); i++)
 	{
 		auto *tool = toolButtons[i]->tool;
-		if(sender->GetActiveTool(0) == tool)
-		{
-			toolButtons[i]->SetSelectionState(0);	//Primary
-			windTool = tool->GetIdentifier() == "DEFAULT_UI_WIND";
-
-			if (sender->GetActiveTool(0)->GetIdentifier().BeginsWith("DEFAULT_DECOR_"))
-				decoBrush = true;
-		}
-		else if(sender->GetActiveTool(1) == tool)
-		{
-			toolButtons[i]->SetSelectionState(1);	//Secondary
-			if (sender->GetActiveTool(1)->GetIdentifier().BeginsWith("DEFAULT_DECOR_"))
-				decoBrush = true;
-		}
-		else if(sender->GetActiveTool(2) == tool)
-		{
-			toolButtons[i]->SetSelectionState(2);	//Tertiary
-		}
-		else if(sender->GetActiveTool(3) == tool)
-		{
-			toolButtons[i]->SetSelectionState(3);	//Replace Mode
-		}
+		// Primary
+		if (sender->GetActiveTool(0) == tool)
+			toolButtons[i]->SetSelectionState(0);
+		// Secondary
+		else if (sender->GetActiveTool(1) == tool)
+			toolButtons[i]->SetSelectionState(1);
+		// Tertiary
+		else if (sender->GetActiveTool(2) == tool)
+			toolButtons[i]->SetSelectionState(2);
+		// Replace Mode
+		else if (sender->GetActiveTool(3) == tool)
+			toolButtons[i]->SetSelectionState(3);
+		// Not selected at all
 		else
-		{
 			toolButtons[i]->SetSelectionState(-1);
-		}
 	}
+
+	decoBrush = sender->GetActiveTool(0)->GetIdentifier().BeginsWith("DEFAULT_DECOR_");
 
 	if (sender->GetRenderer()->findingElement)
 	{
@@ -595,8 +585,19 @@ void GameView::NotifyToolListChanged(GameModel * sender)
 				}
 				else if (tempButton->GetSelectionState() == 1)
 				{
-					Favorite::Ref().RemoveFavorite(tool->GetIdentifier());
-					c->RebuildFavoritesMenu();
+					auto identifier = tool->GetIdentifier();
+					if (Favorite::Ref().IsFavorite(identifier))
+					{
+						Favorite::Ref().RemoveFavorite(identifier);
+						c->RebuildFavoritesMenu();
+					}
+					else if (identifier.BeginsWith("DEFAULT_PT_LIFECUST_"))
+					{
+						if (ConfirmPrompt::Blocking("Remove custom GOL type", "Are you sure you want to remove " + identifier.Substr(20).FromUtf8() + "?"))
+						{
+							c->RemoveCustomGOLType(identifier);
+						}
+					}
 				}
 			}
 			else
@@ -1037,6 +1038,9 @@ void GameView::OnMouseDown(int x, int y, unsigned button)
 				return;
 			Tool *lastTool = c->GetActiveTool(toolIndex);
 			c->SetLastTool(lastTool);
+			windTool = lastTool->GetIdentifier() == "DEFAULT_UI_WIND";
+			decoBrush = lastTool->GetIdentifier().BeginsWith("DEFAULT_DECOR_");
+
 			UpdateDrawMode();
 
 			isMouseDown = true;
@@ -2161,12 +2165,14 @@ void GameView::OnDraw()
 					// Some elements store extra LIFE info in upper bits of ctype, instead of tmp/tmp2
 					else if (type == PT_CRAY || type == PT_DRAY || type == PT_CONV)
 						sampleInfo << " (" << c->ElementResolve(TYP(ctype), ID(ctype)) << ")";
+					else if (type == PT_CLNE || type == PT_BCLN || type == PT_PCLN || type == PT_PBCN)
+						sampleInfo << " (" << c->ElementResolve(ctype, sample.particle.tmp) << ")";
 					else if (c->IsValidElement(ctype))
 						sampleInfo << " (" << c->ElementResolve(ctype, -1) << ")";
 					else
 						sampleInfo << " ()";
 				}
-				sampleInfo << ", Temp: " << (sample.particle.temp - 273.15f) << " C ";
+				sampleInfo << ", Temp: " << (sample.particle.temp - 273.15f) << " C";
 				sampleInfo << ", Life: " << sample.particle.life;
 				if (sample.particle.type != PT_RFRG && sample.particle.type != PT_RFGL)
 				{
@@ -2193,7 +2199,7 @@ void GameView::OnDraw()
 			else
 			{
 				sampleInfo << c->BasicParticleInfo(sample.particle);
-				sampleInfo << ", Temp: " << sample.particle.temp - 273.15f << " C ";
+				sampleInfo << ", Temp: " << sample.particle.temp - 273.15f << " C";
 				sampleInfo << ", Pressure: " << sample.AirPressure;
 			}
 		}
@@ -2212,8 +2218,8 @@ void GameView::OnDraw()
 		}
 
 		int textWidth = Graphics::textwidth(sampleInfo.Build());
-		g->fillrect(XRES-20-textWidth, 12, textWidth+8, 15, 0, 0, 0, alpha*0.5f);
-		g->drawtext(XRES-16-textWidth, 16, sampleInfo.Build(), 0, 250, 0, alpha*0.75f);
+		g->fillrect(XRES - 20 - textWidth, 12, textWidth + 8, 15, 0, 0, 0, alpha*0.5f);
+		g->drawtext(XRES - 16 - textWidth, 16, sampleInfo.Build(), 0, 250, 0, alpha*0.95f);
 
 #ifndef OGLI
 		if (wavelengthGfx)
@@ -2259,10 +2265,9 @@ void GameView::OnDraw()
 
 			if (type)
 			{
-				sampleInfo <<"Temp: "<<sample.particle.temp << " f" << ", ";
+				sampleInfo << "Temp: " << sample.particle.temp << " f" << ", ";
 				sampleInfo << "Vx: " << sample.particle.vx;
 				sampleInfo << ", Vy: " << sample.particle.vy << ", ";
-				sampleInfo << ", CLR:" << sample.particle.dcolour << ", ";
 				sampleInfo << "#" << sample.ParticleID << ", ";
 			}
 			sampleInfo << "X:" << sample.PositionX << " Y:" << sample.PositionY;
@@ -2274,8 +2279,8 @@ void GameView::OnDraw()
 				sampleInfo << ", AHeat: " << sample.AirTemperature - 273.15f << " C";
 
 			textWidth = Graphics::textwidth(sampleInfo.Build());
-			g->fillrect(XRES-20-textWidth, 27, textWidth+8, 14, 0, 0, 0, alpha*0.5f);
-			g->drawtext(XRES-16-textWidth, 30, sampleInfo.Build(), 12, 250, 150, alpha*0.75f);
+			g->fillrect(XRES - 20 - textWidth, 27, textWidth + 8, 14, 0, 0, 0, alpha*0.5f);
+			g->drawtext(XRES - 16 - textWidth, 30, sampleInfo.Build(), 12, 250, 150, alpha*0.95f);
 		}
 	}
 
@@ -2302,9 +2307,9 @@ void GameView::OnDraw()
 			fpsInfo << " [FIND]";
 
 		int textWidth = Graphics::textwidth(fpsInfo.Build());
-		int alpha = 255-introText*5;
-		g->fillrect(12, 12, textWidth+8, 15, 0, 0, 0, alpha*0.5);
-		g->drawtext(16, 16, fpsInfo.Build(), 0, 255, 0, alpha*0.75);
+		int alpha = 255 - introText * 5;
+		g->fillrect(12, 12, textWidth + 8, 15, 0, 0, 0, alpha*0.5);
+		g->drawtext(16, 16, fpsInfo.Build(), 0, 255, 0, alpha*0.95);
 		// Second line
 		StringBuilder fpsInfo2;
 
@@ -2320,41 +2325,40 @@ void GameView::OnDraw()
 
 		int textWidth2 = Graphics::textwidth(fpsInfo2.Build());
 		g->fillrect(12, 26, textWidth2 + 8, 15, 0, 0, 0, alpha * 0.5);
-		g->drawtext(16, 29, fpsInfo2.Build(), 12, 250, 150, alpha * 0.75);
+		g->drawtext(16, 29, fpsInfo2.Build(), 12, 250, 150, alpha * 0.95);
 	}
 
 	//Tooltips
-	if(infoTipPresence)
+	if (infoTipPresence)
 	{
-		int infoTipAlpha = (infoTipPresence>50?50:infoTipPresence)*5;
-		g->drawtext_outline((XRES-Graphics::textwidth(infoTip))/2, (YRES/2)-2, infoTip, 255, 255, 255, infoTipAlpha);
+		int infoTipAlpha = (infoTipPresence > 50 ? 50 : infoTipPresence) * 5;
+		g->drawtext_outline((XRES - Graphics::textwidth(infoTip)) / 2, (YRES / 2) - 2, infoTip, 255, 255, 255, infoTipAlpha);
 	}
 
-	if(toolTipPresence && toolTipPosition.X!=-1 && toolTipPosition.Y!=-1 && toolTip.length())
+	if (toolTipPresence && toolTipPosition.X != -1 && toolTipPosition.Y != -1 && toolTip.length())
 	{
-		if (toolTipPosition.Y == Size.Y-MENUSIZE-10)
-			g->drawtext_outline(toolTipPosition.X, toolTipPosition.Y, toolTip, 12, 250, 150, toolTipPresence>51?255:toolTipPresence*5);
+		if (toolTipPosition.Y == Size.Y - MENUSIZE - 10)
+			g->drawtext_outline(toolTipPosition.X, toolTipPosition.Y, toolTip, 12, 250, 150, toolTipPresence > 51 ? 255 : toolTipPresence * 5);
 		else
-			g->drawtext(toolTipPosition.X, toolTipPosition.Y, toolTip,12 ,250, 150, toolTipPresence>51?255:toolTipPresence*5);
+			g->drawtext(toolTipPosition.X, toolTipPosition.Y, toolTip, 12, 250, 150, toolTipPresence > 51 ? 255 : toolTipPresence * 5);
 	}
 
-	if(buttonTipShow > 0)
+	if (buttonTipShow > 0)
 	{
-		g->drawtext(16, Size.Y-MENUSIZE-24, buttonTip, 255, 255, 255, buttonTipShow>51?255:buttonTipShow*5);
+		g->drawtext(16, Size.Y - MENUSIZE - 24, buttonTip, 255, 255, 255, buttonTipShow > 51 ? 255 : buttonTipShow * 5);
 	}
 
 	//Introduction text
-	if(introText)
+	if (introText)
 	{
-		g->fillrect(0, 0, WINDOWW, WINDOWH, 70,70,70, introText>51?102:introText*2);
-		g->drawtext(16, 20, introTextMessage, 255, 255, 255, introText>51?255:introText*5);
+		g->fillrect(0, 0, WINDOWW, WINDOWH, 80, 80, 80, introText > 51 ? 102 : introText * 2);
+		g->drawtext(16, 20, introTextMessage, 255, 255, 255, introText > 51 ? 255 : introText * 5);
 	}
 
 	// Clear menu areas, to ensure particle graphics don't overlap
-	memset(g->vid+((XRES+BARSIZE)*YRES), 0, (PIXELSIZE*(XRES+BARSIZE))*MENUSIZE);
-	g->clearrect(XRES, 1, BARSIZE, YRES-1);
+	memset(g->vid + ((XRES + BARSIZE)*YRES), 0, (PIXELSIZE*(XRES + BARSIZE))*MENUSIZE);
+	g->clearrect(XRES, 1, BARSIZE, YRES - 1);
 }
-
 ui::Point GameView::lineSnapCoords(ui::Point point1, ui::Point point2)
 {
 	ui::Point diff = point2 - point1;

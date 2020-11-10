@@ -199,6 +199,24 @@ void SearchModel::SelectSave(int saveID)
 	notifySelectedChanged();
 }
 
+void SearchModel::SelectAllSaves()
+{
+	if (selected.size() == saveList.size())
+	{
+		for (auto &save : saveList)
+		{
+			DeselectSave(save->id);
+		}
+	}
+	else
+	{
+		for (auto &save : saveList)
+		{
+			SelectSave(save->id);
+		}
+	}
+}
+
 void SearchModel::DeselectSave(int saveID)
 {
 	bool changed = false;

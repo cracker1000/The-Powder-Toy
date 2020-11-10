@@ -1,22 +1,20 @@
 Changelog for Version 16.0:
-
+Include Custom GOL and bug fixes from latest version.
 Fix some element descriptions.
 Merge changes from version 96.0
 New elements: CWIR and ROCK.
 Change C-16's colour and update VSNS.
 Cloud and BEE are now much better and realistic.
-CMNT now takes some time to solidify.
+CMNT now takes some time to solidify and releases heat.
 Fix codes for new elements that could corrupt the simulation.
 Totally revamped UI, wiki and buttons.
 Fix elements being drawn on screen when clicking on buttons.
-Add Ingame texter.
-HUD now shows Dcolour of particles. 
+Add In-game offline texter.
+Slightly brighter HUD.
 J as a key can now be used as a shortcut..
 Add option for in game save feedback (accessible via feedback button.)
+Performance improvements for script, should be less CPU demanding.
+Improvements to how themes were selected, should be even better (performance wise.)
 
-todo:
-make J also close the menu.
-Add rock
-Update LSNS and HSWC.
 
  

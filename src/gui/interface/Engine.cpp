@@ -17,6 +17,7 @@ using namespace ui;
 
 Engine::Engine():
 	FpsLimit(60.0f),
+	drawingFrequencyLimit(0),
 	Scale(1),
 	Fullscreen(false),
 	FrameIndex(0),
@@ -34,7 +35,8 @@ Engine::Engine():
 	mousexp_(0),
 	mouseyp_(0),
 	maxWidth(0),
-	maxHeight(0)
+	maxHeight(0),
+	momentumScroll(false)
 {
 }
 
@@ -274,6 +276,12 @@ void Engine::onMouseUnclick(int x, int y, unsigned button)
 	mouseb_ &= ~button;
 	if (state_ && !ignoreEvents)
 		state_->DoMouseUp(x, y, button);
+}
+
+void Engine::initialMouse(int x, int y)
+{
+	mousexp_ = x;
+	mouseyp_ = y;
 }
 
 void Engine::onMouseMove(int x, int y)

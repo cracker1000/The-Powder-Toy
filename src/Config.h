@@ -31,11 +31,11 @@
 // The build server will compile for all platforms for you, and send updates in game
 // See jacob1 to get a mod ID
 #ifndef MOD_ID
-#define MOD_ID 06
+#define MOD_ID 6
 #endif
 
 #if defined(SNAPSHOT) || defined(DEBUG)
-#define FUTURE_SAVE_VERSION 95
+#define FUTURE_SAVE_VERSION 96
 #define FUTURE_MINOR_VERSION 0
 #endif
 //VersionInfoEnd

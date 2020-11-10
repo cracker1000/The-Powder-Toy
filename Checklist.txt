@@ -1,7 +1,51 @@
-Icon
-Elements
-SPRK.cpp
-Simulation.cpp
-Gameview.cpp
-Votes
-HUD
+1)Icon and intro text (copy paste)
+
+2)Scripts:
+Copy eventcompat.lua
+Add crackerk.lua and files to solution
+Add luaopen in scripthelper and script interface.
+
+4) TOOLS:
+Copy RSET.cpp and add to project.
+Add in toolnumbers.h
+
+5) Dark theme:
+Copy appearence.cpp from gui>interface.
+
+6)Gravity Modes:
+gui>gamecontroller.cpp
+
+7) HUD:
+Gameview.cpp (copy fpsinfo)
+simulation.cpp
+optionsview.cpp
+
+8)votes:
+Searchview.cpp
+
+9)Elements:               Files Modified:
+(FPTC, 191);             SPRK.cpp
+(FNTC, 192);             SPRK.cpp
+(CLNT, 193);
+(LED, 194);                SPRK.cpp
+(TIMC, 195);               SPRK.cpp
+(FUEL, 196);
+(LITH, 197);                SPRK.cpp
+(DMRN, 198);             Simulation.cpp
+(PINV, 199);                SPRK.cpp and simulation.cpp (check for .life!)
+(WALL, 200);              Simulation.cpp (search for love, define wall element)
+(COND, 201);
+(QGPP, 202);
+(UVRD, 203);
+(SUN, 204);
+(TMPS, 205);
+(PHOS, 206);
+(CMNT, 207);
+(NTRG, 208);
+(PRMT, 209);
+(CLUD, 210);
+(BEE, 211);
+(ECLR, 212);             SPRK.cpp
+(C16, 213);
+(CWIR, 214);
+

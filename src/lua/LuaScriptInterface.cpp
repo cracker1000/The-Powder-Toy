@@ -125,6 +125,7 @@ LuaScriptInterface::LuaScriptInterface(GameController * c, GameModel * m):
 
 	//New TPT API
 	l = luaL_newstate();
+	tpt_lua_setmainthread(l);
 	lua_atpanic(l, atPanic);
 	luaL_openlibs(l);
 	luaopen_bit(l);
@@ -212,6 +213,7 @@ LuaScriptInterface::LuaScriptInterface(GameController * c, GameModel * m):
 		{"graphics_func",&luatpt_graphics_func},
 		{"get_clipboard", &platform_clipboardCopy},
 		{"set_clipboard", &platform_clipboardPaste},
+		{"setdrawcap", &luatpt_setdrawcap},
 		{NULL,NULL}
 	};
 
@@ -291,7 +293,7 @@ tpt.partsdata = nil");
 	}
 
 	tptPart = new LuaSmartRef(l);
-	tptPart->Assign(-1);
+	tptPart->Assign(l, -1);
 	lua_pop(l, 1);
 #endif
 
@@ -523,7 +525,7 @@ int LuaScriptInterface::interface_addComponent(lua_State * l)
 		if (ok.second)
 		{
 			auto it = ok.first;
-			it->second.Assign(1);
+			it->second.Assign(l, 1);
 			it->first->owner_ref = it->second;
 		}
 		luacon_ci->Window->AddComponent(luaComponent->GetComponent());
@@ -1356,6 +1358,10 @@ int LuaScriptInterface::simulation_floodParts(lua_State * l)
 	int c = luaL_optint(l,3,luacon_model->GetActiveTool(0)->GetToolID());
 	int cm = luaL_optint(l,4,-1);
 	int flags = luaL_optint(l,5,luacon_sim->replaceModeFlags);
+	
+	if (x < CELL || x >= XRES-CELL || y < CELL || y >= YRES-CELL)
+		return luaL_error(l, "coordinates out of range (%d,%d)", x, y);
+	
 	int ret = luacon_sim->FloodParts(x, y, c, cm, flags);
 	lua_pushinteger(l, ret);
 	return 1;
@@ -2815,7 +2821,7 @@ int LuaScriptInterface::elements_element(lua_State * l)
 		lua_getfield(l, -1, "Update");
 		if (lua_type(l, -1) == LUA_TFUNCTION)
 		{
-			lua_el_func[id].Assign(-1);
+			lua_el_func[id].Assign(l, -1);
 			lua_el_mode[id] = 1;
 		}
 		else if (lua_type(l, -1) == LUA_TBOOLEAN && !lua_toboolean(l, -1))
@@ -2829,7 +2835,7 @@ int LuaScriptInterface::elements_element(lua_State * l)
 		lua_getfield(l, -1, "Graphics");
 		if (lua_type(l, -1) == LUA_TFUNCTION)
 		{
-			lua_gr_func[id].Assign(-1);
+			lua_gr_func[id].Assign(l, -1);
 		}
 		else if (lua_type(l, -1) == LUA_TBOOLEAN && !lua_toboolean(l, -1))
 		{
@@ -2841,7 +2847,7 @@ int LuaScriptInterface::elements_element(lua_State * l)
 		lua_getfield(l, -1, "Create");
 		if (lua_type(l, -1) == LUA_TFUNCTION)
 		{
-			luaCreateHandlers[id].Assign(-1);
+			luaCreateHandlers[id].Assign(l, -1);
 			luacon_sim->elements[id].Create = luaCreateWrapper;
 		}
 		else if (lua_type(l, -1) == LUA_TBOOLEAN && !lua_toboolean(l, -1))
@@ -2854,7 +2860,7 @@ int LuaScriptInterface::elements_element(lua_State * l)
 		lua_getfield(l, -1, "CreateAllowed");
 		if (lua_type(l, -1) == LUA_TFUNCTION)
 		{
-			luaCreateAllowedHandlers[id].Assign(-1);
+			luaCreateAllowedHandlers[id].Assign(l, -1);
 			luacon_sim->elements[id].CreateAllowed = luaCreateAllowedWrapper;
 		}
 		else if (lua_type(l, -1) == LUA_TBOOLEAN && !lua_toboolean(l, -1))
@@ -2867,7 +2873,7 @@ int LuaScriptInterface::elements_element(lua_State * l)
 		lua_getfield(l, -1, "ChangeType");
 		if (lua_type(l, -1) == LUA_TFUNCTION)
 		{
-			luaChangeTypeHandlers[id].Assign(-1);
+			luaChangeTypeHandlers[id].Assign(l, -1);
 			luacon_sim->elements[id].ChangeType = luaChangeTypeWrapper;
 		}
 		else if (lua_type(l, -1) == LUA_TBOOLEAN && !lua_toboolean(l, -1))
@@ -2880,7 +2886,7 @@ int LuaScriptInterface::elements_element(lua_State * l)
 		lua_getfield(l, -1, "CtypeDraw");
 		if (lua_type(l, -1) == LUA_TFUNCTION)
 		{
-			luaCtypeDrawHandlers[id].Assign(-1);
+			luaCtypeDrawHandlers[id].Assign(l, -1);
 			luacon_sim->elements[id].CtypeDraw = luaCtypeDrawWrapper;
 		}
 		else if (lua_type(l, -1) == LUA_TBOOLEAN && !lua_toboolean(l, -1))
@@ -2995,7 +3001,7 @@ int LuaScriptInterface::elements_property(lua_State * l)
 					lua_el_mode[id] = 1; //update after
 					break;
 				}
-				lua_el_func[id].Assign(3);
+				lua_el_func[id].Assign(l, 3);
 			}
 			else if (lua_type(l, 3) == LUA_TBOOLEAN && !lua_toboolean(l, 3))
 			{
@@ -3008,7 +3014,7 @@ int LuaScriptInterface::elements_property(lua_State * l)
 		{
 			if (lua_type(l, 3) == LUA_TFUNCTION)
 			{
-				lua_gr_func[id].Assign(3);
+				lua_gr_func[id].Assign(l, 3);
 			}
 			else if (lua_type(l, 3) == LUA_TBOOLEAN && !lua_toboolean(l, 3))
 			{
@@ -3021,7 +3027,7 @@ int LuaScriptInterface::elements_property(lua_State * l)
 		{
 			if (lua_type(l, 3) == LUA_TFUNCTION)
 			{
-				luaCreateHandlers[id].Assign(3);
+				luaCreateHandlers[id].Assign(l, 3);
 				luacon_sim->elements[id].Create = luaCreateWrapper;
 			}
 			else if (lua_type(l, 3) == LUA_TBOOLEAN && !lua_toboolean(l, 3))
@@ -3034,7 +3040,7 @@ int LuaScriptInterface::elements_property(lua_State * l)
 		{
 			if (lua_type(l, 3) == LUA_TFUNCTION)
 			{
-				luaCreateAllowedHandlers[id].Assign(3);
+				luaCreateAllowedHandlers[id].Assign(l, 3);
 				luacon_sim->elements[id].CreateAllowed = luaCreateAllowedWrapper;
 			}
 			else if (lua_type(l, 3) == LUA_TBOOLEAN && !lua_toboolean(l, 3))
@@ -3047,7 +3053,7 @@ int LuaScriptInterface::elements_property(lua_State * l)
 		{
 			if (lua_type(l, 3) == LUA_TFUNCTION)
 			{
-				luaChangeTypeHandlers[id].Assign(3);
+				luaChangeTypeHandlers[id].Assign(l, 3);
 				luacon_sim->elements[id].ChangeType = luaChangeTypeWrapper;
 			}
 			else if (lua_type(l, 3) == LUA_TBOOLEAN && !lua_toboolean(l, 3))
@@ -3060,7 +3066,7 @@ int LuaScriptInterface::elements_property(lua_State * l)
 		{
 			if (lua_type(l, 3) == LUA_TFUNCTION)
 			{
-				luaCtypeDrawHandlers[id].Assign(3);
+				luaCtypeDrawHandlers[id].Assign(l, 3);
 				luacon_sim->elements[id].CtypeDraw = luaCtypeDrawWrapper;
 			}
 			else if (lua_type(l, 3) == LUA_TBOOLEAN && !lua_toboolean(l, 3))

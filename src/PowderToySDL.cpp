@@ -29,8 +29,8 @@
 #endif
 #ifdef MACOSX
 #include <CoreServices/CoreServices.h>
-#include <sys/stat.h>
 #endif
+#include <sys/stat.h>
 
 #include "Format.h"
 #include "Misc.h"
@@ -64,6 +64,7 @@ bool fullscreen = false;
 bool altFullscreen = false;
 bool forceIntegerScaling = true;
 bool resizable = false;
+bool momentumScroll = true;
 
 
 void ClipboardPush(ByteString text)
@@ -154,12 +155,12 @@ void blit(pixel * vid)
 #endif
 
 void RecreateWindow();
-int SDLOpen()
+void SDLOpen()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	if (SDL_InitSubSystem(SDL_INIT_VIDEO) < 0)
 	{
-		fprintf(stderr, "Initializing SDL: %s\n", SDL_GetError());
-		return 1;
+		fprintf(stderr, "Initializing SDL (video subsystem): %s\n", SDL_GetError());
+		exit(-1);
 	}
 
 	RecreateWindow();
@@ -172,6 +173,14 @@ int SDLOpen()
 		{
 			desktopWidth = rect.w;
 			desktopHeight = rect.h;
+		}
+		if (Client::Ref().GetPrefBool("AutoDrawLimit", false))
+		{
+			SDL_DisplayMode displayMode;
+			if (!SDL_GetCurrentDisplayMode(displayIndex, &displayMode) && displayMode.refresh_rate >= 60)
+			{
+				ui::Engine::Ref().SetDrawingFrequencyLimit(displayMode.refresh_rate);
+			}
 		}
 	}
 
@@ -197,9 +206,6 @@ int SDLOpen()
 	SDL_SetWindowIcon(sdl_window, icon);
 	SDL_FreeSurface(icon);
 #endif
-	atexit(SDL_Quit);
-
-	return 0;
 }
 
 void SDLSetScreen(int scale_, bool resizable_, bool fullscreen_, bool altFullscreen_, bool forceIntegerScaling_)
@@ -409,11 +415,11 @@ void EventProcess(SDL_Event event)
 		// if mouse hasn't moved yet, sdl will send 0,0. We don't want that
 		if (hasMouseMoved)
 		{
-			mousex = event.motion.x;
-			mousey = event.motion.y;
+			mousex = event.button.x;
+			mousey = event.button.y;
 		}
 		mouseButton = event.button.button;
-		engine->onMouseClick(event.motion.x, event.motion.y, mouseButton);
+		engine->onMouseClick(mousex, mousey, mouseButton);
 
 		mouseDown = true;
 #if !defined(NDEBUG) && !defined(DEBUG)
@@ -424,8 +430,8 @@ void EventProcess(SDL_Event event)
 		// if mouse hasn't moved yet, sdl will send 0,0. We don't want that
 		if (hasMouseMoved)
 		{
-			mousex = event.motion.x;
-			mousey = event.motion.y;
+			mousex = event.button.x;
+			mousey = event.button.y;
 		}
 		mouseButton = event.button.button;
 		engine->onMouseUnclick(mousex, mousey, mouseButton);
@@ -444,6 +450,7 @@ void EventProcess(SDL_Event event)
 			{
 				//initial mouse coords, sdl won't tell us this if mouse hasn't moved
 				CalculateMousePosition(&mousex, &mousey);
+				engine->initialMouse(mousex, mousey);
 				engine->onMouseMove(mousex, mousey);
 				calculatedInitialMouse = true;
 			}
@@ -498,9 +505,16 @@ void EngineProcess()
 {
 	double frameTimeAvg = 0.0f, correctedFrameTimeAvg = 0.0f;
 	SDL_Event event;
+
+	int drawingTimer = 0;
+	int frameStart = 0;
+
 	while(engine->Running())
 	{
-		int frameStart = SDL_GetTicks();
+		int oldFrameStart = frameStart;
+		frameStart = SDL_GetTicks();
+		drawingTimer += frameStart - oldFrameStart;
+
 		if(engine->Broken()) { engine->UnBreak(); break; }
 		event.type = 0;
 		while (SDL_PollEvent(&event))
@@ -511,21 +525,27 @@ void EngineProcess()
 		if(engine->Broken()) { engine->UnBreak(); break; }
 
 		engine->Tick();
-		engine->Draw();
 
-		if (scale != engine->Scale || fullscreen != engine->Fullscreen ||
-				altFullscreen != engine->GetAltFullscreen() ||
-				forceIntegerScaling != engine->GetForceIntegerScaling() || resizable != engine->GetResizable())
+		int drawcap = ui::Engine::Ref().GetDrawingFrequencyLimit();
+		if (!drawcap || drawingTimer > 1000.f/drawcap)
 		{
-			SDLSetScreen(engine->Scale, engine->GetResizable(), engine->Fullscreen, engine->GetAltFullscreen(),
-						 engine->GetForceIntegerScaling());
-		}
+			engine->Draw();
+			drawingTimer = 0;
+
+			if (scale != engine->Scale || fullscreen != engine->Fullscreen ||
+					altFullscreen != engine->GetAltFullscreen() ||
+					forceIntegerScaling != engine->GetForceIntegerScaling() || resizable != engine->GetResizable())
+			{
+				SDLSetScreen(engine->Scale, engine->GetResizable(), engine->Fullscreen, engine->GetAltFullscreen(),
+							 engine->GetForceIntegerScaling());
+			}
 
 #ifdef OGLI
-		blit();
+			blit();
 #else
-		blit(engine->g->vid);
+			blit(engine->g->vid);
 #endif
+		}
 
 		int frameTime = SDL_GetTicks() - frameStart;
 		frameTimeAvg = frameTimeAvg * 0.8 + frameTime * 0.2;
@@ -617,23 +637,6 @@ void SigHandler(int signal)
 	}
 }
 
-void ChdirToDataDirectory()
-{
-#ifdef MACOSX
-	FSRef ref;
-	OSType folderType = kApplicationSupportFolderType;
-	char path[PATH_MAX];
-
-	FSFindFolder( kUserDomain, folderType, kCreateFolder, &ref );
-
-	FSRefMakePath( &ref, (UInt8*)&path, PATH_MAX );
-
-	std::string tptPath = std::string(path) + "/The Powder Toy";
-	mkdir(tptPath.c_str(), 0755);
-	chdir(tptPath.c_str());
-#endif
-}
-
 constexpr int SCALE_MAXIMUM = 10;
 constexpr int SCALE_MARGIN = 30;
 
@@ -661,22 +664,61 @@ int main(int argc, char * argv[])
 	currentHeight = WINDOWH;
 
 
+	// https://bugzilla.libsdl.org/show_bug.cgi?id=3796
+	if (SDL_Init(0) < 0)
+	{
+		fprintf(stderr, "Initializing SDL: %s\n", SDL_GetError());
+		return 1;
+	}
+	atexit(SDL_Quit);
+
 	std::map<ByteString, ByteString> arguments = readArguments(argc, argv);
 
 	if(arguments["ddir"].length())
+	{
 #ifdef WIN
-		_chdir(arguments["ddir"].c_str());
+		int failure = _chdir(arguments["ddir"].c_str());
 #else
-		chdir(arguments["ddir"].c_str());
+		int failure = chdir(arguments["ddir"].c_str());
 #endif
+		if (failure)
+		{
+			perror("failed to chdir to requested ddir");
+		}
+	}
 	else
-		ChdirToDataDirectory();
+	{
+#ifdef WIN
+		struct _stat s;
+		if(_stat("powder.pref", &s) != 0)
+#else
+		struct stat s;
+		if(stat("powder.pref", &s) != 0)
+#endif
+		{
+			char *ddir = SDL_GetPrefPath(NULL, "The Powder Toy");
+			if(ddir)
+			{
+#ifdef WIN
+				int failure = _chdir(ddir);
+#else
+				int failure = chdir(ddir);
+#endif
+				if (failure)
+				{
+					perror("failed to chdir to default ddir");
+				}
+				SDL_free(ddir);
+			}
+		}
+	}
 
 	scale = Client::Ref().GetPrefInteger("Scale", 1);
 	resizable = Client::Ref().GetPrefBool("Resizable", false);
 	fullscreen = Client::Ref().GetPrefBool("Fullscreen", false);
 	altFullscreen = Client::Ref().GetPrefBool("AltFullscreen", false);
 	forceIntegerScaling = Client::Ref().GetPrefBool("ForceIntegerScaling", true);
+	momentumScroll = Client::Ref().GetPrefBool("MomentumScroll", true);
 
 
 	if(arguments["kiosk"] == "true")
@@ -687,8 +729,17 @@ int main(int argc, char * argv[])
 
 	if(arguments["redirect"] == "true")
 	{
-		freopen("stdout.log", "w", stdout);
-		freopen("stderr.log", "w", stderr);
+		FILE *new_stdout = freopen("stdout.log", "w", stdout);
+		FILE *new_stderr = freopen("stderr.log", "w", stderr);
+		if (!new_stdout || !new_stderr)
+		{
+			// no point in printing an error to stdout/stderr since the user probably
+			// requests those streams be redirected because they can't see them
+			// otherwise. so just throw an exception instead anf hope that the OS
+			// and the standard library is smart enough to display the error message
+			// in some useful manner.
+			throw std::runtime_error("cannot honour request to redirect standard streams to log files");
+		}
 	}
 
 	if(arguments["scale"].length())
@@ -757,6 +808,7 @@ int main(int argc, char * argv[])
 	ui::Engine::Ref().Fullscreen = fullscreen;
 	ui::Engine::Ref().SetAltFullscreen(altFullscreen);
 	ui::Engine::Ref().SetForceIntegerScaling(forceIntegerScaling);
+	ui::Engine::Ref().SetMomentumScroll(momentumScroll);
 
 	engine = &ui::Engine::Ref();
 	engine->SetMaxSize(desktopWidth, desktopHeight);

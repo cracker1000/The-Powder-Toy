@@ -348,7 +348,7 @@ int luatpt_element_func(lua_State *l)
 		int replace = luaL_optint(l, 3, 0);
 		if (luacon_sim->IsValidElement(element))
 		{
-			lua_el_func[element].Assign(1);
+			lua_el_func[element].Assign(l, 1);
 			if (replace == 2)
 				lua_el_mode[element] = 3; //update before
 			else if (replace)
@@ -428,7 +428,7 @@ int luatpt_graphics_func(lua_State *l)
 		int element = luaL_optint(l, 2, 0);
 		if (luacon_sim->IsValidElement(element))
 		{
-			lua_gr_func[element].Assign(1);
+			lua_gr_func[element].Assign(l, 1);
 			luacon_ren->graphicscache[element].isready = 0;
 			return 0;
 		}
@@ -1375,6 +1375,21 @@ int luatpt_setfpscap(lua_State* l)
 	if (fpscap < 2)
 		return luaL_error(l, "fps cap too small");
 	ui::Engine::Ref().FpsLimit = fpscap;
+	return 0;
+}
+
+int luatpt_setdrawcap(lua_State* l)
+{
+	int acount = lua_gettop(l);
+	if (acount == 0)
+	{
+		lua_pushinteger(l, ui::Engine::Ref().GetDrawingFrequencyLimit());
+		return 1;
+	}
+	int drawcap = luaL_checkint(l, 1);
+	if(drawcap < 0)
+		return luaL_error(l, "draw cap too small");
+	ui::Engine::Ref().SetDrawingFrequencyLimit(drawcap);
 	return 0;
 }
 

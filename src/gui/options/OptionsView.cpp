@@ -11,6 +11,7 @@
 #include <unistd.h>
 #endif
 #include "SDLCompat.h"
+#include "Platform.h"
 
 #include "gui/Style.h"
 #include "gui/interface/Button.h"
@@ -117,8 +118,8 @@ OptionsView::OptionsView():
 	tempLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
 	scrollPanel->AddChild(tempLabel);
 
-	currentY+=20;
-	gravityMode = new ui::DropDown(ui::Point(Size.X-95, currentY), ui::Point(80, 16));
+	currentY += 20;
+	gravityMode = new ui::DropDown(ui::Point(Size.X - 95, currentY), ui::Point(80, 16));
 	scrollPanel->AddChild(gravityMode);
 	gravityMode->AddOption(std::pair<String, int>("Vertical", 0));
 	gravityMode->AddOption(std::pair<String, int>("Off", 1));
@@ -240,6 +241,28 @@ OptionsView::OptionsView():
 	scrollPanel->AddChild(tempLabel);
 	scrollPanel->AddChild(showAvatars);
 
+	currentY += 20;
+	momentumScroll = new ui::Checkbox(ui::Point(8, currentY), ui::Point(1, 16), "Momentum/Old Scrolling", "");
+	autowidth(momentumScroll);
+	momentumScroll->SetActionCallback({ [this] { c->SetMomentumScroll(momentumScroll->GetChecked()); } });
+	tempLabel = new ui::Label(ui::Point(momentumScroll->Position.X + Graphics::textwidth(momentumScroll->GetText()) + 20, currentY), ui::Point(1, 16), "\bg- Accelerating instead of step scroll");
+	autowidth(tempLabel);
+	tempLabel->Appearance.HorizontalAlign = ui::Appearance::AlignLeft;
+	tempLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
+	scrollPanel->AddChild(tempLabel);
+	scrollPanel->AddChild(momentumScroll);
+
+	currentY += 20;
+	autoDrawLimit = new ui::Checkbox(ui::Point(8, currentY), ui::Point(1, 16), "Auto Draw Rate", "");
+	autowidth(autoDrawLimit);
+	autoDrawLimit->SetActionCallback({ [this] { c->SetAutoDrawLimit(autoDrawLimit->GetChecked()); } });
+	tempLabel = new ui::Label(ui::Point(autoDrawLimit->Position.X + Graphics::textwidth(autoDrawLimit->GetText()) + 20, currentY), ui::Point(1, 16), "\bg- Based on monitor refresh rate at startup");
+	autowidth(tempLabel);
+	tempLabel->Appearance.HorizontalAlign = ui::Appearance::AlignLeft;
+	tempLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
+	scrollPanel->AddChild(tempLabel);
+	scrollPanel->AddChild(autoDrawLimit);
+
 	currentY+=20;
 	mouseClickRequired = new ui::Checkbox(ui::Point(8, currentY), ui::Point(1, 16), "Sticky Categories", "");
 	autowidth(mouseClickRequired);
@@ -292,19 +315,15 @@ OptionsView::OptionsView():
 	currentY+=20;
 	ui::Button * dataFolderButton = new ui::Button(ui::Point(8, currentY), ui::Point(90, 16), "Open Data Folder");
 	dataFolderButton->SetActionCallback({ [] {
-//one of these should always be defined
-#ifdef WIN
-		const char* openCommand = "explorer ";
-#elif MACOSX
-		const char* openCommand = "open ";
-//#elif LIN
-#else
-		const char* openCommand = "xdg-open ";
-#endif
-		char* workingDirectory = new char[FILENAME_MAX+strlen(openCommand)];
-		sprintf(workingDirectory, "%s\"%s\"", openCommand, getcwd(NULL, 0));
-		system(workingDirectory);
-		delete[] workingDirectory;
+		auto *cwd = getcwd(NULL, 0);
+		if (cwd)
+		{
+			Platform::OpenURI(cwd);
+		}
+		else
+		{
+			fprintf(stderr, "cannot open data folder: getcwd(...) failed\n");
+		}
 	} });
 	scrollPanel->AddChild(dataFolderButton);
 
@@ -343,6 +362,8 @@ void OptionsView::NotifySettingsChanged(OptionsModel * sender)
 	mouseClickRequired->SetChecked(sender->GetMouseClickRequired());
 	includePressure->SetChecked(sender->GetIncludePressure());
 	perfectCirclePressure->SetChecked(sender->GetPerfectCircle());
+	momentumScroll->SetChecked(sender->GetMomentumScroll());
+	autoDrawLimit->SetChecked(sender->GetAutoDrawLimit());
 }
 
 void OptionsView::AttachController(OptionsController * c_)

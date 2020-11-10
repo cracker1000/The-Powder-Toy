@@ -572,16 +572,15 @@ void SearchView::NotifySaveListChanged(SearchModel * sender)
 				[this, saveButton] { Search(String::Build("user:", saveButton->GetSave()->GetUserName().FromUtf8())); },
 				[this, saveButton] { c->Selected(saveButton->GetSave()->GetID(), saveButton->GetSelected()); }
 			});
-			if(Client::Ref().GetAuthUser().UserID)
+			if (Client::Ref().GetAuthUser().UserID)
 				saveButton->SetSelectable(true);
-				saveButton->SetShowVotes(true);
+			saveButton->SetShowVotes(true);
 			saveButtons.push_back(saveButton);
 			AddComponent(saveButton);
 			saveX++;
 		}
+		}
 	}
-}
-
 void SearchView::NotifySelectedChanged(SearchModel * sender)
 {
 	std::vector<int> selected = sender->GetSelected();
@@ -653,6 +652,8 @@ void SearchView::OnKeyPress(int key, int scan, bool repeat, bool shift, bool ctr
 		return;
 	if (key == SDLK_ESCAPE)
 		c->Exit();
+	else if ((focusedComponent_ != pageTextbox && focusedComponent_ != searchField) && scan == SDL_SCANCODE_A && ctrl)
+		c->SelectAllSaves();
 	else if (key == SDLK_LCTRL || key == SDLK_RCTRL)
 		c->InstantOpen(true);
 }

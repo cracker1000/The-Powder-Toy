@@ -226,6 +226,29 @@ void OptionsModel::SetPerfectCircle(bool perfectCircle)
 	notifySettingsChanged();
 }
 
+bool OptionsModel::GetMomentumScroll()
+{
+	return Client::Ref().GetPrefBool("MomentumScroll", true);
+}
+
+void OptionsModel::SetMomentumScroll(bool state)
+{
+	Client::Ref().SetPref("MomentumScroll", state);
+	ui::Engine::Ref().SetMomentumScroll(state);
+	notifySettingsChanged();
+}
+
+bool OptionsModel::GetAutoDrawLimit()
+{
+	return Client::Ref().GetPrefBool("AutoDrawLimit", false);
+}
+
+void OptionsModel::SetAutoDrawLimit(bool state)
+{
+	Client::Ref().SetPref("AutoDrawLimit", state);
+	notifySettingsChanged();
+}
+
 void OptionsModel::notifySettingsChanged()
 {
 	for (size_t i = 0; i < observers.size(); i++)

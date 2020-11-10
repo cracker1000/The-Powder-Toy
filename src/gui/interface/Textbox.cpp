@@ -503,7 +503,6 @@ void Textbox::OnTextInput(String text)
 
 void Textbox::OnMouseClick(int x, int y, unsigned button)
 {
-
 	if (button != SDL_BUTTON_RIGHT)
 	{
 		mouseDown = true;

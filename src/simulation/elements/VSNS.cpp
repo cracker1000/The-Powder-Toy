@@ -88,7 +88,7 @@ static int update(UPDATE_FUNC_ARGS)
 					continue;
 				float Vx = parts[ID(r)].vx;
 				float Vy = parts[ID(r)].vy;
-				float Vm = sqrt(Vx*Vx + Vy * Vy);
+				float Vm = sqrt(Vx*Vx + Vy*Vy);
 
 				switch (parts[i].tmp)
 				{
@@ -156,7 +156,7 @@ static int update(UPDATE_FUNC_ARGS)
 					{
 						float Vx = parts[ID(r)].vx;
 						float Vy = parts[ID(r)].vy;
-						float Vm = sqrt(Vx*Vx + Vy * Vy);
+						float Vm = sqrt(Vx*Vx + Vy*Vy);
 						if (Vm > 0)
 						{
 							parts[ID(r)].vx *= Vs / Vm;

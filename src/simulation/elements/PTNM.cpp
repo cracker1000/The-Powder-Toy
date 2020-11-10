@@ -48,15 +48,69 @@ void Element::Element_PTNM()
 	Create = &create;
 }
 
-static int next_shield_transition(int type)
+static void hygn_reactions(int hygn1_id, UPDATE_FUNC_ARGS)
 {
-	switch (type)
+	for (int rx = -1; rx <= 1; rx++)
 	{
-	case PT_SHLD1: return PT_SHLD2;
-	case PT_SHLD2: return PT_SHLD3;
-	case PT_SHLD3: return PT_SHLD4;
+		for (int ry = -1; ry <= 1; ry++)
+		{
+			if (BOUNDS_CHECK && (rx || ry))
+			{
+				int r = pmap[y + ry][x + rx];
+				if (!r || ID(r) == hygn1_id)
+					continue;
+				int rt = TYP(r);
+
+				// HYGN + DESL -> OIL + WATR
+				if (rt == PT_DESL)
+				{
+					sim->part_change_type(ID(r), x + rx, y + ry, PT_WATR);
+					sim->part_change_type(hygn1_id, (int)(parts[hygn1_id].x + 0.5f), (int)(parts[hygn1_id].y + 0.5f), PT_OIL);
+					return;
+				}
+
+				// HYGN + OXYG -> DSTW + SPRK + Heat
+				if (rt == PT_O2 && !parts[i].life)
+				{
+					sim->part_change_type(ID(r), x + rx, y + ry, PT_DSTW);
+					sim->part_change_type(hygn1_id, (int)(parts[hygn1_id].x + 0.5f), (int)(parts[hygn1_id].y + 0.5f), PT_DSTW);
+					parts[ID(r)].temp += 5.0f;
+					parts[hygn1_id].temp += 5.0f;
+
+					parts[i].ctype = PT_PTNM;
+					parts[i].life = 4;
+					sim->part_change_type(i, x, y, PT_SPRK);
+					return;
+				}
+
+				// Cold fusion: 2 hydrogen > 500 C has a chance to fuse
+				if (rt == PT_H2 && RNG::Ref().chance(1, 1000) && parts[ID(r)].temp > 500.0f + 273.15f && parts[hygn1_id].temp > 500.0f + 273.15f)
+				{
+					sim->part_change_type(ID(r), x + rx, y + ry, PT_NBLE);
+					sim->part_change_type(hygn1_id, (int)(parts[hygn1_id].x + 0.5f), (int)(parts[hygn1_id].y + 0.5f), PT_NEUT);
+
+					parts[ID(r)].temp += 1000.0f;
+					parts[hygn1_id].temp += 1000.0f;
+					sim->pv[y / CELL][x / CELL] += 10.0f;
+
+					int j = sim->create_part(-3, x + rx, y + ry, PT_PHOT);
+					if (j > -1)
+					{
+						parts[j].ctype = 0x7C0000;
+						parts[j].temp = parts[ID(r)].temp;
+						parts[j].tmp = 0x1;
+					}
+					if (RNG::Ref().chance(1, 10))
+					{
+						int j = sim->create_part(-3, x + rx, y + ry, PT_ELEC);
+						if (j > -1)
+							parts[j].temp = parts[ID(r)].temp;
+					}
+					return;
+				}
+			}
+		}
 	}
-	return PT_SHLD1;
 }
 
 static int update(UPDATE_FUNC_ARGS)
@@ -64,19 +118,16 @@ static int update(UPDATE_FUNC_ARGS)
 	int hygn1_id = -1; // Id of a hydrogen particle for hydrogen multi-particle reactions
 
 	// Fast conduction (like GOLD)
-	static int checkCoordsX[] = { -4, 4, 0, 0 };
-	static int checkCoordsY[] = { 0, 0, -4, 4 };
-
 	if (!parts[i].life)
 	{
 		for (int j = 0; j < 4; j++)
 		{
+			static const int checkCoordsX[] = { -4, 4, 0, 0 };
+			static const int checkCoordsY[] = { 0, 0, -4, 4 };
 			int rx = checkCoordsX[j];
 			int ry = checkCoordsY[j];
 			int r = pmap[y + ry][x + rx];
-			if (!r)
-				continue;
-			if (TYP(r) == PT_SPRK && parts[ID(r)].life && parts[ID(r)].life < 4)
+			if (r && TYP(r) == PT_SPRK && parts[ID(r)].life && parts[ID(r)].life < 4)
 			{
 				sim->part_change_type(i, x, y, PT_SPRK);
 				parts[i].life = 4;
@@ -87,7 +138,9 @@ static int update(UPDATE_FUNC_ARGS)
 
 	// Single element reactions
 	for (int rx = -1; rx <= 1; rx++)
+	{
 		for (int ry = -1; ry <= 1; ry++)
+		{
 			if (BOUNDS_CHECK && (rx || ry))
 			{
 				int r = pmap[y + ry][x + rx];
@@ -104,7 +157,13 @@ static int update(UPDATE_FUNC_ARGS)
 				// Shield instantly grows (even without SPRK)
 				if (!parts[ID(r)].life && (rt == PT_SHLD1 || rt == PT_SHLD2 || rt == PT_SHLD3))
 				{
-					int next = next_shield_transition(rt);
+					int next = PT_SHLD1;
+					switch (rt)
+					{
+					case PT_SHLD1: next = PT_SHLD2; break;
+					case PT_SHLD2: next = PT_SHLD3; break;
+					case PT_SHLD3: next = PT_SHLD4; break;
+					}
 					sim->part_change_type(ID(r), x + rx, y + ry, next);
 					parts[ID(r)].life = 7;
 					continue;
@@ -128,16 +187,15 @@ static int update(UPDATE_FUNC_ARGS)
 				{
 					switch (rt)
 					{
-						// GAS + > 2 pressure + >= 200 C -> INSL
-					case PT_GAS:
+					case PT_GAS: // GAS + > 2 pressure + >= 200 C -> INSL
 						if (parts[ID(r)].temp >= 200.0f + 273.15f && sim->pv[y / CELL][x / CELL] > 2.0f)
 						{
 							sim->part_change_type(ID(r), x + rx, y + ry, PT_INSL);
 							parts[i].temp += 60.0f; // Other part is INSL, adding temp is useless
 						}
 						break;
-						// BREL + > 1000 C + > 50 pressure -> EXOT
-					case PT_BREC:
+
+					case PT_BREC: // BREL + > 1000 C + > 50 pressure -> EXOT
 						if (parts[ID(r)].temp > 1000.0f + 273.15f && sim->pv[y / CELL][x / CELL] > 50.0f)
 						{
 							sim->part_change_type(ID(r), x + rx, y + ry, PT_EXOT);
@@ -145,80 +203,21 @@ static int update(UPDATE_FUNC_ARGS)
 							parts[i].temp -= 30.0f;
 						}
 						break;
-						// SMKE -> CO2
-					case PT_SMKE:
+
+					case PT_SMKE: // SMKE -> CO2
 						sim->part_change_type(ID(r), x + rx, y + ry, PT_CO2);
 						break;
 					}
 				}
 			}
+		}
+	}
 
 	// Hydrogen reactions
 	if (hygn1_id >= 0)
 	{
-		for (int rx = -1; rx <= 1; rx++)
-			for (int ry = -1; ry <= 1; ry++)
-				if (BOUNDS_CHECK && (rx || ry))
-				{
-					int r = pmap[y + ry][x + rx];
-					if (!r || ID(r) == hygn1_id)
-						continue;
-					int rt = TYP(r);
-
-					// HYGN + DESL -> OIL + WATR
-					if (rt == PT_DESL)
-					{
-						sim->part_change_type(ID(r), x + rx, y + ry, PT_WATR);
-						sim->part_change_type(hygn1_id, (int)(parts[hygn1_id].x + 0.5f),
-							(int)(parts[hygn1_id].y + 0.5f), PT_OIL);
-						goto end_hydrogen_reactions;
-					}
-
-					// HYGN + OXYG -> DSTW + SPRK + Heat
-					if (rt == PT_O2 && !parts[i].life)
-					{
-						sim->part_change_type(ID(r), x + rx, y + ry, PT_DSTW);
-						sim->part_change_type(hygn1_id, (int)(parts[hygn1_id].x + 0.5f),
-							(int)(parts[hygn1_id].y + 0.5f), PT_DSTW);
-						parts[ID(r)].temp += 5.0f;
-						parts[hygn1_id].temp += 5.0f;
-
-						parts[i].ctype = PT_PTNM;
-						parts[i].life = 4;
-						sim->part_change_type(i, x, y, PT_SPRK);
-						goto end_hydrogen_reactions;
-					}
-
-					// Cold fusion: 2 hydrogen > 500 C has a chance to fuse
-					if (rt == PT_H2 && RNG::Ref().chance(1, 1000) &&
-						parts[ID(r)].temp > 500.0f + 273.15f && parts[hygn1_id].temp > 500.0f + 273.15f)
-					{
-						sim->part_change_type(ID(r), x + rx, y + ry, PT_NBLE);
-						sim->part_change_type(hygn1_id, (int)(parts[hygn1_id].x + 0.5f),
-							(int)(parts[hygn1_id].y + 0.5f), PT_NEUT);
-
-						parts[ID(r)].temp += 1000.0f;
-						parts[hygn1_id].temp += 1000.0f;
-						sim->pv[y / CELL][x / CELL] += 10.0f;
-
-						int j = sim->create_part(-3, x + rx, y + ry, PT_PHOT);
-						if (j > -1)
-						{
-							parts[j].ctype = 0x7C0000;
-							parts[j].temp = parts[ID(r)].temp;
-							parts[j].tmp = 0x1;
-						}
-						if (RNG::Ref().chance(1, 10))
-						{
-							int j = sim->create_part(-3, x + rx, y + ry, PT_ELEC);
-							if (j > -1)
-								parts[j].temp = parts[ID(r)].temp;
-						}
-						goto end_hydrogen_reactions;
-					}
-				}
+		hygn_reactions(hygn1_id, UPDATE_FUNC_SUBCALL_ARGS);
 	}
-end_hydrogen_reactions:;
 
 	return 0;
 }
