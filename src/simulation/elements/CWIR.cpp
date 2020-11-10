@@ -51,9 +51,9 @@ static int update(UPDATE_FUNC_ARGS)
 {
 	int rx, ry, r;
 	int cust = parts[i].tmp;
-	if (parts[i].tmp < 0 || parts[i].tmp > 10)
+	if (parts[i].tmp < 0 || parts[i].tmp > 8)
 	{
-		parts[i].tmp = 10;
+		parts[i].tmp = 8;
 	}
 
 	int checkCoordsX[] = { -cust, cust, 0, 0 };
