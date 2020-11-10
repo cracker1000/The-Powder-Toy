@@ -1,7 +1,11 @@
 Changelog for Version 16.0:
-Include Custom GOL and bug fixes from latest version.
-Fix some element descriptions.
+Read carefully!
 Merge changes from version 96.0
+All the settings (stamps and saves included) will be stored in %app data% if powder.pref was not found.
+Include Custom GOL and bug fixes from latest version.
+BRAY's.life can be now modified using ARAY.
+Fix some element descriptions.
+Removed some elements from wiki which were merged into official version.
 New elements: CWIR and ROCK.
 Change C-16's colour and update VSNS.
 Cloud and BEE are now much better and realistic.
@@ -11,7 +15,8 @@ Totally revamped UI, wiki and buttons.
 Fix elements being drawn on screen when clicking on buttons.
 Add In-game offline texter.
 Slightly brighter HUD.
-J as a key can now be used as a shortcut..
+Add an option for auto hiding the HUD.
+J as a key can now be used as a shortcut for new menu.
 Add option for in game save feedback (accessible via feedback button.)
 Performance improvements for script, should be less CPU demanding.
 Improvements to how themes were selected, should be even better (performance wise.)
