@@ -59,7 +59,6 @@ static int update(UPDATE_FUNC_ARGS)
 		{
 			parts[i].vx = 0;
 			parts[i].vy = 0;
-			parts[i].temp = 344.15f;
 		}
 		for (int rx = -2; rx < 3; rx++)
 			for (int ry = -2; ry < 3; ry++)
@@ -70,9 +69,13 @@ static int update(UPDATE_FUNC_ARGS)
 						continue;
 					if ((TYP(r) == PT_WATR|| TYP(r) == PT_DSTW|| TYP(r) == PT_SLTW|| TYP(r) == PT_CBNW) && (parts[i].tmp2 !=1))
 					{
-						    parts[i].temp = 364.15f;
+						if (parts[i].temp <= 374.15f)
+						{
+							parts[i].temp += 70.15f;
+						}
 							parts[i].tmp2 = 1;
 							sim->kill_part(ID(r));
+							
 					}
 				}
 	}

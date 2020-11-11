@@ -30,7 +30,7 @@ void Element::Element_CWIR()
 
 	Weight = 100;
 
-	HeatConduct = 251;
+	HeatConduct = 250;
 	Description = "Customisable wire, conducts at a variable speed set by.tmp";
 
 	Properties = TYPE_SOLID | PROP_CONDUCTS | PROP_HOT_GLOW | PROP_LIFE_DEC;
@@ -41,7 +41,7 @@ void Element::Element_CWIR()
 	HighPressureTransition = NT;
 	LowTemperature = ITL;
 	LowTemperatureTransition = NT;
-	HighTemperature = 1337.0f;
+	HighTemperature = 2337.0f;
 	HighTemperatureTransition = PT_LAVA;
 
 	Update = &update;

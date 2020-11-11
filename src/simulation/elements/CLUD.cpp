@@ -80,15 +80,24 @@ static int update(UPDATE_FUNC_ARGS)
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
-		*colb -= cpart->tmp/9;
-		*colr -= cpart->tmp/9;
-		*colg -= cpart->tmp/9;
+	if (cpart->tmp <= 997)
+	{
+		*colb -= cpart->tmp / 9;
+		*colr -= cpart->tmp / 9;
+		*colg -= cpart->tmp / 9;
 		*firea = 35;
 		*fireb = *colb;
 		*firer = *colr;
 		*fireg = *colg;
 		*pixel_mode = PMODE_NONE;
 		*pixel_mode |= FIRE_BLEND;
-
+	}
+      if (cpart->tmp > 997)
+		{
+			*colb = 255;
+			*colr = 235;
+			*colg = 235;
+			*pixel_mode |= PMODE_LFLARE;
+		}
 	return 0;
 }
