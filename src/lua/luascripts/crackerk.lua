@@ -1,4 +1,4 @@
---Cracker1000's custom script version 2.0
+--Cracker1000's custom script version 3.0
 
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)

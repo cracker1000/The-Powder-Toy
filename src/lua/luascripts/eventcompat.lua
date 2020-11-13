@@ -1,3 +1,4 @@
+--Modified for the mod.
 if not event then
 	return
 end
