@@ -1,4 +1,5 @@
-1)Icon and intro text (copy paste)
+//To future self, use this as a quick reference in case something goes wrong :P 
+1)Icon and intro text ( just copy paste)
 
 2)Scripts:
 Copy eventcompat.lua
@@ -49,3 +50,4 @@ Searchview.cpp
 (C16, 213);
 (CWIR, 214);
 
+10) Run script update.bat to update the scripts for linux and mac.

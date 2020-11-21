@@ -57,7 +57,7 @@ static int update(UPDATE_FUNC_ARGS)
 	//Explosion code (Burns out if charged above the set life.)
 	if (parts[i].tmp > parts[i].life)
 	{
-		sim->part_change_type(i, x , y, PT_LIFE);
+		sim->part_change_type(i, x , y, PT_FIRE);
 	}
 	//Activation and Deactivation.
 	if (parts[i].tmp2 != 10)
@@ -106,19 +106,18 @@ static int update(UPDATE_FUNC_ARGS)
 				case PT_WATR:
 				case PT_SLTW:
 				case PT_CBNW:
-				case PT_DSTW:
-				                                    
-				{  if (RNG::Ref().chance(1, 30))
+				case PT_DSTW:	                                    
+				{  
+					if (RNG::Ref().chance(1, 200))
 				{
 					parts[i].type = PT_H2;
 					sim->part_change_type(ID(r), x + rx, y + ry, PT_BRMT);
+					parts[ID(r)].temp += parts[i].tmp;
 					sim->pv[(y / CELL) + ry][(x / CELL) + rx] += 1.0;
-					if (parts[ID(r)].tmp >= 22)
-						parts[i].temp += parts[ID(r)].tmp;
 				}
 				}
 				break;
-				case PT_O2: //Burns blue when in contact with O2.
+				case PT_O2: //Burns when in contact with O2.
 				{
 					sim->part_change_type(i, x + rx, y + ry, PT_PLSM);
 					sim->pv[(y / CELL) + ry][(x / CELL) + rx] += 4.0;
@@ -126,11 +125,14 @@ static int update(UPDATE_FUNC_ARGS)
 				break;
 				case PT_ACID:
 				{
-					sim->part_change_type(ID(r), x + rx, y + ry, PT_NONE);
-					sim->part_change_type(i, x + rx, y + ry, PT_H2);
-					sim->pv[(y / CELL) + ry][(x / CELL) + rx] += 0.5;
+					if (RNG::Ref().chance(1, 120))
+					{
+						sim->part_change_type(ID(r), x + rx, y + ry, PT_NONE);
+						sim->part_change_type(i, x + rx, y + ry, PT_H2);
+						sim->pv[(y / CELL) + ry][(x / CELL) + rx] += 0.5;
+					}
 				}
-				break;
+				
 				}
 			}
 	//Diffusion of tmp i.e stored charge.

@@ -2,6 +2,7 @@
 #include "simulation/Air.h"
 
 static int update(UPDATE_FUNC_ARGS);
+static void create(ELEMENT_CREATE_FUNC_ARGS);
 
 void Element::Element_CWIR()
 {
@@ -31,7 +32,7 @@ void Element::Element_CWIR()
 	Weight = 100;
 
 	HeatConduct = 250;
-	Description = "Customisable wire, conducts at a variable speed set by.tmp";
+	Description = "Customisable wire, conduction speed set with .tmp, melting point with .tmp2";
 
 	Properties = TYPE_SOLID | PROP_CONDUCTS | PROP_HOT_GLOW | PROP_LIFE_DEC;
 
@@ -41,23 +42,35 @@ void Element::Element_CWIR()
 	HighPressureTransition = NT;
 	LowTemperature = ITL;
 	LowTemperatureTransition = NT;
-	HighTemperature = 2337.0f;
-	HighTemperatureTransition = PT_LAVA;
+	HighTemperature = ITH;
+	HighTemperatureTransition = NT;
 
 	Update = &update;
+	Create = &create;
 }
 
 static int update(UPDATE_FUNC_ARGS)
 {
 	int rx, ry, r;
-	int cust = parts[i].tmp;
+	//some checks for speed and melting point.
 	if (parts[i].tmp < 0 || parts[i].tmp > 8)
 	{
 		parts[i].tmp = 8;
 	}
 
+	if (parts[i].tmp2 < 0 || parts[i].tmp2 > 9720)
+	{
+		parts[i].tmp2 = 2000;
+	}
+
+	if (parts[i].temp-273.15f >= parts[i].tmp2)
+	{
+		parts[i].ctype = parts[i].type;
+		sim->part_change_type(i, x, y, PT_LAVA); //custom melting point.
+	}
+	int cust = parts[i].tmp;
 	int checkCoordsX[] = { -cust, cust, 0, 0 };
-	int checkCoordsY[] = { 0, 0, -cust, cust };
+	int checkCoordsY[] = { 0, 0, -cust, cust }; //custom conductivity.
 
 	if (!parts[i].life)
 	{
@@ -77,4 +90,9 @@ static int update(UPDATE_FUNC_ARGS)
 		}
 	}
 	return 0;
+}
+
+static void create(ELEMENT_CREATE_FUNC_ARGS)
+{
+	sim->parts[i].tmp2 = 2000;
 }
