@@ -81,12 +81,15 @@ static int update(UPDATE_FUNC_ARGS)
 				{
 				case PT_WOOD:
 				{
-					if (parts[i].life > 75)
-					{
-						sim->pv[(y / CELL) + ry][(x / CELL) + rx] = -1.0f;
-						sim->create_part(-1, x + 4, y + 4, PT_WAX);
-						parts[ID(r)].temp = 373.15f;
-						parts[i].life--;
+						if (parts[i].life > 75)
+						{
+							if (RNG::Ref().chance(1, 90))
+							{
+							sim->pv[(y / CELL) + ry][(x / CELL) + rx] = -1.0f;
+							sim->create_part(-1, x + 4, y + 4, PT_WAX);
+							parts[ID(r)].temp = 373.15f;
+							parts[i].life--;
+						}
 					}
 				}
 				break;

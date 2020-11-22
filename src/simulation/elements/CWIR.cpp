@@ -58,7 +58,7 @@ static int update(UPDATE_FUNC_ARGS)
 		parts[i].tmp = 8;
 	}
 
-	if (parts[i].tmp2 < 0 || parts[i].tmp2 > 9720)
+	if (parts[i].tmp2 < 1 || parts[i].tmp2 > 9725)
 	{
 		parts[i].tmp2 = 2000;
 	}

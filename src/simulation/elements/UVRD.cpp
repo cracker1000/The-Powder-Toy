@@ -87,7 +87,7 @@ static int update(UPDATE_FUNC_ARGS)
 				case PT_FIGH:
 				case PT_STKM2:
 				{
-					parts[ID(r)].life = 100;
+					parts[ID(r)].life -= 05;
 				}
 				break;
 				}
@@ -98,7 +98,7 @@ static int update(UPDATE_FUNC_ARGS)
 static int graphics(GRAPHICS_FUNC_ARGS)
 	{
 		*pixel_mode |= NO_DECO;
-		return 1;
+		return 0;
 	}
 static void create(ELEMENT_CREATE_FUNC_ARGS)
 {

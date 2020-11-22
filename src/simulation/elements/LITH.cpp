@@ -132,7 +132,7 @@ static int update(UPDATE_FUNC_ARGS)
 						sim->pv[(y / CELL) + ry][(x / CELL) + rx] += 0.5;
 					}
 				}
-				
+				break;
 				}
 			}
 	//Diffusion of tmp i.e stored charge.
