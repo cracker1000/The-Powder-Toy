@@ -52,7 +52,7 @@ void Element::Element_PROJ()
 
 static int update(UPDATE_FUNC_ARGS)
 {
-	int r, rx, ry, nxi,nyi;
+	int r, rx, ry;
 	for (rx = -1; rx < 2; rx++)
 		for (ry = -1; ry < 2; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
@@ -60,8 +60,8 @@ static int update(UPDATE_FUNC_ARGS)
 				r = pmap[y + ry][x + rx];
 				if (!r)
 					continue;
-				
-			for (parts[i].life == 10 && parts[i].tmp > 0;)
+				int nxi= rx*-1, nyi = ry * -1;
+			if (parts[i].life == 10 && parts[i].tmp > 0)
 				{
 					parts[i].tmp--;
 					parts[i].vx = nxi;
