@@ -52,15 +52,17 @@ void Element::Element_PROJ()
 
 static int update(UPDATE_FUNC_ARGS)
 {
-	int r, rx, ry,nxi,nyi;
+	int r, rx, ry,nxi = 0,nyi = 0;
 	for (rx = -1; rx < 2; rx++)
 		for (ry = -1; ry < 2; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
 			{
-				r = pmap[y + ry][x + rx];	
-				if (!r && parts[ID(r)].type != PT_SPRK && parts[ID(r)].ctype != PT_PSCN)
+				r = pmap[y + ry][x + rx];
+				if (!r && r == PT_PSCN)
+				{
 					nxi = rx, nyi = ry;
 					continue;
+				}
 			}
 			if (parts[i].life == 10 && parts[i].tmp > 0)
 				{
