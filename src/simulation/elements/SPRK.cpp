@@ -253,6 +253,15 @@ static int update(UPDATE_FUNC_ARGS)
 					}
 				}
 					continue;
+				case PT_PROJ:
+				{
+					if (sender == PT_PSCN)
+					{
+						parts[ID(r)].life = 10;
+					}
+					
+				}
+				continue;
 				case PT_LED:
 					if (parts[i].life < 4)
 					{
