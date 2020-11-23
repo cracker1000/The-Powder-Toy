@@ -58,7 +58,9 @@ static int update(UPDATE_FUNC_ARGS)
 			if (BOUNDS_CHECK && (rx || ry))
 			{
 				r = pmap[y + ry][x + rx];	
-				 nxi = rx, nyi = ry;
+				if (!r && parts[ID(r)].type != PT_SPRK && parts[ID(r)].ctype != PT_PSCN)
+					nxi = rx, nyi = ry;
+					continue;
 			}
 			if (parts[i].life == 10 && parts[i].tmp > 0)
 				{
