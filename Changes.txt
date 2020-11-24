@@ -1,7 +1,16 @@
 Changelog for Version 17.0:
-FIx CWIR crashing with large .tmp values.
+Additions:
+Update to TPT 96.0 stable.
+Add new element PROJ (Projectile.)
 Add support for custom melting point to CWIR.
-Fix some minor LITH reactions.
+
+Fixes:
+Fix some minor LITH and UV reactions.
+FIx CWIR crashing with large .tmp values.
+Changes to ECLR making it less buggy (now works with PSCN and NSCN.)
+
+
+
 
 
 

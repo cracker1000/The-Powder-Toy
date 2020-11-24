@@ -30,8 +30,8 @@ void Element::Element_PROJ()
 
 	Weight = 100;
 
-	HeatConduct = 35;
-	Description = "Projectile, converts into given ctype after collision. SPRK with PSCN to launch.";
+	HeatConduct = 0;
+	Description = "Projectile, converts into ctype. SPRK with PSCN to launch. Use .tmp for power.";
 
 	Properties = TYPE_PART;
 
@@ -41,8 +41,8 @@ void Element::Element_PROJ()
 	HighPressureTransition = NT;
 	LowTemperature = ITL;
 	LowTemperatureTransition = NT;
-	HighTemperature = 2887.15f;
-	HighTemperatureTransition = ST;
+	HighTemperature = ITH;
+	HighTemperatureTransition = NT;
 
 	Update = &update;
 	CtypeDraw = &ctypeDraw;
@@ -52,42 +52,50 @@ void Element::Element_PROJ()
 
 static int update(UPDATE_FUNC_ARGS)
 {
-	int r, rx, ry,nxi = 0,nyi = 0;
+	int r, rx, ry;
 	for (rx = -1; rx < 2; rx++)
 		for (ry = -1; ry < 2; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
 			{
 				r = pmap[y + ry][x + rx];
-				if (!r && r == PT_PSCN)
-				{
-					nxi = rx, nyi = ry;
+				if (!r)
 					continue;
+				if(parts[ID(r)].type == PT_SPRK && parts[ID(r)].ctype == PT_PSCN && parts[ID(r)].life == 3) //Check for a sprk with ctype PSCN to activate and store the direction.
+				{
+					parts[i].pavg[1] = -rx;
+					parts[i].pavg[2] = -ry;
+					parts[i].life = 10;
 				}
 			}
-			if (parts[i].life == 10 && parts[i].tmp > 0)
+
+	if (parts[i].life == 10) //For motion, .tmp determines the range. 
 				{
-					parts[i].tmp--;
-					parts[i].vx = nxi;
-					parts[i].vy = nyi;
-				}
-				 if (parts[i].life == 10 && parts[i].tmp == 0)
-				{
-					sim->part_change_type(i, x, y, parts[i].ctype);
-				}
+					parts[i].tmp2++;
+					parts[i].vx = parts[i].pavg[1] + parts[i].tmp/100;
+					parts[i].vy = parts[i].pavg[2] + parts[i].tmp2/20 - parts[i].tmp/200;
+			    }
+	//For collision detection.
+	if (parts[i].life == 10 && (sim->elements[TYP(r)].Properties & TYPE_SOLID||sim->elements[TYP(r)].Properties & TYPE_PART||sim->elements[TYP(r)].Properties & TYPE_LIQUID))
+	{
+		sim->part_change_type(i, x , y, parts[i].ctype);
+	}
+
 	return 0;
 }
 
-static int graphics(GRAPHICS_FUNC_ARGS)
+static int graphics(GRAPHICS_FUNC_ARGS) //Flare when activated.
 {
+	if(cpart->life == 10)
 	*pixel_mode |= PMODE_LFLARE;
 	return 0;
 }
 
-static void create(ELEMENT_CREATE_FUNC_ARGS)
+static void create(ELEMENT_CREATE_FUNC_ARGS) //Default settings.
 {
 	sim->parts[i].tmp = 50;
+
 }
-static bool ctypeDraw(CTYPEDRAW_FUNC_ARGS)
+static bool ctypeDraw(CTYPEDRAW_FUNC_ARGS) //For enabling Ctype Draw.
 {
 	if (!Element::ctypeDrawVInCtype(CTYPEDRAW_FUNC_SUBCALL_ARGS))
 	{
