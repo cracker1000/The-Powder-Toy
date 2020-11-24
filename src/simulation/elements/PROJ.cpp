@@ -31,7 +31,7 @@ void Element::Element_PROJ()
 	Weight = 100;
 
 	HeatConduct = 0;
-	Description = "Projectile, converts into ctype. SPRK with PSCN to launch. Use .tmp for power.";
+	Description = "Projectile, converts into ctype. SPRK with PSCN to launch. Use .tmp for range and .temp for power.";
 
 	Properties = TYPE_PART;
 
@@ -43,6 +43,7 @@ void Element::Element_PROJ()
 	LowTemperatureTransition = NT;
 	HighTemperature = ITH;
 	HighTemperatureTransition = NT;
+	DefaultProperties.temp = R_TEMP + 10.0f + 273.15f; //Defualt.
 
 	Update = &update;
 	CtypeDraw = &ctypeDraw;
@@ -52,12 +53,11 @@ void Element::Element_PROJ()
 
 static int update(UPDATE_FUNC_ARGS)
 {
-	int r, rx, ry;
-	for (rx = -1; rx < 2; rx++)
-		for (ry = -1; ry < 2; ry++)
+	for (int rx = -1; rx <= 1; rx++)
+		for (int ry = -1; ry <= 1; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
 			{
-				r = pmap[y + ry][x + rx];
+				int r = pmap[y + ry][x + rx];
 				if (!r)
 					continue;
 				if(parts[ID(r)].type == PT_SPRK && parts[ID(r)].ctype == PT_PSCN && parts[ID(r)].life == 3) //Check for a sprk with ctype PSCN to activate and store the direction.
@@ -66,18 +66,17 @@ static int update(UPDATE_FUNC_ARGS)
 					parts[i].pavg[2] = -ry;
 					parts[i].life = 10;
 				}
-			}
-
-	if (parts[i].life == 10) //For motion, .tmp determines the range. 
+				//For collision detection.
+				if (parts[i].life == 10 && parts[ID(r)].type != PT_SPRK && parts[ID(r)].type != PT_PSCN && (sim->elements[TYP(r)].Properties & TYPE_SOLID || sim->elements[TYP(r)].Properties & TYPE_PART || sim->elements[TYP(r)].Properties & TYPE_LIQUID))
 				{
-					parts[i].tmp2++;
-					parts[i].vx = parts[i].pavg[1] + parts[i].tmp/100;
-					parts[i].vy = parts[i].pavg[2] + parts[i].tmp2/20 - parts[i].tmp/200;
-			    }
-	//For collision detection.
-	if (parts[i].life == 10 && (sim->elements[TYP(r)].Properties & TYPE_SOLID||sim->elements[TYP(r)].Properties & TYPE_PART||sim->elements[TYP(r)].Properties & TYPE_LIQUID))
+					sim->part_change_type(i, x, y, parts[i].ctype);
+				}
+			}
+	if (parts[i].life == 10) //For motion, .temp determines the power while .tmp deterimines the range. 
 	{
-		sim->part_change_type(i, x , y, parts[i].ctype);
+		parts[i].tmp2+= 1;
+		parts[i].vx = parts[i].pavg[1]*((parts[i].temp-273.15f)/10);
+		parts[i].vy = parts[i].pavg[2] + 0.2*(parts[i].tmp2/parts[i].tmp);
 	}
 
 	return 0;
@@ -92,8 +91,7 @@ static int graphics(GRAPHICS_FUNC_ARGS) //Flare when activated.
 
 static void create(ELEMENT_CREATE_FUNC_ARGS) //Default settings.
 {
-	sim->parts[i].tmp = 50;
-
+	sim->parts[i].tmp = 10;
 }
 static bool ctypeDraw(CTYPEDRAW_FUNC_ARGS) //For enabling Ctype Draw.
 {
@@ -105,6 +103,5 @@ static bool ctypeDraw(CTYPEDRAW_FUNC_ARGS) //For enabling Ctype Draw.
 	{
 		sim->parts[i].ctype |= PMAPID(30);
 	}
-	sim->parts[i].temp = sim->elements[t].DefaultProperties.temp;
 	return true;
 }
