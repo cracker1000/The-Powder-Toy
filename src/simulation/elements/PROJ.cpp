@@ -43,7 +43,7 @@ void Element::Element_PROJ()
 	LowTemperatureTransition = NT;
 	HighTemperature = ITH;
 	HighTemperatureTransition = NT;
-	DefaultProperties.temp = R_TEMP + 10.0f + 273.15f; //Defualt.
+	DefaultProperties.temp = R_TEMP + 30.0f; //Defualt power.
 
 	Update = &update;
 	CtypeDraw = &ctypeDraw;
@@ -53,6 +53,11 @@ void Element::Element_PROJ()
 
 static int update(UPDATE_FUNC_ARGS)
 {
+	//checks for .tmp and .temp
+	if (parts[i].tmp <= 0 || parts[i].tmp > 500)
+		parts[i].tmp = 10;
+	if (parts[i].temp <= 273.15f || parts[i].temp > 473.15f )
+		parts[i].temp = 293.15f ;
 	for (int rx = -1; rx <= 1; rx++)
 		for (int ry = -1; ry <= 1; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
@@ -67,7 +72,7 @@ static int update(UPDATE_FUNC_ARGS)
 					parts[i].life = 10;
 				}
 				//For collision detection.
-				if (parts[i].life == 10 && parts[ID(r)].type != PT_SPRK && parts[ID(r)].type != PT_PSCN && (sim->elements[TYP(r)].Properties & TYPE_SOLID || sim->elements[TYP(r)].Properties & TYPE_PART || sim->elements[TYP(r)].Properties & TYPE_LIQUID))
+				if (parts[i].life == 10 && parts[ID(r)].type != PT_EMBR && parts[ID(r)].type != PT_SPRK && parts[ID(r)].type != PT_PSCN && (sim->elements[TYP(r)].Properties & TYPE_SOLID || sim->elements[TYP(r)].Properties & TYPE_PART || sim->elements[TYP(r)].Properties & TYPE_LIQUID))
 				{
 					sim->part_change_type(i, x, y, parts[i].ctype);
 				}
@@ -77,8 +82,8 @@ static int update(UPDATE_FUNC_ARGS)
 		parts[i].tmp2+= 1;
 		parts[i].vx = parts[i].pavg[1]*((parts[i].temp-273.15f)/10);
 		parts[i].vy = parts[i].pavg[2] + 0.2*(parts[i].tmp2/parts[i].tmp);
+		sim->create_part(-1, x, y - 1, PT_EMBR);
 	}
-
 	return 0;
 }
 
@@ -89,9 +94,10 @@ static int graphics(GRAPHICS_FUNC_ARGS) //Flare when activated.
 	return 0;
 }
 
-static void create(ELEMENT_CREATE_FUNC_ARGS) //Default settings.
+static void create(ELEMENT_CREATE_FUNC_ARGS) //Default rangeand ctype settings.
 {
 	sim->parts[i].tmp = 10;
+	sim->parts[i].ctype = PT_BOMB;
 }
 static bool ctypeDraw(CTYPEDRAW_FUNC_ARGS) //For enabling Ctype Draw.
 {
