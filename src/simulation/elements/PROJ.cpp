@@ -31,7 +31,7 @@ void Element::Element_PROJ()
 	Weight = 100;
 
 	HeatConduct = 0;
-	Description = "Projectile, converts into ctype. SPRK with PSCN to launch. Use .tmp for range and .temp for power.";
+	Description = "Projectile, converts into ctype upon collision. SPRK with PSCN to launch. Use .tmp for range and temp. for power.";
 
 	Properties = TYPE_PART;
 
@@ -57,7 +57,8 @@ static int update(UPDATE_FUNC_ARGS)
 	if (parts[i].tmp <= 0 || parts[i].tmp > 500)
 		parts[i].tmp = 10;
 	if (parts[i].temp <= 273.15f || parts[i].temp > 473.15f )
-		parts[i].temp = 293.15f ;
+		parts[i].temp = 293.15f;
+
 	for (int rx = -1; rx <= 1; rx++)
 		for (int ry = -1; ry <= 1; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
@@ -94,12 +95,12 @@ static int graphics(GRAPHICS_FUNC_ARGS) //Flare when activated.
 	return 0;
 }
 
-static void create(ELEMENT_CREATE_FUNC_ARGS) //Default rangeand ctype settings.
+static void create(ELEMENT_CREATE_FUNC_ARGS) //Default range and ctype settings.
 {
 	sim->parts[i].tmp = 10;
 	sim->parts[i].ctype = PT_BOMB;
 }
-static bool ctypeDraw(CTYPEDRAW_FUNC_ARGS) //For enabling Ctype Draw.
+static bool ctypeDraw(CTYPEDRAW_FUNC_ARGS) //For enabling ctype Draw.
 {
 	if (!Element::ctypeDrawVInCtype(CTYPEDRAW_FUNC_SUBCALL_ARGS))
 	{
