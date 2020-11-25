@@ -51,3 +51,8 @@ Searchview.cpp
 (CWIR, 214);
 
 10) Run script update.bat to update the scripts for linux and mac.
+11) To make a new Pull Request:
+a) Run new branch.bat
+b) Open gitbash> git checkout -b vanilla (in case it fails to checkout)
+c) git checkout -b <branch name here>
+d) Push commits> push to origin> Done. 
