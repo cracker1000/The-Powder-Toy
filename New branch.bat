@@ -1,4 +1,5 @@
-git remote add Newbee https://github.com/The-Powder-Toy/The-Powder-Toy
-git fetch Newbee
-git checkout Newbee/master
-git checkout -b Newbee2
+git remote add upstream https://github.com/The-Powder-Toy/The-Powder-Toy
+git fetch upstream
+git checkout upstream/master
+git checkout -b vanilla
+git checkout -b projectile
