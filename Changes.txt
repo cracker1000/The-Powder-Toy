@@ -1,13 +1,19 @@
-Changelog for Version 17.0:
+Changelog for Version 17.0 (maintainance/ Release)
+
 Additions:
-Update to TPT 96.0 stable.
 Add new element PROJ (Projectile.)
 Add support for custom melting point to CWIR.
+Add support for multiple wiki pages. 
+Add missing fonts for texter.
 
 Fixes:
 Fix some minor LITH and UV reactions.
-FIx CWIR crashing with large .tmp values.
-Changes to ECLR making it less buggy (now works with PSCN and NSCN.)
+Fix CWIR crashing with large .tmp values.
+Changes to ECLR making it easier to use (now works with PSCN and NSCN.)
+
+todo:
+Fix error when loading saves with GoL elements.
+ 
 
 
 
