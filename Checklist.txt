@@ -49,9 +49,16 @@ Searchview.cpp
 (ECLR, 212);             SPRK.cpp
 (C16, 213);
 (CWIR, 214);
+(PROJ, 215); 
 
 10) Run script update.bat to update the scripts for linux and mac.
-11) To make a new Pull Request:
+
+11) To cherry pick
+a) Run cherrypick.bat
+b) FIlter branch to upstream> cherrypick and commit.
+c) Done. 
+
+12) To make a new Pull Request:
 a) Run new branch.bat
 b) Open gitbash> git checkout -b vanilla (in case it fails to checkout)
 c) git checkout -b <branch name here>
