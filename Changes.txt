@@ -1,8 +1,9 @@
-Changelog for Version 17.0 (maintainance/ Release)
+Changelog for Version 17.0 (maintainance update)
 
 Additions:
 Add new element PROJ (Projectile.)
 Add support for custom melting point to CWIR.
+Add options for customising theme (click on done to save the custom settings.).
 support for multiple wiki pages. 
 Add some missing fonts for texter.
 
