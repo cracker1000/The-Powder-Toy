@@ -11,6 +11,7 @@ Fix some minor LITH and UV reactions.
 Fix CWIR crashing with large .tmp values.
 Changes to ECLR making it easier to use (now works with PSCN and NSCN.)
 Fix error when loading saves with GoL elements.
+Reset molten SLCN tmp in reactions to prevent interference with products.
 
  
 

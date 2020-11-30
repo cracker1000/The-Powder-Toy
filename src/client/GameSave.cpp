@@ -2429,9 +2429,8 @@ char * GameSave::serialiseOPS(unsigned int & dataLength)
 				}
 				if (particles[i].type == PT_LIFE)
 				{
-					RESTRICTVERSION(95, 0);
+					RESTRICTVERSION(96, 0);
 				}
-
 				//Get the pmap entry for the next particle in the same position
 				i = partsPosLink[i];
 			}
