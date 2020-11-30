@@ -819,17 +819,16 @@ void GameSave::readOPS(char * data, int dataLength)
 							minor = bson_iterator_int(&subiter);
 					}
 				}
-	//Caution! Revert the below changes when Version 96.0 actually gets release.
-//#if defined(SNAPSHOT) || defined(DEBUG)
-				//if (major > FUTURE_SAVE_VERSION || (major == FUTURE_SAVE_VERSION && minor > FUTURE_MINOR_VERSION))
-//#else
-				//if (major > SAVE_VERSION || (major == SAVE_VERSION && minor > MINOR_VERSION))
-//#endif
-				//{
-					//String errorMessage = String::Build("Save from a newer version: Requires version ", major, ".", minor);
-					//throw ParseException(ParseException::WrongVersion, errorMessage);
-				//}
-#if defined(SNAPSHOT) || defined(DEBUG)
+#if defined(SNAPSHOT) || defined(BETA) || defined(DEBUG) || MOD_ID > 0
+				if (major > FUTURE_SAVE_VERSION || (major == FUTURE_SAVE_VERSION && minor > FUTURE_MINOR_VERSION))
+#else
+				if (major > SAVE_VERSION || (major == SAVE_VERSION && minor > MINOR_VERSION))
+#endif
+				{
+					String errorMessage = String::Build("Save from a newer version: Requires version ", major, ".", minor);
+					throw ParseException(ParseException::WrongVersion, errorMessage);
+				}
+#if defined(SNAPSHOT) || defined(BETA) || defined(DEBUG) || MOD_ID > 0
 				else if (major > SAVE_VERSION || (major == SAVE_VERSION && minor > MINOR_VERSION))
 					fakeNewerVersion = true;
 #endif
@@ -2497,6 +2496,12 @@ char * GameSave::serialiseOPS(unsigned int & dataLength)
 			}
 		}
 	}
+
+#if defined(SNAPSHOT) || defined(BETA) || defined(DEBUG) || MOD_ID > 0
+	// Mark save as incompatible with latest release
+	if (minimumMajorVersion > SAVE_VERSION || (minimumMajorVersion == SAVE_VERSION && minimumMinorVersion > MINOR_VERSION))
+		fromNewerVersion = true;
+#endif
 
 	bson b;
 	b.data = NULL;
