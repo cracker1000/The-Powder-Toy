@@ -2,7 +2,7 @@
 const char *const introTextData =
 "\br                                         <<< WELCOME TO THE \boCRACKER1000 \brMOD >>> \n\n"
 "\bo---------------------------------------------------------------------------------------------------------------------\n"
-"\brVersion:\bo Mod: 17.0\bo  TPT: 95.0 (snapshot 204)\n"
+"\brVersion:\bo Mod: 18.0\bo  TPT: 95.0 (snapshot 205)\n"
 "\bo---------------------------------------------------------------------------------------------------------------------\n"
 "\bl \n"
 "\bt  Important instructions:\n"

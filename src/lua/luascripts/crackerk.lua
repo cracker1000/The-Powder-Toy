@@ -1,5 +1,4 @@
 --Cracker1000's custom script version 4.0
-
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
 local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
@@ -90,7 +89,7 @@ local brlabel = Label:new(340, 210, 10, 15, "Turned: Off")
 local reminder = Button:new(203,252,80,30, "Reminder", "Adjust brightness.")
 local remon = Button:new(293,252,45,20,"On", "Save.")
 local remoff  = Button:new(293,272,45,20,"Off", "Cancel.")
-local remvalue = Textbox:new(323, 272, 40, 20, '', 'Time in mins')
+local remvalue= Label:new(363, 264, 90, 20, "Notifies after every 30 mins")
 
 local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
 
@@ -167,6 +166,40 @@ newmenu:removeComponent(remon)
 newmenu:removeComponent(remoff)
 newmenu:removeComponent(remvalue)
 end
+
+local startTime
+
+function remindme()
+local endTime = startTime+ 1800
+if os.time() >= endTime then
+tpt.unregister_step(remindme)
+tpt.message_box("Activity Reminder!","You have played for 30 mins. Click dismiss to continue.")
+end
+end
+
+reminder:action(function(sender)
+clearsb()
+newmenu:addComponent(remon)
+newmenu:addComponent(remoff)
+newmenu:addComponent(remvalue)
+end)
+
+remon:action(function(sender)
+clearsb()
+startTime = os.time()
+tpt.register_step(remindme)
+newmenu:removeComponent(remon)
+newmenu:removeComponent(remoff)
+newmenu:removeComponent(remvalue)
+end)
+
+remoff:action(function(sender)
+clearsb()
+tpt.unregister_step(remindme)
+newmenu:removeComponent(remon)
+newmenu:removeComponent(remoff)
+newmenu:removeComponent(remvalue)
+end)
 
 function cbrightness()
 tpt.fillrect(-1,-1,629,424,0,0,0,255 - MANAGER.getsetting("CRK", "brightness"))
@@ -953,6 +986,7 @@ tpt.setfpscap(2)
 end)
 
 reset:action(function(sender)
+tpt.unregister_step(remindme)
 brlabel:text("Turned: off")
 brightSlider:value("200")
 tpt.unregister_step(cbrightness)
@@ -2487,10 +2521,10 @@ fonts['5x7']['"'] = {
 --Cracker64's Powder Toy Multiplayer
 --I highly recommend to use my Autorun Script Manager
 
-local versionstring = "1.0"
+local versionstring = "1.0.1"
 
-if TPTMP then if TPTMP.version <= 5 then TPTMP.disableMultiplayer() else error("newer version already running") end end local get_name = tpt.get_name -- if script already running, replace it
-TPTMP = {["version"] = 5, ["versionStr"] = versionstring} -- script version sent on connect to ensure server protocol is the same
+if TPTMP then if TPTMP.version <= 6 then TPTMP.disableMultiplayer() else error("newer version already running") end end local get_name = tpt.get_name -- if script already running, replace it
+TPTMP = {["version"] = 6, ["versionStr"] = versionstring} -- script version sent on connect to ensure server protocol is the same
 local issocket,socket = pcall(require,"socket")
 if not http then error"Tpt version not supported" end
 local using_manager = false
@@ -2652,7 +2686,7 @@ local function connectToServer(ip,port,nick)
 		if not authToken then
 			authToken = zs
 			if uid then
-				local ok, err = authenticate(saveid, authToken, uid, sess)
+				local ok, err = authenticate(saveid, authToken:sub(1, 20), uid, sess)
 				if not ok then
 					return false, err
 				end
@@ -2789,7 +2823,7 @@ ui_box = {
 new = function(x,y,w,h,r,g,b)
 	local box=ui_base.new()
 	box.x=x box.y=y box.w=w box.h=h box.x2=x+w box.y2=y+h
-	box.r=r or 90 box.g= g or 90  box.b=  b or 90
+	box.r=r or 90 box.g=g or 90 box.b=b or 90
 	function box:setcolor(r,g,b) self.r=r self.g=g self.b=b end
 	function box:setbackground(r,g,b,a) self.br=r self.bg=g self.bb=b self.ba=a end
 	box.drawbox=true
@@ -4683,9 +4717,3 @@ evt.register(evt.keypress, keypress)
 evt.register(evt.keyrelease, keyrelease)
 evt.register(evt.textinput, textinput)
 evt.register(evt.blur, blur)
-
-
-
-
-
-
