@@ -8,7 +8,7 @@ void Element::Element_UVRD()
 {
 	Identifier = "DEFAULT_PT_UVRD";
 	Name = "UV";
-	Colour = PIXPACK(0x4B0082);
+	Colour = PIXPACK(0x9400D3);
 	MenuVisible = 1;
 	MenuSection = SC_NUCLEAR;
 	Enabled = 1;
@@ -32,7 +32,7 @@ void Element::Element_UVRD()
 
 	DefaultProperties.temp = R_TEMP + 100.0f + 273.15f;
 	HeatConduct = 251;
-	Description = "UV rays emitted by SUN, reacts differently with different elements.";
+	Description = "UV rays emitted by SUN, reacts differently with different elements. Visible when passing through FILT ";
 
 	Properties = TYPE_ENERGY | PROP_LIFE_DEC | PROP_LIFE_KILL_DEC;
 
@@ -52,6 +52,8 @@ void Element::Element_UVRD()
 
 static int update(UPDATE_FUNC_ARGS)
 {
+	if (parts[i].tmp2 > 0)
+		parts[i].tmp2--;
 	int r, rx, ry, np, rndstore;
 	for (rx = -1; rx < 2; rx++)
 		for (ry = -1; ry < 2; ry++)
@@ -83,6 +85,11 @@ static int update(UPDATE_FUNC_ARGS)
 					np = sim->create_part(ID(r), x + rx, y + ry, PT_SPRK);
 				}
 				break;
+				case PT_FILT:
+				{
+					parts[i].tmp2 = 20;
+				}
+				break;
 				case PT_STKM:
 				case PT_FIGH:
 				case PT_STKM2:
@@ -96,7 +103,21 @@ static int update(UPDATE_FUNC_ARGS)
 }
 
 static int graphics(GRAPHICS_FUNC_ARGS)
-	{
+		{
+			if (cpart->tmp2 > 0)
+			{
+				*colr = 200;
+				*colg = 0;
+				*colb = 200;
+				*pixel_mode |= PMODE_GLOW;
+			}
+			else
+			{
+				*colr = 0;
+				*colb = 0;
+				*colg = 0;
+				*pixel_mode |= NO_DECO;
+			}
 		*pixel_mode |= NO_DECO;
 		return 0;
 	}
