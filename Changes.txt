@@ -1,24 +1,17 @@
-Changelog for Version 17.0 (maintainance update)
+Changelog for Version 18.0
 
 Additions:
-Add new element PROJ (Projectile.)
-Add support for custom melting point to CWIR.
-Add options for customising theme (click on done to save the custom settings.).
-support for multiple wiki pages. 
-Add some missing fonts for texter.
-
+Add custom brightness settings (Now you can change the game brightness without affecting other programmes.)
+Make customisable themes show the RGB value for each theme and also make it a bit compact.
+Make theme use the alpha values of slider (using the brightness settings if turned on.)
+Merge changes from 96.0 (Enabling saves with cGoL elements to be uploaded.)
+Update inbuilt tptmp script to version 1.0 (Check out the forum thread for more info.)
+HUD(while in debug mode) now shows temp. in both K and F. 
+ 
 Fixes:
-Fix some minor LITH and UV reactions.
-Fix CWIR crashing with large .tmp values.
-Changes to ECLR making it easier to use (now works with PSCN and NSCN.)
-Fix error when loading saves with GoL elements.
-Reset molten SLCN tmp in reactions to prevent interference with products.
+Fix HUD showing Fahrenheit as unit instead of Kelvin.
+Switching between themes is now optimised.
+todo:
+Complete reminder settings.
 
- 
-
-
-
-
-
-
- 
+                      
