@@ -1,17 +1,14 @@
-Changelog for Version 18.0
+Changelog for Version 19.0
 
 Additions:
-Add custom brightness settings (Now you can change the game brightness without affecting other programmes.)
-Make customisable themes show the RGB value for each theme and also make it a bit compact.
-Make theme use the alpha values of slider (using the brightness settings if turned on.)
-Merge changes from 96.0 (Enabling saves with cGoL elements to be uploaded.)
-Update inbuilt tptmp script to version 1.0.1 (Check out the forum thread for more info.)
-HUD(while in debug mode) now shows temp. in both K and F. 
-Add an inactivity reminder (Will pop up a message after every 30 mins reducing unneccesary cpu and memory usage.)
-UV is now invisible and also penetrates other elements (Pass it through FILT to make it visible.)
+
+
+
+
 Fixes:
-Fix HUD showing Fahrenheit as unit instead of Kelvin.
-Switching between themes is now optimised.
+
+
+todo:
 
 
                       
