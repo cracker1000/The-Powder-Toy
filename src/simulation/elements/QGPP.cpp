@@ -85,11 +85,12 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 	{
 		*pixel_mode |= PMODE_LFLARE;
 	}
-	if (cpart->tmp <= 50 && cpart->temp >= 374.15f)
+	if (cpart->tmp <= 150 && cpart->temp >= 374.15f)
 	{
-		*colb = 50;
-		*colg = 225;
-		*colr = 225;
+		float frequency = 0.04045;
+		*colr = (sin(frequency* cpart->tmp + 4) * 127 + 150);
+		*colg = (sin(frequency* cpart->tmp + 8) * 127 + 150);
+		*colb = (sin(frequency* cpart->tmp + 5) * 127 + 150);
 	}
 	if (cpart->temp < 373.15f)
 	{
