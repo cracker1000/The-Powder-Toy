@@ -32,8 +32,8 @@ local bary = Button:new(90,220,80,20,"Show", "Shows the bar at top")
 local barn = Button:new(90,240,80,20,"Hide", "Hides the bar")
 
 local bug = Button:new(10,252,75,30,"Feedback", "Direct to Mod thread for bug report.")
-local bug1 = Button:new(90,252,80,30,"Website", "Direct to Mod thread for bug report.")
-local bug2 = Button:new(180,252,80,30,"In game", "Direct to Mod thread for bug report.")
+local bug1 = Button:new(90,252,50,30,"Website", "Direct to Mod thread for bug report.")
+local bug2 = Button:new(145,252,50,30,"In game", "Direct to Mod thread for bug report.")
 
 local wiki  =  Button:new(203,28,80,30,"Wiki", "Element wiki!")
 
@@ -173,7 +173,7 @@ function remindme()
 local endTime = startTime+ 1800
 if os.time() >= endTime then
 tpt.unregister_step(remindme)
-tpt.message_box("Activity Reminder!","You have played for 30 mins. Click dismiss to continue.")
+tpt.message_box("Activity Reminder!","You have played for 30 mins. Simulation has been paused to save resources. Click dismiss to continue.")
 end
 end
 
@@ -187,6 +187,7 @@ end)
 remon:action(function(sender)
 clearsb()
 startTime = os.time()
+tpt.unregister_step(remindme)
 tpt.register_step(remindme)
 newmenu:removeComponent(remon)
 newmenu:removeComponent(remoff)
@@ -445,7 +446,7 @@ local nextpg = Button:new(292, 400, 40, 15, "Next")
 local close2 = Button:new(512, 400, 100, 15, "Close wiki")
 local creditstxt = Label:new(6,-25, 598, 418,"WELCOME TO THE OFFLINE WIKI\n\n1) CWIR: Customisable wire. Conduction speed set using .tmp property (Range is 0 to 8) \n.tmp2 property is used for setting melting point (default is 2000C).\n\n2) C-16: A powerful explosive. Explodes creating pressure about 40 units when above 65C.\n\n3) TIMC: Time Crystal, converts into it's ctype when sparked with PSCN. Timer set using .tmp, default is 100.\n\n4) FUEL: Powerful fuel, explodes when temp is above 50C or Pressure above 14.\n\n5) THRM: Thermostat. Maintains the surrounding temp based on its own .temp property.\n\n6) CLNT: Coolant. Cools down the temp of the system. Use .tmp to configure the cooling/heating power.\nEvaporates at extreme temperatures into WTRV.\n\n7) DMRN: Demron. Radioactive shielding material and a better indestructible heat insulator.\nIt can also block energy particles like PROT.\n\n8) FNTC & FPTC: Faster versions of NTCT and PTCT. Useful for making faster logic gates.\n\n9) PINV: Powered Invisible, allows particles to move through it only when activated.\nUse PSCN to activate and NSCN to deactivate.\n\n10) UV: UV rays, harms stkms (-5 life every frame), visible with FILT, grows plnt, can sprk pscn and evaporates watr.\n\n11) SUN.: Emits rays which makes PLNT grow in direction of sun, emits UV radiation, makes PSCN spark and heals STKMs.\n\n12) CLUD: Realistic cloud, rains and creates LIGH after sometime (every 1000 frames).\nShines bright when it creates a LIGH.")
 
-local creditstxt2 = Label:new(6,-25, 598, 418," 13) LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\n Reacts with different elements like O2, WATR, ACID etc as IRL.\n\n 14) LED:  Light Emmiting Diode. Use PSCN to activate and NSCN to deactivate. Temp sets the brightness.\n Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow and 5 = pink. \n\n 15) QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n Glows yellow before exploding. \n\n 16) TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp. Supports .tmp deserialisation.\n\n 17) PHOS: Phosphorus. Shiny white  particle when spawned, slowly turns into red phosphorus with time. \n Burns blue or red  when in contact with CFLM or O2 respectively, (based on on .tmp).\n Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n\n 18) CMNT: Cement, creates an exothermic reaction when mixed with water and gets solidified, darkens when solid.\n\n 19) NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n\n 20) PRMT: Promethium, radioactive element. Catches fire at high velocity (>12), creats NEUT when mixed with PLUT. \n Explodes at low temp and emits neut at high temp.\n\n 20) BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n\n 21) ECLR: Electronic eraser, clears the defined radius (.tmp) when activated (Use with PSCN and NSCN). \n\n 22) PROJ: Projectile, converts into its's ctype upon collision. launch with PSCN.\n Temperature determines power while .tmp is for range.")
+local creditstxt2 = Label:new(6,-25, 598, 418," 13) LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\n Reacts with different elements like O2, WATR, ACID etc as IRL.\n\n 14) LED:  Light Emmiting Diode. Use PSCN to activate and NSCN to deactivate. Temp sets the brightness.\n Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow, 5 = pink and 6 = Flash mode.  \n\n 15) QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n Glows yellow before exploding. \n\n 16) TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp. Supports .tmp deserialisation.\n\n 17) PHOS: Phosphorus. Shiny white  particle when spawned, slowly turns into red phosphorus with time. \n Burns blue or red  when in contact with CFLM or O2 respectively, (based on on .tmp).\n Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n\n 18) CMNT: Cement, creates an exothermic reaction when mixed with water and gets solidified, darkens when solid.\n\n 19) NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n\n 20) PRMT: Promethium, radioactive element. Catches fire at high velocity (>12), creats NEUT when mixed with PLUT. \n Explodes at low temp and emits neut at high temp.\n\n 20) BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n\n 21) ECLR: Electronic eraser, clears the defined radius (.tmp) when activated (Use with PSCN and NSCN). \n\n 22) PROJ: Projectile, converts into its's ctype upon collision. launch with PSCN.\n Temperature determines power while .tmp is for range.")
 
 creditw:addComponent(creditstxt)
 creditw:addComponent(close2)

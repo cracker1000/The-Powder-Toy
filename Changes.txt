@@ -1,14 +1,15 @@
 Changelog for Version 19.0
 
 Additions:
-
-
-
+New LED mode where it flash colours when .tmp2 set to "06" mode
 
 Fixes:
-
+Make feedback buttons smaller to avoid accidental clicks with neighboring buttons.
+Make Reminder unregister first if clicked twice.
 
 todo:
-
+Megre new commits
+Add Subframe sprk
+Make PROJ better and move it into Force category
 
                       

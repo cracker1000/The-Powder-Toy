@@ -109,7 +109,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 				*colr = 200;
 				*colg = 0;
 				*colb = 200;
-				*pixel_mode |= PMODE_GLOW;
+				*pixel_mode |= PMODE_FLARE;
 			}
 			else
 			{

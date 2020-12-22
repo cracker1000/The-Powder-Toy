@@ -48,7 +48,25 @@ void Element::Element_LED()
 static int update(UPDATE_FUNC_ARGS)
 {
 
+	if (parts[i].temp > 374.15f)
+		parts[i].temp = 374.15f;
+	if (parts[i].temp < 274.15f)
+		parts[i].temp = 274.15f;
+
+	if (parts[i].tmp2 == 6 && parts[i].tmp < 1000)
 	{
+		parts[i].tmp++;
+	}
+	if (parts[i].tmp2 == 6 && parts[i].tmp == 1000)
+	{
+		parts[i].tmp = 1;
+	}
+
+	if (parts[i].tmp2 > 6 || parts[i].tmp2 <= 0)
+	{
+		parts[i].tmp2 = 0;
+	}
+	
 		int r, rx, ry, np;
 		if (parts[i].life != 10)
 		{
@@ -73,16 +91,8 @@ static int update(UPDATE_FUNC_ARGS)
 						}
 					}
 		}
-
-		{
-			if (parts[i].temp > 374.15f)
-				parts[i].temp = 374.15f;
-			if (parts[i].temp < 274.15f)
-				parts[i].temp = 274.15f;
-		}
 		return 0;
 	}
-}
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
@@ -95,34 +105,40 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 				*fireg = 0;
 				*fireb = 0;
 			}
-			if (cpart->tmp2 == 2)
+			else if (cpart->tmp2 == 2)
 			{
 				*firer = 0;
 				*fireg = 250;
 				*fireb = 0;
 			}
-			if (cpart->tmp2 == 3)
+			else if (cpart->tmp2 == 3)
 			{
 				*firer = 0;
 				*fireg = 0;
 				*fireb = 250;
 			}
 
-			if (cpart->tmp2 == 4)
+			else if (cpart->tmp2 == 4)
 			{
 				*firer = 250;
 				*fireg = 250;
 				*fireb = 0;
 			}
 
-			if (cpart->tmp2 == 5)
+			else if (cpart->tmp2 == 5)
 			{
 				*firer = 250;
 				*fireg = 0;
 				*fireb = 250;
 			}
-
-			if (cpart->tmp2 == 0 || cpart->tmp2 > 5)
+			else if (cpart->tmp2 == 6)
+			{
+					float frequency = 0.04045;
+					*firer = (sin(frequency* cpart->tmp + 4) * 127 + 150);
+					*fireg = (sin(frequency* cpart->tmp + 6) * 127 + 150);
+					*fireb = (sin(frequency* cpart->tmp + 8) * 127 + 150);
+			}
+			else if (cpart->tmp2 == 0)
 			{
 				*firer = 250;
 				*fireg = 250;

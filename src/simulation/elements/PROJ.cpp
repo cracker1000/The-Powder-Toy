@@ -10,7 +10,7 @@ void Element::Element_PROJ()
 	Name = "PROJ";
 	Colour = PIXPACK(0xFFE21D24);
 	MenuVisible = 1;
-	MenuSection = SC_SPECIAL;
+	MenuSection = SC_FORCE;
 	Enabled = 1;
 
 	Advection = 0.0f;
