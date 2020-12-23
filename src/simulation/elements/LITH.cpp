@@ -54,18 +54,12 @@ static int update(UPDATE_FUNC_ARGS)
 	if (parts[i].life <= 1)
 		parts[i].life = 1;
 
-	//Explosion code (Burns out if charged above the set life.)
-	if (parts[i].tmp > parts[i].life)
-	{
-		sim->part_change_type(i, x , y, PT_FIRE);
-	}
 	//Activation and Deactivation.
 	if (parts[i].tmp2 != 10)
 	{
 		if (parts[i].tmp2 > 0)
 			parts[i].tmp2--;
 	}
-
 	else
 	{
 		for (int rx = -2; rx < 3; rx++)

@@ -834,6 +834,16 @@ clearsb()
 end)
 
 mp9:action(function(sender)
+if MANAGER.getsetting("CRK","ar") == nil then
+MANAGER.savesetting("CRK","ar",70)
+end
+if MANAGER.getsetting("CRK","ag") == nil then
+MANAGER.savesetting("CRK","ag",70)
+end
+if MANAGER.getsetting("CRK","ab") == nil then
+MANAGER.savesetting("CRK","ab",70)
+end
+
 rlb:text(MANAGER.getsetting("CRK", "ar"))
 glb:text(MANAGER.getsetting("CRK", "ag"))
 blb:text(MANAGER.getsetting("CRK", "ab"))

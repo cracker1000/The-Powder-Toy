@@ -2,11 +2,13 @@ Changelog for Version 19.0
 
 Additions:
 New LED mode where it flash colours when .tmp2 set to "06" mode.
-Move PROJ into Force category.
+Move PROJ into Force category and also improve the collision detection.
+Remove the explosion code from LITH (making capacity changes easier.)
 
 Fixes:
 Make feedback buttons smaller to avoid accidental clicks with neighboring buttons.
 Make Reminder unregister first if clicked twice.
+Fix Custom option crashing the game if no settings were saved beforehand.
 
 todo:
 Megre with master.
@@ -14,6 +16,7 @@ Complete Subframe sprk.
 Fix UV behaviour.
 Try improving performance by optimising Scripts and some elements.
 Add powered PRTI and PRTO?
+
 
 
 

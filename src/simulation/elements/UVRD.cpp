@@ -101,7 +101,6 @@ static int update(UPDATE_FUNC_ARGS)
 			}
 	return 0;
 }
-
 static int graphics(GRAPHICS_FUNC_ARGS)
 		{
 			if (cpart->tmp2 > 0)
@@ -121,6 +120,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		*pixel_mode |= NO_DECO;
 		return 0;
 	}
+
 static void create(ELEMENT_CREATE_FUNC_ARGS)
 {
 	float a = RNG::Ref().between(0, 359) * 3.14159f / 180.0f;

@@ -72,12 +72,21 @@ static int update(UPDATE_FUNC_ARGS)
 					parts[i].pavg[2] = -ry;
 					parts[i].life = 10;
 				}
+			}
+	for (int rx = -2; rx <= 2; rx++)
+		for (int ry = -2; ry <= 2; ry++)
+			if (BOUNDS_CHECK && (rx || ry))
+			{
+				int r = pmap[y + ry][x + rx];
+				if (!r)
+					continue;
 				//For collision detection.
-				if (parts[i].life == 10 && parts[ID(r)].type != PT_EMBR && parts[ID(r)].type != PT_SPRK && parts[ID(r)].type != PT_PSCN && (sim->elements[TYP(r)].Properties & TYPE_SOLID || sim->elements[TYP(r)].Properties & TYPE_PART || sim->elements[TYP(r)].Properties & TYPE_LIQUID))
+				if (parts[i].life == 10 && parts[ID(r)].type != PT_EMBR && parts[ID(r)].type != PT_SPRK && parts[ID(r)].type != PT_PSCN && TYP(r))
 				{
 					sim->part_change_type(i, x, y, parts[i].ctype);
 				}
 			}
+
 	if (parts[i].life == 10) //For motion, .temp determines the power while .tmp deterimines the range. 
 	{
 		parts[i].tmp2+= 1;
