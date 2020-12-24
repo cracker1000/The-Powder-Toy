@@ -50,6 +50,8 @@ Searchview.cpp
 (C16, 213);
 (CWIR, 214);
 (PROJ, 215); 
+(PPTI, 216);     SPRK.cpp
+(PPTO, 217);     SPRK.cpp
 
 10) Run script update.bat to update the scripts for linux and mac.
 

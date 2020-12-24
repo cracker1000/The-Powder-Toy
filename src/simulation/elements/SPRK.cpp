@@ -260,6 +260,20 @@ static int update(UPDATE_FUNC_ARGS)
 						else if (sender == PT_PSCN && parts[ID(r)].life >= 10) parts[ID(r)].life = 9;
 					}
 					continue;
+				case PT_PPTI:
+					if (parts[i].tmp2 < 4)
+					{
+						if (sender == PT_NSCN) parts[ID(r)].tmp2 = 10;
+						else if (sender == PT_PSCN && parts[ID(r)].tmp2 >= 10) parts[ID(r)].tmp2 = 9;
+					}
+					continue;
+				case PT_PPTO:
+					if (parts[i].tmp2 < 4)
+					{
+						if (sender == PT_NSCN) parts[ID(r)].tmp2 = 10;
+						else if (sender == PT_PSCN && parts[ID(r)].tmp2 >= 10) parts[ID(r)].tmp2 = 9;
+					}
+					continue;
 				case PT_LCRY:
 					if (abs(rx)<2&&abs(ry)<2 && parts[i].life<4)
 					{

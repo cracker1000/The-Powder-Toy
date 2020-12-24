@@ -67,7 +67,7 @@ static int update(UPDATE_FUNC_ARGS)
 		parts[i].tmp2 = 0;
 	}
 	
-		int r, rx, ry, np;
+		int r, rx, ry;
 		if (parts[i].life != 10)
 		{
 			if (parts[i].life > 0)
@@ -96,7 +96,6 @@ static int update(UPDATE_FUNC_ARGS)
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
-	{
 		if (cpart->life == 0)
 		{
 			if (cpart->tmp2 == 1)                            // Different tmp modes change colour of glow.
@@ -152,5 +151,4 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 			*pixel_mode |= FIRE_ADD;
 		}
 		return 0;
-	}
 }
