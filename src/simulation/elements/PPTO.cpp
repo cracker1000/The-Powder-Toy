@@ -19,7 +19,7 @@ void Element::Element_PPTO()
 	Collision = 0.0f;
 	Gravity = 0.0f;
 	Diffusion = 0.00f;
-	HotAir = 0.005f	* CFDS;
+	HotAir = 0.00f	* CFDS;
 	Falldown = 0;
 
 	Flammable = 0;
@@ -84,6 +84,7 @@ static int update(UPDATE_FUNC_ARGS)
 
 	if (parts[i].tmp2 == 0)
 	{
+		sim->pv[(y / CELL)][(x / CELL)] = 2.0f;
 		int r, nnx, rx, ry, np, fe = 0;
 		int count = 0;
 		parts[i].tmp = (int)((parts[i].temp - 73.15f) / 100 + 1);

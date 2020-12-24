@@ -5,7 +5,7 @@ Additions:
 New LED mode where it flash colours when .tmp2 set to "06" mode.
 Move PROJ into Force category and also improve the collision detection.
 Remove the explosion code from LITH (making capacity changes easier.)
-Changes to UV (Cannot pass through SUN) and can now split WATR into H2 and O2 when passed through FILT.
+Changes to UV, can now split WATR into H2 and O2 after passing it through FILT.
 
 Fixes:
 Make feedback buttons smaller to avoid accidental clicks with neighboring buttons.
