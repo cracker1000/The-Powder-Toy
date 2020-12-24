@@ -37,8 +37,8 @@ Searchview.cpp
 (WALL, 200);              Simulation.cpp (search for love, define wall element)
 (COND, 201);
 (QGPP, 202);
-(UVRD, 203);
-(SUN, 204);
+(UVRD, 203);             Simulation.cpp (Add with PROT)
+(SUN, 204);                Simulation.cpp (Add check for UV to not pass through)
 (TMPS, 205);
 (PHOS, 206);
 (CMNT, 207);

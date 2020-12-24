@@ -34,7 +34,7 @@ void Element::Element_UVRD()
 	HeatConduct = 251;
 	Description = "UV rays emitted by SUN, reacts differently with different elements. Visible when passing through FILT ";
 
-	Properties = TYPE_ENERGY | PROP_LIFE_DEC | PROP_LIFE_KILL_DEC;
+	Properties = TYPE_ENERGY | PROP_LIFE_DEC;
 
 	LowPressure = IPL;
 	LowPressureTransition = NT;
@@ -52,9 +52,7 @@ void Element::Element_UVRD()
 
 static int update(UPDATE_FUNC_ARGS)
 {
-	if (parts[i].tmp2 > 0)
-		parts[i].tmp2--;
-	int r, rx, ry, np, rndstore;
+	int r, rx, ry;
 	for (rx = -1; rx < 2; rx++)
 		for (ry = -1; ry < 2; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
@@ -65,9 +63,7 @@ static int update(UPDATE_FUNC_ARGS)
 				case PT_PLNT:
 					if (RNG::Ref().chance(1, 40))
 					{
-						np = sim->create_part(ID(r), x + rx, y + ry, PT_VINE);
-						if (np < 0) continue;
-						parts[np].life = 0;
+						sim->create_part(ID(r), x + rx, y + ry, PT_VINE);
 					}
 					break;
 				case PT_WATR:
@@ -75,19 +71,29 @@ static int update(UPDATE_FUNC_ARGS)
 				case PT_CBNW:
 				case PT_SLTW:
 				{
-					np = sim->create_part(ID(r), x + rx, y + ry, PT_WTRV);
-					if (np < 0) continue;
-					parts[np].life = 0;
+					if (parts[i].life > 1)
+					{
+						if (RNG::Ref().chance(1, 2))
+						{
+							sim->part_change_type(ID(r), x + rx, y + ry, PT_H2);
+						}
+						if (RNG::Ref().chance(1, 2))
+						{
+							sim->part_change_type(ID(r), x + rx, y + ry, PT_O2);
+						}
+					}
+					else 
+						sim->part_change_type(ID(r), x + rx, y + ry, PT_WTRV);
 				}
 				break;
 				case PT_PSCN:
 				{
-					np = sim->create_part(ID(r), x + rx, y + ry, PT_SPRK);
+					sim->create_part(ID(r), x + rx, y + ry, PT_SPRK);
 				}
 				break;
 				case PT_FILT:
 				{
-					parts[i].tmp2 = 20;
+					parts[i].life++;
 				}
 				break;
 				case PT_STKM:
@@ -103,11 +109,11 @@ static int update(UPDATE_FUNC_ARGS)
 }
 static int graphics(GRAPHICS_FUNC_ARGS)
 		{
-			if (cpart->tmp2 > 0)
+			if (cpart->life > 0)
 			{
-				*colr = 200;
+				*colr = cpart->life + 50;
 				*colg = 0;
-				*colb = 200;
+				*colb = cpart->life + 50;
 				*pixel_mode |= PMODE_FLARE;
 			}
 			else
@@ -124,7 +130,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 static void create(ELEMENT_CREATE_FUNC_ARGS)
 {
 	float a = RNG::Ref().between(0, 359) * 3.14159f / 180.0f;
-	sim->parts[i].life = 680;
+	sim->parts[i].life = 5;
 	sim->parts[i].vx = 2.0f * cosf(a);
 	sim->parts[i].vy = 2.0f * sinf(a);
 }
