@@ -54,8 +54,8 @@ static int update(UPDATE_FUNC_ARGS)
 	}
 
 	int r, rx, ry;
-	for (rx = -1; rx < 2; rx++)
-		for (ry = -1; ry < 2; ry++)
+	for (rx = -21; rx < 2; rx++)
+		for (ry = -2; ry < 2; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
 			{
 				r = pmap[y + ry][x + rx];
@@ -66,12 +66,12 @@ static int update(UPDATE_FUNC_ARGS)
 					if (parts[i].tmp < 300)
 					{
 						parts[i].life = 100;
-						sim->part_change_type(i, x + rx, y + ry, PT_FIRE);
+						sim->part_change_type(i, x , y, PT_FIRE);
 					}
 					else if (parts[i].tmp >= 300)
 					{
 						parts[i].life = 100;
-						sim->part_change_type(i, x + rx, y + ry, PT_CFLM);
+						sim->part_change_type(i, x, y, PT_CFLM);
 					}
 				}
 				break;
@@ -85,13 +85,15 @@ static int update(UPDATE_FUNC_ARGS)
 				case PT_CFLM:
 				{
 					parts[i].life = 100;
-					sim->part_change_type(i, x + rx, y + ry, PT_CFLM);
+					sim->part_change_type(i, x, y, PT_CFLM);
 				}
 				break;
+
 				case PT_FIRE:
+				case PT_PLSM:
 				{
 					parts[i].life = 100;
-					sim->part_change_type(i, x + rx, y + ry, PT_FIRE);
+					sim->part_change_type(i, x, y, PT_FIRE);
 				}
 				break;
 				}
@@ -101,10 +103,6 @@ static int update(UPDATE_FUNC_ARGS)
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
-	*colr += cpart->tmp;
-	*colg -= cpart->tmp;
-	*colb -= cpart->tmp;
-
 	if (*colr > 155)
 	{
 		*colr = 155;
@@ -114,5 +112,9 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 	{
 		*pixel_mode |= PMODE_FLARE;
 	}
+
+	*colr += cpart->tmp;
+	*colg -= cpart->tmp;
+	*colb -= cpart->tmp;
 	return 0;
 }

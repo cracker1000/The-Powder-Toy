@@ -65,8 +65,6 @@ static int update(UPDATE_FUNC_ARGS)
 	return 0;
 }
 
-
-
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
 	int z = (cpart->tmp2 - 2) * 8;

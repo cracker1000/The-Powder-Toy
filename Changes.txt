@@ -6,7 +6,7 @@ New LED mode where it flash colours when .tmp2 is set to "06" mode.
 Move PROJ into Force category and also improve the collision detection.
 Remove the explosion code from LITH (making capacity changes easier.)
 Changes to UV, can now split WATR into H2 and O2 after passing it through FILT otherwise will just evaporate it.
-
+Menu now shows reminder status if reminder is turned on.
 Fixes:
 Make feedback buttons smaller to avoid accidental clicks with neighboring buttons.
 Make Reminder unregister first if clicked twice.
@@ -14,8 +14,9 @@ Fix Custom option crashing the game if no settings were saved beforehand.
 Opening and Closing the menu no longer alters the simulation pause state.
 
 todo:
-Megre with master.
+Megre with master (After commits from snap 205!)
 Try improving performance by optimising Scripts and some elements.
+Fix PHOS making WATR out of nowhere.
 
 
 
