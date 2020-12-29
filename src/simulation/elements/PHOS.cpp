@@ -48,73 +48,57 @@ void Element::Element_PHOS()
 
 static int update(UPDATE_FUNC_ARGS)
 {
-	if (parts[i].tmp < 800 && (RNG::Ref().chance(1, 5)))
+	if (parts[i].tmp < 250 && (RNG::Ref().chance(1, 5)))
 	{
 		parts[i].tmp++;
 	}
-
 	int r, rx, ry;
-	for (rx = -21; rx < 2; rx++)
-		for (ry = -2; ry < 2; ry++)
+	for (rx = -1; rx < 1; rx++)
+		for (ry = -1; ry < 1; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
 			{
 				r = pmap[y + ry][x + rx];
 				switch (TYP(r))
 				{
 				case PT_O2:
-				{ 
-					if (parts[i].tmp < 300)
-					{
-						parts[i].life = 100;
-						sim->part_change_type(i, x , y, PT_FIRE);
-					}
-					else if (parts[i].tmp >= 300)
-					{
-						parts[i].life = 100;
-						sim->part_change_type(i, x, y, PT_CFLM);
-					}
+				{
+					sim->pv[(y / CELL) + ry][(x / CELL) + rx] += 10.0;
+					sim->create_part(i, x, y, PT_FIRE);
 				}
 				break;
 				case PT_OIL:
 				{
-					if(parts[i].tmp>0)
+					if(parts[i].tmp > 0)
 					parts[i].tmp--;
-					
 				}
 				break;
 				case PT_CFLM:
 				{
-					parts[i].life = 100;
-					sim->part_change_type(i, x, y, PT_CFLM);
+					sim->create_part(i, x, y, PT_CFLM);
 				}
 				break;
-
 				case PT_FIRE:
 				case PT_PLSM:
 				{
-					parts[i].life = 100;
-					sim->part_change_type(i, x, y, PT_FIRE);
+					sim->create_part(i, x, y, PT_FIRE);
 				}
 				break;
 				}
 			}
 	return 0;
 }
-
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
 	if (*colr > 155)
 	{
 		*colr = 155;
 	}
-
 	if (cpart->tmp <= 100)
 	{
 		*pixel_mode |= PMODE_FLARE;
 	}
-
 	*colr += cpart->tmp;
-	*colg -= cpart->tmp;
-	*colb -= cpart->tmp;
+	*colg -= cpart->tmp/2;
+	*colb -= cpart->tmp/2;
 	return 0;
 }

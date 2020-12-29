@@ -35,13 +35,14 @@ void Element::Element_QGPP()
 	Description = "Quark Gluon Plasma, a strange element under investigation.";
 
 	Properties = TYPE_GAS | PROP_NEUTPASS;
+
 	LowPressure = IPL;
 	LowPressureTransition = NT;
-	HighPressure = 40.0;
-	HighPressureTransition = PT_PHOT;
+	HighPressure = IPH;
+	HighPressureTransition = NT;
 	LowTemperature = ITL;
 	LowTemperatureTransition = NT;
-	HighTemperature = ITH;
+	HighTemperature = NT;
 	HighTemperatureTransition = NT;
 
 	Update = &update;
@@ -63,19 +64,10 @@ static int update(UPDATE_FUNC_ARGS)
 					parts[i].tmp = 55;
 					parts[i].type = PT_SING;
 				}
-
-
-				int r, rx, ry;
-				for (rx = -4; rx < 3; rx++)
-					for (ry = -4; ry < 3; ry++)
-						if (BOUNDS_CHECK && (rx || ry))
-						{
-							r = pmap[y + ry][x + rx];
-							if (parts[i].tmp <= 170 && parts[i].temp >= 474.15f)
-							{
-								sim->pv[(y / CELL) + ry][(x / CELL) + rx] = -4.0f;
-							}
-						}
+				if (parts[i].tmp <= 170 && parts[i].temp >= 474.15f)
+					{
+								sim->pv[(y / CELL)][(x / CELL)] = -4.0f;
+				    }
 	return 0;
 }
 

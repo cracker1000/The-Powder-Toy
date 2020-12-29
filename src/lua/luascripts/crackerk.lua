@@ -475,8 +475,6 @@ end)
 close2:action(function() ui.closeWindow(creditw) end)
 clearsb()
 ui.showWindow(creditw) 
-
-
 end)
 
 info:action(function(sender)
@@ -918,6 +916,7 @@ clearsb()
 end)
 
 function startupcheck()
+interface.addComponent(toggle)
 if MANAGER.getsetting("CRK", "savergb") == "2" then
 tpt.register_step(theme)
 tpt.register_step(topbar)
@@ -933,6 +932,7 @@ else
 MANAGER.savesetting("CRK", "brightness",200)
 end
 end
+
 startupcheck()
 
 Ruler:action(function(sender)
@@ -1051,7 +1051,6 @@ end)
 
 function close()
 ui.closeWindow(newmenu) 
-newmenu:addComponent(toggle)
 clearsb()
 clearm()
 end
@@ -1075,8 +1074,6 @@ newmenu:addComponent(autohide)
 newmenu:addComponent(chud)
 newmenu:addComponent(brightness)
 newmenu:addComponent(reminder)
-
-newmenu:removeComponent(toggle)
 end
 
 hide:action(function(sender)
@@ -1094,7 +1091,6 @@ tpt.register_keypress(keyclicky)
 toggle:action(function(sender)
 open()
 end)
-interface.addComponent(toggle)
 
 --fontstart
 fonts ={}
@@ -2530,14 +2526,14 @@ fonts['5x7']['"'] = {
                 {0, 0, 0, 0, 0}
         }
 }
---fontstop
---Cracker64's Powder Toy Multiplayer
+--fontstop--Cracker64's Powder Toy Multiplayer
 --I highly recommend to use my Autorun Script Manager
 
-local versionstring = "1.0.1"
+local version = 8
+local versionstring = "1.0.2"
 
-if TPTMP then if TPTMP.version <= 6 then TPTMP.disableMultiplayer() else error("newer version already running") end end local get_name = tpt.get_name -- if script already running, replace it
-TPTMP = {["version"] = 6, ["versionStr"] = versionstring} -- script version sent on connect to ensure server protocol is the same
+if TPTMP then if TPTMP.version <= version then TPTMP.disableMultiplayer() else error("newer version already running") end end local get_name = tpt.get_name -- if script already running, replace it
+TPTMP = {["version"] = version, ["versionStr"] = versionstring} -- script version sent on connect to ensure server protocol is the same
 local issocket,socket = pcall(require,"socket")
 if not http then error"Tpt version not supported" end
 local using_manager = false
@@ -2625,19 +2621,20 @@ local function authenticateGetUser()
 	end
 	return uid, sess
 end
-local function authenticate(saveid, comment, uid, sess)
-	local req = http.post("https://powdertoy.co.uk/Browse/Comments.json?ID=" .. saveid, { Comment = comment }, { [ "X-Auth-User-Id" ] = uid, [ "X-Auth-Session-Key" ] = sess })
+local function authenticateGetToken(uid, sess)
+	local req = http.get("https://powdertoy.co.uk/ExternalAuth.api?Action=Get", { [ "X-Auth-User-Id" ] = uid, [ "X-Auth-Session-Key" ] = sess })
 	while req:status() == "running" do
 		socket.sleep(0.1)
 	end
 	local body, code = req:finish()
-	if not body:match([["Status"%s*:%s*1]]) then
-		return nil, "Authentication failed, try logging out and back in and restarting TPT"
-	end
 	if code ~= 200 then
 		return nil, "Error code " .. code .. ": " .. body
 	end
-	return true
+	local status = body:match([["Status":"([^"]+)"]])
+	if status ~= "OK" then
+		return nil, "Authentication failed, try logging out and back in and restarting TPT"
+	end
+	return body:match([["Token":"([^"]+)"]])
 end
 local function connectToServer(ip,port,nick)
 	if con.connected then return false,"Already connected" end
@@ -2675,67 +2672,46 @@ local function connectToServer(ip,port,nick)
 	if not connectByte() then
 		return false, r
 	end
-	if c=="\3" then
-		if not connectZString() then
-			return false, r
-		end
-		local saveid = zs
-		if not connectZString() then
-			return false, r
+	for authAttempt = 1, 2 do
+		if c~="\3" then
+			break
 		end
 		local uid, sess = authenticateGetUser()
-		if not uid then
+		if uid then
+			if not authToken then
+				local err
+				authToken, err = authenticateGetToken(uid, sess)
+				if not authToken then
+					return false, err
+				end
+				if using_manager then
+					MANAGER.savesetting("tptmp", "authtoken", authToken)
+				end
+			end
+		else
 			authToken = nil
 		end
 		if authToken then
-			sock:send("\3" .. uid .. "\0" .. authToken .. "\0")
-			if not connectByte() then
-				return false, r
-			end
-			if c == "\6" then
-				authToken = nil
-			end
+			sock:send("\1" .. authToken .. "\0")
+		else
+			sock:send("\0")
 		end
-		if not authToken then
-			authToken = zs
-			if uid then
-				local ok, err = authenticate(saveid, authToken:sub(1, 20), uid, sess)
-				if not ok then
-					return false, err
-				end
-				sock:send("\1")
-			else
-				sock:send("\0")
-			end
+		if not connectByte() then
+			return false, r
 		end
-		for attempt = 1, 30 do
-			c,r = sock:receive(1)
-			if not c then
-				if r~="timeout" then
-					return false, r
-				end
-			else
-				break
-			end
-		end
-		if not c then
-			return false, "Authentication failed, try again later"
-		end
-		if c == "\4" then
+		local cresponse = c
+		if c == "\1" then
 			if not connectZString() then
 				return false, r
-			end
-			if using_manager and nick == zs then -- best effort
-				MANAGER.savesetting("tptmp", "authtoken", authToken)
 			end
 			if nick ~= zs then
 				nick = zs
 				chatwindow:addline("You joined as "..nick,255,255,50)
 			end
-			if not connectByte() then
-				return false, r
-			end
+		else
+			authToken = nil
 		end
+		c = cresponse
 	end
 	sock:settimeout(0)
 	if c~= "\1" then
