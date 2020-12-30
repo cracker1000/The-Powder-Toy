@@ -59,9 +59,7 @@ static int update(UPDATE_FUNC_ARGS)
 {
 	if (parts[i].vx >= 12.0 || parts[i].vy >= 12.0)
 	{
-		sim->part_change_type(i, x , y, PT_FIRE);
-		parts[i].life = 200;
-		parts[i].temp = 574.15f;
+		sim->create_part(i, x , y, PT_FIRE);
 	}
     if (parts[i].temp <= 274.15f)
 	{
@@ -71,7 +69,7 @@ static int update(UPDATE_FUNC_ARGS)
 	
    if (parts[i].temp >= 874.15f)
 	{
-		 if (RNG::Ref().chance(1, 100))
+		 if (RNG::Ref().chance(1, 200))
 		 {
 			 sim->create_part(i, x, y, PT_NEUT);
 		 }
@@ -88,14 +86,8 @@ static int update(UPDATE_FUNC_ARGS)
 				{
 				case PT_PLUT:
 				{
-					parts[ID(r)].type = PT_NONE;
 					sim->create_part(i, x, y, PT_NEUT);
 					sim->pv[(y / CELL) + ry][(x / CELL) + rx] = -2.0f;
-				}
-				break;
-				case PT_SING:
-				{
-					parts[i].tmp = 10;
 				}
 				break;
 				}
@@ -109,19 +101,6 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 	*colr += z;
 	*colg += z;
 	*colb += z;
-
-	if (cpart->temp <= 274.15f)
-	{
-		*colb = 105;
-		*colr = 95;
-		*colg = 65;
-	}
-	if (cpart->temp >= 600.15f)
-	{
-		*colb = 15;
-		*colr = 205;
-		*colg = 15;
-	}
 	return 0;
 }
 

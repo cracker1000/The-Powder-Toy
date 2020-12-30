@@ -1,18 +1,20 @@
 Changelog for Version 19.0
 
 Additions:
-New elements: PPTI and PPTO (powered versions of PRTI and PRTO.)
+New elements: PPTI, PPTO (powered versions of PRTI and PRTO.) and SEED (Grows into TREES like IRL.)
 New LED mode where it flash colours when .tmp2 is set to "06" mode.
 Move PROJ into Force category and also improve the collision detection.
 Remove the explosion code from LITH (making capacity changes easier.)
 Changes to UV, can now split WATR into H2 and O2 after passing it through FILT otherwise will just evaporate it.
 Menu now shows reminder status if reminder is turned on.
 Update TPTMP script to 1.0.2
+Updated WIKI.
 
 Fixes:
 Make feedback buttons smaller to avoid accidental clicks with neighboring buttons.
-Make Reminder unregister first if clicked twice.
-Remove various useless checks in some elements for better performance (QGP, LED, PHOS, FNTC, FPTC)
+Make Reminder unregister first if clicked twice (prevent accidental slowing down the game.)
+Fix J key shortcut bringing up the Mod settings while typing text in TPTMP window.
+Code cleanup for various elements, should give better performance now (QGP, LED, PHOS, FNTC, FPTC, CLNT and PRMT.)
 Fix Custom option crashing the game if no settings were saved beforehand.
 Opening and Closing the menu no longer alters the simulation pause state.
 Fix PHOS making WATR out of nowhere.

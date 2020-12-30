@@ -51,7 +51,7 @@ static int update(UPDATE_FUNC_ARGS)
 
 {
 	//Prevent setting capacity below 1. Default set to 100.
-	if (parts[i].life <= 1)
+	if (parts[i].life < 1)
 		parts[i].life = 1;
 
 	//Activation and Deactivation.

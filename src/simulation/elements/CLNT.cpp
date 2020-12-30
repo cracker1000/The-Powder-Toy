@@ -1,6 +1,7 @@
 #include "simulation/ElementCommon.h"
 static int update(UPDATE_FUNC_ARGS);
 static int graphics(GRAPHICS_FUNC_ARGS);
+static void create(ELEMENT_CREATE_FUNC_ARGS);
 
 void Element::Element_CLNT()
 {
@@ -43,46 +44,45 @@ void Element::Element_CLNT()
 	HighTemperatureTransition = PT_WATR;
 	Update = &update;
 	Graphics = &graphics;
+	Create = &create;
 }
 
 static int update(UPDATE_FUNC_ARGS)
 {
-	{
+	if (parts[i].tmp > 9725 || parts[i].tmp < -273)
+	parts[i].tmp = 22;
 
 		if (parts[i].temp - 273.15f >= parts[i].tmp)
 		{
-			parts[i].temp -= 3.15;
+			parts[i].temp -= 4.00;
 		}
 		if (parts[i].temp - 273.15f < parts[i].tmp)
 		{
-			parts[i].temp += 3.15f;
+			parts[i].temp += 4.00;
 		}
 		return 0;
-	}
 }
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
-	if (cpart->temp - 273.15f == cpart->tmp)
-	{
-		*colg = 200;
-		*colr = 0;
-		*colb = 0;
-	}
 	if (cpart->temp - 294.15f > cpart->tmp)
 	{
 		*colr = 200;
-		*colb = 0;
+		*colb = 50;
 		*colg = 0;
 
 	}
-	if (cpart->temp - 273.15f < cpart->tmp)
+	else if (cpart->temp - 273.15f < cpart->tmp)
 	{
 		*colg = 0;
 		*colb = 200;
-		*colr = 0;
+		*colr = 50;
 	}
 	*pixel_mode |= PMODE_FLARE;
 
 	return 0;
+}
+static void create(ELEMENT_CREATE_FUNC_ARGS)
+{
+	sim->parts[i].tmp = 22;
 }

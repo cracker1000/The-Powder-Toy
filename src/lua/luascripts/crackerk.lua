@@ -86,11 +86,10 @@ local brop = Button:new(293,235,45,20,"On", "Save.")
 local bropc = Button:new(342,235,45,20,"Off", "Cancel.")
 local brlabel = Label:new(340, 210, 10, 15, "Turned: Off")
 
-local reminder = Button:new(203,252,80,30, "Reminder", "Adjust brightness.")
+local reminder = Button:new(203,252,80,30, "Reminder", "reminds after 30 mins.")
 local remon = Button:new(293,252,45,20,"On", "Save.")
 local remoff  = Button:new(293,272,45,20,"Off", "Cancel.")
-local remvalue= Label:new(363, 264, 90, 20, "Notifies after 30 mins")
-local remlabel = Label:new(40, 284, 10, 15, "Reminder is on.")
+local remlabel = Label:new(68, 284, 10, 15, "Reminder is on (30 mins.)")
 
 local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
 
@@ -165,7 +164,6 @@ newmenu:removeComponent(brlabel)
 newmenu:removeComponent(brightSlider)
 newmenu:removeComponent(remon)
 newmenu:removeComponent(remoff)
-newmenu:removeComponent(remvalue)
 end
 
 local startTime
@@ -183,7 +181,6 @@ reminder:action(function(sender)
 clearsb()
 newmenu:addComponent(remon)
 newmenu:addComponent(remoff)
-newmenu:addComponent(remvalue)
 end)
 
 remon:action(function(sender)
@@ -195,7 +192,6 @@ newmenu:addComponent(remlabel)
 newmenu:addComponent(remon)
 newmenu:removeComponent(remon)
 newmenu:removeComponent(remoff)
-newmenu:removeComponent(remvalue)
 end)
 
 remoff:action(function(sender)
@@ -204,7 +200,6 @@ tpt.unregister_step(remindme)
 newmenu:removeComponent(remlabel)
 newmenu:removeComponent(remon)
 newmenu:removeComponent(remoff)
-newmenu:removeComponent(remvalue)
 end)
 
 function cbrightness()
@@ -451,7 +446,7 @@ local nextpg = Button:new(292, 400, 40, 15, "Next")
 local close2 = Button:new(512, 400, 100, 15, "Close wiki")
 local creditstxt = Label:new(6,-25, 598, 418,"\nWELCOME TO THE OFFLINE WIKI\n\n1) CWIR: Customisable wire. Conduction speed set using .tmp property (Range is 0 to 8) \n.tmp2 property is used for setting melting point (default is 2000C).\n\n2) C-16: A powerful explosive. Explodes creating pressure about 40 units when above 65C.\n\n3) TIMC: Time Crystal, converts into it's ctype when sparked with PSCN. Timer set using .tmp, default is 100.\n\n4) FUEL: Powerful fuel, explodes when temp is above 50C or Pressure above 14.\n\n5) THRM: Thermostat. Maintains the surrounding temp based on its own .temp property.\n\n6) CLNT: Coolant. Cools down the temp of the system. Use .tmp to configure the cooling/heating power.\nEvaporates at extreme temperatures into WTRV.\n\n7) DMRN: Demron. Radioactive shielding material and a better indestructible heat insulator.\nIt can also block energy particles like PROT.\n\n8) FNTC & FPTC: Faster versions of NTCT and PTCT. Useful for making faster logic gates.\n\n9) PINV: Powered Invisible, allows particles to move through it only when activated.\nUse PSCN to activate and NSCN to deactivate.\n\n10) UV: UV rays, harms stkms (-5 life every frame), visible with FILT, grows plnt, can sprk pscn and evaporates watr.\nCan split WATR into O2 and H2 when passed through FILT. \n\n11) SUN.: Emits rays which makes PLNT grow in direction of sun, emits UV radiation, makes PSCN spark and heals STKMs.\n\n12) CLUD: Realistic cloud, rains and creates LIGH after sometime (every 1000 frames).\nShines bright when it creates a LIGH.")
 
-local creditstxt2 = Label:new(6,-25, 598, 418,"\n 13) LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\n Reacts with different elements like O2, WATR, ACID etc as IRL.\n\n 14) LED:  Light Emmiting Diode. Use PSCN to activate and NSCN to deactivate. Temp sets the brightness.\n Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow, 5 = pink and 6 = Flash mode.  \n\n 15) QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n Glows yellow before exploding. \n\n 16) TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp. Supports .tmp deserialisation.\n\n 17) PHOS: Phosphorus. Shiny white  particle when spawned, slowly turns into red phosphorus with time. \n Burns blue or red  when in contact with CFLM or O2 respectively, (based on on .tmp).\n Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n\n 18) CMNT: Cement, creates an exothermic reaction when mixed with water and gets solidified, darkens when solid.\n\n 19) NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n\n 20) PRMT: Promethium, radioactive element. Catches fire at high velocity (>12), creats NEUT when mixed with PLUT. \n Explodes at low temp and emits neut at high temp.\n\n 20) BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n\n 21) ECLR: Electronic eraser, clears the defined radius (.tmp) when activated (Use with PSCN and NSCN). \n\n 22) PROJ: Projectile, converts into its's ctype upon collision. launch with PSCN.\n Temperature determines power while .tmp is for range.\n\n 23) PPTI and PPTO: Powered Versions of PRTI and PRTO, use with PSCN and NSCN.")
+local creditstxt2 = Label:new(6,-25, 598, 418,"\n\n 13) LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\n Reacts with different elements like O2, WATR, ACID etc as IRL.\n\n 14) LED:  Light Emmiting Diode. Use PSCN to activate and NSCN to deactivate. Temp sets the brightness.\n Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow, 5 = pink and 6 = Flash mode.  \n\n 15) QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n Glows yellow before exploding. \n\n 16) TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp. Supports .tmp deserialisation.\n\n 17) PHOS: Phosphorus. Shiny white  particle when spawned, slowly turns into red phosphorus with time. \n Burns blue or red  when in contact with CFLM or O2 respectively, (based on on .tmp).\n Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n\n 18) CMNT: Cement, creates an exothermic reaction when mixed with water and gets solidified, darkens when solid.\n\n 19) NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n\n 20) PRMT: Promethium, radioactive element. Catches fire at high velocity (>12), creats NEUT when mixed with PLUT. \n Explodes at low temp and emits neut at high temp.\n\n 20) BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n\n 21) ECLR: Electronic eraser, clears the defined radius (.tmp) when activated (Use with PSCN and NSCN). \n\n 22) PROJ: Projectile, converts into its's ctype upon collision. launch with PSCN.\n Temperature determines power while .tmp is for range.\n\n 23) PPTI and PPTO: Powered Versions of PRTI and PRTO, use with PSCN and NSCN.\n 24) SEED: Grows into PLNT of random height when placed on DUST/SAND and Watered.")
 
 creditw:addComponent(creditstxt)
 creditw:addComponent(close2)
@@ -1080,9 +1075,11 @@ hide:action(function(sender)
 close()
 end)
 
-function keyclicky(key, nkey, modifier, event)
-    if (key =="j" and event == 1)  then 
+function keyclicky(key)
+if TPTMP and TPTMP.chatHidden == true then
+if (key =="j")  then 
 open()
+end
 end
 end
 
@@ -2526,7 +2523,9 @@ fonts['5x7']['"'] = {
                 {0, 0, 0, 0, 0}
         }
 }
---fontstop--Cracker64's Powder Toy Multiplayer
+--fontstop
+
+--Cracker64's Powder Toy Multiplayer
 --I highly recommend to use my Autorun Script Manager
 
 local version = 8
@@ -2812,7 +2811,7 @@ ui_box = {
 new = function(x,y,w,h,r,g,b)
 	local box=ui_base.new()
 	box.x=x box.y=y box.w=w box.h=h box.x2=x+w box.y2=y+h
-	box.r=r or 90 box.g=g or 90 box.b=b or 90
+	box.r=r or 70 box.g=g or 70 box.b=b or 70
 	function box:setcolor(r,g,b) self.r=r self.g=g self.b=b end
 	function box:setbackground(r,g,b,a) self.br=r self.bg=g self.bb=b self.ba=a end
 	box.drawbox=true
