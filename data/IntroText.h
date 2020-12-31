@@ -1,8 +1,8 @@
 #pragma once
 const char *const introTextData =
-"\br                                         <<< WELCOME TO THE \boCRACKER1000 \brMOD >>> \n\n"
+"\br                                         <<< WELCOME TO THE \boCRACKER1000 \brMOD \bw2021 \br>>> \n\n"
 "\bo---------------------------------------------------------------------------------------------------------------------\n"
-"\brVersion:\bo 19.0\bo  TPT: 95.0\n"
+"\brVersion:\bo 20.0\bo  TPT: 96.0\n"
 "\bo---------------------------------------------------------------------------------------------------------------------\n"
 "\bl \n"
 "\bt  Important instructions: (Do Not Skip!)\n"

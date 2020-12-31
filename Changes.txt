@@ -1,4 +1,4 @@
-Changelog for Version 19.0
+Changelog for Version 20.0
 
 Additions:
 New elements: PPTI, PPTO (powered versions of PRTI and PRTO.) and SEED (Grows into TREES like IRL.)

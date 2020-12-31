@@ -2,6 +2,7 @@
 
 static int update(UPDATE_FUNC_ARGS);
 static void create(ELEMENT_CREATE_FUNC_ARGS);
+static int graphics(GRAPHICS_FUNC_ARGS);
 
 void Element::Element_SEED()
 {
@@ -22,7 +23,7 @@ void Element::Element_SEED()
 	HotAir = 0.000f	* CFDS;
 	Falldown = 1;
 
-	Flammable = 1;
+	Flammable = 5;
 	Explosive = 0;
 	Meltable = 0;
 	Hardness = 5;
@@ -32,7 +33,7 @@ void Element::Element_SEED()
 	HeatConduct = 35;
 	Description = "Seeds, grows into trees when watered. Needs DUST or SAND as soil.";
 
-	Properties = TYPE_PART | PROP_LIFE_DEC;
+	Properties = TYPE_PART;
 
 	LowPressure = IPL;
 	LowPressureTransition = NT;
@@ -45,6 +46,7 @@ void Element::Element_SEED()
 
 	Update = &update;
 	Create = &create;
+	Graphics = &graphics;
 }
 
 static int update(UPDATE_FUNC_ARGS)
@@ -56,62 +58,88 @@ static int update(UPDATE_FUNC_ARGS)
 				int r = pmap[y + ry][x + rx];
 				if (!r)
 					continue;
+				r = pmap[y + ry][x + rx];
 				switch (TYP(r))
 				{
+				case PT_DUST: // Get micro nutrients from soil.
 				case PT_SAND:
-				case PT_DUST:
-				{
-					parts[i].pavg[0] = 1;
+				case PT_CLST:
+				{ 
+					if (parts[i].tmp == 0)
+					{
+						sim->kill_part(ID(r));
+						parts[i].tmp = 1;
+					}
 				}
 				break;
-				case PT_WATR:
+				case PT_WATR: //Got the nutrients, time to drink and grow.
 				case PT_SLTW:
 				{
-					if (parts[i].pavg[0] == 1)
+					if (parts[i].tmp == 1)
 					{
-						parts[i].pavg[1] = 1;
-						parts[i].life = 250 - parts[i].tmp2;
-						parts[i].tmp = 1;
+						sim->kill_part(ID(r));
+						parts[i].tmp = 2;
 					}
 				}
 				break;
 				}
 			}
-
-	if (parts[i].life > 110 && parts[i].pavg[0] > 0 && parts[i].pavg[1] > 0)
+	//Actual life begins here.
+	if (parts[i].tmp == 2 && parts[i].temp >= 275.15f)
 	{
-		parts[i].vy = -1;
+		parts[i].vy = -0.6;
 		parts[i].vx = 0;
-		sim->create_part(-1, x, y + 1, PT_WOOD);
-		sim->create_part(-1, x+1, y + 1, PT_WOOD);
+		parts[i].life--;
+		if (parts[i].life >= 120)
+		{
+			sim->create_part(-1, x, y + 1, PT_WOOD);
+			sim->create_part(-1, x + 1, y + 1, PT_WOOD);
+		}
+		else if (parts[i].life < 120 && parts[i].life > 110)
+		{
+			sim->create_part(-1, x, y + 1, PT_PLNT);
+		}
+		if (parts[i].life > 0 && parts[i].life < 110)
+		{
+			sim->create_part(-1, x - 1, y + 1, PT_VINE);
+			sim->create_part(-1, x + 1, y + 1, PT_VINE);
+			sim->create_part(-1, x - 5, y + 1, PT_VINE);
+			sim->create_part(-1, x + 5, y + 1, PT_VINE);
+			sim->create_part(-1, x - 12, y + 1, PT_VINE);
+			sim->create_part(-1, x + 12, y + 1, PT_VINE);
+			sim->create_part(-1, x, y + 1, PT_VINE);
+		}
+		//Played the role, time to say goodbye to simulation.
+		if (parts[i].life == 0)
+			sim->part_change_type(i, x, y, PT_NONE);
 	}
-
-	if (parts[i].life >= 100 && parts[i].life < 110 && parts[i].pavg[0] > 0 && parts[i].pavg[1] > 0)
-	{
-		parts[i].vy = -1;
-		parts[i].vx = 0;
-		sim->create_part(-1, x, y + 1, PT_PLNT);
-		sim->create_part(-1, x + 1, y + 1, PT_PLNT);
-	}
-
-	if (parts[i].life > 0 && parts[i].life < 100 && parts[i].pavg[0] > 0 && parts[i].pavg[1] > 0)
-	{
-		parts[i].vy = -1;
-		parts[i].vx = 0;
-		sim->create_part(-1, x - 1, y + 1, PT_VINE);
-		sim->create_part(-1, x + 1, y + 1, PT_VINE);
-		sim->create_part(-1, x - 2, y + 1, PT_VINE);
-		sim->create_part(-1, x + 2, y + 1, PT_VINE);
-		sim->create_part(-1, x , y + 1, PT_VINE);
-	}
-
-	if (parts[i].tmp == 1 && parts[i].life == 0)
-		sim->part_change_type(i, x, y, PT_NONE);
-
 	return 0;
 }
 
 static void create(ELEMENT_CREATE_FUNC_ARGS)
 {
-	sim->parts[i].tmp2 = RNG::Ref().between(50, 110);
+	sim->parts[i].life = RNG::Ref().between(130, 340);
+}
+
+
+static int graphics(GRAPHICS_FUNC_ARGS)
+{
+	if (cpart->tmp == 2 && cpart->temp >= 275.15f)// Infinity Seeds.
+	{
+		*firer = 250;
+		*fireg = 250;
+		*fireb = 250;
+		*firea = 55;
+		*colr += *firer;
+		*colg += *fireg;
+		*colb += *fireb;
+		*pixel_mode |= PMODE_LFLARE;
+	}                            
+	if (cpart->temp < 275.15f) //Cold seeds.
+	{
+		*colr = 30;
+		*colg = 30;
+		*colb = 120;
+	}
+	return 0;
 }
