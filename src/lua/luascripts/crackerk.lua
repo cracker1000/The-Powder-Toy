@@ -240,6 +240,7 @@ newmenu:removeComponent(bropc)
 end)
 
 --Texter script hybrid start
+local yvalue = 70
 function drawLetter(letter, x, y, element, font)
 
         for currentX = 0, fonts[font]['width'] - 1 + fonts[font][letter]['kerning'] do
@@ -286,22 +287,25 @@ function drawText(text, x, y, element, font)
         end
 end
 
-
 chud:action(function(sender)
+yvalue = 70
 local mouseX, mouseY = tpt.mousex, tpt.mousey
 local text, element, font = '', 'ARAY', '5x7'
 clearsb()
 clearm()
 local textTextboxs = Textbox:new(98, 55, 40, 20, '', 'element')
-local textTextbox = Textbox:new(10, 30, 590, 20, '', 'Text')
-local scripthelp = Label:new(3,70,400, 60,"\n\nTexter help:\nType the desired output element in element textbox. You can also insert newlines.\nPress Enter to place the text once you are done.")
+local textTextbox = Textbox:new(10, 30, 505, 20, '', 'Text')
+local scripthelp = Label:new(120,100,120, 10,"Texter help:\nElement box: Type the desired output element here (Defaults to ARAY.)\nNewline: Inserts a new line and places existing text automatically.\nEnter and Cancel: To place the text or cancel it.")
 local place = Button:new(10,55,40,20,"Enter", "Toggle hidden elements.")
-local cancel= Button:new(52,55,40,20,"Cancel", "Shows hidden elements")
+local cancel= Button:new(52,55,40,20,"Cancel", "Cancel the element placement.")
+local newline = Button:new(142,55,46,20,"New line", "New line.")
+
 newmenu:addComponent(textTextbox)
 newmenu:addComponent(textTextboxs)
 newmenu:addComponent(scripthelp) 
 newmenu:addComponent(place)
 newmenu:addComponent(cancel)
+newmenu:addComponent(newline)
 
  textTextbox:onTextChanged(
                     function(sender)
@@ -314,15 +318,22 @@ newmenu:addComponent(cancel)
                             element = textTextboxs:text();
                     end
                 )
-
-
 cancel:action(function(sender)
 newmenu:removeComponent(scripthelp)
 newmenu:removeComponent(textTextbox)
 newmenu:removeComponent(textTextboxs)
 newmenu:removeComponent(place)
 newmenu:removeComponent(cancel)
+newmenu:removeComponent(newline)
 close()
+end)
+
+newline:action(function(sender)
+if yvalue < 375 then
+drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
+yvalue = yvalue+10
+textTextbox:text('New line')
+end
 end)
 
 place:action(function(sender)
@@ -331,8 +342,9 @@ newmenu:removeComponent(textTextbox)
 newmenu:removeComponent(textTextboxs)
 newmenu:removeComponent(place)
 newmenu:removeComponent(cancel)
+newmenu:removeComponent(newline)
 close()
-drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, 70, element, font)
+drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
 end)
 end)
 
