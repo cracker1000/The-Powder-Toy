@@ -240,7 +240,8 @@ newmenu:removeComponent(bropc)
 end)
 
 --Texter script hybrid start
-local yvalue = 70
+yvalue = 70
+linenumber = 01
 function drawLetter(letter, x, y, element, font)
 
         for currentX = 0, fonts[font]['width'] - 1 + fonts[font][letter]['kerning'] do
@@ -289,6 +290,7 @@ end
 
 chud:action(function(sender)
 yvalue = 70
+linenumber = 01
 local mouseX, mouseY = tpt.mousex, tpt.mousey
 local text, element, font = '', 'ARAY', '5x7'
 clearsb()
@@ -299,6 +301,8 @@ local scripthelp = Label:new(120,100,120, 10,"Texter help:\nElement box: Type th
 local place = Button:new(10,55,40,20,"Enter", "Toggle hidden elements.")
 local cancel= Button:new(52,55,40,20,"Cancel", "Cancel the element placement.")
 local newline = Button:new(142,55,46,20,"New line", "New line.")
+local lno  = Label:new(210, 58, 10, 15, "Line No:")
+local lnol  = Label:new(240, 58, 10, 15, linenumber)
 
 newmenu:addComponent(textTextbox)
 newmenu:addComponent(textTextboxs)
@@ -306,7 +310,8 @@ newmenu:addComponent(scripthelp)
 newmenu:addComponent(place)
 newmenu:addComponent(cancel)
 newmenu:addComponent(newline)
-
+newmenu:addComponent(lno)
+newmenu:addComponent(lnol)
  textTextbox:onTextChanged(
                     function(sender)
                             text = textTextbox:text();
@@ -325,14 +330,18 @@ newmenu:removeComponent(textTextboxs)
 newmenu:removeComponent(place)
 newmenu:removeComponent(cancel)
 newmenu:removeComponent(newline)
+newmenu:removeComponent(lno)
+newmenu:removeComponent(lnol)
 close()
 end)
 
 newline:action(function(sender)
-if yvalue < 375 then
+if linenumber < 30 then
 drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
 yvalue = yvalue+10
-textTextbox:text('New line')
+textTextbox:text('')
+linenumber = linenumber + 1
+lnol:text(linenumber)
 end
 end)
 
@@ -343,6 +352,8 @@ newmenu:removeComponent(textTextboxs)
 newmenu:removeComponent(place)
 newmenu:removeComponent(cancel)
 newmenu:removeComponent(newline)
+newmenu:removeComponent(lno)
+newmenu:removeComponent(lnol)
 close()
 drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
 end)
