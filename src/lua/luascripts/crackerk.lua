@@ -337,6 +337,7 @@ end)
 
 newline:action(function(sender)
 if linenumber < 30 then
+text = textTextbox:text();
 drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
 yvalue = yvalue+10
 textTextbox:text('')

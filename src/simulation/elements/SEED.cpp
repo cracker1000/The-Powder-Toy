@@ -23,15 +23,15 @@ void Element::Element_SEED()
 	HotAir = 0.000f	* CFDS;
 	Falldown = 1;
 
-	Flammable = 5;
+	Flammable = 10;
 	Explosive = 0;
 	Meltable = 0;
 	Hardness = 5;
 
 	Weight = 84;
 
-	HeatConduct = 35;
-	Description = "Seeds, grows into trees when watered. Needs DUST or SAND as soil.";
+	HeatConduct = 45;
+	Description = "Seeds, grows into trees when watered. Needs warm temp. and DUST/SAND/CLST as soil.";
 
 	Properties = TYPE_PART;
 
@@ -136,7 +136,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		*firea = 100;
 		*pixel_mode |= PMODE_LFLARE;
 	}                            
-	if (cpart->temp < 275.15f) //Cold seeds.
+	else if (cpart->temp < 275.15f) //Cold seeds.
 	{
 		*colr = 30;
 		*colg = 30;
