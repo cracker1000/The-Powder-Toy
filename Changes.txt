@@ -1,7 +1,7 @@
 Changelog for Version 20.0
 
 Additions:
-Add a new line button for texter(Makes typing multiple line texts much easier.)
+Add support for new lines to texter (Makes typing multiple lines much easier.)
 Improvements to seed.
 
 Fixes:

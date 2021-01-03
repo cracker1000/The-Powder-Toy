@@ -87,52 +87,53 @@ static int update(UPDATE_FUNC_ARGS)
 	//Actual life begins here.
 	if (parts[i].tmp == 2 && parts[i].temp >= 275.15f)
 	{
-		parts[i].vy = -0.6;
+		parts[i].vy = -0.5;
 		parts[i].vx = 0;
 		parts[i].life--;
-		if (parts[i].life >= 120)
+		if (parts[i].life >= 160)
 		{
 			sim->create_part(-1, x, y + 1, PT_WOOD);
 			sim->create_part(-1, x + 1, y + 1, PT_WOOD);
 		}
-		else if (parts[i].life < 120 && parts[i].life > 110)
+		else if (parts[i].life < 160 && parts[i].life >= 148)
 		{
 			sim->create_part(-1, x, y + 1, PT_PLNT);
+			sim->create_part(-1, x+1, y+1, PT_PLNT);
 		}
-		if (parts[i].life > 0 && parts[i].life < 110)
+		else if (parts[i].life > 0 && parts[i].life < 148)
 		{
-			sim->create_part(-1, x - 1, y + 1, PT_VINE);
-			sim->create_part(-1, x + 1, y + 1, PT_VINE);
-			sim->create_part(-1, x - 5, y + 1, PT_VINE);
-			sim->create_part(-1, x + 5, y + 1, PT_VINE);
-			sim->create_part(-1, x - 12, y + 1, PT_VINE);
-			sim->create_part(-1, x + 12, y + 1, PT_VINE);
-			sim->create_part(-1, x, y + 1, PT_VINE);
+			sim->create_part(-1, x - 2, y + 2, PT_VINE);
+			sim->create_part(-1, x + 2, y + 2, PT_VINE);
+			sim->create_part(-1, x - 6, y + 2, PT_VINE);
+			sim->create_part(-1, x + 6, y + 2, PT_VINE);
+			sim->create_part(-1, x - 14, y + 2, PT_VINE);
+			sim->create_part(-1, x + 14, y + 2, PT_VINE);
+			sim->create_part(-1, x, y + 2, PT_VINE);
 		}
 		//Played the role, time to say goodbye to simulation.
 		if (parts[i].life == 0)
-			sim->part_change_type(i, x, y, PT_NONE);
+			sim->kill_part(i);
 	}
 	return 0;
 }
 
 static void create(ELEMENT_CREATE_FUNC_ARGS)
 {
-	sim->parts[i].life = RNG::Ref().between(130, 340);
+	sim->parts[i].life = RNG::Ref().between(190, 400);
+	sim->parts[i].tmp2 = RNG::Ref().between(0, 4);
 }
-
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
 	if (cpart->tmp == 2 && cpart->temp >= 275.15f)// Infinity Seeds.
 	{
+		*colr = 255;
+		*colg = 255;
+		*colb = 255;
 		*firer = 250;
 		*fireg = 250;
 		*fireb = 250;
-		*firea = 55;
-		*colr += *firer;
-		*colg += *fireg;
-		*colb += *fireb;
+		*firea = 100;
 		*pixel_mode |= PMODE_LFLARE;
 	}                            
 	if (cpart->temp < 275.15f) //Cold seeds.
@@ -141,5 +142,9 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		*colg = 30;
 		*colb = 120;
 	}
+	int z = (cpart->tmp2 - 2) * 8;
+	*colr += z;
+	*colg += z;
+	*colb += z;
 	return 0;
 }
