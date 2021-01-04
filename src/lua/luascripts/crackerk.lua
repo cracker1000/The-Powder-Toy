@@ -171,7 +171,7 @@ local startTime
 function remindme()
 local endTime = startTime+ 1800
 if os.time() >= endTime then
-tpt.unregister_step(remindme)
+event.unregister(event.tick,remindme)
 newmenu:removeComponent(remlabel)
 tpt.message_box("Activity Reminder!","You have played for 30 mins. Simulation has been paused to save resources. Click dismiss to continue.")
 end
@@ -186,8 +186,8 @@ end)
 remon:action(function(sender)
 clearsb()
 startTime = os.time()
-tpt.unregister_step(remindme)
-tpt.register_step(remindme)
+event.unregister(event.tick,remindme)
+event.register(event.tick,remindme)
 newmenu:addComponent(remlabel)
 newmenu:addComponent(remon)
 newmenu:removeComponent(remon)
@@ -196,7 +196,7 @@ end)
 
 remoff:action(function(sender)
 clearsb()
-tpt.unregister_step(remindme)
+event.unregister(event.tick,remindme)
 newmenu:removeComponent(remlabel)
 newmenu:removeComponent(remon)
 newmenu:removeComponent(remoff)
@@ -219,8 +219,8 @@ end)
 
 brop:action(function(sender)
 MANAGER.savesetting("CRK", "brightstate", "1")
-tpt.unregister_step(cbrightness)
-tpt.register_step(cbrightness)
+event.unregister(event.tick,cbrightness)
+event.register(event.tick,cbrightness)
 newmenu:removeComponent(brightSlider)
 brlabel:text("Turned: on")
 newmenu:removeComponent(brlabel)
@@ -231,7 +231,7 @@ end)
 bropc:action(function(sender)
 MANAGER.savesetting("CRK", "brightstate", "0")
 brlabel:text("Turned: off")
-tpt.unregister_step(cbrightness)
+event.unregister(event.tick,cbrightness)
 brightSlider:value("200")
 newmenu:removeComponent(brightSlider)
 newmenu:removeComponent(brop)
@@ -374,12 +374,12 @@ newmenu:addComponent(autohiden)
 end)
 
 autohidey:action(function(sender)
-tpt.register_step(autohidehud)
+event.register(event.tick,autohidehud)
 clearsb()
 end)
 
 autohiden:action(function(sender)
-tpt.unregister_step(autohidehud)
+event.unregister(event.tick,autohidehud)
 clearsb()
 end)
 
@@ -531,38 +531,19 @@ newmenu:addComponent(bgI)
 newmenu:addComponent(bgD)
 end)
 
-local as = 60
+as = 60
+backvr = 0
+backvg = 0
+backvb = 0
 
-function backb()
-tpt.fillrect(0,0,610,385,0,0,255,as)
-end
-function backr()
-tpt.fillrect(0,0,610,385,255,0,0,as)
-end
 function backg()
-tpt.fillrect(0,0,610,385,0,255,0,as)
+tpt.fillrect(0,-1,610,385,backvr,backvg,backvb,as)
 end
-function backy()
-tpt.fillrect(0,0,610,385,255,255,0,as)
+function clearback()
+clearsb()
+event.unregister(event.tick,backg)
+event.register(event.tick,backg)
 end
-
-function clearbg()
-newmenu:removeComponent(bgI)
-newmenu:removeComponent(bgD)
-newmenu:removeComponent(bg5)
-newmenu:removeComponent(bg4)
-newmenu:removeComponent(bg3)
-newmenu:removeComponent(bg2)
-newmenu:removeComponent(bg1)
-tpt.unregister_step(backy)
-tpt.unregister_step(backb)
-tpt.unregister_step(backr)
-tpt.unregister_step(backg)
-end
-
-tgr = 0
-tgg  = 0
-tgb = 200
 
 bgI:action(function(sender)
 as = as+30
@@ -572,41 +553,38 @@ as = as-30
 end)
 
 bg1:action(function(sender)
-clearbg()
-tgr = 0
-tgg  = 0
-tgb = 200
+clearsb()
+backvr = 0
+backvg = 0
+backvb = 0
+event.unregister(event.tick,backg)
 end)
 bg2:action(function(sender)
-tgr = 0
-tgg  = 0
-tgb = 200
-clearbg()
-tpt.register_step(backb)
+backvr = 0
+backvg = 0
+backvb = 200
+clearback()
 end)
 
 bg3:action(function(sender)
-tgr = 200
-tgg  = 0
-tgb = 0
-clearbg()
-tpt.register_step(backr)
+backvr = 200
+backvg = 0
+backvb = 0
+clearback()
 end)
 
 bg4:action(function(sender)
-tgr = 0
-tgg  = 200
-tgb = 0
-clearbg()
-tpt.register_step(backg)
+backvr = 0
+backvg = 200
+backvb = 0
+clearback()
 end)
 
 bg5:action(function(sender)
-tgr = 200
-tgg  = 200
-tgb = 0
-clearbg()
-tpt.register_step(backy)
+backvr = 200
+backvg = 200
+backvb = 0
+clearback()
 end)
 
 rc:action(function(sender)
@@ -756,11 +734,11 @@ tpt.drawline(338,0, 611,0,colourRED,colourGRN,colourBLU,al)
 end
 
 function mpnolag()
-tpt.unregister_step(topbar)
-tpt.unregister_step(theme)
-tpt.register_step(theme)
-tpt.register_step(topbar)
-tpt.unregister_step(colourblender)
+event.unregister(event.tick,topbar)
+event.unregister(event.tick,theme)
+event.register(event.tick,theme)
+event.register(event.tick,topbar)
+event.unregister(event.tick,colourblender)
 end
 
 mp:action(function(sender)
@@ -849,9 +827,9 @@ end)
 
 mp8:action(function(sender)
 MANAGER.savesetting("CRK","savergb",1)
-tpt.register_step(colourblender)
-tpt.unregister_step(topbar)
-tpt.unregister_step(theme)
+event.register(event.tick,colourblender)
+event.unregister(event.tick,topbar)
+event.unregister(event.tick,theme)
 clearsb()
 end)
 
@@ -904,7 +882,6 @@ newmenu:removeComponent(blb)
 newmenu:removeComponent(mpop)
 clearsb()
 end)
-
 end)
 
 function topbar()
@@ -924,28 +901,28 @@ newmenu:addComponent(barn)
 end)
 
 bary:action(function(sender)
-tpt.unregister_step(topbar)
-tpt.register_step(topbar)
+event.unregister(event.tick,topbar)
+event.register(event.tick,topbar)
 clearsb()
 end)
 
 barn:action(function(sender)
-tpt.unregister_step(topbar)
+event.unregister(event.tick,topbar)
 clearsb()
 end)
 
 function startupcheck()
 interface.addComponent(toggle)
 if MANAGER.getsetting("CRK", "savergb") == "2" then
-tpt.register_step(theme)
-tpt.register_step(topbar)
+event.register(event.tick,theme)
+event.register(event.tick,topbar)
 else
-tpt.register_step(colourblender)
+event.register(event.tick,colourblender)
 end
 
 if MANAGER.getsetting("CRK", "brightstate") == "1" then
 brightSlider:value(MANAGER.getsetting("CRK", "brightness"))
-tpt.register_step(cbrightness)
+event.register(event.tick,cbrightness)
 brlabel:text("Turned: on")
 else
 MANAGER.savesetting("CRK", "brightness",200)
@@ -989,16 +966,17 @@ UIhidey:action(function(sender)
 tpt.hud(0)
 newmenu:removeComponent(UIhiden)
 newmenu:removeComponent(UIhidey)
-tpt.unregister_step(topbar)
-tpt.register_step(UIhide)
+event.unregister(event.tick,topbar)
+event.unregister(event.tick,UIhide)
+event.register(event.tick,UIhide)
 end)
 
 UIhiden:action(function(sender)
-tpt.hud(0)
+tpt.hud(1)
 newmenu:removeComponent(UIhiden)
 newmenu:removeComponent(UIhidey)
-tpt.unregister_step(UIhide)
-tpt.register_step(topbar)
+event.unregister(event.tick,UIhide)
+event.register(event.tick,topbar)
 end)
 
 FPS:action(function(sender)
@@ -1021,17 +999,20 @@ tpt.setfpscap(2)
 end)
 
 reset:action(function(sender)
-tpt.unregister_step(remindme)
+event.unregister(event.tick,remindme)
+event.unregister(event.tick,backg)
+event.unregister(event.tick,cbrightness)
+event.unregister(event.tick,UIhide)
+event.unregister(event.tick,autohidehud)
+event.register(event.tick,colourblender)
+event.register(event.tick,topbar)
 newmenu:removeComponent(remlabel)
 brlabel:text("Turned: off")
 brightSlider:value("200")
-tpt.unregister_step(cbrightness)
-tpt.unregister_step(autohidehud)
+MANAGER.savesetting("CRK", "brightstate", "0")
+MANAGER.savesetting("CRK","savergb",1)
 tpt.hud(1)
 ui.closeWindow(newmenu) 
-tgr = 0
-tgg  = 0
-tgb = 200
 tpt.el.dyst.menu=0
 tpt.el.eqve.menu=0
 tpt.el.shd4.menu=0
@@ -1048,21 +1029,17 @@ tpt.el.bizg.menu=0
 tpt.el.bray.menu=0
 tpt.el.psts.menu=0
 tpt.el.mort.menu=0
-tpt.unregister_step(UIhide)
 tpt.display_mode(3)
 tpt.watertest(0)
 sim.edgeMode(0) 
 tpt.setfpscap(60)
 tpt.setwindowsize(1)
-tpt.register_step(colourblender)
-tpt.register_step(topbar)
 tpt.newtonian_gravity(0)
 tpt.decorations_enable(0)
 sim.resetPressure()
 tpt.ambient_heat(0)
 sim.resetTemp()
 tpt.reset_velocity(1,380,300,300)
-clearbg()
 clearsb()
 tpt.setdebug(0X0)
 sim.clearSim()

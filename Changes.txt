@@ -3,12 +3,15 @@ Changelog for Version 20.0
 Additions:
 Add support for new lines to texter (Makes typing multiple lines much easier.)
 Improvements to seed.
+Scripts now use lua event api functions instead of older, deprecated tpt.register ones.
 
 Fixes:
 Fix out of range errors when typing really long sentences.
+Various under the hood changes to script.
 
 todo:
 Megre with master (After commits from snap 205!)
+Merge colourblender with themes.
 
 
 
