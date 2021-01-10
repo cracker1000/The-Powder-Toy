@@ -1,10 +1,12 @@
 #pragma once
 const char *const introTextData =
-"\bo Cracker1000's Mod 20.0 \bw built on TPT 96.0\n"
-"\br --------------------------------------------------------------------------------------------------------------------\n"
-"\bl \n"
-"\bt Important Instructions:\n"
-"\bb --------------------------------------------------------------------------------------------------------------------\n"
+
+"\br |--------------------------------------------|\n"
+"\bo  Cracker1000's Mod 20.0 \bb|\bw Built on TPT 96.0 \n"
+"\br |--------------------------------------------|\n"
+"\n"
+"\br  Important Instructions:                        \n"
+"  \xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\xEE\x81\xA9\n"
 "\br *\bw There's a new 'V' drop down button on top, press it to open the Mod menu.\n"
 "\br *\bw 'J' can be used as a shortcut to bring up the menu anytime.\n"
 "\br *\bw The Mod features an in-built 'Texter' for typing text in game.\n"

@@ -1,4 +1,4 @@
---Cracker1000's custom script version 5.0
+--Cracker1000's custom script version 4.5
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
 local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
@@ -295,8 +295,8 @@ local mouseX, mouseY = tpt.mousex, tpt.mousey
 local text, element, font = '', 'ARAY', '5x7'
 clearsb()
 clearm()
-local textTextboxs = Textbox:new(98, 55, 40, 20, '', 'element')
-local textTextbox = Textbox:new(10, 30, 505, 20, '', 'Text')
+local textTextboxs = Textbox:new(98, 55, 40, 20, '', 'Element')
+local textTextbox = Textbox:new(10, 30, 505, 20, '', 'Type your text here.')
 local scripthelp = Label:new(120,100,120, 10,"Texter help:\nElement box: Type the desired output element here (Defaults to ARAY.)\nNewline: Inserts a new line and places existing text automatically.\nEnter and Cancel: To place the text or cancel it.")
 local place = Button:new(10,55,40,20,"Enter", "Toggle hidden elements.")
 local cancel= Button:new(52,55,40,20,"Cancel", "Cancel the element placement.")
@@ -1077,14 +1077,11 @@ close()
 end)
 
 function keyclicky(key)
-if TPTMP and TPTMP.chatHidden == true then
-if (key =="j")  then 
+if (key =="j") and TPTMP.chatHidden == true then 
 open()
 return false
 end
 end
-end
-
 tpt.register_keypress(keyclicky) 
 
 toggle:action(function(sender)
