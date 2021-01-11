@@ -1,10 +1,10 @@
 Changelog for Version 20.0 (Major)
 
 Additions:
-Add support for new lines to texter (Makes typing multiple lines much easier.)
+New, updated texter (supports typing multiple lines of text.)
 Improvements to seed.
 Scripts now use lua event api functions instead of older, deprecated tpt.register ones.
-Add support for new Meson Build System.
+Add support for meson.
 
 Fixes:
 Fix out of range errors when typing really long sentences.

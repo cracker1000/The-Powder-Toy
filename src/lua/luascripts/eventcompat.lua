@@ -1141,7 +1141,7 @@ local function smallstep()
 	if not MANAGER.hidden then
 		step()
 		gfx.fillRect(sidebutton.x, sidebutton.y+1, sidebutton.w+1, sidebutton.h+1)
-		color=BLACK
+		color=WHITE
 	end
 	for i,dline in ipairs(lua_letters[ICON]) do
 		tpt.drawline(dline[1]+sidebutton.x,dline[2]+sidebutton.y,dline[3]+sidebutton.x,dline[4]+sidebutton.y,color[1],color[2],color[3])
