@@ -1,18 +1,19 @@
 Changelog for Version 20.0 (Major)
 
 Additions:
-New, updated texter (supports typing multiple lines of text.)
-Improvements to seed.
+New, updated texter (now supports typing multiple lines of text.)
+Improvements to SEED.
 Scripts now use lua event api functions instead of older, deprecated tpt.register ones.
-Add support for meson.
+Add support for meson build system (future proofing)
+Performance Improvements
+Minor adjustments to CLOUD.
 
 Fixes:
-Fix out of range errors when typing really long sentences.
+Fix out of range errors when typing really long sentences in texter.
 Various under the hood changes to script.
 
 todo:
 Megre with master (After commits from snap 205!)
-Merge colourblender with themes.
 
 
 

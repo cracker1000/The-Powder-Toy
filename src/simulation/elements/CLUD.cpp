@@ -54,7 +54,7 @@ static int update(UPDATE_FUNC_ARGS)
 	{
 			parts[i].tmp++;
 	}
-	if (parts[i].tmp == 1000)
+	 if (parts[i].tmp == 1000)
 	{
 		parts[i].tmp2 = 1;
 		if (RNG::Ref().chance(1, 1000))
@@ -62,7 +62,13 @@ static int update(UPDATE_FUNC_ARGS)
 			sim->create_part(-1, x, y + 30, PT_LIGH);
 		}
 	}
-
+	else if (parts[i].tmp == 997)
+	{
+		if (RNG::Ref().chance(1, 1000))
+		{
+			sim->create_part(-1, x, y + 30, PT_LIGH);
+		}
+	}
 	if (parts[i].tmp2 == 1 && parts[i].tmp > -5)
 	{
 		parts[i].tmp --;
@@ -80,7 +86,7 @@ static int update(UPDATE_FUNC_ARGS)
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
-	if (cpart->tmp <= 997)
+	if (cpart->tmp <= 998)
 	{
 		*colb -= cpart->tmp / 9;
 		*colr -= cpart->tmp / 9;
@@ -92,7 +98,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		*pixel_mode = PMODE_NONE;
 		*pixel_mode |= FIRE_BLEND;
 	}
-      if (cpart->tmp > 997)
+      if (cpart->tmp > 998)
 		{
 			*colb = 255;
 			*colr = 235;
