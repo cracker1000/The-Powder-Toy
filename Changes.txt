@@ -9,7 +9,6 @@ Add support for meson.
 Performance Improvements.
 CLOUD now creates LIGH in a more realistic way.
 New intro text.
-
 Fixes:
 Fix out of range errors when typing really long sentences in texter.
 Various under the hood changes to script.

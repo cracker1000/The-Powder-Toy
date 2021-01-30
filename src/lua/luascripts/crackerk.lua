@@ -1,4 +1,4 @@
---Cracker1000's custom script version 5.0
+--Cracker1000's custom script version 5.6
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
 local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")

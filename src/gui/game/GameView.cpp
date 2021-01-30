@@ -2352,7 +2352,7 @@ void GameView::OnDraw()
 	//Introduction textm
 	if (introText)
 	{
-		g->fillrect(0, 0, WINDOWW, WINDOWH/2, 17, 17, 17, introText > 51 ? 102 : introText * 2);
+		g->fillrect(0, 0, WINDOWW, WINDOWH/2, 18, 18, 18, introText > 51 ? 102 : introText * 2);
 		g->drawtext(16, 20, introTextMessage, 255, 255, 255, introText > 51 ? 255 : introText * 5);
 	}
 

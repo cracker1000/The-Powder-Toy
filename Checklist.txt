@@ -53,6 +53,7 @@ Searchview.cpp
 (PPTI, 216);     SPRK.cpp
 (PPTO, 217);     SPRK.cpp
 (SEED, 218);    
+(CSNS, 219);    
 
 10) Run script update.bat to update the scripts for linux and mac.
 

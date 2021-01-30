@@ -95,7 +95,7 @@ static int update(UPDATE_FUNC_ARGS)
 				switch (parts[i].tmp)
 				{
 				case 1:
-					// .ctype serialization.
+					// .ctype serialization
 					if (TYP(r) != PT_CSNS && TYP(r) != PT_FILT)
 					{
 						doSerialization = true;
@@ -103,7 +103,7 @@ static int update(UPDATE_FUNC_ARGS)
 					}
 					break;
 				case 3:
-					// .ctype deserialization.
+					// .ctype deserialization
 					if (TYP(r) == PT_FILT)
 					{
 						doDeserialization = true;
@@ -111,14 +111,14 @@ static int update(UPDATE_FUNC_ARGS)
 					}
 					break;
 				case 2:
-					// Invert mode.
+					// Invert mode
 					if (TYP(r) && TYP(r) != PT_METL && parts[ID(r)].ctype != parts[i].ctype)
 						parts[i].life = 1;
 					else
 						parts[i].life = 0;
 					break;
 				default:
-					// Normal mode.
+					// Normal mode
 					if (TYP(r) != PT_METL && parts[ID(r)].ctype == parts[i].ctype)
 						parts[i].life = 1;
 					break;
