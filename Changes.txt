@@ -1,12 +1,14 @@
 Changelog for Version 20.0 (Major)
 
 Additions:
-New, updated texter (now supports typing multiple lines of text.)
+New elements: CSNS, ctype sensor.
+New and updated texter (now supports typing multiple lines of text.)
 Improvements to SEED.
-Scripts now use lua event api functions instead of older, deprecated tpt.register ones.
-Add support for meson build system (future proofing)
-Performance Improvements
-Minor adjustments to CLOUD.
+Scripts now use lua event api functions instead of older, deprecated, tpt.register ones.
+Add support for meson.
+Performance Improvements.
+CLOUD now creates LIGH in a more realistic way.
+New intro text.
 
 Fixes:
 Fix out of range errors when typing really long sentences in texter.
