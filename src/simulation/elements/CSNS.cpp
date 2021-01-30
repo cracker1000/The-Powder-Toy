@@ -83,8 +83,6 @@ static int update(UPDATE_FUNC_ARGS)
 	for (int rx = -rd; rx < rd + 1; rx++)
 		for (int ry = -rd; ry < rd + 1; ry++)
 			if (x + rx >= 0 && y + ry >= 0 && x + rx < XRES && y + ry < YRES && (rx || ry))
-
-
 			{
 				int r = pmap[y + ry][x + rx];
 				if (!r)
@@ -124,12 +122,10 @@ static int update(UPDATE_FUNC_ARGS)
 					break;
 				}
 			}
-
 	for (int rx = -1; rx <= 1; rx++)
 		for (int ry = -1; ry <= 1; ry++)
 			if (BOUNDS_CHECK && (rx || ry))
 			{
-
 				int r = pmap[y + ry][x + rx];
 				if (!r)
 					continue;
@@ -159,7 +155,6 @@ static int update(UPDATE_FUNC_ARGS)
 					}
 				}
 			}
-
 	return 0;
 }
 
