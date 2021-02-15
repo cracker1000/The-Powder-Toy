@@ -112,7 +112,10 @@ static int update(UPDATE_FUNC_ARGS)
 		}
 		//Played the role, time to say goodbye to simulation.
 		if (parts[i].life == 0)
+		{
 			sim->kill_part(i);
+			sim->create_part(-1,x,y,PT_SEED);
+		}
 	}
 	return 0;
 }

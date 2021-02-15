@@ -1,4 +1,4 @@
---Cracker1000's custom script version 5.6
+--Cracker1000's custom script version 6.0
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
 local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
@@ -210,7 +210,7 @@ brightness:action(function(sender)
 fs.makeDirectory("scripts")
 clearsb()
 brightSlider:value (MANAGER.getsetting("CRK", "brightness"))
-brightSlider:onValueChanged(function() MANAGER.savesetting("CRK", "brightness", brightSlider:value()) end)
+brightSlider:onValueChanged(function() MANAGER.savesetting("CRK", "brightness", brightSlider:value()+30) end)
 newmenu:addComponent(brlabel)
 newmenu:addComponent(brightSlider)
 newmenu:addComponent(brop)
@@ -421,7 +421,7 @@ tpt.el.bizs.menusection=9
 tpt.el.bizg.menusection=6
 tpt.el.bray.menusection=9
 tpt.el.psts.menusection=8
-tpt.el.mort.menusection=5
+tpt.el.mort.menusection=6
 tpt.el.dyst.menu=1
 tpt.el.eqve.menu=1
 tpt.el.shd4.menu=1
@@ -847,9 +847,9 @@ end
 rlb:text(MANAGER.getsetting("CRK", "ar"))
 glb:text(MANAGER.getsetting("CRK", "ag"))
 blb:text(MANAGER.getsetting("CRK", "ab"))
-rSlider:onValueChanged(function() rclr = rSlider:value() rlb:text(rclr) end)
-gSlider:onValueChanged(function() gclr = gSlider:value() glb:text(gclr) end)
-bSlider:onValueChanged(function() bclr = bSlider:value() blb:text(bclr) end)
+rSlider:onValueChanged(function() rclr = rSlider:value() rlb:text(rclr) MANAGER.savesetting("CRK","ar", rSlider:value()) end)
+gSlider:onValueChanged(function() gclr = gSlider:value() glb:text(gclr) MANAGER.savesetting("CRK","ag",gSlider:value()) end)
+bSlider:onValueChanged(function() bclr = bSlider:value() blb:text(bclr) MANAGER.savesetting("CRK","ab",bSlider:value())  end)
 rSlider:value(MANAGER.getsetting("CRK", "ar"))
 gSlider:value(MANAGER.getsetting("CRK", "ag"))
 bSlider:value(MANAGER.getsetting("CRK", "ab"))
@@ -867,9 +867,6 @@ newmenu:addComponent(mpop)
 mpop:action(function(sender)
 mpnolag()
 MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar", rSlider:value())
-MANAGER.savesetting("CRK","ag",gSlider:value())
-MANAGER.savesetting("CRK","ab",bSlider:value())
 newmenu:removeComponent(rSlider)
 newmenu:removeComponent(gSlider)
 newmenu:removeComponent(bSlider)
@@ -1053,6 +1050,9 @@ end
 
 function open()
 ui.showWindow(newmenu) 
+newmenu:onDraw(theme)
+newmenu:onTryExit(close)
+newmenu:onTryExit(close)
 newmenu:addComponent(deletesparkButton)
 newmenu:addComponent(FPS)
 newmenu:addComponent(info)
@@ -1079,7 +1079,6 @@ end)
 function keyclicky(key)
 if (key =="j") and TPTMP.chatHidden == true then 
 open()
-return false
 end
 end
 tpt.register_keypress(keyclicky) 
@@ -3433,7 +3432,7 @@ if using_manager then
 else
 	chatwindow = ui_chatbox.new(100, 100, 225, 150)
 end
-chatwindow:setbackground(10,10,10,235) chatwindow.drawbackground=true
+chatwindow:setbackground(10,10,10,150) chatwindow.drawbackground=true
 
 local eleNameTable = {
 ["DEFAULT_PT_LIFE_GOL"] = 256,["DEFAULT_PT_LIFE_HLIF"] = 257,["DEFAULT_PT_LIFE_ASIM"] = 258,["DEFAULT_PT_LIFE_2x2"] = 259,["DEFAULT_PT_LIFE_DANI"] = 260,
