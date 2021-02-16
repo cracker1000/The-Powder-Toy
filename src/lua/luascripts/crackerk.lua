@@ -91,6 +91,10 @@ local remon = Button:new(293,252,45,20,"On", "Save.")
 local remoff  = Button:new(293,272,45,20,"Off", "Cancel.")
 local remlabel = Label:new(68, 284, 10, 15, "Reminder is on (30 mins.)")
 
+local fancur = Button:new(396,28,80,30, "Fancy cursor", "Draws graphics around cursor.")
+local fanon = Button:new(483,28,40,20,"On", "Turnon")
+local fanoff  = Button:new(483,48,40,20,"Off", "Turnoff")
+
 local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
 
 function clearm()
@@ -111,6 +115,7 @@ newmenu:removeComponent(autohide)
 newmenu:removeComponent(chud)
 newmenu:removeComponent(brightness)
 newmenu:removeComponent(reminder)
+newmenu:removeComponent(fancur)
 end
 
 function clearsb()
@@ -164,7 +169,31 @@ newmenu:removeComponent(brlabel)
 newmenu:removeComponent(brightSlider)
 newmenu:removeComponent(remon)
 newmenu:removeComponent(remoff)
+newmenu:removeComponent(fanon)
+newmenu:removeComponent(fanoff)
 end
+
+
+function drawcirc()
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+12,tpt.brushy+12,ar,ag,ab,100)
+end
+
+fancur:action(function(sender)
+clearsb()
+newmenu:addComponent(fanon)
+newmenu:addComponent(fanoff)
+end)
+
+fanon:action(function(sender)
+event.unregister(event.tick,drawcirc)
+event.register(event.tick,drawcirc)
+clearsb()
+end)
+
+fanoff:action(function(sender)
+event.unregister(event.tick,drawcirc)
+clearsb()
+end)
 
 local startTime
 
@@ -996,6 +1025,7 @@ tpt.setfpscap(2)
 end)
 
 reset:action(function(sender)
+event.unregister(event.tick,drawcirc)
 event.unregister(event.tick,remindme)
 event.unregister(event.tick,backg)
 event.unregister(event.tick,cbrightness)
@@ -1052,7 +1082,6 @@ function open()
 ui.showWindow(newmenu) 
 newmenu:onDraw(theme)
 newmenu:onTryExit(close)
-newmenu:onTryExit(close)
 newmenu:addComponent(deletesparkButton)
 newmenu:addComponent(FPS)
 newmenu:addComponent(info)
@@ -1070,6 +1099,7 @@ newmenu:addComponent(autohide)
 newmenu:addComponent(chud)
 newmenu:addComponent(brightness)
 newmenu:addComponent(reminder)
+newmenu:addComponent(fancur)
 end
 
 hide:action(function(sender)

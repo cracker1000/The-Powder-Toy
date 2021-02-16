@@ -1,17 +1,18 @@
 Changelog for Version 20.0 (Major)
 
 Additions:
+New option: fancy cursor (Draws fancy graphics around pointer, changes as per theme)
 New elements: CSNS, ctype sensor (Also worth mentioning all these new sensor support serialisation.)
 New and updated texter (now supports typing multiple lines of text.)
 Themes now change in realtime, even when menu is kept open (helpful when using custom settings.)
 Now you can click outside the menu to close it.
-Seeds now grow more naturally.
+Seeds grow more naturally.
 Add support for meson.
-Scripts now use lua event api functions instead of older, deprecated, tpt.register ones.
+Scripts now use lua event api functions instead of older tpt.register ones.
 Moved "MORT" into gas menu.
 Clouds now creates LIGH in a more realistic way.
 Performance Improvements.
-New intro text.
+New intro design.
 
 Fixes:
 Fix out of range errors when typing really long sentences in texter.
