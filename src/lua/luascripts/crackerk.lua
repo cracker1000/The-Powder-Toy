@@ -175,22 +175,29 @@ end
 
 
 function drawcirc()
-graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+12,tpt.brushy+12,ar,ag,ab,100)
+if MANAGER.getsetting("CRK", "savergb") == "2" then
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+10,tpt.brushy+10,ar,ag,ab,110)
+else
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+10,tpt.brushy+10,colourRED,colourGRN,colourBLU,110)
+end
 end
 
 fancur:action(function(sender)
 clearsb()
+fs.makeDirectory("scripts")
 newmenu:addComponent(fanon)
 newmenu:addComponent(fanoff)
 end)
 
 fanon:action(function(sender)
+MANAGER.savesetting("CRK", "fanc",1)
 event.unregister(event.tick,drawcirc)
 event.register(event.tick,drawcirc)
 clearsb()
 end)
 
 fanoff:action(function(sender)
+MANAGER.savesetting("CRK", "fanc",0)
 event.unregister(event.tick,drawcirc)
 clearsb()
 end)
@@ -758,8 +765,6 @@ tpt.drawline(613,343,627,343,colourRED,colourGRN,colourBLU,al)
 tpt.drawline(613,359,627,359,colourRED,colourGRN,colourBLU,al)
 tpt.drawline(613,375,627,375,colourRED,colourGRN,colourBLU,al)
 tpt.drawline(613,391,627,391,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(1,0, 312,0,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(338,0, 611,0,colourRED,colourGRN,colourBLU,al)
 end
 
 function mpnolag()
@@ -916,8 +921,13 @@ al = brightSlider:value()
 else
 al = 255
 end
+if MANAGER.getsetting("CRK", "savergb") == "2" then
 tpt.drawline(1,0, 312,0, ar, ag, ab,al)
 tpt.drawline(338,0, 611,0, ar, ag, ab,al)
+else
+tpt.drawline(1,0, 312,0, colourRED,colourGRN,colourBLUal)
+tpt.drawline(338,0, 611,0, colourRED,colourGRN,colourBLU,al)
+end
 end
 
 bar:action(function(sender)
@@ -944,6 +954,7 @@ event.register(event.tick,theme)
 event.register(event.tick,topbar)
 else
 event.register(event.tick,colourblender)
+event.register(event.tick,topbar)
 end
 
 if MANAGER.getsetting("CRK", "brightstate") == "1" then
@@ -952,6 +963,12 @@ event.register(event.tick,cbrightness)
 brlabel:text("Turned: on")
 else
 MANAGER.savesetting("CRK", "brightness",200)
+end
+
+if MANAGER.getsetting("CRK", "fanc") == "0" then
+event.unregister(event.tick,drawcirc)
+else
+event.register(event.tick,drawcirc)
 end
 end
 
@@ -1036,6 +1053,7 @@ event.register(event.tick,topbar)
 newmenu:removeComponent(remlabel)
 brlabel:text("Turned: off")
 brightSlider:value("200")
+MANAGER.savesetting("CRK", "fanc","0")
 MANAGER.savesetting("CRK", "brightstate", "0")
 MANAGER.savesetting("CRK","savergb",1)
 tpt.hud(1)

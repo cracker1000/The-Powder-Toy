@@ -1,9 +1,10 @@
 Changelog for Version 20.0 (Major)
 
-Additions:
-New option: fancy cursor (Draws fancy graphics around pointer, changes as per theme)
+Additions/changes:
+Updated to TPT 96.0 (enabling uploading saves with CGoL elements.)
+New option: fancy cursor (Draws fancy graphics around pointer, changes colour as per theme.)
 New elements: CSNS, ctype sensor (Also worth mentioning all these new sensor support serialisation.)
-New and updated texter (now supports typing multiple lines of text.)
+Updated texter (now supports typing multiple lines of text.)
 Themes now change in realtime, even when menu is kept open (helpful when using custom settings.)
 Now you can click outside the menu to close it.
 Seeds grow more naturally.
@@ -17,16 +18,8 @@ New intro design.
 Fixes:
 Fix out of range errors when typing really long sentences in texter.
 Various under the hood changes to script.
-Add a check for too low brightness values.
+Add a lowerlimit for brightness settings.
+Fix topbar not hiding even when turned off while using pulse theme.
 
 todo:
 Megre with master (After commits from snap 205!)
-Pusle theme merger.
-Make J also close the menu.
-
-
-
-
-
-
-                      
