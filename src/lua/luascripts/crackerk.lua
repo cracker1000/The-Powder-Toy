@@ -1,4 +1,4 @@
---Cracker1000's custom script version 6.1
+--Cracker1000's custom script version 6.0 beta
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
 local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
@@ -95,6 +95,8 @@ local fancur = Button:new(396,28,80,30, "Fancy cursor", "Draws graphics around c
 local fanon = Button:new(483,28,40,20,"On", "Turnon")
 local fanoff  = Button:new(483,48,40,20,"Off", "Turnoff")
 
+local Help = Button:new(396,60,80,30, "Help", "Shows various stats.")
+
 local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
 
 function clearm()
@@ -116,6 +118,7 @@ newmenu:removeComponent(chud)
 newmenu:removeComponent(brightness)
 newmenu:removeComponent(reminder)
 newmenu:removeComponent(fancur)
+newmenu:removeComponent(Help)
 end
 
 function clearsb()
@@ -173,6 +176,20 @@ newmenu:removeComponent(fanon)
 newmenu:removeComponent(fanoff)
 end
 
+Help:action(function(sender)
+clearsb()
+local close23 = Button:new(250, 282, 100, 15, "Close")
+local newmenu2 = Window:new(1,1, 610, 300)
+local statxt = Label:new(1,1, 600, 290,"\n Here's some help for the settings:\n Time elapsed: \n Interface: \n Brightness: \n Reminder: \n Theme used: \n Fancy cursor: \n Current time: \n Mod version: 20.0 anniversary edition. \n Ruler: ")
+newmenu2:addComponent(statxt)
+newmenu2:addComponent(close23)
+
+close23:action(function(sender)
+ui.closeWindow(newmenu2) 
+end)
+
+ui.showWindow(newmenu2) 
+end)
 
 function drawcirc()
 if MANAGER.getsetting("CRK", "savergb") == "2" then
@@ -1100,7 +1117,7 @@ clearm()
 end
 
 function drawglitch()
-graphics.drawLine(7, 18,314,18,ar,ag,ab,240)
+graphics.drawLine(7, 18,314,18,200,20,20,250)
 end
 
 function open()
@@ -1125,6 +1142,7 @@ newmenu:addComponent(chud)
 newmenu:addComponent(brightness)
 newmenu:addComponent(reminder)
 newmenu:addComponent(fancur)
+newmenu:addComponent(Help)
 end
 
 hide:action(function(sender)

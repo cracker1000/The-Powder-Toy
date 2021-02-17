@@ -2267,7 +2267,8 @@ void GameView::OnDraw()
 			{
 				sampleInfo << "(" << sample.particle.temp << " K" << " / ";
 				sampleInfo << "" << (sample.particle.temp - 273.15f)*1.8 + 32 << " F)" << ", ";
-				sampleInfo << "dcolor: #" << Format::Uppercase() << Format::Hex() << Format::Fixed(sample.particle.dcolour) << ", ";
+				sampleInfo << "dcolor: #" << Format::Uppercase() << Format::Hex() <<sample.particle.dcolour<<", ";
+				sampleInfo << Format::Dec();
 				sampleInfo << "Vx: " << sample.particle.vx;
 				sampleInfo << ", Vy: " << sample.particle.vy << ", ";
 				sampleInfo << "#" << sample.ParticleID << ", ";
