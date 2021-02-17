@@ -6,7 +6,7 @@ New option: fancy cursor (Draws fancy graphics around pointer, changes colour as
 HUD now also shows dcolour(when in debug mode.)
 New elements: CSNS, ctype sensor (Also worth mentioning all these new sensor support serialisation.)
 Updated texter (now supports typing multiple lines of text.)
-Themes now change in realtime, even when menu is kept open (helpful when using custom settings.)
+Themes and brightness now change in realtime, even when the menu is kept open (helpful when using custom settings.)
 Now you can click outside the menu to close it.
 Seeds grow more naturally.
 Add support for meson.

@@ -1,4 +1,4 @@
---Cracker1000's custom script version 6.0
+--Cracker1000's custom script version 6.1
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
 local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
@@ -243,6 +243,9 @@ tpt.fillrect(-1,-1,629,424,0,0,0,255 - MANAGER.getsetting("CRK", "brightness"))
 end
 
 brightness:action(function(sender)
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+newmenu:onDraw(cbrightness)
+end
 fs.makeDirectory("scripts")
 clearsb()
 brightSlider:value (MANAGER.getsetting("CRK", "brightness"))
@@ -778,6 +781,7 @@ end
 mp:action(function(sender)
 clearsb()
 fs.makeDirectory("scripts")
+newmenu:onDraw(theme)
 newmenu:addComponent(mp1)
 newmenu:addComponent(mp2)
 newmenu:addComponent(mp3)
@@ -868,6 +872,8 @@ clearsb()
 end)
 
 mp9:action(function(sender)
+mpnolag()
+MANAGER.savesetting("CRK","savergb",2)
 if MANAGER.getsetting("CRK","ar") == nil then
 MANAGER.savesetting("CRK","ar",70)
 end
@@ -899,8 +905,6 @@ newmenu:addComponent(blb)
 newmenu:addComponent(mpop)
 
 mpop:action(function(sender)
-mpnolag()
-MANAGER.savesetting("CRK","savergb",2)
 newmenu:removeComponent(rSlider)
 newmenu:removeComponent(gSlider)
 newmenu:removeComponent(bSlider)
@@ -1042,7 +1046,7 @@ tpt.setfpscap(2)
 end)
 
 reset:action(function(sender)
-event.unregister(event.tick,drawcirc)
+event.register(event.tick,drawcirc)
 event.unregister(event.tick,remindme)
 event.unregister(event.tick,backg)
 event.unregister(event.tick,cbrightness)
@@ -1098,7 +1102,7 @@ end
 
 function open()
 ui.showWindow(newmenu) 
-newmenu:onDraw(theme)
+newmenu:onDraw(open)
 newmenu:onTryExit(close)
 newmenu:addComponent(deletesparkButton)
 newmenu:addComponent(FPS)
