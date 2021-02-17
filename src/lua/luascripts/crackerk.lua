@@ -925,7 +925,7 @@ if MANAGER.getsetting("CRK", "savergb") == "2" then
 tpt.drawline(1,0, 312,0, ar, ag, ab,al)
 tpt.drawline(338,0, 611,0, ar, ag, ab,al)
 else
-tpt.drawline(1,0, 312,0, colourRED,colourGRN,colourBLUal)
+tpt.drawline(1,0, 312,0, colourRED,colourGRN,colourBLU,al)
 tpt.drawline(338,0, 611,0, colourRED,colourGRN,colourBLU,al)
 end
 end

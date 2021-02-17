@@ -1,8 +1,9 @@
 Changelog for Version 20.0 (Major)
 
 Additions/changes:
-Updated to TPT 96.0 (enabling uploading saves with CGoL elements.)
+Updated to TPT 96.0 (enabling uploading saves with cGoL elements.)
 New option: fancy cursor (Draws fancy graphics around pointer, changes colour as per theme.)
+HUD now also shows dcolour(when in debug mode.)
 New elements: CSNS, ctype sensor (Also worth mentioning all these new sensor support serialisation.)
 Updated texter (now supports typing multiple lines of text.)
 Themes now change in realtime, even when menu is kept open (helpful when using custom settings.)

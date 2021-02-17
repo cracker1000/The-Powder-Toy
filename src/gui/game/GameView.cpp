@@ -2267,6 +2267,7 @@ void GameView::OnDraw()
 			{
 				sampleInfo << "(" << sample.particle.temp << " K" << " / ";
 				sampleInfo << "" << (sample.particle.temp - 273.15f)*1.8 + 32 << " F)" << ", ";
+				sampleInfo << "dcolor: #" << Format::Uppercase() << Format::Hex() << Format::Fixed(sample.particle.dcolour) << ", ";
 				sampleInfo << "Vx: " << sample.particle.vx;
 				sampleInfo << ", Vy: " << sample.particle.vy << ", ";
 				sampleInfo << "#" << sample.ParticleID << ", ";
@@ -2352,7 +2353,7 @@ void GameView::OnDraw()
 	//Introduction textm
 	if (introText)
 	{
-		g->fillrect(0, 0, WINDOWW, WINDOWH/2, 20, 20, 20, introText > 51 ? 102 : introText * 2);
+		g->fillrect(0, 0, WINDOWW, WINDOWH/2, 24, 24, 24, introText > 51 ? 102 : introText * 2);
 		g->drawtext(16, 20, introTextMessage, 255, 255, 255, introText > 51 ? 255 : introText * 5);
 	}
 

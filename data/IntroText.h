@@ -11,6 +11,7 @@ const char *const introTextData =
 "\br *\bw There's also an offline WIKI for elements, found in Mod menu.\n"
 "\br *\bw Themes can be customised using the 'themes' option (Selected themes are also automatically saved.)\n"
 "\br *\bw You can unhide all the hidden elements using 'Hidden elements' option.\n"
+"\br *\bw New gravity modes can be switched using W key aswell.\n"
 "\br *\bw Do not forget to give suggestions or feedback, use feedback option from menu for same.\n"
-"\n\n\n"
+"\n\n"
 "\bl Press any key (except power) to continue.....";
