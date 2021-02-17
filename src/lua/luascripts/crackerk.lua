@@ -1100,9 +1100,13 @@ clearsb()
 clearm()
 end
 
+function drawglitch()
+graphics.drawLine(7, 18,314,18,ar,ag,ab,240)
+end
+
 function open()
 ui.showWindow(newmenu) 
-newmenu:onDraw(open)
+newmenu:onDraw(drawglitch)
 newmenu:onTryExit(close)
 newmenu:addComponent(deletesparkButton)
 newmenu:addComponent(FPS)
