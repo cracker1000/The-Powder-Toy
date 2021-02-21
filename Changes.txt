@@ -1,26 +1,34 @@
 Changelog for Version 20.0 (Major)
 
 Additions/changes:
-Updated to TPT 96.0 (enabling uploading saves with cGoL elements.)
-New option: fancy cursor (Draws fancy graphics around pointer, changes colour as per theme.)
-HUD now also shows dcolour(when in debug mode.)
-New elements: CSNS, ctype sensor (Also worth mentioning all these new sensor support serialisation.)
-Updated texter (now supports typing multiple lines of text.)
-Themes and brightness now change in realtime, even when the menu is kept open (helpful when using custom settings.)
-Now you can click outside the menu to close it.
-Seeds grow more naturally.
+#Texter:
+Texter now supports typing multiple lines of text at once.
+Fix out of range errors.
+New option to change lines (also shown separately as you change.)
+
+# TPT 96.0:
+Includes all the changes made to the official release.
+You can now upload saves with CGoL elements too.
 Add support for meson.
-Scripts now use lua event api functions instead of older tpt.register ones.
+
+#Elements:
+CSNS, ctype sensor (Also worth mentioning all these new sensor support serialisation.)
+Seeds now grow more naturally.
 Moved "MORT" into gas menu.
 Clouds now creates LIGH in a more realistic way.
+
+#Other:
+New option: fancy cursor (Draws fancy graphics around pointer, changes colour as per theme.)
+HUD now also shows dcolour(when in debug mode.)
+Brightness settings now affect themes, topbar and backgrounds.
+Themes, backgrounds and brightness now change in realtime, even when the menu is kept open (helpful when using custom settings.)
+Now you can click outside the menu to close it.
+Scripts now use lua event api functions instead of older tpt.register ones.
 Performance Improvements.
 New intro design.
-
-Fixes:
-Fix out of range errors when typing really long sentences in texter.
-Various under the hood changes to script.
 Add a lowerlimit for brightness settings.
-Fix topbar not hiding even when turned off while using pulse theme.
+Fix topbar not hiding while using pulse theme.
+Fix TPTMP icon showing up extra bright on startup.
 
 todo:
 Megre with master (After commits from snap 205!)
