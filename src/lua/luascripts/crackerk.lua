@@ -93,7 +93,7 @@ local fancur = Button:new(396,28,80,30, "Fancy cursor", "Draws graphics around c
 local fanon = Button:new(483,28,40,20,"On", "Turnon")
 local fanoff  = Button:new(483,48,40,20,"Off", "Turnoff")
 
-local Help = Button:new(396,60,80,30, "Help", "Shows various stats.")
+local Help = Button:new(396,60,80,30, "Random save", "Shows various stats.")
 
 local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
 
@@ -173,18 +173,9 @@ newmenu:removeComponent(fanoff)
 end
 
 Help:action(function(sender)
-clearsb()
-local close23 = Button:new(250, 282, 100, 15, "Close")
-local newmenu2 = Window:new(1,1, 610, 300)
-local statxt = Label:new(1,1, 600, 290,"\n Here's some help for some of the settings: 1) Interface: This option hides the interface for a more immersive feel. \n 2) Framelimiter: A simple option that maxs out the framecap. \n ")
-newmenu2:addComponent(statxt)
-newmenu2:addComponent(close23)
-
-close23:action(function(sender)
-ui.closeWindow(newmenu2) 
-end)
-
-ui.showWindow(newmenu2) 
+close()
+randsav = math.random(0,2667342)
+sim.loadSave(randsav, 0) 
 end)
 
 function drawcirc()

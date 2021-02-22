@@ -18,7 +18,7 @@ Moved "MORT" into gas menu.
 Clouds now creates LIGH in a more realistic way.
 
 #Other:
-New option: fancy cursor (Draws fancy graphics around pointer, changes colour as per theme.)
+New option: fancy cursor and random save loader.
 HUD now also shows dcolour(when in debug mode.)
 Fix VRSS, VRSG, RFGL not showing up when unhiding elements. 
 Brightness settings now affect themes, topbar and backgrounds.
@@ -33,4 +33,3 @@ Fix TPTMP icon showing up extra bright on startup.
 
 todo:
 Megre with master (After commits from snap 205!)
-Complete help option
