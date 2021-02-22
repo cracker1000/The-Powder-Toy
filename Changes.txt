@@ -1,15 +1,10 @@
-Changelog for Version 20.0 (Major)
+Changelog for Version 20.0
 
 Additions/changes:
 #Texter:
 Texter now supports typing multiple lines of text at once.
 Fix out of range errors.
 New option to change lines (also shown separately as you change.)
-
-# TPT 96.0:
-Includes all the changes made to the official release.
-You can now upload saves with CGoL elements too.
-Add support for meson.
 
 #Elements:
 CSNS, ctype sensor (Also worth mentioning all these new sensor support serialisation.)

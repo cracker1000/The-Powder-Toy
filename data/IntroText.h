@@ -1,7 +1,7 @@
 #pragma once
 const char *const introTextData =
 "\br |--------------------------------------------|\n"
-"\bo  Cracker1000's Mod 20.0 \bb|\bw Built on TPT 96.0 \n"
+"\bo  Cracker1000's Mod 20.0 \bb|\bw Built on TPT 95.0 \n"
 "\br |--------------------------------------------|\n"
 "\n"
 "\bo  Some Instructions:                        \n"
