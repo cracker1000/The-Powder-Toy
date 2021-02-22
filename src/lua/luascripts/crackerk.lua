@@ -1,3 +1,2620 @@
+--Cracker1000's custom script version 6.4 beta
+local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
+local newmenu = Window:new(-15,-15, 610, 300)
+local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
+newmenu:addComponent(creditstxt1)
+
+local deletesparkButton =  Button:new(10,28,75,30,"Interface", "shows UI related stuff.")
+
+local UIhidey = Button:new(90,28,80,20,"Hide", "Hides the UI")
+local UIhiden = Button:new(90,48,80,20,"Show", "Shows the UI")
+
+local FPS = Button:new(10,60,75,30, "Frame limiter", "Turns the frame limiter on/off.")
+local FPS1 = Button:new(90,60,80,20, "On", "Turns the frame limiter on.")
+local FPS2 = Button:new(90,80,80,20, "Off", "Turns the frame limiter off.")
+
+local reset= Button:new(10,92,75,30,"Reset", "Reset everything.")
+
+local info= Button:new(10,124,75,30,"Stack tools", "Usefull for subframe.")
+local info1= Button:new(90,124,80,20,"Separate", "Removes top most particle from stack.")
+local info2= Button:new(90,144,80,20,"Delete", "Leaves top particle and PHOT but remove everything else.")
+
+local Ruler = Button:new(10,156,75,30, "Ruler", "Toggles in game ruler.")
+local Ry = Button:new(90,156,80,20,"Hide", "Hides the Ruler")
+local Rn = Button:new(90,176,80,20,"Show", "Shows the Ruler. (Press SHIFT)")
+
+local rc = Button:new(10,188,75,30,"Record", "Options for recording frames")
+local rc1 = Button:new(90,188,80,20,"Start", "Starts recording")
+local rc2 = Button:new(90,206,80,20,"Stop","Stops recording")
+
+local bar = Button:new(10,220,75,30,"Top bar", "Toggle top bar")
+local bary = Button:new(90,220,80,20,"Show", "Shows the bar at top")
+local barn = Button:new(90,240,80,20,"Hide", "Hides the bar")
+
+local bug = Button:new(10,252,75,30,"Feedback", "Direct to Mod thread for bug report.")
+local bug1 = Button:new(90,252,50,30,"Website", "Direct to Mod thread for bug report.")
+local bug2 = Button:new(145,252,50,30,"In game", "Direct to Mod thread for bug report.")
+
+local wiki  =  Button:new(203,28,80,30,"Wiki", "Element wiki!")
+
+local bare = Button:new(203,60,80,30,"Hidden Elem.", "Toggle hidden elements.")
+local barye = Button:new(293,60,80,20,"Show", "Shows hidden elements")
+local barne = Button:new(293,80,80,20,"Hide", "Hides elements")
+
+local mp = Button:new(203,92,80,30,"Theme", "Changes game's theme")
+local mp1 = Button:new(293,92,75,20,"Dark", "Change the theme to default")
+local mp2 = Button:new(293,112,75,20,"Fire", "Change the theme to Blue")
+local mp3 = Button:new(293,132,75,20,"Aqua", "Change the theme to Red")
+local mp4 = Button:new(293,152,75,20,"Forest", "Change the theme to Green")
+local mp5 = Button:new(293,172,75,20,"Sun", "Change the theme to Yellow")
+local mp6 = Button:new(293,192,75,20,"Orange", "Change the theme to Orange")
+local mp7 = Button:new(293,212,75,20,"Vanilla", "Change the theme back to Plain white")
+local mp8 = Button:new(293,232,75,20,"Pulse", "RBG makes everything better.")
+local mp9 = Button:new(293,252,75,20,"Custom", "Custom options.")
+local rl = Label:new(480, 92, 10, 15, "Red")
+local gl = Label:new(480, 112, 10, 15, "Green")
+local bl = Label:new(480, 132, 10, 15, "Blue")
+local rSlider = Slider:new(373, 92, 100, 15, 255)
+local gSlider = Slider:new(373, 112, 100, 15, 255)
+local bSlider = Slider:new(373, 132, 100, 15, 255)
+
+local rlb = Label:new(510, 92, 10, 15)
+local glb = Label:new(510, 112, 10, 15)
+local blb = Label:new(510, 132, 10, 15)
+
+local mpop = Button:new(373,152,75,20,"Done", "Custom options.")
+
+local bg = Button:new(203,124,80,30,"Backgrounds", "Sets different backgrounds.")
+local bg1 = Button:new(293,124,75,20,"BLACK", "Default")
+local bg2 = Button:new(293,146,75,20,"BLUE", "Blue background")
+local bg3 = Button:new(293,166,75,20,"RED", "Red background")
+local bg4 = Button:new(293,186,75,20,"GREEN", "Green background")
+local bg5 = Button:new(293,206,75,20,"YELLOW", "Yellow background")
+
+local autohide= Button:new(203,156,80,30, "Auto Hide HUD", "Hide.")
+local autohidey= Button:new(293,156,75,20, "On", "Hide.")
+local autohiden= Button:new(293,176,75,20, "Off", "Hide.")
+
+local chud = Button:new(203,188,80,30, "Texter", "for text.")
+
+local brightness = Button:new(203,220,80,30, "Brightness", "Adjust brightness.")
+local brightSlider = Slider:new(293,220, 100, 15, 255)
+
+local brop = Button:new(293,235,45,20,"On", "Save.")
+local bropc = Button:new(342,235,45,20,"Off", "Cancel.")
+local brlabel = Label:new(340, 210, 10, 15, "Turned: Off")
+
+local reminder = Button:new(203,252,80,30, "Reminder", "reminds after 30 mins.")
+local remon = Button:new(293,252,45,20,"On", "Save.")
+local remoff  = Button:new(293,272,45,20,"Off", "Cancel.")
+local remlabel = Label:new(68, 284, 10, 15, "Reminder is on (30 mins.)")
+
+local fancur = Button:new(396,28,80,30, "Fancy cursor", "Draws graphics around cursor.")
+local fanon = Button:new(483,28,40,20,"On", "Turnon")
+local fanoff  = Button:new(483,48,40,20,"Off", "Turnoff")
+
+local Help = Button:new(396,60,80,30, "Help", "Shows various stats.")
+
+local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
+
+function clearm()
+newmenu:removeComponent(reset)
+newmenu:removeComponent(FPS)
+newmenu:removeComponent(deletesparkButton)
+newmenu:removeComponent(hide)
+newmenu:removeComponent(info)
+newmenu:removeComponent(Ruler)
+newmenu:removeComponent(mp)
+newmenu:removeComponent(rc)
+newmenu:removeComponent(bg)
+newmenu:removeComponent(bug)
+newmenu:removeComponent(bar)
+newmenu:removeComponent(bare)
+newmenu:removeComponent(wiki)
+newmenu:removeComponent(autohide)
+newmenu:removeComponent(chud)
+newmenu:removeComponent(brightness)
+newmenu:removeComponent(reminder)
+newmenu:removeComponent(fancur)
+newmenu:removeComponent(Help)
+end
+
+function clearsb()
+newmenu:removeComponent(UIhiden)
+newmenu:removeComponent(UIhidey)
+newmenu:removeComponent(Ry)
+newmenu:removeComponent(Rn)
+newmenu:removeComponent(rc1)
+newmenu:removeComponent(rc2)
+newmenu:removeComponent(bug1)
+newmenu:removeComponent(bug2)
+newmenu:removeComponent(bg1)
+newmenu:removeComponent(bg2)
+newmenu:removeComponent(bg3)
+newmenu:removeComponent(bg4)
+newmenu:removeComponent(bg5)
+newmenu:removeComponent(FPS1)
+newmenu:removeComponent(FPS2)
+newmenu:removeComponent(mp1)
+newmenu:removeComponent(mp2)
+newmenu:removeComponent(mp3)
+newmenu:removeComponent(mp4)
+newmenu:removeComponent(mp5)
+newmenu:removeComponent(mp6)
+newmenu:removeComponent(mp7)
+newmenu:removeComponent(mp8)
+newmenu:removeComponent(mp9)
+newmenu:removeComponent(bary)
+newmenu:removeComponent(barn)
+newmenu:removeComponent(barye)
+newmenu:removeComponent(barne)
+newmenu:removeComponent(info1)
+newmenu:removeComponent(info2)
+newmenu:removeComponent(autohidey)
+newmenu:removeComponent(autohiden)
+newmenu:removeComponent(rSlider)
+newmenu:removeComponent(gSlider)
+newmenu:removeComponent(bSlider)
+newmenu:removeComponent(rl)
+newmenu:removeComponent(gl)
+newmenu:removeComponent(bl)
+newmenu:removeComponent(rlb)
+newmenu:removeComponent(glb)
+newmenu:removeComponent(blb)
+newmenu:removeComponent(mpop)
+newmenu:removeComponent(brop)
+newmenu:removeComponent(bropc)
+newmenu:removeComponent(brlabel)
+newmenu:removeComponent(brightSlider)
+newmenu:removeComponent(remon)
+newmenu:removeComponent(remoff)
+newmenu:removeComponent(fanon)
+newmenu:removeComponent(fanoff)
+end
+
+Help:action(function(sender)
+clearsb()
+local close23 = Button:new(250, 282, 100, 15, "Close")
+local newmenu2 = Window:new(1,1, 610, 300)
+local statxt = Label:new(1,1, 600, 290,"\n Here's some help for some of the settings: 1) Interface: This option hides the interface for a more immersive feel. \n 2) Framelimiter: A simple option that maxs out the framecap. \n ")
+newmenu2:addComponent(statxt)
+newmenu2:addComponent(close23)
+
+close23:action(function(sender)
+ui.closeWindow(newmenu2) 
+end)
+
+ui.showWindow(newmenu2) 
+end)
+
+function drawcirc()
+if MANAGER.getsetting("CRK", "savergb") == "2" then
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+4,tpt.brushy+4 ,ar,ag,ab,110)
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+13,tpt.brushy+13,ar,ag,ab,110)
+else
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+4,tpt.brushy+4 ,colourRED,colourGRN,colourBLU,110)
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+13,tpt.brushy+13,colourRED,colourGRN,colourBLU,110)
+end
+end
+
+fancur:action(function(sender)
+clearsb()
+fs.makeDirectory("scripts")
+newmenu:addComponent(fanon)
+newmenu:addComponent(fanoff)
+end)
+
+fanon:action(function(sender)
+MANAGER.savesetting("CRK", "fanc",1)
+event.unregister(event.tick,drawcirc)
+event.register(event.tick,drawcirc)
+clearsb()
+end)
+
+fanoff:action(function(sender)
+MANAGER.savesetting("CRK", "fanc",0)
+event.unregister(event.tick,drawcirc)
+clearsb()
+end)
+
+local startTime
+
+function remindme()
+local endTime = startTime+ 1800
+if os.time() >= endTime then
+event.unregister(event.tick,remindme)
+newmenu:removeComponent(remlabel)
+tpt.message_box("Activity Reminder!","You have played for 30 mins. Simulation has been paused to save resources. Click dismiss to continue.")
+end
+end
+
+reminder:action(function(sender)
+clearsb()
+newmenu:addComponent(remon)
+newmenu:addComponent(remoff)
+end)
+
+remon:action(function(sender)
+clearsb()
+startTime = os.time()
+event.unregister(event.tick,remindme)
+event.register(event.tick,remindme)
+newmenu:addComponent(remlabel)
+newmenu:addComponent(remon)
+newmenu:removeComponent(remon)
+newmenu:removeComponent(remoff)
+end)
+
+remoff:action(function(sender)
+clearsb()
+event.unregister(event.tick,remindme)
+newmenu:removeComponent(remlabel)
+newmenu:removeComponent(remon)
+newmenu:removeComponent(remoff)
+end)
+
+function cbrightness()
+tpt.fillrect(-1,-1,629,424,0,0,0,255-MANAGER.getsetting("CRK", "brightness"))
+end
+
+brightness:action(function(sender)
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+newmenu:onDraw(cbrightness)
+end
+fs.makeDirectory("scripts")
+clearsb()
+brightSlider:value (MANAGER.getsetting("CRK", "brightness"))
+brightSlider:onValueChanged(function() MANAGER.savesetting("CRK", "brightness", brightSlider:value()+45) end)
+newmenu:addComponent(brlabel)
+newmenu:addComponent(brightSlider)
+newmenu:addComponent(brop)
+newmenu:addComponent(bropc)
+end)
+
+brop:action(function(sender)
+MANAGER.savesetting("CRK", "brightstate", "1")
+event.unregister(event.tick,cbrightness)
+event.register(event.tick,cbrightness)
+newmenu:removeComponent(brightSlider)
+brlabel:text("Turned: on")
+newmenu:removeComponent(brlabel)
+newmenu:removeComponent(brop)
+newmenu:removeComponent(bropc)
+end)
+
+bropc:action(function(sender)
+MANAGER.savesetting("CRK", "brightstate", "0")
+brlabel:text("Turned: off")
+event.unregister(event.tick,cbrightness)
+brightSlider:value("200")
+newmenu:removeComponent(brightSlider)
+newmenu:removeComponent(brop)
+newmenu:removeComponent(brlabel)
+newmenu:removeComponent(bropc)
+end)
+
+--Texter script hybrid start
+yvalue = 50
+linenumber = 01
+function drawLetter(letter, x, y, element, font)
+
+        for currentX = 0, fonts[font]['width'] - 1 + fonts[font][letter]['kerning'] do
+
+                for currentY = fonts[font][letter]['descender'], fonts[font]['height'] - 1 do
+
+                        if fonts[font][letter]['pixels'][currentY + 1 - fonts[font][letter]['descender']][currentX + 1] == 1 then
+
+                                -- Create the element
+                                tpt.create(x + currentX, y + currentY - fonts[font][letter]['descender'], element)
+                        end
+                end
+        end
+end
+
+function drawText(text, x, y, element, font)
+
+        local currentLetter
+        local originalX = x
+
+        for p = 1, #text do
+
+                currentLetter = string.sub(text, p, p)
+
+                if currentLetter == '\n' then
+
+                        -- Reset to new line
+                        x = originalX
+                        y = y + fonts[font]['height'] + fonts[font]['linespacing']
+
+                elseif fonts['5x7'][currentLetter] then
+
+                        -- Draw letter
+                        drawLetter(currentLetter, x, y, element, font)
+                        x = x + fonts[font]['width'] + fonts[font]['charspacing'] + fonts[font][currentLetter]['kerning']
+
+                else
+
+                        -- Draw null character
+                        drawLetter('NULL', x, y, element, font)
+                        x = x + fonts[font]['width'] + fonts[font]['charspacing'] + fonts[font]['NULL']['kerning']
+                end
+
+        end
+end
+
+chud:action(function(sender)
+close()
+local newmenu4 = Window:new(-15,-15, 610, 300)
+local scripthelp2 = Label:new(13,5,120, 20,"Welcome to the texter 2.0")
+ui.showWindow(newmenu4)
+yvalue = 50
+linenumber = 01
+local mouseX, mouseY = tpt.mousex, tpt.mousey
+local text, element, font = '', 'ARAY', '5x7'
+local textTextboxs = Textbox:new(96, 55, 42, 20, '', 'Element')
+local textTextbox = Textbox:new(10, 30, 505, 20, '', 'Type your text here.')
+local scripthelp = Label:new(133,100,120, 10,"Texter help:\nElement box: Type the desired output element here (Defaults to ARAY.)\nNewline: Inserts a new line and places existing text automatically (Max 33.)\nEnter and Cancel: To place the text or cancel it.")
+local place = Button:new(10,55,40,20,"Enter", "Toggle hidden elements.")
+local cancel= Button:new(52,55,40,20,"Cancel", "Cancel the element placement.")
+local newline = Button:new(142,55,46,20,"New line", "New line.")
+local lno  = Label:new(210, 58, 10, 15, "Line No:")
+local lnol  = Label:new(240, 58, 10, 15, linenumber)
+
+newmenu4:addComponent(textTextbox)
+newmenu4:addComponent(textTextboxs)
+newmenu4:addComponent(scripthelp) 
+newmenu4:addComponent(scripthelp2) 
+newmenu4:addComponent(place)
+newmenu4:addComponent(cancel)
+newmenu4:addComponent(newline)
+newmenu4:addComponent(lno)
+newmenu4:addComponent(lnol)
+ textTextbox:onTextChanged(
+                    function(sender)
+                            text = textTextbox:text();
+                    end
+                )
+
+ textTextboxs:onTextChanged(
+                    function(sender)
+                            element = textTextboxs:text();
+                    end
+                )
+cancel:action(function(sender)
+newmenu4:removeComponent(scripthelp)
+newmenu4:removeComponent(scripthelp2)
+newmenu4:removeComponent(textTextbox)
+newmenu4:removeComponent(textTextboxs)
+newmenu4:removeComponent(place)
+newmenu4:removeComponent(cancel)
+newmenu4:removeComponent(newline)
+newmenu4:removeComponent(lno)
+newmenu4:removeComponent(lnol)
+ui.closeWindow(newmenu4)
+end)
+
+newline:action(function(sender)
+if linenumber <= 32 then
+text = textTextbox:text();
+yvalue = yvalue+10
+textTextbox:text('')
+linenumber = linenumber + 1
+lnol:text(linenumber)
+end
+if linenumber <=  33 then
+drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
+end
+end)
+
+place:action(function(sender)
+if linenumber <=  33 then
+drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
+end
+newmenu4:removeComponent(scripthelp)
+newmenu4:removeComponent(textTextbox)
+newmenu4:removeComponent(textTextboxs)
+newmenu4:removeComponent(place)
+newmenu4:removeComponent(cancel)
+newmenu4:removeComponent(newline)
+newmenu4:removeComponent(lno)
+newmenu4:removeComponent(lnol)
+newmenu4:removeComponent(scripthelp2)
+ui.closeWindow(newmenu4)
+end)
+end)
+
+--Texter script hybrid end
+
+function autohidehud()
+	if tpt.mousey <= 55 then tpt.hud(0) else tpt.hud(1)
+	end
+end
+
+autohide:action(function(sender)
+clearsb()
+newmenu:addComponent(autohidey)
+newmenu:addComponent(autohiden)
+end)
+
+autohidey:action(function(sender)
+event.register(event.tick,autohidehud)
+clearsb()
+end)
+
+autohiden:action(function(sender)
+event.unregister(event.tick,autohidehud)
+clearsb()
+end)
+
+bug:action(function(sender)
+clearsb()
+newmenu:addComponent(bug1)
+newmenu:addComponent(bug2)
+end)
+
+bug1:action(function(sender)
+clearsb()
+platform.openLink("https://powdertoy.co.uk/Discussions/Thread/View.html?Thread=23279")
+end)
+
+bug2:action(function(sender)
+close()
+sim.loadSave(2596812,0) 
+end)
+
+bare:action(function(sender)
+clearsb()
+newmenu:addComponent(barye)
+newmenu:addComponent(barne)
+end)
+
+barye:action(function(sender)
+--brokenvib
+clearsb()
+tpt.el.rfgl.menusection=7
+tpt.el.vrss.menusection=9
+tpt.el.vrsg.menusection=6
+tpt.el.dyst.menusection=8
+tpt.el.eqve.menusection=8
+tpt.el.shd4.menusection=9
+tpt.el.shd3.menusection=9
+tpt.el.shd2.menusection=9
+tpt.el.lolz.menusection=11
+tpt.el.love.menusection=11
+tpt.el.embr.menusection=5
+tpt.el.spwn.menusection=11
+tpt.el.spwn2.menusection=11
+tpt.el.frzw.menusection=7
+tpt.el.bizs.menusection=9
+tpt.el.bizg.menusection=6
+tpt.el.bray.menusection=1
+tpt.el.psts.menusection=8
+tpt.el.mort.menusection=6
+tpt.el.dyst.menu=1
+tpt.el.eqve.menu=1
+tpt.el.shd4.menu=1
+tpt.el.shd3.menu=1
+tpt.el.shd2.menu=1
+tpt.el.lolz.menu=1
+tpt.el.love.menu=1
+tpt.el.embr.menu=1
+tpt.el.spwn.menu=1
+tpt.el.spwn2.menu=1
+tpt.el.frzw.menu=1
+tpt.el.bizs.menu=1
+tpt.el.bizg.menu=1
+tpt.el.bray.menu=1
+tpt.el.psts.menu=1
+tpt.el.mort.menu=1
+tpt.el.rfgl.menu=1
+tpt.el.vrss.menu=1
+tpt.el.vrsg.menu=1
+end)
+
+function hideyes()
+tpt.el.dyst.menu=0
+tpt.el.eqve.menu=0
+tpt.el.shd4.menu=0
+tpt.el.shd3.menu=0
+tpt.el.shd2.menu=0
+tpt.el.lolz.menu=0
+tpt.el.love.menu=0
+tpt.el.embr.menu=0
+tpt.el.spwn.menu=0
+tpt.el.spwn2.menu=0
+tpt.el.frzw.menu=0
+tpt.el.bizs.menu=0
+tpt.el.bizg.menu=0
+tpt.el.bray.menu=0
+tpt.el.psts.menu=0
+tpt.el.mort.menu=0
+tpt.el.rfgl.menu=0
+tpt.el.vrss.menu=0
+tpt.el.vrsg.menu=0
+end
+
+barne:action(function(sender)
+clearsb()
+hideyes()
+end)
+
+wiki:action(function(sender)
+local pgno1 = Label:new(30,400,10, 15, "Page 1/2")
+local pgno2 = Label:new(30,400,10, 15, "Page 2/2")
+local creditw = Window:new(-15,-15, 626, 422)
+local prevpg = Button:new(242, 400, 40, 15, "Prev.")
+local nextpg = Button:new(292, 400, 40, 15, "Next")
+local close2 = Button:new(512, 400, 100, 15, "Close wiki")
+local creditstxt = Label:new(6,-22, 598, 418,"\nWELCOME TO THE OFFLINE WIKI\n\n1) CWIR: Customisable wire. Conduction speed set using .tmp property (Range is 0 to 8) \n.tmp2 property is used for setting melting point (default is 2000C).\n\n2) C-16: A powerful explosive. Explodes creating pressure about 40 units when above 65C.\n\n3) TIMC: Time Crystal, converts into it's ctype when sparked with PSCN. Timer set using .tmp, default is 100.\n\n4) FUEL: Powerful fuel, explodes when temp is above 50C or Pressure above 14.\n\n5) THRM: Thermostat. Maintains the surrounding temp based on its own .temp property.\n\n6) CLNT: Coolant. Cools down the temp of the system. Use .tmp to configure the cooling/heating power.\nEvaporates at extreme temperatures into WTRV.\n\n7) DMRN: Demron. Radioactive shielding material and a better indestructible heat insulator.\nIt can also block energy particles like PROT.\n\n8) FNTC & FPTC: Faster versions of NTCT and PTCT. Useful for making faster logic gates.\n\n9) PINV: Powered Invisible, allows particles to move through it only when activated. Use with PSCN and NSCN.\n\n10) UV: UV rays, harms stkms (-5 life every frame), visible with FILT, grows plnt, can sprk pscn and evaporates watr.\nCan split WATR into O2 and H2 when passed through FILT. \n\n11) SUN.: Emits rays which makes PLNT grow in direction of sun, emits UV radiation, makes PSCN spark and heals STKMs.\n\n12) CLUD: Realistic cloud, rains and creates LIGH after sometime (every 1000 frames).\n\n13) LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\nReacts with different elements like O2, WATR, ACID etc as IRL.")
+
+local creditstxt2 = Label:new(6,-25, 598, 418,"\n\n  14) LED:  Light Emmiting Diode. Use PSCN to activate and NSCN to deactivate. Temp sets the brightness.\n  Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow, 5 = pink and 6 = Flash mode.  \n\n  15) QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n  Glows in different colours just before exploding. \n\n  16) TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp. Supports .tmp deserialisation.\n\n  17) PHOS: Phosphorus. Shiny white  particle when spawned, slowly turns into red phosphorus with time. \n  Burns blue or red  when in contact with CFLM or O2 respectively, (based on on .tmp).\n  Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n\n  18) CMNT: Cement, creates an exothermic reaction when mixed with water and gets solidified, darkens when solid.\n\n  19) NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n\n  20) PRMT: Promethium, radioactive element. Catches fire at high velocity (>12), creats NEUT when mixed with PLUT. \n  Explodes at low temp and emits neut at high temp.\n\n  20) BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n  Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n\n  21) ECLR: Electronic eraser, clears the defined radius (.tmp) when activated (Use with PSCN and NSCN). \n\n  22) PROJ: Projectile, converts into its's ctype upon collision. launch with PSCN. Temperature = power while .tmp = range.\n\n  23) PPTI and PPTO: Powered Versions of PRTI and PRTO, use with PSCN and NSCN.\n\n  24) SEED: Grows into PLNT of random height when placed on DUST/SAND/CLST and Watered. Needs warm temp. to grow.\n\n  25) CSNS: Ctype sensor, detects nearby element's ctype. Useful when working with LAVA.")
+
+creditw:addComponent(creditstxt)
+creditw:addComponent(close2)
+creditw:addComponent(nextpg)
+creditw:addComponent(pgno1)
+creditw:addComponent(prevpg)
+
+prevpg:action(function()
+creditw:addComponent(creditstxt)
+creditw:removeComponent(creditstxt2)
+creditw:removeComponent(pgno2)
+creditw:addComponent(pgno1)
+end)
+nextpg:action(function() 
+creditw:addComponent(creditstxt2)
+creditw:removeComponent(creditstxt)
+creditw:removeComponent(pgno1)
+creditw:addComponent(pgno2)
+end)
+
+close2:action(function() ui.closeWindow(creditw) end)
+clearsb()
+ui.showWindow(creditw) 
+end)
+
+info:action(function(sender)
+clearsb()
+newmenu:addComponent(info1)
+newmenu:addComponent(info2)
+end)
+
+info1:action(function(sender)
+for i in sim.parts() do
+		local x,y = sim.partProperty(i, sim.FIELD_X),sim.partProperty(i, sim.FIELD_Y)
+		if sim.pmap (x, y) == i then 
+                                tpt.delete(i)
+		end
+	end
+end)
+
+info2:action(function(sender)
+for i in sim.parts() do
+		local x,y = sim.partProperty(i, sim.FIELD_X),sim.partProperty(i, sim.FIELD_Y)
+		if sim.pmap(x, y) ~= i and bit.band(elem.property(sim.partProperty(i, sim.FIELD_TYPE), "Properties"), elem.TYPE_ENERGY) == 0 then
+			tpt.delete(i)
+		end
+	end
+end)
+
+bg:action(function(sender)
+clearsb()
+newmenu:addComponent(bg1)
+newmenu:addComponent(bg2)
+newmenu:addComponent(bg3)
+newmenu:addComponent(bg4)
+newmenu:addComponent(bg5)
+newmenu:onDraw(backg)
+end)
+
+backvr = 0
+backvg = 0
+backvb = 0
+
+function backg()
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+as = brightSlider:value()
+else
+as = 60
+end
+
+if(as<30)then
+as = 30
+end
+
+if(as>110)then
+as = 110
+end
+
+tpt.fillrect(0,-1,610,385,backvr,backvg,backvb,as)
+end
+
+function clearback()
+clearsb()
+event.unregister(event.tick,backg)
+event.register(event.tick,backg)
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+event.unregister(event.tick,cbrightness)
+event.register(event.tick,cbrightness)
+end
+end
+
+bg1:action(function(sender)
+clearsb()
+backvr = 0
+backvg = 0
+backvb = 0
+event.unregister(event.tick,backg)
+end)
+bg2:action(function(sender)
+backvr = 0
+backvg = 0
+backvb = 200
+clearback()
+end)
+
+bg3:action(function(sender)
+backvr = 200
+backvg = 0
+backvb = 0
+clearback()
+end)
+
+bg4:action(function(sender)
+backvr = 0
+backvg = 200
+backvb = 0
+clearback()
+end)
+
+bg5:action(function(sender)
+backvr = 200
+backvg = 200
+backvb = 0
+clearback()
+end)
+
+rc:action(function(sender)
+clearsb()
+newmenu:addComponent(rc1)
+newmenu:addComponent(rc2)
+end)
+
+rc1:action(function(sender)
+tpt.record(true)
+ui.closeWindow(newmenu) 
+newmenu:removeComponent(rc1)
+newmenu:removeComponent(rc2)
+end)
+
+rc2:action(function(sender)
+ui.closeWindow(newmenu) 
+tpt.record(false)
+ui.closeWindow(newmenu) 
+newmenu:removeComponent(rc1)
+newmenu:removeComponent(rc2)
+end)
+
+function theme()
+ar = MANAGER.getsetting("CRK", "ar")
+ag = MANAGER.getsetting("CRK", "ag")
+ab = MANAGER.getsetting("CRK", "ab")
+
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+al = brightSlider:value()
+else
+al = 255
+end
+
+tpt.drawrect(613,1,14,95,ar,ag,ab,al)
+tpt.drawrect(613,136,14,269,ar,ag,ab,al)
+tpt.drawline(612,408,612,421,ar,ag,ab,al)
+tpt.drawline(187,409,187,422,ar,ag,ab,al)
+tpt.drawline(469,408,469,421,ar,ag,ab,al)
+tpt.drawline(487,408,487,421,ar,ag,ab,al)
+tpt.drawline(507,408,507,421,ar,ag,ab,al)
+tpt.drawline(241,408,241,421,ar,ag,ab,al)
+tpt.drawline(36,408,36,421,ar,ag,ab,al)
+tpt.drawline(18,408,18,421,ar,ag,ab,al)
+tpt.drawline(580,409,580,422,ar,ag,ab,al)
+tpt.drawline(596,409,596,422,ar,ag,ab,al)
+tpt.drawrect(1,408,626,14,ar,ag,ab,al)
+
+tpt.drawline(613,96,627,96,ar,ag,ab,al)
+tpt.drawline(613,16,627,16,ar,ag,ab,al)
+tpt.drawline(613,32,627,32,ar,ag,ab,al)
+tpt.drawline(613,48,627,48,ar,ag,ab,al)
+tpt.drawline(613,64,627,64,ar,ag,ab,al)
+tpt.drawline(613,80,627,80,ar,ag,ab,al)
+
+tpt.drawline(613,151,627,151,ar,ag,ab,al)
+tpt.drawline(613,167,627,167,ar,ag,ab,al)
+tpt.drawline(613,183,627,183,ar,ag,ab,al)
+tpt.drawline(613,199,627,199,ar,ag,ab,al)
+tpt.drawline(613,215,627,215,ar,ag,ab,al)
+tpt.drawline(613,231,627,231,ar,ag,ab,al)
+tpt.drawline(613,247,627,247,ar,ag,ab,al)
+tpt.drawline(613,263,627,263,ar,ag,ab,al)
+tpt.drawline(613,279,627,279,ar,ag,ab,al)
+tpt.drawline(613,295,627,295,ar,ag,ab,al)
+tpt.drawline(613,311,627,311,ar,ag,ab,al)
+tpt.drawline(613,327,627,327,ar,ag,ab,al)
+tpt.drawline(613,343,627,343,ar,ag,ab,al)
+tpt.drawline(613,359,627,359,ar,ag,ab,al)
+tpt.drawline(613,375,627,375,ar,ag,ab,al)
+tpt.drawline(613,391,627,391,ar,ag,ab,al)
+end
+
+frameCount,colourRED,colourGRN,colourBLU = 0,0,0,0
+function colourblender()
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+al = brightSlider:value()
+else
+al = 255
+end
+ colourRGB = {colourRED,colourGRN,colourBLU}
+ if frameCount > 1529 then frameCount = 0 else frameCount = frameCount + 1 end
+ if frameCount > 0 and frameCount < 255 then
+  colourRED = 255
+  if colourGRN > 254 then else colourGRN = colourGRN + 1 end
+ end
+ if frameCount > 254 and frameCount < 510 then
+  colourGRN = 255
+  if colourRED == 0 then else colourRED = colourRED - 1 end
+ end
+ if frameCount > 510 and frameCount < 765 then
+  colourGRN = 255
+  if colourBLU > 254 then else colourBLU = colourBLU + 1 end
+ end
+ if frameCount > 764 and frameCount < 1020 then
+  colourBLU = 255
+  if colourGRN == 0 then else colourGRN = colourGRN - 1 end
+ end
+ if frameCount > 1020 and frameCount < 1275 then
+  colourBLU = 255
+  if colourRED > 254 then else colourRED = colourRED + 1 end
+ end
+ if frameCount > 1274 and frameCount < 1530 then
+  colourRED = 255
+  if colourBLU == 0 then else colourBLU = colourBLU - 1 end
+ end
+tpt.drawrect(613,1,14,95,colourRED,colourGRN,colourBLU,al)
+tpt.drawrect(613,136,14,269,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(612,408,612,421,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(187,409,187,422,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(469,408,469,421,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(487,408,487,421,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(507,408,507,421,colourRED,colourGRN,colourBLU,al)
+
+tpt.drawline(241,408,241,421,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(36,408,36,421,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(18,408,18,421,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(580,409,580,422,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(596,409,596,422,colourRED,colourGRN,colourBLU,al)
+tpt.drawrect(1,408,626,14,colourRED,colourGRN,colourBLU,al)
+
+tpt.drawline(613,96,627,96,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,16,627,16,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,32,627,32,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,48,627,48,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,64,627,64,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,80,627,80,colourRED,colourGRN,colourBLU,al)
+
+tpt.drawline(613,151,627,151,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,167,627,167,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,183,627,183,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,199,627,199,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,215,627,215,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,231,627,231,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,247,627,247,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,263,627,263,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,279,627,279,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,295,627,295,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,311,627,311,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,327,627,327,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,343,627,343,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,359,627,359,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,375,627,375,colourRED,colourGRN,colourBLU,al)
+tpt.drawline(613,391,627,391,colourRED,colourGRN,colourBLU,al)
+end
+
+function mpnolag()
+event.unregister(event.tick,topbar)
+event.unregister(event.tick,theme)
+event.register(event.tick,theme)
+event.register(event.tick,topbar)
+event.unregister(event.tick,colourblender)
+end
+
+mp:action(function(sender)
+clearsb()
+fs.makeDirectory("scripts")
+newmenu:onDraw(theme)
+newmenu:addComponent(mp1)
+newmenu:addComponent(mp2)
+newmenu:addComponent(mp3)
+newmenu:addComponent(mp4)
+newmenu:addComponent(mp5)
+newmenu:addComponent(mp6)
+newmenu:addComponent(mp7)
+newmenu:addComponent(mp8)
+newmenu:addComponent(mp9)
+end)
+
+mp1:action(function(sender)
+MANAGER.savesetting("CRK","savergb",2)
+MANAGER.savesetting("CRK","ar",70)
+MANAGER.savesetting("CRK","ag",70)
+MANAGER.savesetting("CRK","ab",70)
+MANAGER.savesetting("CRK","al",255)
+mpnolag()
+clearsb()
+end)
+
+mp2:action(function(sender)
+MANAGER.savesetting("CRK","savergb",2)
+MANAGER.savesetting("CRK","ar",255)
+MANAGER.savesetting("CRK","ag",0)
+MANAGER.savesetting("CRK","ab",0)
+MANAGER.savesetting("CRK","al",255)
+mpnolag()
+clearsb()
+end)
+
+mp3:action(function(sender)
+MANAGER.savesetting("CRK","savergb",2)
+MANAGER.savesetting("CRK","ar",0)
+MANAGER.savesetting("CRK","ag",0)
+MANAGER.savesetting("CRK","ab",255)
+MANAGER.savesetting("CRK","al",255)
+mpnolag()
+clearsb()
+end)
+
+mp4:action(function(sender)
+MANAGER.savesetting("CRK","savergb",2)
+MANAGER.savesetting("CRK","ar",0)
+MANAGER.savesetting("CRK","ag",255)
+MANAGER.savesetting("CRK","ab",0)
+MANAGER.savesetting("CRK","al",255)
+mpnolag()
+clearsb()
+end)
+
+mp5:action(function(sender)
+MANAGER.savesetting("CRK","savergb",2)
+MANAGER.savesetting("CRK","ar",255)
+MANAGER.savesetting("CRK","ag",255)
+MANAGER.savesetting("CRK","ab",0)
+MANAGER.savesetting("CRK","al",255)
+mpnolag()
+clearsb()
+end)
+
+mp6:action(function(sender)
+MANAGER.savesetting("CRK","savergb",2)
+MANAGER.savesetting("CRK","ar",255)
+MANAGER.savesetting("CRK","ag",150)
+MANAGER.savesetting("CRK","ab",0)
+MANAGER.savesetting("CRK","al",255)
+mpnolag()
+clearsb()
+end)
+
+mp7:action(function(sender)
+MANAGER.savesetting("CRK","savergb",2)
+MANAGER.savesetting("CRK","ar",255)
+MANAGER.savesetting("CRK","ag",255)
+MANAGER.savesetting("CRK","ab",255)
+MANAGER.savesetting("CRK","al",255)
+mpnolag()
+clearsb()
+end)
+
+mp8:action(function(sender)
+MANAGER.savesetting("CRK","savergb",1)
+event.register(event.tick,colourblender)
+event.unregister(event.tick,theme)
+clearsb()
+end)
+
+mp9:action(function(sender)
+mpnolag()
+MANAGER.savesetting("CRK","savergb",2)
+if MANAGER.getsetting("CRK","ar") == nil then
+MANAGER.savesetting("CRK","ar",70)
+end
+if MANAGER.getsetting("CRK","ag") == nil then
+MANAGER.savesetting("CRK","ag",70)
+end
+if MANAGER.getsetting("CRK","ab") == nil then
+MANAGER.savesetting("CRK","ab",70)
+end
+
+rlb:text(MANAGER.getsetting("CRK", "ar"))
+glb:text(MANAGER.getsetting("CRK", "ag"))
+blb:text(MANAGER.getsetting("CRK", "ab"))
+rSlider:onValueChanged(function() rclr = rSlider:value() rlb:text(rclr) MANAGER.savesetting("CRK","ar", rSlider:value()) end)
+gSlider:onValueChanged(function() gclr = gSlider:value() glb:text(gclr) MANAGER.savesetting("CRK","ag",gSlider:value()) end)
+bSlider:onValueChanged(function() bclr = bSlider:value() blb:text(bclr) MANAGER.savesetting("CRK","ab",bSlider:value())  end)
+rSlider:value(MANAGER.getsetting("CRK", "ar"))
+gSlider:value(MANAGER.getsetting("CRK", "ag"))
+bSlider:value(MANAGER.getsetting("CRK", "ab"))
+newmenu:addComponent(rSlider)
+newmenu:addComponent(gSlider)
+newmenu:addComponent(bSlider)
+newmenu:addComponent(rl)
+newmenu:addComponent(gl)
+newmenu:addComponent(bl)
+newmenu:addComponent(rlb)
+newmenu:addComponent(glb)
+newmenu:addComponent(blb)
+newmenu:addComponent(mpop)
+
+mpop:action(function(sender)
+newmenu:removeComponent(rSlider)
+newmenu:removeComponent(gSlider)
+newmenu:removeComponent(bSlider)
+newmenu:removeComponent(rl)
+newmenu:removeComponent(gl)
+newmenu:removeComponent(bl)
+newmenu:removeComponent(rlb)
+newmenu:removeComponent(glb)
+newmenu:removeComponent(blb)
+newmenu:removeComponent(mpop)
+clearsb()
+end)
+end)
+
+function topbar()
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+al = brightSlider:value()
+else
+al = 255
+end
+if MANAGER.getsetting("CRK", "savergb") == "2" then
+tpt.drawline(1,0, 312,0, ar, ag, ab,al)
+tpt.drawline(338,0, 611,0, ar, ag, ab,al)
+else
+tpt.drawline(1,0, 312,0, colourRED,colourGRN,colourBLU,al)
+tpt.drawline(338,0, 611,0, colourRED,colourGRN,colourBLU,al)
+end
+end
+
+bar:action(function(sender)
+clearsb()
+newmenu:addComponent(bary)
+newmenu:addComponent(barn)
+end)
+
+bary:action(function(sender)
+event.unregister(event.tick,topbar)
+event.register(event.tick,topbar)
+clearsb()
+end)
+
+barn:action(function(sender)
+event.unregister(event.tick,topbar)
+clearsb()
+end)
+
+function startupcheck()
+interface.addComponent(toggle)
+if MANAGER.getsetting("CRK", "savergb") == "2" then
+event.register(event.tick,theme)
+event.register(event.tick,topbar)
+else
+event.register(event.tick,colourblender)
+event.register(event.tick,topbar)
+end
+
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+brightSlider:value(MANAGER.getsetting("CRK", "brightness"))
+event.register(event.tick,cbrightness)
+brlabel:text("Turned: on")
+else
+MANAGER.savesetting("CRK", "brightness",200)
+end
+
+if MANAGER.getsetting("CRK", "fanc") == "0" then
+event.unregister(event.tick,drawcirc)
+else
+event.register(event.tick,drawcirc)
+end
+end
+
+startupcheck()
+
+Ruler:action(function(sender)
+clearsb()
+newmenu:addComponent(Ry)
+newmenu:addComponent(Rn)
+end)
+
+Ry:action(function(sender)
+tpt.setdebug(0X0)
+newmenu:removeComponent(Ry)
+newmenu:removeComponent(Rn)
+end)
+
+Rn:action(function(sender)
+tpt.setdebug(0X4)
+newmenu:removeComponent(Ry)
+newmenu:removeComponent(Rn)
+end)
+
+deletesparkButton:action(function(sender)
+clearsb()
+tpt.hud(0)
+newmenu:addComponent(UIhidey)
+newmenu:addComponent(UIhiden)
+end)
+
+function UIhide()
+tpt.hud(0)
+tpt.fillrect(-1,382,616,42,0,0,0,255)
+tpt.fillrect(612,0,17,424,0,0,0,255)
+end
+
+UIhidey:action(function(sender)
+tpt.hud(0)
+newmenu:removeComponent(UIhiden)
+newmenu:removeComponent(UIhidey)
+event.unregister(event.tick,topbar)
+event.unregister(event.tick,UIhide)
+event.register(event.tick,UIhide)
+end)
+
+UIhiden:action(function(sender)
+tpt.hud(1)
+newmenu:removeComponent(UIhiden)
+newmenu:removeComponent(UIhidey)
+event.unregister(event.tick,UIhide)
+event.register(event.tick,topbar)
+end)
+
+FPS:action(function(sender)
+clearsb()
+newmenu:addComponent(FPS1)
+newmenu:addComponent(FPS2)
+end)
+
+
+FPS1:action(function(sender)
+newmenu:removeComponent(FPS1)
+newmenu:removeComponent(FPS2)
+tpt.setfpscap(60)
+end)
+
+FPS2:action(function(sender)
+newmenu:removeComponent(FPS1)
+newmenu:removeComponent(FPS2)
+tpt.setfpscap(2)
+end)
+
+reset:action(function(sender)
+clearsb()
+event.register(event.tick,drawcirc)
+event.unregister(event.tick,remindme)
+event.unregister(event.tick,backg)
+event.unregister(event.tick,cbrightness)
+event.unregister(event.tick,UIhide)
+event.unregister(event.tick,autohidehud)
+event.register(event.tick,colourblender)
+event.register(event.tick,topbar)
+newmenu:removeComponent(remlabel)
+brlabel:text("Turned: off")
+brightSlider:value("200")
+MANAGER.savesetting("CRK", "fanc","0")
+MANAGER.savesetting("CRK", "brightstate", "0")
+MANAGER.savesetting("CRK","savergb",1)
+tpt.hud(1)
+ui.closeWindow(newmenu) 
+hideyes()
+tpt.display_mode(3)
+tpt.watertest(0)
+sim.edgeMode(0) 
+tpt.setfpscap(60)
+tpt.setwindowsize(1)
+tpt.newtonian_gravity(0)
+tpt.decorations_enable(0)
+sim.resetPressure()
+tpt.ambient_heat(0)
+sim.resetTemp()
+tpt.reset_velocity(1,380,300,300)
+tpt.setdebug(0X0)
+sim.clearSim()
+end)
+
+function close()
+ui.closeWindow(newmenu) 
+clearsb()
+clearm()
+end
+
+function drawglitch()
+graphics.drawLine(7, 18,314,18,200,20,20,250)
+end
+
+function open()
+ui.showWindow(newmenu) 
+newmenu:onDraw(drawglitch)
+newmenu:onTryExit(close)
+newmenu:addComponent(deletesparkButton)
+newmenu:addComponent(FPS)
+newmenu:addComponent(info)
+newmenu:addComponent(reset)
+newmenu:addComponent(hide)
+newmenu:addComponent(Ruler)
+newmenu:addComponent(rc)
+newmenu:addComponent(bg)
+newmenu:addComponent(mp)
+newmenu:addComponent(bug)
+newmenu:addComponent(bar)
+newmenu:addComponent(bare)
+newmenu:addComponent(wiki)
+newmenu:addComponent(autohide)
+newmenu:addComponent(chud)
+newmenu:addComponent(brightness)
+newmenu:addComponent(reminder)
+newmenu:addComponent(fancur)
+newmenu:addComponent(Help)
+end
+
+hide:action(function(sender)
+close()
+end)
+
+function keyclicky(key)
+if (key =="j") and TPTMP.chatHidden == true then 
+open()
+end
+end
+tpt.register_keypress(keyclicky) 
+
+toggle:action(function(sender)
+open()
+end)
+
+--fontstart
+fonts ={}
+fonts['5x7'] = {}
+fonts['5x7']['width'] = 5
+fonts['5x7']['height'] = 7
+fonts['5x7']['linespacing'] = 4
+fonts['5x7']['charspacing'] = 1
+fonts['5x7']['a'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1}
+        }
+}
+fonts['5x7']['b'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['c'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['d'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['e'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['f'] = {
+        ['descender'] = 0,
+        ['kerning'] = -1,
+        ['pixels']  = {
+                {0, 0, 1, 1, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['g'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0}
+        }
+}
+fonts['5x7']['h'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['i'] = {
+        ['descender'] = 0,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['j'] = {
+        ['descender'] = -2,
+        ['kerning'] = -3,
+        ['pixels']  = {
+                {0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['k'] = {
+        ['descender'] = 0,
+        ['kerning'] = -1,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 1, 0},
+                {1, 0, 1, 0, 0},
+                {1, 1, 0, 0, 0},
+                {1, 0, 1, 0, 0},
+                {1, 0, 0, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['l'] = {
+        ['descender'] = 0,
+        ['kerning'] = -3,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['m'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 0, 1, 0},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['n'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 1, 1, 0},
+                {1, 1, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['o'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['p'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['q'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1}
+        }
+}
+fonts['5x7']['r'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 1, 1, 0},
+                {1, 1, 0, 0, 1},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['s'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 1, 1, 1},
+                {1, 0, 0, 0, 0},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['t'] = {
+        ['descender'] = 0,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['u'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['v'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 1, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['w'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['x'] = {
+        ['descender'] = 0,
+        ['kerning'] = -1,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 1, 0},
+                {1, 0, 0, 1, 0},
+                {0, 1, 1, 0, 0},
+                {1, 0, 0, 1, 0},
+                {1, 0, 0, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['y'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 1, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {1, 1, 0, 0, 0}
+        }
+}
+fonts['5x7']['z'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7'][' '] = {
+        ['descender'] = 0,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+
+fonts['5x7']['0'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 1, 1},
+                {1, 0, 1, 0, 1},
+                {1, 1, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['1'] = {
+        ['descender'] = 0,
+        ['kerning'] = -3,
+        ['pixels']  = {
+                {0, 1, 0, 0, 0},
+                {1, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['2'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['3'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['4'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 1, 1},
+                {0, 0, 1, 0, 1},
+                {0, 1, 0, 0, 1},
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['5'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 1},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {0, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['6'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 1, 1, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['7'] = {
+        ['descender'] = 0,
+        ['kerning'] = -1,
+        ['pixels']  = {
+                {1, 1, 1, 1, 0},
+                {0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['8'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['9'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 1, 0},
+                {0, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['.'] = {
+        ['descender'] = 0,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['<'] = {
+        ['descender'] = 0,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['>'] = {
+        ['descender'] = 0,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['@'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 0, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 1, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0}
+        }
+}
+
+fonts['5x7']['#'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 0, 1, 0},
+                {1, 1, 1, 1, 1},
+                {0, 1, 0, 1, 0},
+                {1, 1, 1, 1, 1},
+                {0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['$'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 1, 0, 0},
+                {0, 1, 1, 1, 0},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 0},
+                {0, 1, 1, 1, 0},
+                {0, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 1, 0, 0}
+        }
+}
+
+fonts['5x7']['%'] = {
+        ['descender'] = -1,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {1, 1, 0, 0, 1},
+                {1, 1, 0, 0, 1},
+                {0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 1, 1},
+                {1, 0, 0, 1, 1},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['^'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 1, 0},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['{'] = {
+        ['descender'] = -2,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0}
+        }
+}
+
+fonts['5x7']['}'] = {
+        ['descender'] = -2,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['&'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 1, 0, 1},
+                {1, 0, 0, 1, 0},
+                {0, 1, 1, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['*'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {1, 0, 1, 0, 1},
+                {0, 1, 1, 1, 0},
+                {1, 0, 1, 0, 1},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['('] = {
+        ['descender'] = -2,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0}
+        }
+}
+
+fonts['5x7'][')'] = {
+        ['descender'] = -2,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['='] = {
+        ['descender'] = 0,
+        ['kerning'] = -1,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['['] = {
+        ['descender'] = -2,
+        ['kerning'] = -3,
+        ['pixels']  = {
+                {1, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 0, 0, 0}
+        }
+}
+
+fonts['5x7'][']'] = {
+        ['descender'] = -2,
+        ['kerning'] = -3,
+        ['pixels']  = {
+                {1, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 1, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['|'] = {
+        ['descender'] = -2,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['!'] = {
+        ['descender'] = 0,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['?'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7'][','] = {
+        ['descender'] = -1,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7'][':'] = {
+        ['descender'] = 0,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7'][';'] = {
+        ['descender'] = 0,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['+'] = {
+        ['descender'] = 0,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 1, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['-'] = {
+        ['descender'] = 0,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['_'] = {
+        ['descender'] = 0,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['/'] = {
+        ['descender'] = -2,
+        ['kerning'] = -2,
+        ['pixels']  = {
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0}
+        }
+}
+
+fonts['5x7']['NULL'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 1}
+        }
+}
+
+
+fonts['5x7']['A'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 1, 0},
+                {0, 1, 0, 1, 0},
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['B'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['C'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['D'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['E'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 1},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['F'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 1},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['G'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 0},
+                {1, 0, 1, 1, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['H'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['I'] = {
+        ['descender'] = 0,
+        ['kerning'] = -4,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['J'] = {
+        ['descender'] = 0,
+        ['kerning'] = -1,
+        ['pixels']  = {
+                {0, 0, 0, 1, 0},
+                {0, 0, 0, 1, 0},
+                {0, 0, 0, 1, 0},
+                {0, 0, 0, 1, 0},
+                {0, 0, 0, 1, 0},
+                {1, 0, 0, 1, 0},
+                {0, 1, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['K'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 1, 0},
+                {1, 0, 1, 0, 0},
+                {1, 1, 0, 0, 0},
+                {1, 0, 1, 0, 0},
+                {1, 0, 0, 1, 0},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['L'] = {
+        ['descender'] = 0,
+        ['kerning'] = -1,
+        ['pixels']  = {
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['M'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 0, 1, 1},
+                {1, 1, 0, 1, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['N'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 1, 0, 0, 1},
+                {1, 1, 0, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 0, 1, 1},
+                {1, 0, 0, 1, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['O'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['P'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['Q'] = {
+        ['descender'] = -2,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 1, 0},
+                {0, 0, 0, 0, 1}
+        }
+}
+fonts['5x7']['R'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['S'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 1, 1, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 0},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['T'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 1},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['U'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 1, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['V'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 1, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['W'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['X'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 1, 0},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['Y'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {1, 0, 0, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 1, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['Z'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 1},
+                {0, 0, 0, 1, 0},
+                {0, 0, 1, 0, 0},
+                {0, 1, 0, 0, 0},
+                {1, 0, 0, 0, 0},
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+
+
+fonts['5x7']['_'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {1, 1, 1, 1, 1},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+fonts['5x7']['"'] = {
+        ['descender'] = 0,
+        ['kerning'] = 0,
+        ['pixels']  = {
+                {0, 0, 1, 0, 1},
+                {0, 1, 0, 1, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0}
+        }
+}
+--fontstop
+
+
+
+
 
 --Cracker64's Powder Toy Multiplayer
 local version = 8
@@ -2177,2621 +4794,3 @@ evt.register(evt.keypress, keypress)
 evt.register(evt.keyrelease, keyrelease)
 evt.register(evt.textinput, textinput)
 evt.register(evt.blur, blur)
-
-
-
-
-
---Cracker1000's custom script version 6.3 beta
-local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
-local newmenu = Window:new(-15,-15, 610, 300)
-local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
-newmenu:addComponent(creditstxt1)
-
-local deletesparkButton =  Button:new(10,28,75,30,"Interface", "shows UI related stuff.")
-
-local UIhidey = Button:new(90,28,80,20,"Hide", "Hides the UI")
-local UIhiden = Button:new(90,48,80,20,"Show", "Shows the UI")
-
-local FPS = Button:new(10,60,75,30, "Frame limiter", "Turns the frame limiter on/off.")
-local FPS1 = Button:new(90,60,80,20, "On", "Turns the frame limiter on.")
-local FPS2 = Button:new(90,80,80,20, "Off", "Turns the frame limiter off.")
-
-local reset= Button:new(10,92,75,30,"Reset", "Reset everything.")
-
-local info= Button:new(10,124,75,30,"Stack tools", "Usefull for subframe.")
-local info1= Button:new(90,124,80,20,"Separate", "Removes top most particle from stack.")
-local info2= Button:new(90,144,80,20,"Delete", "Leaves top particle and PHOT but remove everything else.")
-
-local Ruler = Button:new(10,156,75,30, "Ruler", "Toggles in game ruler.")
-local Ry = Button:new(90,156,80,20,"Hide", "Hides the Ruler")
-local Rn = Button:new(90,176,80,20,"Show", "Shows the Ruler. (Press SHIFT)")
-
-local rc = Button:new(10,188,75,30,"Record", "Options for recording frames")
-local rc1 = Button:new(90,188,80,20,"Start", "Starts recording")
-local rc2 = Button:new(90,206,80,20,"Stop","Stops recording")
-
-local bar = Button:new(10,220,75,30,"Top bar", "Toggle top bar")
-local bary = Button:new(90,220,80,20,"Show", "Shows the bar at top")
-local barn = Button:new(90,240,80,20,"Hide", "Hides the bar")
-
-local bug = Button:new(10,252,75,30,"Feedback", "Direct to Mod thread for bug report.")
-local bug1 = Button:new(90,252,50,30,"Website", "Direct to Mod thread for bug report.")
-local bug2 = Button:new(145,252,50,30,"In game", "Direct to Mod thread for bug report.")
-
-local wiki  =  Button:new(203,28,80,30,"Wiki", "Element wiki!")
-
-local bare = Button:new(203,60,80,30,"Hidden Elem.", "Toggle hidden elements.")
-local barye = Button:new(293,60,80,20,"Show", "Shows hidden elements")
-local barne = Button:new(293,80,80,20,"Hide", "Hides elements")
-
-local mp = Button:new(203,92,80,30,"Theme", "Changes game's theme")
-local mp1 = Button:new(293,92,75,20,"Dark", "Change the theme to default")
-local mp2 = Button:new(293,112,75,20,"Fire", "Change the theme to Blue")
-local mp3 = Button:new(293,132,75,20,"Aqua", "Change the theme to Red")
-local mp4 = Button:new(293,152,75,20,"Forest", "Change the theme to Green")
-local mp5 = Button:new(293,172,75,20,"Sun", "Change the theme to Yellow")
-local mp6 = Button:new(293,192,75,20,"Orange", "Change the theme to Orange")
-local mp7 = Button:new(293,212,75,20,"Vanilla", "Change the theme back to Plain white")
-local mp8 = Button:new(293,232,75,20,"Pulse", "RBG makes everything better.")
-local mp9 = Button:new(293,252,75,20,"Custom", "Custom options.")
-local rl = Label:new(480, 92, 10, 15, "Red")
-local gl = Label:new(480, 112, 10, 15, "Green")
-local bl = Label:new(480, 132, 10, 15, "Blue")
-local rSlider = Slider:new(373, 92, 100, 15, 255)
-local gSlider = Slider:new(373, 112, 100, 15, 255)
-local bSlider = Slider:new(373, 132, 100, 15, 255)
-
-local rlb = Label:new(510, 92, 10, 15)
-local glb = Label:new(510, 112, 10, 15)
-local blb = Label:new(510, 132, 10, 15)
-
-local mpop = Button:new(373,152,75,20,"Done", "Custom options.")
-
-local bg = Button:new(203,124,80,30,"Backgrounds", "Sets different backgrounds.")
-local bg1 = Button:new(293,124,75,20,"BLACK", "Default")
-local bg2 = Button:new(293,146,75,20,"BLUE", "Blue background")
-local bg3 = Button:new(293,166,75,20,"RED", "Red background")
-local bg4 = Button:new(293,186,75,20,"GREEN", "Green background")
-local bg5 = Button:new(293,206,75,20,"YELLOW", "Yellow background")
-
-local autohide= Button:new(203,156,80,30, "Auto Hide HUD", "Hide.")
-local autohidey= Button:new(293,156,75,20, "On", "Hide.")
-local autohiden= Button:new(293,176,75,20, "Off", "Hide.")
-
-local chud = Button:new(203,188,80,30, "Texter", "for text.")
-
-local brightness = Button:new(203,220,80,30, "Brightness", "Adjust brightness.")
-local brightSlider = Slider:new(293,220, 100, 15, 255)
-
-local brop = Button:new(293,235,45,20,"On", "Save.")
-local bropc = Button:new(342,235,45,20,"Off", "Cancel.")
-local brlabel = Label:new(340, 210, 10, 15, "Turned: Off")
-
-local reminder = Button:new(203,252,80,30, "Reminder", "reminds after 30 mins.")
-local remon = Button:new(293,252,45,20,"On", "Save.")
-local remoff  = Button:new(293,272,45,20,"Off", "Cancel.")
-local remlabel = Label:new(68, 284, 10, 15, "Reminder is on (30 mins.)")
-
-local fancur = Button:new(396,28,80,30, "Fancy cursor", "Draws graphics around cursor.")
-local fanon = Button:new(483,28,40,20,"On", "Turnon")
-local fanoff  = Button:new(483,48,40,20,"Off", "Turnoff")
-
-local Help = Button:new(396,60,80,30, "Help", "Shows various stats.")
-
-local hide= Button:new(528,278,80,20, "Close menu", "Hide.")
-
-function clearm()
-newmenu:removeComponent(reset)
-newmenu:removeComponent(FPS)
-newmenu:removeComponent(deletesparkButton)
-newmenu:removeComponent(hide)
-newmenu:removeComponent(info)
-newmenu:removeComponent(Ruler)
-newmenu:removeComponent(mp)
-newmenu:removeComponent(rc)
-newmenu:removeComponent(bg)
-newmenu:removeComponent(bug)
-newmenu:removeComponent(bar)
-newmenu:removeComponent(bare)
-newmenu:removeComponent(wiki)
-newmenu:removeComponent(autohide)
-newmenu:removeComponent(chud)
-newmenu:removeComponent(brightness)
-newmenu:removeComponent(reminder)
-newmenu:removeComponent(fancur)
-newmenu:removeComponent(Help)
-end
-
-function clearsb()
-newmenu:removeComponent(UIhiden)
-newmenu:removeComponent(UIhidey)
-newmenu:removeComponent(Ry)
-newmenu:removeComponent(Rn)
-newmenu:removeComponent(rc1)
-newmenu:removeComponent(rc2)
-newmenu:removeComponent(bug1)
-newmenu:removeComponent(bug2)
-newmenu:removeComponent(bg1)
-newmenu:removeComponent(bg2)
-newmenu:removeComponent(bg3)
-newmenu:removeComponent(bg4)
-newmenu:removeComponent(bg5)
-newmenu:removeComponent(FPS1)
-newmenu:removeComponent(FPS2)
-newmenu:removeComponent(mp1)
-newmenu:removeComponent(mp2)
-newmenu:removeComponent(mp3)
-newmenu:removeComponent(mp4)
-newmenu:removeComponent(mp5)
-newmenu:removeComponent(mp6)
-newmenu:removeComponent(mp7)
-newmenu:removeComponent(mp8)
-newmenu:removeComponent(mp9)
-newmenu:removeComponent(bary)
-newmenu:removeComponent(barn)
-newmenu:removeComponent(barye)
-newmenu:removeComponent(barne)
-newmenu:removeComponent(info1)
-newmenu:removeComponent(info2)
-newmenu:removeComponent(autohidey)
-newmenu:removeComponent(autohiden)
-newmenu:removeComponent(rSlider)
-newmenu:removeComponent(gSlider)
-newmenu:removeComponent(bSlider)
-newmenu:removeComponent(rl)
-newmenu:removeComponent(gl)
-newmenu:removeComponent(bl)
-newmenu:removeComponent(rlb)
-newmenu:removeComponent(glb)
-newmenu:removeComponent(blb)
-newmenu:removeComponent(mpop)
-newmenu:removeComponent(brop)
-newmenu:removeComponent(bropc)
-newmenu:removeComponent(brlabel)
-newmenu:removeComponent(brightSlider)
-newmenu:removeComponent(remon)
-newmenu:removeComponent(remoff)
-newmenu:removeComponent(fanon)
-newmenu:removeComponent(fanoff)
-end
-
-Help:action(function(sender)
-clearsb()
-local close23 = Button:new(250, 282, 100, 15, "Close")
-local newmenu2 = Window:new(1,1, 610, 300)
-local statxt = Label:new(1,1, 600, 290,"\n Here's some help for the settings:\n Time elapsed: \n Interface: \n Brightness: \n Reminder: \n Theme used: \n Fancy cursor: \n Current time: \n Mod version: 20.0 anniversary edition. \n Ruler: ")
-newmenu2:addComponent(statxt)
-newmenu2:addComponent(close23)
-
-close23:action(function(sender)
-ui.closeWindow(newmenu2) 
-end)
-
-ui.showWindow(newmenu2) 
-end)
-
-function drawcirc()
-if MANAGER.getsetting("CRK", "savergb") == "2" then
-graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+10,tpt.brushy+10,ar,ag,ab,110)
-else
-graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+10,tpt.brushy+10,colourRED,colourGRN,colourBLU,110)
-end
-end
-
-fancur:action(function(sender)
-clearsb()
-fs.makeDirectory("scripts")
-newmenu:addComponent(fanon)
-newmenu:addComponent(fanoff)
-end)
-
-fanon:action(function(sender)
-MANAGER.savesetting("CRK", "fanc",1)
-event.unregister(event.tick,drawcirc)
-event.register(event.tick,drawcirc)
-clearsb()
-end)
-
-fanoff:action(function(sender)
-MANAGER.savesetting("CRK", "fanc",0)
-event.unregister(event.tick,drawcirc)
-clearsb()
-end)
-
-local startTime
-
-function remindme()
-local endTime = startTime+ 1800
-if os.time() >= endTime then
-event.unregister(event.tick,remindme)
-newmenu:removeComponent(remlabel)
-tpt.message_box("Activity Reminder!","You have played for 30 mins. Simulation has been paused to save resources. Click dismiss to continue.")
-end
-end
-
-reminder:action(function(sender)
-clearsb()
-newmenu:addComponent(remon)
-newmenu:addComponent(remoff)
-end)
-
-remon:action(function(sender)
-clearsb()
-startTime = os.time()
-event.unregister(event.tick,remindme)
-event.register(event.tick,remindme)
-newmenu:addComponent(remlabel)
-newmenu:addComponent(remon)
-newmenu:removeComponent(remon)
-newmenu:removeComponent(remoff)
-end)
-
-remoff:action(function(sender)
-clearsb()
-event.unregister(event.tick,remindme)
-newmenu:removeComponent(remlabel)
-newmenu:removeComponent(remon)
-newmenu:removeComponent(remoff)
-end)
-
-function cbrightness()
-tpt.fillrect(-1,-1,629,424,0,0,0,255-MANAGER.getsetting("CRK", "brightness"))
-end
-
-brightness:action(function(sender)
-if MANAGER.getsetting("CRK", "brightstate") == "1" then
-newmenu:onDraw(cbrightness)
-end
-fs.makeDirectory("scripts")
-clearsb()
-brightSlider:value (MANAGER.getsetting("CRK", "brightness"))
-brightSlider:onValueChanged(function() MANAGER.savesetting("CRK", "brightness", brightSlider:value()+45) end)
-newmenu:addComponent(brlabel)
-newmenu:addComponent(brightSlider)
-newmenu:addComponent(brop)
-newmenu:addComponent(bropc)
-end)
-
-brop:action(function(sender)
-MANAGER.savesetting("CRK", "brightstate", "1")
-event.unregister(event.tick,cbrightness)
-event.register(event.tick,cbrightness)
-newmenu:removeComponent(brightSlider)
-brlabel:text("Turned: on")
-newmenu:removeComponent(brlabel)
-newmenu:removeComponent(brop)
-newmenu:removeComponent(bropc)
-end)
-
-bropc:action(function(sender)
-MANAGER.savesetting("CRK", "brightstate", "0")
-brlabel:text("Turned: off")
-event.unregister(event.tick,cbrightness)
-brightSlider:value("200")
-newmenu:removeComponent(brightSlider)
-newmenu:removeComponent(brop)
-newmenu:removeComponent(brlabel)
-newmenu:removeComponent(bropc)
-end)
-
---Texter script hybrid start
-yvalue = 50
-linenumber = 01
-function drawLetter(letter, x, y, element, font)
-
-        for currentX = 0, fonts[font]['width'] - 1 + fonts[font][letter]['kerning'] do
-
-                for currentY = fonts[font][letter]['descender'], fonts[font]['height'] - 1 do
-
-                        if fonts[font][letter]['pixels'][currentY + 1 - fonts[font][letter]['descender']][currentX + 1] == 1 then
-
-                                -- Create the element
-                                tpt.create(x + currentX, y + currentY - fonts[font][letter]['descender'], element)
-                        end
-                end
-        end
-end
-
-function drawText(text, x, y, element, font)
-
-        local currentLetter
-        local originalX = x
-
-        for p = 1, #text do
-
-                currentLetter = string.sub(text, p, p)
-
-                if currentLetter == '\n' then
-
-                        -- Reset to new line
-                        x = originalX
-                        y = y + fonts[font]['height'] + fonts[font]['linespacing']
-
-                elseif fonts['5x7'][currentLetter] then
-
-                        -- Draw letter
-                        drawLetter(currentLetter, x, y, element, font)
-                        x = x + fonts[font]['width'] + fonts[font]['charspacing'] + fonts[font][currentLetter]['kerning']
-
-                else
-
-                        -- Draw null character
-                        drawLetter('NULL', x, y, element, font)
-                        x = x + fonts[font]['width'] + fonts[font]['charspacing'] + fonts[font]['NULL']['kerning']
-                end
-
-        end
-end
-
-chud:action(function(sender)
-close()
-local newmenu4 = Window:new(-15,-15, 610, 300)
-local scripthelp2 = Label:new(13,5,120, 20,"Welcome to the texter 2.0")
-ui.showWindow(newmenu4)
-yvalue = 50
-linenumber = 01
-local mouseX, mouseY = tpt.mousex, tpt.mousey
-local text, element, font = '', 'ARAY', '5x7'
-local textTextboxs = Textbox:new(96, 55, 42, 20, '', 'Element')
-local textTextbox = Textbox:new(10, 30, 505, 20, '', 'Type your text here.')
-local scripthelp = Label:new(133,100,120, 10,"Texter help:\nElement box: Type the desired output element here (Defaults to ARAY.)\nNewline: Inserts a new line and places existing text automatically (Max 33.)\nEnter and Cancel: To place the text or cancel it.")
-local place = Button:new(10,55,40,20,"Enter", "Toggle hidden elements.")
-local cancel= Button:new(52,55,40,20,"Cancel", "Cancel the element placement.")
-local newline = Button:new(142,55,46,20,"New line", "New line.")
-local lno  = Label:new(210, 58, 10, 15, "Line No:")
-local lnol  = Label:new(240, 58, 10, 15, linenumber)
-
-newmenu4:addComponent(textTextbox)
-newmenu4:addComponent(textTextboxs)
-newmenu4:addComponent(scripthelp) 
-newmenu4:addComponent(scripthelp2) 
-newmenu4:addComponent(place)
-newmenu4:addComponent(cancel)
-newmenu4:addComponent(newline)
-newmenu4:addComponent(lno)
-newmenu4:addComponent(lnol)
- textTextbox:onTextChanged(
-                    function(sender)
-                            text = textTextbox:text();
-                    end
-                )
-
- textTextboxs:onTextChanged(
-                    function(sender)
-                            element = textTextboxs:text();
-                    end
-                )
-cancel:action(function(sender)
-newmenu4:removeComponent(scripthelp)
-newmenu4:removeComponent(scripthelp2)
-newmenu4:removeComponent(textTextbox)
-newmenu4:removeComponent(textTextboxs)
-newmenu4:removeComponent(place)
-newmenu4:removeComponent(cancel)
-newmenu4:removeComponent(newline)
-newmenu4:removeComponent(lno)
-newmenu4:removeComponent(lnol)
-ui.closeWindow(newmenu4)
-end)
-
-newline:action(function(sender)
-if linenumber <= 32 then
-text = textTextbox:text();
-yvalue = yvalue+10
-textTextbox:text('')
-linenumber = linenumber + 1
-lnol:text(linenumber)
-end
-if linenumber <=  33 then
-drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
-end
-end)
-
-place:action(function(sender)
-if linenumber <=  33 then
-drawText(string.gsub(text, '\\n', '\n') .. '\n', 11, yvalue, element, font)
-end
-newmenu4:removeComponent(scripthelp)
-newmenu4:removeComponent(textTextbox)
-newmenu4:removeComponent(textTextboxs)
-newmenu4:removeComponent(place)
-newmenu4:removeComponent(cancel)
-newmenu4:removeComponent(newline)
-newmenu4:removeComponent(lno)
-newmenu4:removeComponent(lnol)
-newmenu4:removeComponent(scripthelp2)
-ui.closeWindow(newmenu4)
-end)
-end)
-
---Texter script hybrid end
-
-function autohidehud()
-	if tpt.mousey <= 55 then tpt.hud(0) else tpt.hud(1)
-	end
-end
-
-autohide:action(function(sender)
-clearsb()
-newmenu:addComponent(autohidey)
-newmenu:addComponent(autohiden)
-end)
-
-autohidey:action(function(sender)
-event.register(event.tick,autohidehud)
-clearsb()
-end)
-
-autohiden:action(function(sender)
-event.unregister(event.tick,autohidehud)
-clearsb()
-end)
-
-bug:action(function(sender)
-clearsb()
-newmenu:addComponent(bug1)
-newmenu:addComponent(bug2)
-end)
-
-bug1:action(function(sender)
-clearsb()
-platform.openLink("https://powdertoy.co.uk/Discussions/Thread/View.html?Thread=23279")
-end)
-
-bug2:action(function(sender)
-close()
-sim.loadSave(2596812,0) 
-end)
-
-bare:action(function(sender)
-clearsb()
-newmenu:addComponent(barye)
-newmenu:addComponent(barne)
-end)
-
-barye:action(function(sender)
-tpt.el.dyst.menusection=8
-tpt.el.eqve.menusection=8
-tpt.el.shd4.menusection=9
-tpt.el.shd3.menusection=9
-tpt.el.shd2.menusection=9
-tpt.el.lolz.menusection=11
-tpt.el.love.menusection=11
-tpt.el.embr.menusection=4
-tpt.el.spwn.menusection=11
-tpt.el.spwn2.menusection=11
-tpt.el.frzw.menusection=7
-tpt.el.bizs.menusection=9
-tpt.el.bizg.menusection=6
-tpt.el.bray.menusection=9
-tpt.el.psts.menusection=8
-tpt.el.mort.menusection=6
-tpt.el.dyst.menu=1
-tpt.el.eqve.menu=1
-tpt.el.shd4.menu=1
-tpt.el.shd3.menu=1
-tpt.el.shd2.menu=1
-tpt.el.lolz.menu=1
-tpt.el.love.menu=1
-tpt.el.embr.menu=1
-tpt.el.spwn.menu=1
-tpt.el.spwn2.menu=1
-tpt.el.frzw.menu=1
-tpt.el.bizs.menu=1
-tpt.el.bizg.menu=1
-tpt.el.bray.menu=1
-tpt.el.psts.menu=1
-tpt.el.mort.menu=1
-clearsb()
-end)
-
-barne:action(function(sender)
-tpt.el.dyst.menu=0
-tpt.el.eqve.menu=0
-tpt.el.shd4.menu=0
-tpt.el.shd3.menu=0
-tpt.el.shd2.menu=0
-tpt.el.lolz.menu=0
-tpt.el.love.menu=0
-tpt.el.embr.menu=0
-tpt.el.spwn.menu=0
-tpt.el.spwn2.menu=0
-tpt.el.frzw.menu=0
-tpt.el.bizs.menu=0
-tpt.el.bizg.menu=0
-tpt.el.bray.menu=0
-tpt.el.psts.menu=0
-tpt.el.mort.menu=0
-clearsb()
-end)
-
-wiki:action(function(sender)
-local pgno1 = Label:new(30,400,10, 15, "Page 1/2")
-local pgno2 = Label:new(30,400,10, 15, "Page 2/2")
-local creditw = Window:new(-15,-15, 626, 422)
-local prevpg = Button:new(242, 400, 40, 15, "Prev.")
-local nextpg = Button:new(292, 400, 40, 15, "Next")
-local close2 = Button:new(512, 400, 100, 15, "Close wiki")
-local creditstxt = Label:new(6,-22, 598, 418,"\nWELCOME TO THE OFFLINE WIKI\n\n1) CWIR: Customisable wire. Conduction speed set using .tmp property (Range is 0 to 8) \n.tmp2 property is used for setting melting point (default is 2000C).\n\n2) C-16: A powerful explosive. Explodes creating pressure about 40 units when above 65C.\n\n3) TIMC: Time Crystal, converts into it's ctype when sparked with PSCN. Timer set using .tmp, default is 100.\n\n4) FUEL: Powerful fuel, explodes when temp is above 50C or Pressure above 14.\n\n5) THRM: Thermostat. Maintains the surrounding temp based on its own .temp property.\n\n6) CLNT: Coolant. Cools down the temp of the system. Use .tmp to configure the cooling/heating power.\nEvaporates at extreme temperatures into WTRV.\n\n7) DMRN: Demron. Radioactive shielding material and a better indestructible heat insulator.\nIt can also block energy particles like PROT.\n\n8) FNTC & FPTC: Faster versions of NTCT and PTCT. Useful for making faster logic gates.\n\n9) PINV: Powered Invisible, allows particles to move through it only when activated. Use with PSCN and NSCN.\n\n10) UV: UV rays, harms stkms (-5 life every frame), visible with FILT, grows plnt, can sprk pscn and evaporates watr.\nCan split WATR into O2 and H2 when passed through FILT. \n\n11) SUN.: Emits rays which makes PLNT grow in direction of sun, emits UV radiation, makes PSCN spark and heals STKMs.\n\n12) CLUD: Realistic cloud, rains and creates LIGH after sometime (every 1000 frames).\n\n13) LITH: Lithium ion battery, Use with PSCN and NSCN. Charges with INST when deactivated. Life sets capacity.\nReacts with different elements like O2, WATR, ACID etc as IRL.")
-
-local creditstxt2 = Label:new(6,-25, 598, 418,"\n\n  14) LED:  Light Emmiting Diode. Use PSCN to activate and NSCN to deactivate. Temp sets the brightness.\n  Different .tmp2 modes: 0 = white, 1= red, 2= green, 3 =blue, 4= yellow, 5 = pink and 6 = Flash mode.  \n\n  15) QGP: Quark Gluon Plasma, bursts out radiation afer sometime. Turns into Purple QGP when under 100C which is stable.\n  Glows in different colours just before exploding. \n\n  16) TMPS: .tmp sensor, creats sprk when there is an element with higher .tmp than its temp. Supports .tmp deserialisation.\n\n  17) PHOS: Phosphorus. Shiny white  particle when spawned, slowly turns into red phosphorus with time. \n  Burns blue or red  when in contact with CFLM or O2 respectively, (based on on .tmp).\n  Oil reverses the oxidation turning it back into white PHOS. Melts at 45C.\n\n  18) CMNT: Cement, creates an exothermic reaction when mixed with water and gets solidified, darkens when solid.\n\n  19) NTRG: Nitrogen gas, liquifies to LN2 when cooled or when under pressure, reacts with H2 to make NITR and puts out fire.\n\n  20) PRMT: Promethium, radioactive element. Catches fire at high velocity (>12), creats NEUT when mixed with PLUT. \n  Explodes at low temp and emits neut at high temp.\n\n  20) BEE: Eats PLNT. Secretes wax when in contact with wood and life > 75.  Attacks STKMs and FIGH.\n  Gets aggresive if life gets below 30. Uses pressure waves to communicate when in danger!\n\n  21) ECLR: Electronic eraser, clears the defined radius (.tmp) when activated (Use with PSCN and NSCN). \n\n  22) PROJ: Projectile, converts into its's ctype upon collision. launch with PSCN. Temperature = power while .tmp = range.\n\n  23) PPTI and PPTO: Powered Versions of PRTI and PRTO, use with PSCN and NSCN.\n\n  24) SEED: Grows into PLNT of random height when placed on DUST/SAND/CLST and Watered. Needs warm temp. to grow.\n\n  25) CSNS: Ctype sensor, detects nearby element's ctype. Useful when working with LAVA.")
-
-creditw:addComponent(creditstxt)
-creditw:addComponent(close2)
-creditw:addComponent(nextpg)
-creditw:addComponent(pgno1)
-creditw:addComponent(prevpg)
-
-prevpg:action(function()
-creditw:addComponent(creditstxt)
-creditw:removeComponent(creditstxt2)
-creditw:removeComponent(pgno2)
-creditw:addComponent(pgno1)
-end)
-nextpg:action(function() 
-creditw:addComponent(creditstxt2)
-creditw:removeComponent(creditstxt)
-creditw:removeComponent(pgno1)
-creditw:addComponent(pgno2)
-end)
-
-close2:action(function() ui.closeWindow(creditw) end)
-clearsb()
-ui.showWindow(creditw) 
-end)
-
-info:action(function(sender)
-clearsb()
-newmenu:addComponent(info1)
-newmenu:addComponent(info2)
-end)
-
-info1:action(function(sender)
-for i in sim.parts() do
-		local x,y = sim.partProperty(i, sim.FIELD_X),sim.partProperty(i, sim.FIELD_Y)
-		if sim.pmap (x, y) == i then 
-                                tpt.delete(i)
-		end
-	end
-end)
-
-info2:action(function(sender)
-for i in sim.parts() do
-		local x,y = sim.partProperty(i, sim.FIELD_X),sim.partProperty(i, sim.FIELD_Y)
-		if sim.pmap(x, y) ~= i and bit.band(elem.property(sim.partProperty(i, sim.FIELD_TYPE), "Properties"), elem.TYPE_ENERGY) == 0 then
-			tpt.delete(i)
-		end
-	end
-end)
-
-bg:action(function(sender)
-clearsb()
-newmenu:addComponent(bg1)
-newmenu:addComponent(bg2)
-newmenu:addComponent(bg3)
-newmenu:addComponent(bg4)
-newmenu:addComponent(bg5)
-newmenu:onDraw(backg)
-end)
-
-backvr = 0
-backvg = 0
-backvb = 0
-
-function backg()
-if MANAGER.getsetting("CRK", "brightstate") == "1" then
-as = brightSlider:value()
-else
-as = 60
-end
-
-if MANAGER.getsetting("CRK", "brightstate") == "1" then
-event.unregister(event.tick,cbrightness)
-event.register(event.tick,cbrightness)
-end
-
-if(as<30)then
-as = 30
-end
-
-if(as>110)then
-as = 110
-end
-
-tpt.fillrect(0,-1,610,385,backvr,backvg,backvb,as)
-end
-
-function clearback()
-clearsb()
-event.unregister(event.tick,backg)
-event.register(event.tick,backg)
-end
-
-bg1:action(function(sender)
-clearsb()
-backvr = 0
-backvg = 0
-backvb = 0
-event.unregister(event.tick,backg)
-end)
-bg2:action(function(sender)
-backvr = 0
-backvg = 0
-backvb = 200
-clearback()
-end)
-
-bg3:action(function(sender)
-backvr = 200
-backvg = 0
-backvb = 0
-clearback()
-end)
-
-bg4:action(function(sender)
-backvr = 0
-backvg = 200
-backvb = 0
-clearback()
-end)
-
-bg5:action(function(sender)
-backvr = 200
-backvg = 200
-backvb = 0
-clearback()
-end)
-
-rc:action(function(sender)
-clearsb()
-newmenu:addComponent(rc1)
-newmenu:addComponent(rc2)
-end)
-
-rc1:action(function(sender)
-tpt.record(true)
-ui.closeWindow(newmenu) 
-newmenu:removeComponent(rc1)
-newmenu:removeComponent(rc2)
-end)
-
-rc2:action(function(sender)
-ui.closeWindow(newmenu) 
-tpt.record(false)
-ui.closeWindow(newmenu) 
-newmenu:removeComponent(rc1)
-newmenu:removeComponent(rc2)
-end)
-
-function theme()
-ar = MANAGER.getsetting("CRK", "ar")
-ag = MANAGER.getsetting("CRK", "ag")
-ab = MANAGER.getsetting("CRK", "ab")
-
-if MANAGER.getsetting("CRK", "brightstate") == "1" then
-al = brightSlider:value()
-else
-al = 255
-end
-
-tpt.drawrect(613,1,14,95,ar,ag,ab,al)
-tpt.drawrect(613,136,14,269,ar,ag,ab,al)
-tpt.drawline(612,408,612,421,ar,ag,ab,al)
-tpt.drawline(187,409,187,422,ar,ag,ab,al)
-tpt.drawline(469,408,469,421,ar,ag,ab,al)
-tpt.drawline(487,408,487,421,ar,ag,ab,al)
-tpt.drawline(507,408,507,421,ar,ag,ab,al)
-tpt.drawline(241,408,241,421,ar,ag,ab,al)
-tpt.drawline(36,408,36,421,ar,ag,ab,al)
-tpt.drawline(18,408,18,421,ar,ag,ab,al)
-tpt.drawline(580,409,580,422,ar,ag,ab,al)
-tpt.drawline(596,409,596,422,ar,ag,ab,al)
-tpt.drawrect(1,408,626,14,ar,ag,ab,al)
-
-tpt.drawline(613,96,627,96,ar,ag,ab,al)
-tpt.drawline(613,16,627,16,ar,ag,ab,al)
-tpt.drawline(613,32,627,32,ar,ag,ab,al)
-tpt.drawline(613,48,627,48,ar,ag,ab,al)
-tpt.drawline(613,64,627,64,ar,ag,ab,al)
-tpt.drawline(613,80,627,80,ar,ag,ab,al)
-
-tpt.drawline(613,151,627,151,ar,ag,ab,al)
-tpt.drawline(613,167,627,167,ar,ag,ab,al)
-tpt.drawline(613,183,627,183,ar,ag,ab,al)
-tpt.drawline(613,199,627,199,ar,ag,ab,al)
-tpt.drawline(613,215,627,215,ar,ag,ab,al)
-tpt.drawline(613,231,627,231,ar,ag,ab,al)
-tpt.drawline(613,247,627,247,ar,ag,ab,al)
-tpt.drawline(613,263,627,263,ar,ag,ab,al)
-tpt.drawline(613,279,627,279,ar,ag,ab,al)
-tpt.drawline(613,295,627,295,ar,ag,ab,al)
-tpt.drawline(613,311,627,311,ar,ag,ab,al)
-tpt.drawline(613,327,627,327,ar,ag,ab,al)
-tpt.drawline(613,343,627,343,ar,ag,ab,al)
-tpt.drawline(613,359,627,359,ar,ag,ab,al)
-tpt.drawline(613,375,627,375,ar,ag,ab,al)
-tpt.drawline(613,391,627,391,ar,ag,ab,al)
-end
-
-frameCount,colourRED,colourGRN,colourBLU = 0,0,0,0
-function colourblender()
-if MANAGER.getsetting("CRK", "brightstate") == "1" then
-al = brightSlider:value()
-else
-al = 255
-end
- colourRGB = {colourRED,colourGRN,colourBLU}
- if frameCount > 1529 then frameCount = 0 else frameCount = frameCount + 1 end
- if frameCount > 0 and frameCount < 255 then
-  colourRED = 255
-  if colourGRN > 254 then else colourGRN = colourGRN + 1 end
- end
- if frameCount > 254 and frameCount < 510 then
-  colourGRN = 255
-  if colourRED == 0 then else colourRED = colourRED - 1 end
- end
- if frameCount > 510 and frameCount < 765 then
-  colourGRN = 255
-  if colourBLU > 254 then else colourBLU = colourBLU + 1 end
- end
- if frameCount > 764 and frameCount < 1020 then
-  colourBLU = 255
-  if colourGRN == 0 then else colourGRN = colourGRN - 1 end
- end
- if frameCount > 1020 and frameCount < 1275 then
-  colourBLU = 255
-  if colourRED > 254 then else colourRED = colourRED + 1 end
- end
- if frameCount > 1274 and frameCount < 1530 then
-  colourRED = 255
-  if colourBLU == 0 then else colourBLU = colourBLU - 1 end
- end
-tpt.drawrect(613,1,14,95,colourRED,colourGRN,colourBLU,al)
-tpt.drawrect(613,136,14,269,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(612,408,612,421,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(187,409,187,422,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(469,408,469,421,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(487,408,487,421,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(507,408,507,421,colourRED,colourGRN,colourBLU,al)
-
-tpt.drawline(241,408,241,421,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(36,408,36,421,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(18,408,18,421,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(580,409,580,422,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(596,409,596,422,colourRED,colourGRN,colourBLU,al)
-tpt.drawrect(1,408,626,14,colourRED,colourGRN,colourBLU,al)
-
-tpt.drawline(613,96,627,96,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,16,627,16,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,32,627,32,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,48,627,48,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,64,627,64,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,80,627,80,colourRED,colourGRN,colourBLU,al)
-
-tpt.drawline(613,151,627,151,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,167,627,167,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,183,627,183,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,199,627,199,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,215,627,215,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,231,627,231,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,247,627,247,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,263,627,263,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,279,627,279,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,295,627,295,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,311,627,311,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,327,627,327,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,343,627,343,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,359,627,359,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,375,627,375,colourRED,colourGRN,colourBLU,al)
-tpt.drawline(613,391,627,391,colourRED,colourGRN,colourBLU,al)
-end
-
-function mpnolag()
-event.unregister(event.tick,topbar)
-event.unregister(event.tick,theme)
-event.register(event.tick,theme)
-event.register(event.tick,topbar)
-event.unregister(event.tick,colourblender)
-end
-
-mp:action(function(sender)
-clearsb()
-fs.makeDirectory("scripts")
-newmenu:onDraw(theme)
-newmenu:addComponent(mp1)
-newmenu:addComponent(mp2)
-newmenu:addComponent(mp3)
-newmenu:addComponent(mp4)
-newmenu:addComponent(mp5)
-newmenu:addComponent(mp6)
-newmenu:addComponent(mp7)
-newmenu:addComponent(mp8)
-newmenu:addComponent(mp9)
-end)
-
-mp1:action(function(sender)
-MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar",70)
-MANAGER.savesetting("CRK","ag",70)
-MANAGER.savesetting("CRK","ab",70)
-MANAGER.savesetting("CRK","al",255)
-mpnolag()
-clearsb()
-end)
-
-mp2:action(function(sender)
-MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar",255)
-MANAGER.savesetting("CRK","ag",0)
-MANAGER.savesetting("CRK","ab",0)
-MANAGER.savesetting("CRK","al",255)
-mpnolag()
-clearsb()
-end)
-
-mp3:action(function(sender)
-MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar",0)
-MANAGER.savesetting("CRK","ag",0)
-MANAGER.savesetting("CRK","ab",255)
-MANAGER.savesetting("CRK","al",255)
-mpnolag()
-clearsb()
-end)
-
-mp4:action(function(sender)
-MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar",0)
-MANAGER.savesetting("CRK","ag",255)
-MANAGER.savesetting("CRK","ab",0)
-MANAGER.savesetting("CRK","al",255)
-mpnolag()
-clearsb()
-end)
-
-mp5:action(function(sender)
-MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar",255)
-MANAGER.savesetting("CRK","ag",255)
-MANAGER.savesetting("CRK","ab",0)
-MANAGER.savesetting("CRK","al",255)
-mpnolag()
-clearsb()
-end)
-
-mp6:action(function(sender)
-MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar",255)
-MANAGER.savesetting("CRK","ag",150)
-MANAGER.savesetting("CRK","ab",0)
-MANAGER.savesetting("CRK","al",255)
-mpnolag()
-clearsb()
-end)
-
-mp7:action(function(sender)
-MANAGER.savesetting("CRK","savergb",2)
-MANAGER.savesetting("CRK","ar",255)
-MANAGER.savesetting("CRK","ag",255)
-MANAGER.savesetting("CRK","ab",255)
-MANAGER.savesetting("CRK","al",255)
-mpnolag()
-clearsb()
-end)
-
-mp8:action(function(sender)
-MANAGER.savesetting("CRK","savergb",1)
-event.register(event.tick,colourblender)
-event.unregister(event.tick,theme)
-clearsb()
-end)
-
-mp9:action(function(sender)
-mpnolag()
-MANAGER.savesetting("CRK","savergb",2)
-if MANAGER.getsetting("CRK","ar") == nil then
-MANAGER.savesetting("CRK","ar",70)
-end
-if MANAGER.getsetting("CRK","ag") == nil then
-MANAGER.savesetting("CRK","ag",70)
-end
-if MANAGER.getsetting("CRK","ab") == nil then
-MANAGER.savesetting("CRK","ab",70)
-end
-
-rlb:text(MANAGER.getsetting("CRK", "ar"))
-glb:text(MANAGER.getsetting("CRK", "ag"))
-blb:text(MANAGER.getsetting("CRK", "ab"))
-rSlider:onValueChanged(function() rclr = rSlider:value() rlb:text(rclr) MANAGER.savesetting("CRK","ar", rSlider:value()) end)
-gSlider:onValueChanged(function() gclr = gSlider:value() glb:text(gclr) MANAGER.savesetting("CRK","ag",gSlider:value()) end)
-bSlider:onValueChanged(function() bclr = bSlider:value() blb:text(bclr) MANAGER.savesetting("CRK","ab",bSlider:value())  end)
-rSlider:value(MANAGER.getsetting("CRK", "ar"))
-gSlider:value(MANAGER.getsetting("CRK", "ag"))
-bSlider:value(MANAGER.getsetting("CRK", "ab"))
-newmenu:addComponent(rSlider)
-newmenu:addComponent(gSlider)
-newmenu:addComponent(bSlider)
-newmenu:addComponent(rl)
-newmenu:addComponent(gl)
-newmenu:addComponent(bl)
-newmenu:addComponent(rlb)
-newmenu:addComponent(glb)
-newmenu:addComponent(blb)
-newmenu:addComponent(mpop)
-
-mpop:action(function(sender)
-newmenu:removeComponent(rSlider)
-newmenu:removeComponent(gSlider)
-newmenu:removeComponent(bSlider)
-newmenu:removeComponent(rl)
-newmenu:removeComponent(gl)
-newmenu:removeComponent(bl)
-newmenu:removeComponent(rlb)
-newmenu:removeComponent(glb)
-newmenu:removeComponent(blb)
-newmenu:removeComponent(mpop)
-clearsb()
-end)
-end)
-
-function topbar()
-if MANAGER.getsetting("CRK", "brightstate") == "1" then
-al = brightSlider:value()
-else
-al = 255
-end
-if MANAGER.getsetting("CRK", "savergb") == "2" then
-tpt.drawline(1,0, 312,0, ar, ag, ab,al)
-tpt.drawline(338,0, 611,0, ar, ag, ab,al)
-else
-tpt.drawline(1,0, 312,0, colourRED,colourGRN,colourBLU,al)
-tpt.drawline(338,0, 611,0, colourRED,colourGRN,colourBLU,al)
-end
-end
-
-bar:action(function(sender)
-clearsb()
-newmenu:addComponent(bary)
-newmenu:addComponent(barn)
-end)
-
-bary:action(function(sender)
-event.unregister(event.tick,topbar)
-event.register(event.tick,topbar)
-clearsb()
-end)
-
-barn:action(function(sender)
-event.unregister(event.tick,topbar)
-clearsb()
-end)
-
-function startupcheck()
-interface.addComponent(toggle)
-if MANAGER.getsetting("CRK", "savergb") == "2" then
-event.register(event.tick,theme)
-event.register(event.tick,topbar)
-else
-event.register(event.tick,colourblender)
-event.register(event.tick,topbar)
-end
-
-if MANAGER.getsetting("CRK", "brightstate") == "1" then
-brightSlider:value(MANAGER.getsetting("CRK", "brightness"))
-event.register(event.tick,cbrightness)
-brlabel:text("Turned: on")
-else
-MANAGER.savesetting("CRK", "brightness",200)
-end
-
-if MANAGER.getsetting("CRK", "fanc") == "0" then
-event.unregister(event.tick,drawcirc)
-else
-event.register(event.tick,drawcirc)
-end
-end
-
-startupcheck()
-
-Ruler:action(function(sender)
-clearsb()
-newmenu:addComponent(Ry)
-newmenu:addComponent(Rn)
-end)
-
-Ry:action(function(sender)
-tpt.setdebug(0X0)
-newmenu:removeComponent(Ry)
-newmenu:removeComponent(Rn)
-end)
-
-Rn:action(function(sender)
-tpt.setdebug(0X4)
-newmenu:removeComponent(Ry)
-newmenu:removeComponent(Rn)
-end)
-
-deletesparkButton:action(function(sender)
-clearsb()
-tpt.hud(0)
-newmenu:addComponent(UIhidey)
-newmenu:addComponent(UIhiden)
-end)
-
-function UIhide()
-tpt.hud(0)
-tpt.fillrect(-1,382,616,42,0,0,0,255)
-tpt.fillrect(612,0,17,424,0,0,0,255)
-end
-
-UIhidey:action(function(sender)
-tpt.hud(0)
-newmenu:removeComponent(UIhiden)
-newmenu:removeComponent(UIhidey)
-event.unregister(event.tick,topbar)
-event.unregister(event.tick,UIhide)
-event.register(event.tick,UIhide)
-end)
-
-UIhiden:action(function(sender)
-tpt.hud(1)
-newmenu:removeComponent(UIhiden)
-newmenu:removeComponent(UIhidey)
-event.unregister(event.tick,UIhide)
-event.register(event.tick,topbar)
-end)
-
-FPS:action(function(sender)
-clearsb()
-newmenu:addComponent(FPS1)
-newmenu:addComponent(FPS2)
-end)
-
-
-FPS1:action(function(sender)
-newmenu:removeComponent(FPS1)
-newmenu:removeComponent(FPS2)
-tpt.setfpscap(60)
-end)
-
-FPS2:action(function(sender)
-newmenu:removeComponent(FPS1)
-newmenu:removeComponent(FPS2)
-tpt.setfpscap(2)
-end)
-
-reset:action(function(sender)
-event.register(event.tick,drawcirc)
-event.unregister(event.tick,remindme)
-event.unregister(event.tick,backg)
-event.unregister(event.tick,cbrightness)
-event.unregister(event.tick,UIhide)
-event.unregister(event.tick,autohidehud)
-event.register(event.tick,colourblender)
-event.register(event.tick,topbar)
-newmenu:removeComponent(remlabel)
-brlabel:text("Turned: off")
-brightSlider:value("200")
-MANAGER.savesetting("CRK", "fanc","0")
-MANAGER.savesetting("CRK", "brightstate", "0")
-MANAGER.savesetting("CRK","savergb",1)
-tpt.hud(1)
-ui.closeWindow(newmenu) 
-tpt.el.dyst.menu=0
-tpt.el.eqve.menu=0
-tpt.el.shd4.menu=0
-tpt.el.shd3.menu=0
-tpt.el.shd2.menu=0
-tpt.el.lolz.menu=0
-tpt.el.love.menu=0
-tpt.el.embr.menu=0
-tpt.el.spwn.menu=0
-tpt.el.spwn2.menu=0
-tpt.el.frzw.menu=0
-tpt.el.bizs.menu=0
-tpt.el.bizg.menu=0
-tpt.el.bray.menu=0
-tpt.el.psts.menu=0
-tpt.el.mort.menu=0
-tpt.display_mode(3)
-tpt.watertest(0)
-sim.edgeMode(0) 
-tpt.setfpscap(60)
-tpt.setwindowsize(1)
-tpt.newtonian_gravity(0)
-tpt.decorations_enable(0)
-sim.resetPressure()
-tpt.ambient_heat(0)
-sim.resetTemp()
-tpt.reset_velocity(1,380,300,300)
-clearsb()
-tpt.setdebug(0X0)
-sim.clearSim()
-end)
-
-function close()
-ui.closeWindow(newmenu) 
-clearsb()
-clearm()
-end
-
-function drawglitch()
-graphics.drawLine(7, 18,314,18,200,20,20,250)
-end
-
-function open()
-ui.showWindow(newmenu) 
-newmenu:onDraw(drawglitch)
-newmenu:onTryExit(close)
-newmenu:addComponent(deletesparkButton)
-newmenu:addComponent(FPS)
-newmenu:addComponent(info)
-newmenu:addComponent(reset)
-newmenu:addComponent(hide)
-newmenu:addComponent(Ruler)
-newmenu:addComponent(rc)
-newmenu:addComponent(bg)
-newmenu:addComponent(mp)
-newmenu:addComponent(bug)
-newmenu:addComponent(bar)
-newmenu:addComponent(bare)
-newmenu:addComponent(wiki)
-newmenu:addComponent(autohide)
-newmenu:addComponent(chud)
-newmenu:addComponent(brightness)
-newmenu:addComponent(reminder)
-newmenu:addComponent(fancur)
-newmenu:addComponent(Help)
-end
-
-hide:action(function(sender)
-close()
-end)
-
-function keyclicky(key)
-if (key =="j") and TPTMP.chatHidden == true then 
-open()
-end
-end
-tpt.register_keypress(keyclicky) 
-
-toggle:action(function(sender)
-open()
-end)
-
---fontstart
-fonts ={}
-fonts['5x7'] = {}
-fonts['5x7']['width'] = 5
-fonts['5x7']['height'] = 7
-fonts['5x7']['linespacing'] = 4
-fonts['5x7']['charspacing'] = 1
-fonts['5x7']['a'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1}
-        }
-}
-fonts['5x7']['b'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['c'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['d'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['e'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['f'] = {
-        ['descender'] = 0,
-        ['kerning'] = -1,
-        ['pixels']  = {
-                {0, 0, 1, 1, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['g'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1},
-                {0, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0}
-        }
-}
-fonts['5x7']['h'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['i'] = {
-        ['descender'] = 0,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['j'] = {
-        ['descender'] = -2,
-        ['kerning'] = -3,
-        ['pixels']  = {
-                {0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['k'] = {
-        ['descender'] = 0,
-        ['kerning'] = -1,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 1, 0},
-                {1, 0, 1, 0, 0},
-                {1, 1, 0, 0, 0},
-                {1, 0, 1, 0, 0},
-                {1, 0, 0, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['l'] = {
-        ['descender'] = 0,
-        ['kerning'] = -3,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['m'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 0, 1, 0},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['n'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 1, 1, 0},
-                {1, 1, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['o'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['p'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['q'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1},
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 0, 1}
-        }
-}
-fonts['5x7']['r'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 1, 1, 0},
-                {1, 1, 0, 0, 1},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['s'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 1, 1, 1},
-                {1, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['t'] = {
-        ['descender'] = 0,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['u'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['v'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['w'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['x'] = {
-        ['descender'] = 0,
-        ['kerning'] = -1,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 1, 0},
-                {1, 0, 0, 1, 0},
-                {0, 1, 1, 0, 0},
-                {1, 0, 0, 1, 0},
-                {1, 0, 0, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['y'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {1, 1, 0, 0, 0}
-        }
-}
-fonts['5x7']['z'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7'][' '] = {
-        ['descender'] = 0,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-
-fonts['5x7']['0'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 1, 1},
-                {1, 0, 1, 0, 1},
-                {1, 1, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['1'] = {
-        ['descender'] = 0,
-        ['kerning'] = -3,
-        ['pixels']  = {
-                {0, 1, 0, 0, 0},
-                {1, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['2'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['3'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['4'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 1, 1},
-                {0, 0, 1, 0, 1},
-                {0, 1, 0, 0, 1},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['5'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 1},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['6'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 1, 1, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['7'] = {
-        ['descender'] = 0,
-        ['kerning'] = -1,
-        ['pixels']  = {
-                {1, 1, 1, 1, 0},
-                {0, 0, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['8'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['9'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 1},
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 1, 0},
-                {0, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['.'] = {
-        ['descender'] = 0,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['<'] = {
-        ['descender'] = 0,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['>'] = {
-        ['descender'] = 0,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['@'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 0, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 1, 0, 0, 1},
-                {0, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0}
-        }
-}
-
-fonts['5x7']['#'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 0, 1, 0},
-                {1, 1, 1, 1, 1},
-                {0, 1, 0, 1, 0},
-                {1, 1, 1, 1, 1},
-                {0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['$'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 1, 0, 0},
-                {0, 1, 1, 1, 0},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 0},
-                {0, 1, 1, 1, 0},
-                {0, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 1, 0, 0}
-        }
-}
-
-fonts['5x7']['%'] = {
-        ['descender'] = -1,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {1, 1, 0, 0, 1},
-                {1, 1, 0, 0, 1},
-                {0, 0, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 1, 1},
-                {1, 0, 0, 1, 1},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['^'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 1, 0},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['{'] = {
-        ['descender'] = -2,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 1, 0, 0}
-        }
-}
-
-fonts['5x7']['}'] = {
-        ['descender'] = -2,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['&'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 1, 0, 1},
-                {1, 0, 0, 1, 0},
-                {0, 1, 1, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['*'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 1, 0, 0},
-                {1, 0, 1, 0, 1},
-                {0, 1, 1, 1, 0},
-                {1, 0, 1, 0, 1},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['('] = {
-        ['descender'] = -2,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 1, 0, 0}
-        }
-}
-
-fonts['5x7'][')'] = {
-        ['descender'] = -2,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['='] = {
-        ['descender'] = 0,
-        ['kerning'] = -1,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['['] = {
-        ['descender'] = -2,
-        ['kerning'] = -3,
-        ['pixels']  = {
-                {1, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 0, 0, 0}
-        }
-}
-
-fonts['5x7'][']'] = {
-        ['descender'] = -2,
-        ['kerning'] = -3,
-        ['pixels']  = {
-                {1, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 1, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['|'] = {
-        ['descender'] = -2,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['!'] = {
-        ['descender'] = 0,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['?'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7'][','] = {
-        ['descender'] = -1,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7'][':'] = {
-        ['descender'] = 0,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7'][';'] = {
-        ['descender'] = 0,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['+'] = {
-        ['descender'] = 0,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 1, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['-'] = {
-        ['descender'] = 0,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['_'] = {
-        ['descender'] = 0,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['/'] = {
-        ['descender'] = -2,
-        ['kerning'] = -2,
-        ['pixels']  = {
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0}
-        }
-}
-
-fonts['5x7']['NULL'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 1}
-        }
-}
-
-
-fonts['5x7']['A'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 0},
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['B'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['C'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['D'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['E'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 1},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['F'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 1},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['G'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 0},
-                {1, 0, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['H'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['I'] = {
-        ['descender'] = 0,
-        ['kerning'] = -4,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['J'] = {
-        ['descender'] = 0,
-        ['kerning'] = -1,
-        ['pixels']  = {
-                {0, 0, 0, 1, 0},
-                {0, 0, 0, 1, 0},
-                {0, 0, 0, 1, 0},
-                {0, 0, 0, 1, 0},
-                {0, 0, 0, 1, 0},
-                {1, 0, 0, 1, 0},
-                {0, 1, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['K'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 1, 0},
-                {1, 0, 1, 0, 0},
-                {1, 1, 0, 0, 0},
-                {1, 0, 1, 0, 0},
-                {1, 0, 0, 1, 0},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['L'] = {
-        ['descender'] = 0,
-        ['kerning'] = -1,
-        ['pixels']  = {
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['M'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 0, 1, 1},
-                {1, 1, 0, 1, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['N'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 1, 0, 0, 1},
-                {1, 1, 0, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 0, 1, 1},
-                {1, 0, 0, 1, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['O'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['P'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['Q'] = {
-        ['descender'] = -2,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 1, 0},
-                {0, 0, 0, 0, 1}
-        }
-}
-fonts['5x7']['R'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['S'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 1, 1, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 0},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['T'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 1},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['U'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 1, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['V'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['W'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 1, 0, 1},
-                {1, 0, 1, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['X'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 1, 0},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['Y'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {1, 0, 0, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 1, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['Z'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 1},
-                {0, 0, 0, 1, 0},
-                {0, 0, 1, 0, 0},
-                {0, 1, 0, 0, 0},
-                {1, 0, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-
-
-fonts['5x7']['_'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {1, 1, 1, 1, 1},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
-fonts['5x7']['"'] = {
-        ['descender'] = 0,
-        ['kerning'] = 0,
-        ['pixels']  = {
-                {0, 0, 1, 0, 1},
-                {0, 1, 0, 1, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0}
-        }
-}
---fontstop
