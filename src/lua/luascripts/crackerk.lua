@@ -2178,7 +2178,8 @@ evt.register(evt.keyrelease, keyrelease)
 evt.register(evt.textinput, textinput)
 evt.register(evt.blur, blur)
 
---Cracker1000's custom script version 6.5
+
+--Cracker1000's custom script version 7.0
 local toggle = Button:new(314,0,23,12, "V", "Toggle additional menus.")
 local newmenu = Window:new(-15,-15, 610, 300)
 local creditstxt1 = Label:new(110,-20,100, 60,"Welcome to the Mod settings. Tip: 'J' can be used as a shortcut.")
@@ -2370,20 +2371,17 @@ end
 
 fancur:action(function(sender)
 clearsb()
-fs.makeDirectory("scripts")
 newmenu:addComponent(fanon)
 newmenu:addComponent(fanoff)
 end)
 
 fanon:action(function(sender)
-MANAGER.savesetting("CRK", "fanc",1)
 event.unregister(event.tick,drawcirc)
 event.register(event.tick,drawcirc)
 clearsb()
 end)
 
 fanoff:action(function(sender)
-MANAGER.savesetting("CRK", "fanc",0)
 event.unregister(event.tick,drawcirc)
 clearsb()
 end)
@@ -3186,12 +3184,6 @@ brlabel:text("Turned: on")
 else
 MANAGER.savesetting("CRK", "brightness",200)
 end
-
-if MANAGER.getsetting("CRK", "fanc") == "0" then
-event.unregister(event.tick,drawcirc)
-else
-event.register(event.tick,drawcirc)
-end
 end
 
 startupcheck()
@@ -3265,7 +3257,6 @@ end)
 
 reset:action(function(sender)
 clearsb()
-event.register(event.tick,drawcirc)
 event.unregister(event.tick,remindme)
 event.unregister(event.tick,backg)
 event.unregister(event.tick,cbrightness)
@@ -3276,7 +3267,6 @@ event.register(event.tick,topbar)
 newmenu:removeComponent(remlabel)
 brlabel:text("Turned: off")
 brightSlider:value("200")
-MANAGER.savesetting("CRK", "fanc","0")
 MANAGER.savesetting("CRK", "brightstate", "0")
 MANAGER.savesetting("CRK","savergb",1)
 tpt.hud(1)

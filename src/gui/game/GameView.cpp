@@ -2263,15 +2263,19 @@ void GameView::OnDraw()
 			StringBuilder sampleInfo;
 			sampleInfo << Format::Precision(2);
 
+			StringBuilder sampleInfo23;
+			sampleInfo23 << Format::Precision(2);
+
 			if (type)
 			{
 				sampleInfo << "(" << sample.particle.temp << " K" << " / ";
 				sampleInfo << "" << (sample.particle.temp - 273.15f)*1.8 + 32 << " F)" << ", ";
-				sampleInfo << "dcolor: #" << Format::Uppercase() << Format::Hex() <<sample.particle.dcolour<<", ";
-				sampleInfo << Format::Dec();
-				sampleInfo << "Vx: " << sample.particle.vx;
-				sampleInfo << ", Vy: " << sample.particle.vy << ", ";
-				sampleInfo << "#" << sample.ParticleID << ", ";
+				sampleInfo<< "#" << sample.ParticleID << ", ";
+
+				sampleInfo23 << "Vx: " << sample.particle.vx;
+				sampleInfo23 << ", Vy: " << sample.particle.vy;
+				sampleInfo23 << ", dcolor: #" << Format::Uppercase() << Format::Hex() << sample.particle.dcolour;
+				sampleInfo23 << Format::Dec();
 			}
 			sampleInfo << "X:" << sample.PositionX << " Y:" << sample.PositionY;
 
@@ -2284,6 +2288,10 @@ void GameView::OnDraw()
 			textWidth = Graphics::textwidth(sampleInfo.Build());
 			g->fillrect(XRES - 20 - textWidth, 27, textWidth + 8, 14, 0, 0, 0, alpha*0.5f);
 			g->drawtext(XRES - 16 - textWidth, 30, sampleInfo.Build(), 12, 250, 150, alpha*0.95f);
+
+			int textWidth23 = Graphics::textwidth(sampleInfo23.Build());
+			g->fillrect(XRES - 20 - textWidth23, 41, textWidth23 + 8, 14, 0, 0, 0, alpha*0.5f);
+			g->drawtext(XRES - 16 - textWidth23, 45,sampleInfo23.Build(), 150, 150, 250, alpha*0.95f);
 		}
 	}
 
@@ -2327,8 +2335,8 @@ void GameView::OnDraw()
 		fpsInfo2 << buffer << " ";
 
 		int textWidth2 = Graphics::textwidth(fpsInfo2.Build());
-		g->fillrect(12, 26, textWidth2 + 8, 15, 0, 0, 0, alpha * 0.5);
-		g->drawtext(16, 29, fpsInfo2.Build(), 12, 250, 150, alpha * 0.95);
+		g->fillrect(12, 27, textWidth2 + 8, 15, 0, 0, 0, alpha * 0.5);
+		g->drawtext(16, 30, fpsInfo2.Build(), 12, 250, 150, alpha * 0.95);
 	}
 
 	//Tooltips
