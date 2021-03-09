@@ -30,7 +30,7 @@ void Element::Element_BEE()
 
 	Weight = 91;
 
-	DefaultProperties.temp = R_TEMP + 2.0f + 273.15f;
+	DefaultProperties.temp = R_TEMP + 20.0f + 273.15f;
 	HeatConduct = 42;
 	Description = "BEE, Secretes wax, attacks figh/stkm, eats plant to stay alive and multiply.";
 
@@ -42,8 +42,8 @@ void Element::Element_BEE()
 	HighPressureTransition = NT;
 	LowTemperature = ITL;
 	LowTemperatureTransition = NT;
-	HighTemperature = 374.15f;
-	HighTemperatureTransition = PT_NONE;
+	HighTemperature = ITH;
+	HighTemperatureTransition = NT;
 
 	Update = &update;
 	Graphics = &graphics;
@@ -77,46 +77,59 @@ static int update(UPDATE_FUNC_ARGS)
 				{
 					sim->pv[(y / CELL) + ry][(x / CELL) + rx] = 0.9f;  //Search wider areas for food if life drops below 30.
 				}
+
+				if (parts[i].temp <= 44 + 273.15f && parts[i].life >= 75) //Temp. regulation.
+				{
+					parts[i].temp++;
+					parts[i].life--;
+				}
+
+				if (parts[i].temp > 90 + 273.15f && parts[i].life >= 75)
+				{
+					parts[i].temp--;
+					parts[i].life--;
+				}
+
+				if (parts[i].temp < 10 + 273.15f) //Stop moving when cold!
+				{
+					parts[i].vx = 0.0;
+					parts[i].vy = 0.0;
+				}
+
 				switch (TYP(r))
 				{
 				case PT_WOOD:
 				{
-						if (parts[i].life > 75)
+					sim->pv[(y / CELL) + ry][(x / CELL) + rx] = -2.0f;
+						if (parts[i].life > 65)
 						{
-							if (RNG::Ref().chance(1, 90))
+							if (RNG::Ref().chance(1, 30))
 							{
-							sim->pv[(y / CELL) + ry][(x / CELL) + rx] = -1.0f;
-							sim->create_part(-1, x + 4, y + 4, PT_WAX);
-							parts[ID(r)].temp = 373.15f;
-							parts[i].life--;
+								sim->part_change_type(ID(r), x + rx, y + ry, PT_MWAX);
+							}
 						}
-					}
 				}
 				break;
 				case PT_FIRE:
 				case PT_PLSM:
+				case PT_SMKE:
 				{
-					sim->pv[(y / CELL) + ry][(x / CELL) + rx] = 4.0f;
-					parts[i].vy -= 1;
+					sim->pv[(y / CELL) + ry][(x / CELL) + rx] = 3.0f;
+					parts[i].vy -= 2;
 				}
 				break;
-				case PT_MWAX:
-				case PT_WAX:
-				{
-					
-						parts[ID(r)].temp = 373.15f;
 
-				}
-				break;
 				case PT_PLNT:
 				{
-					
 					sim->pv[(y / CELL) + ry][(x / CELL) + rx] = -2.0f;
-					parts[i].life = 100;
-					if (RNG::Ref().chance(1, 90))
+					if (RNG::Ref().chance(1, 30))
+					{
+						parts[i].life = 100;
+						sim->part_change_type(ID(r), x + rx, y + ry, PT_NONE);
+					}
+					if (RNG::Ref().chance(1, 80))
 					{
 						sim->create_part(-1, x + 4, y + 4, PT_BEE);
-						sim->part_change_type(ID(r), x + rx, y + ry, PT_NONE);
 					}
 				}
 				break;

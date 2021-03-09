@@ -1,11 +1,11 @@
 Changelog for Version 20.0 <M>
 
 Additions/changes:
-Fancy cursor is no longer on as a default setting (slightly better too!)
+Fancy cursor is no longer on as a default setting (is slightly better too!)
 Minor tweeks to interface.
-Debug mode now shows extra info in 3 different lines making it easier to read.
-Updated to TPT 96.0
+Rewrite some parts of debug mode to show info in 3 different lines thus making it easier to read.
+Rewrite some parts of BEE element. (Info added to offline wiki.)
+Slightly change random save algorithm to avoid errors.
 
 todo:
-Megre with master (After commits from snap 205!)
-Make BEES smart enough
+Update to TPT 96.0.
