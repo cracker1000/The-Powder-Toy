@@ -2355,17 +2355,15 @@ end
 
 Help:action(function(sender)
 close()
-randsav = math.random(0,2667342)
+randsav = math.random(1,2655497)
 sim.loadSave(randsav, 0) 
 end)
 
 function drawcirc()
 if MANAGER.getsetting("CRK", "savergb") == "2" then
-graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+4,tpt.brushy+4 ,ar,ag,ab,110)
-graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+13,tpt.brushy+13,ar,ag,ab,110)
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+4,tpt.brushy+4,ar,ag,ab,100)
 else
-graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+4,tpt.brushy+4 ,colourRED,colourGRN,colourBLU,110)
-graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+13,tpt.brushy+13,colourRED,colourGRN,colourBLU,110)
+graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+4,tpt.brushy+4,colourRED,colourGRN,colourBLU,100)
 end
 end
 
