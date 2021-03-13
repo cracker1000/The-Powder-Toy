@@ -1,4 +1,3 @@
-
 --Cracker64's Powder Toy Multiplayer
 local version = 8
 local versionstring = "1.0.2"
@@ -2635,9 +2634,7 @@ newmenu:addComponent(barye)
 newmenu:addComponent(barne)
 end)
 
-barye:action(function(sender)
---brokenvib
-clearsb()
+function hideno()
 tpt.el.rfgl.menusection=7
 tpt.el.vrss.menusection=9
 tpt.el.vrsg.menusection=6
@@ -2676,6 +2673,12 @@ tpt.el.mort.menu=1
 tpt.el.rfgl.menu=1
 tpt.el.vrss.menu=1
 tpt.el.vrsg.menu=1
+end
+
+barye:action(function(sender)
+clearsb()
+hideno()
+MANAGER.savesetting("CRK", "hidestate", "1")
 end)
 
 function hideyes()
@@ -2703,6 +2706,7 @@ end
 barne:action(function(sender)
 clearsb()
 hideyes()
+MANAGER.savesetting("CRK", "hidestate", "0")
 end)
 
 wiki:action(function(sender)
@@ -3182,8 +3186,12 @@ brlabel:text("Turned: on")
 else
 MANAGER.savesetting("CRK", "brightness",200)
 end
+
+if MANAGER.getsetting("CRK", "hidestate") == "1" then
+hideno()
 end
 
+end
 startupcheck()
 
 Ruler:action(function(sender)

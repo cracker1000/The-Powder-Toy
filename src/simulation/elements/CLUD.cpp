@@ -72,6 +72,7 @@ static int update(UPDATE_FUNC_ARGS)
 	if (parts[i].tmp2 == 1 && parts[i].tmp > -5)
 	{
 		parts[i].tmp --;
+		sim->pv[(y / CELL)][(x / CELL)] = 1.0f;
 		if (RNG::Ref().chance(1, 50))
 		{
 			sim->create_part(-1, x, y + 1, PT_WATR);

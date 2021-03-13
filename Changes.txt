@@ -1,11 +1,12 @@
 Changelog for Version 20.0 <M>
 
 Additions/changes:
-Fancy cursor is no longer on as a default setting (is slightly better too!)
 Minor tweeks to interface.
 Rewrite some parts of debug mode to show info in 3 different lines thus making it easier to read.
-Rewrite some parts of BEE element. (Info added to offline wiki.)
-Slightly change random save algorithm to avoid errors.
+Rewrite BEE element. (Info added to offline wiki.)
+Change random save algorithm to avoid errors.
+Hidden elements are now also loaded on startup (if turned on in the settings.)
+Fancy cursor is no longer on as a default setting.
 
 todo:
 Update to TPT 96.0.
