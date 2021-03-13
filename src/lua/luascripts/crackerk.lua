@@ -2359,6 +2359,11 @@ sim.loadSave(randsav, 0)
 end)
 
 function drawcirc()
+if MANAGER.getsetting("CRK", "brightstate") == "1" then
+event.unregister(event.tick,cbrightness)
+event.register(event.tick,cbrightness)
+end
+
 if MANAGER.getsetting("CRK", "savergb") == "2" then
 graphics.fillCircle(tpt.mousex, tpt.mousey,tpt.brushx+4,tpt.brushy+4,ar,ag,ab,100)
 else
@@ -3275,6 +3280,7 @@ brlabel:text("Turned: off")
 brightSlider:value("200")
 MANAGER.savesetting("CRK", "brightstate", "0")
 MANAGER.savesetting("CRK","savergb",1)
+MANAGER.savesetting("CRK","hidestate", "0")
 tpt.hud(1)
 ui.closeWindow(newmenu) 
 hideyes()
