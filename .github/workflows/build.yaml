@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'r*.*'
+    jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
