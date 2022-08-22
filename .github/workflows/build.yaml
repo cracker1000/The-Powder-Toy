@@ -96,8 +96,8 @@ jobs:
         with:
           path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
           name: powder${{ matrix.suffix }}
-            uses: actions/checkout@v2
-   Uploadpr:
+          
+      - uses: actions/checkout@v2
       - name: Build
         run: echo ${{ github.sha }} > Release.txt
       - name: Test
