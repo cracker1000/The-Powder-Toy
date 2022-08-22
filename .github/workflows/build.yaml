@@ -96,10 +96,15 @@ jobs:
         with:
           path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
           name: powder${{ matrix.suffix }}
-      - name: upload binaries to release
-      uses: softprops/action-gh-release@v1
-      with:
-      path: artifacts/*
-      files: build/FOO.zip
-
-          
+            uses: actions/checkout@v2
+   Uploadpr:
+      - name: Build
+        run: echo ${{ github.sha }} > Release.txt
+      - name: Test
+        run: cat Release.txt
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            Release.txt
+            LICENSE
