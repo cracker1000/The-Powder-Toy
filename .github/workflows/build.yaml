@@ -94,5 +94,5 @@ jobs:
           asset_content_type: application/zip
       - uses: actions/upload-artifact@v2
         with:
-          path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
+          path: https://github.com/cracker1000/The-Powder-Toy/releases/tag/vtest1
           name: powder${{ matrix.suffix }}
