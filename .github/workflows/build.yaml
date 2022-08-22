@@ -1,19 +1,109 @@
-name: Main
+name: build
 
-on: push
-
+on:
+  push:
+    tags:
+      - 'r*.*'
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      can_publish: ${{ steps.starcatcher_check.outputs.can_publish }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - id: get_type
+        run: python3 ./.github/get-type.py ${{ github.ref }}
+      - id: create_release
+        if: steps.get_type.outputs.TYPE != 'dev'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ steps.get_type.outputs.NAME }}
+          draft: true
+          prerelease: false
+      - id: starcatcher_check
+        if: steps.get_type.outputs.TYPE != 'dev'
+        run: bash -c './.github/starcatcher-check.sh'
+        env:
+          STARCATCHER_PUBLISH_HOSTPORT: ${{ secrets.STARCATCHER_PUBLISH_HOSTPORT }}
   build:
+    runs-on: ${{ matrix.os }}
+    needs: [release]
+    strategy:
+      fail-fast: false
+      matrix:
+# Platform supportment for Cracker1000's mod     
+#  - Compile with static.
+#  - CPU architecture: AMD64 (x86-64)
+#  - Bits: 64-bit only
+#  - Operating System: Linux, Windows
+#  - Compiler: GCC (for Linux), MSVC (for Windows)
+#
+# Please keep this matrix in sync with the other one in this file, see the ### blocks.
+#########################################################
+############# BEGIN BLOCK FOR COPYING BELOW #############
+#########################################################
+        platform_short: [lin, win]
+        toolset_short: [gcc, msvc]
+        exclude:
+          - platform_short: lin
+            toolset_short: msvc
+          - platform_short: win
+            toolset_short: gcc
+#########################################################
+############## END BLOCK FOR COPYING BELOW ##############
+#########################################################
+        include:
+          - platform_short: lin
+            os: ubuntu-18.04
+            prefix: ''
+            suffix: ''
+          - platform_short: win
+            os: windows-2019
+            prefix: ''
+            suffix: '.exe'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - id: get_type
+        run: python3 ./.github/get-type.py ${{ github.ref }}
+      - run: python3 -m pip install meson ninja
+      - run: bash -c './.github/build.sh'
+        env:
+          PLATFORM_SHORT: ${{ matrix.platform_short }}
+          TOOLSET_SHORT: ${{ matrix.toolset_short }}
+          RELNAME: ${{ steps.get_type.outputs.NAME }}
+          RELTYPE: ${{ steps.get_type.outputs.TYPE }}
+          MOD_ID: ${{ steps.get_type.outputs.MOD_ID }}
+      - uses: actions/upload-release-asset@v1
+        if: steps.get_type.outputs.TYPE != 'dev'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.release.outputs.upload_url }}
+          asset_path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
+          asset_name: ${{ matrix.prefix }}powder${{ steps.get_type.outputs.NAME }}-${{ matrix.platform_short }}${{ matrix.suffix }}
+          asset_content_type: application/zip
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
+          name: powder${{ matrix.suffix }}
+          Uploadreleases:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build
-        run: echo ${{ github.sha }} > Release.txt
-      - name: Test
-        run: cat Release.txt
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
+        tag_name: uploadt2
         with:
-          files: Release.txt
+          files: ${{ matrix.prefix }}powder${{ matrix.suffix }}
