@@ -94,8 +94,7 @@ jobs:
         with:
           path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
           name: powder${{ matrix.suffix }}
-    Uploadreleases:
-      - name: Checkout
+      - name: Uploadreleases
         uses: actions/checkout@v2
       - name: Build
       - name: Release
