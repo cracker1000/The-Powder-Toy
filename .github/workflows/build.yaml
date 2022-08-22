@@ -96,10 +96,7 @@ jobs:
         with:
           path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
           name: powder${{ matrix.suffix }}
-           buildupload:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
+     - name: Checkout
         uses: actions/checkout@v2
       - name: Build
         run: echo ${{ github.sha }} > Release.txt
