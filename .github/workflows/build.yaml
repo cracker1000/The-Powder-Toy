@@ -2,8 +2,6 @@ name: build
 
 on:
   push:
-    tags:
-      - 'r*.*'
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -104,6 +102,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Releaseup
         uses: softprops/action-gh-release@v1
-        tag_name: testv22
+        tag_name: ${{ github.ref }}
         with:
           files: ${{ matrix.prefix }}powder${{ matrix.suffix }}
