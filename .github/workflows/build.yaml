@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - 'r*.*'
-jobs:
   release:
     runs-on: ubuntu-latest
     outputs:
@@ -49,15 +48,21 @@ jobs:
 #########################################################
 ############# BEGIN BLOCK FOR COPYING BELOW #############
 #########################################################
-        platform_short: [win]
-        toolset_short: [msvc]
+        platform_short: [lin, win]
+        toolset_short: [gcc, msvc]
         exclude:
+          - platform_short: lin
             toolset_short: msvc
           - platform_short: win
+            toolset_short: gcc
 #########################################################
 ############## END BLOCK FOR COPYING BELOW ##############
 #########################################################
         include:
+          - platform_short: lin
+            os: ubuntu-18.04
+            prefix: ''
+            suffix: ''
           - platform_short: win
             os: windows-2019
             prefix: ''
