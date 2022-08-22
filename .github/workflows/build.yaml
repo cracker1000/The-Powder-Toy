@@ -2,8 +2,6 @@ name: build
 
 on:
   push:
-    tags:
-      - 'r*.*'
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -96,8 +94,7 @@ jobs:
         with:
           path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
           name: powder${{ matrix.suffix }}
-          Uploadreleases:
-    runs-on: ubuntu-latest
+    Uploadreleases:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
