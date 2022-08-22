@@ -102,6 +102,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Releaseup
         uses: softprops/action-gh-release@v1
-        tag_name: ${{ github.ref }}
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: ${{ matrix.prefix }}powder${{ matrix.suffix }}
