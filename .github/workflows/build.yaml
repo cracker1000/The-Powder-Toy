@@ -94,5 +94,12 @@ jobs:
           asset_content_type: application/zip
       - uses: actions/upload-artifact@v2
         with:
-          path: https://github.com/cracker1000/The-Powder-Toy/releases/tag/vtest1
+          path: ${{ matrix.prefix }}powder${{ matrix.suffix }}
           name: powder${{ matrix.suffix }}
+      - name: upload binaries to release
+      uses: softprops/action-gh-release@v1
+      with:
+      path: artifacts/*
+      files: build/FOO.zip
+
+          
