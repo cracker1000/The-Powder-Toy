@@ -3,12 +3,6 @@ name: build
 on:
   push:
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      can_publish: ${{ steps.starcatcher_check.outputs.can_publish }}
-    steps:
   upload:
     runs-on: ubuntu-latest
     steps:
