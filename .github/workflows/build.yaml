@@ -1,7 +1,8 @@
 name: build
+
 on:
   push:
-  tags:
+    tags:
       - 'r*.*'
 jobs:
   upload:
@@ -17,5 +18,5 @@ jobs:
         uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
         delete_release: true
-        tag_name: r29.0
+        tag_name: r30.0
                 
