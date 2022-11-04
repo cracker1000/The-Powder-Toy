@@ -1,25 +1,27 @@
 --Cracker1000 mod interface script--
 local passreal = "12345678"
-local crackversion = 48.0 --48.5 Next version
+local crackversion = 50.0 --51.0 Next version
 local passreal2 = "DMND"
 local motw = "."
 local specialmsgval = 0
 local updatestatus = 0
-local themevaldefault = 0
 
 --TOOL for MISL
-local MISLT = elem.allocate("CR1K", "MISLT")
-local count = 0
+local MISLT = elem.allocate("CR1K", "MIST")
+local tcount, posxt, posyt = 150,0,0
 elem.element(MISLT, elem.element(elem.DEFAULT_PT_DMND))
 elem.property(MISLT, "Name", "MIST")
-elem.property(MISLT, "Description", "HELP: Missile Tool for placing MISL targets, click and then quicly move cursor to set the target before counter reaches 100.")
-elem.property(MISLT, "Color", 0xFFFE8915)
+elem.property(MISLT, "Description", "Help: Missile Target Tool, click and then quicly move cursor to set the target before counter reaches 0. Set one at a time.")
+elem.property(MISLT, "Color", 0xFFA500)
 elem.property(MISLT, "MenuSection", elem.SC_TOOL)
 elem.property(MISLT, "Update", function (i)
+posxt = tpt.get_property("x",i)
+posyt = tpt.get_property("y",i)
 function setcoord()
 pcall(tpt.set_property, "tmp", tpt.mousex, i)
 pcall(tpt.set_property, "tmp2", tpt.mousey, i)
 pcall(tpt.set_property, "type", 228,i)
+return false
 end
 drawgraph()
 end)
@@ -27,22 +29,27 @@ end)
 function drawgraph()
 tpt.unregister_step(drawgraph2)
 tpt.register_step(drawgraph2)
-count = count + 1
-if count == 100 then
+tcount = tcount - 1
+if tcount == 0 then
 setcoord()
-count = 0
-print("Target Set.")
+tcount = 150
 tpt.unregister_step(drawgraph2)
 end
 end
 
 function drawgraph2()
-if count > 0 then
-gfx.fillCircle(tpt.mousex,tpt.mousey,5,5,0,190,0,200)
-gfx.drawCircle(tpt.mousex,tpt.mousey,5,5,0,190,0,255)
+if tcount < 150 then
+gfx.drawLine(posxt,posyt,tpt.mousex,tpt.mousey,255,9,9,200)
+gfx.fillCircle(tpt.mousex,tpt.mousey,tcount/5,tcount/5,0,190,0,200)
+gfx.drawCircle(tpt.mousex,tpt.mousey,tcount/5,tcount/5,0,190,0,255)
+gfx.fillCircle(posxt,posyt,2,2,255,9,9,100)
 gfx.drawText(tpt.mousex - 30,tpt.mousey + 20," MISL Target Mode")
 end 
-gfx.drawText(10,370,"MISL Tool Counter: ("..count..")",32,216,255,255)
+if tcount <= 1 then
+print("Missile Target Set")
+else
+gfx.drawText(10,370,"MISL Tool Counter: ("..tcount..")",32,216,255,255)
+end
 end
 --TOOL end
 
@@ -233,7 +240,7 @@ end
 local filesize, filedone = reqwin:progress()
 local downprog = math.floor((filedone/filesize)*100)
 --Graphics while downloading updates..
-gfx.fillRect(10,367,downprog*2,12,32,255,216,150)
+gfx.fillRect(10,367,downprog*2,12,32,255,216,120)
 updatertext = "Downloading update, "..downprog .."% Done"
 if reqwin:status() == "done"  then
 local reqwindata, reqwincode = reqwin:finish()
@@ -251,6 +258,7 @@ updatertext = "Done, click here to restart."
 clickcheck = 1
 event.unregister(event.tick,updatermod)
 else
+timeout = 1
 updatertext = " Updater error code: "..reqwincode
 event.unregister(event.tick,updatermod)
 end
@@ -268,11 +276,12 @@ elseif checkos == "LIN64" then
 reqwin = http.get("https://github.com/cracker1000/The-Powder-Toy/releases/download/Latest/powder")
 elseif checkos == "WIN32" then
 reqwin = http.get("https://github.com/cracker1000/The-Powder-Toy/releases/download/Latest/powder32.exe")
-else
-print("Your platform isn't supported by URS. Please download it manually from the mod thread.")
-event.unregister(event.mousedown, clicktomsg2)
-event.unregister(event.tick, showmotdnot2)--Prevent conflicts between motw and updater notifications
+elseif checkos == "MACOSARM"  or checkos == "MACOSX" then
+print("URS doesn't support MAC OS, please download the update manually from here...")
+platform.openLink("https://powdertoy.co.uk/Discussions/Thread/View.html?Thread=23279")
 event.unregister(event.tick,updatermod)
+event.unregister(event.tick,clicktomsg2)
+event.unregister(event.tick,showmotdnot2)
 end
 event.register(event.tick,updatermod)
 event.unregister(event.mousedown, clicktomsg)
@@ -308,6 +317,8 @@ gfx.fillRect(5,72,600,312,10,10,10,200)
 gfx.drawRect(5,72,600,312,255,255,255,255)
 gfx.fillCircle(120,81,4,4,50,50,250,200)
 gfx.drawCircle(120,81,4,4,32,216,250,255)
+
+gfx.drawText(12,79,"OS:"..platform.platform(),255,255,0,200)
 gfx.drawText(130,78,"Welcome to the Cracker1000 Mod's URS Updater. (Updating from v."..crackversion.." to v."..tonumber(updatever)..")",32,216,255,255)
 gfx.drawText(12,98,crdata,250,250,250,255)
 if updatertext == "Done, click here to restart." then
@@ -316,10 +327,10 @@ else
 gfx.drawRect(10,363,590,1,32,216,255,255)
 end
 if timeout == 1 and clickcheck ~= 1 then
-gfx.drawText(12,350,"Error: Taking longer than usual, you can wait or download it manually using the button provided below..",255,10,10,245)
+gfx.drawText(12,350,"Uh oh something went wrong. You can wait or use the manual download option provided below. Report the error in mod thread.",255,10,10,245)
 gfx.drawRect(320,366,167,14,32,216,255,220)
 gfx.fillRect(320,366,167,14,32,216,255,40)
-gfx.drawText(325,370,"Click here to download manually",32,216,255,220)
+gfx.drawText(325,370,"Click here to download manually.",32,216,255,220)
 end
 end
 if tpt.mousex >10 and tpt.mousex < 205 and tpt.mousey > 367 and tpt.mousey < 380 then
@@ -344,7 +355,14 @@ gfx.drawText(212,369,"X",255,5,5,255)
 end
 end
 --URS end
-local errtimer = 200
+local errtimer = 0
+function runupdater()
+event.unregister(event.tick,errormesg)
+event.unregister(event.tick,showmotdnot2)
+event.register(event.tick,showmotdnot2)
+event.unregister(event.mousedown, clicktomsg2)
+event.register(event.mousedown, clicktomsg2)
+end
 function writefile2()
 timermotd = timermotd + 1
 if timermotd >= 250 then
@@ -357,11 +375,7 @@ if code2 == 200 then
 errtext = ""
 updatever = string.sub(ret2,9,13)
 if tonumber(crackversion) < tonumber(updatever) then
-event.unregister(event.tick,errormesg)
-event.unregister(event.tick,showmotdnot2)
-event.register(event.tick,showmotdnot2)
-event.unregister(event.mousedown, clicktomsg2)
-event.register(event.mousedown, clicktomsg2)
+runupdater()
 elseif tonumber(crackversion) >= tonumber(updatever) then
 errtext = "URS: Latest Version"
 end
@@ -389,15 +403,13 @@ end
 end
 
 function errormesg()
-if errtimer > 0 then
-errtimer = errtimer - 1
-end
+errtimer = errtimer + 1
 if errtext ==  "URS: Latest Version" or errtext == "Checking for updates.." then
 gfx.drawText(10,370,errtext,55,255,55,255)
 else
 gfx.drawText(10,370,errtext,255,55,55,255)
 end
-if errtimer == 0 then
+if errtimer >= 250 then
 event.unregister(event.tick,errormesg)
 end
 end
@@ -1845,6 +1857,7 @@ local bogb1 = Button:new(124,333,60,25,"Borders", "Draw Borders")
 
 local jkey = Button:new(124,300,60,25,"J-Shortcut", "Toggle Shortcut")
 local neonmode = Button:new(224,300,60,25,"Neon Mode", "Toggle fire strength")
+local Forceup = Button:new(324,300,70,25,"Force Update", "Triggers the forced update mechanism.")
 local bg7 = Button:new(224,333,60,25,"Developer", "Disable inbuilt scripts")
 
 local baropa =  Button:new(24,250,35,20,"Short", "Short and moving")
@@ -1985,6 +1998,7 @@ newmenuth:addComponent(bog1)
 newmenuth:addComponent(bogb1)
 newmenuth:addComponent(jkey)
 newmenuth:addComponent(neonmode)
+newmenuth:addComponent(Forceup)
 
 newmenuth:addComponent(rSlider)
 newmenuth:addComponent(gSlider)
@@ -2059,6 +2073,12 @@ elseif nmodv == "1" then
 nmodv = "0"
 tpt.setfire(1)
 end
+end)
+
+Forceup:action(function(sender)
+ui.closeWindow(newmenuth)
+ui.closeWindow(newmenu)
+runupdater()
 end)
 
 mpop:action(function(sender)
@@ -2154,7 +2174,7 @@ end)
 local adminpass = Textbox:new(290, 336, 55, 20, '', ' <Code> ')
 local admincan = Button:new(350,336,20,20,"X", "cancle admin mode")
 local admincan1 = Button:new(225,336,70,20,"Debug mode", "Disables crackerk.lua and fail check")
-local admincan2 = Button:new(298,336,76,20,"Disable scripts","Disables all embedded scripts")
+local admincan2 = Button:new(298,336,76,20,"Disable scripts", "Disables all embedded scripts")
 
 bg7:action(function(sender)
 adminval = 1
@@ -2175,6 +2195,7 @@ newmenuth:removeComponent(adminpass)
 newmenuth:removeComponent(admincan)
 newmenuth:addComponent(admincan1)
 newmenuth:addComponent(admincan2)
+
 admincan1:action(function(sender)
 local fdlf3 = io.open('debugmode.txt', 'w')
 fdlf3:write("Message from Cracker1000: This file disables the embedded scripts in Cracker1000's Mod for debugging purposes, delete this to restore the mod to original state.")
@@ -2209,6 +2230,9 @@ end)
 
 function startupcheck()
 event.register(event.tick,errormesg)
+--if tpt.version.modid ~= 6 then
+--tpt.message_box("URS Safety Warning!", "You are using a non supported version of TPT with crackerk.lua script. Please download the original mod from mod thread. \nI will not be held responsible for any data loss or damage if you use this script with this version. Click Dismiss to continue.")
+--end
 fs.makeDirectory("scripts")
 os.remove("older.exe")
 os.remove("older")
@@ -7289,12 +7313,7 @@ chars_light = {
         }
     }
 }
-function secure()
-if tpt.version.modid ~= 6 and themevaldefault == 1 then
-platform.restart()
-end
-end
-secure()
+
 function notificationscript()
 -- Prevent multiple instances of the script running
 if MaticzplNotifications ~= nil then
