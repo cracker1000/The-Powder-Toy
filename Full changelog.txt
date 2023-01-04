@@ -4,8 +4,7 @@ update tptmp to v2.0.28
 other fixes from master branch
 Fix URS not handling updates properly on linux.
 Add various checks to prevent renaming issues when updating
-Make appname a constant for updater..
-
+Make appname a constant for updater.
 
 v53.1:
 Attempt to fix URS filedone errors.
