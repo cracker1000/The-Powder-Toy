@@ -1,3 +1,4 @@
+iscrackmod = true
 --Cracker64's Autorun Script Manager
 --The autorun to end all autoruns
 --Version 3.12

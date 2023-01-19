@@ -1,3 +1,8 @@
+v54.1
+Stop pointing to starcatcher server for update checks
+Other fixes after v97.0 release
+new iscrackmod variable for scripts that need to detect crackmod
+
 v54.0:
 Match v97.0
 update tptmp to v2.0.28

@@ -7581,7 +7581,7 @@ if MaticzplNotifications ~= nil then
     return
 end
 
-if tpt.version.modid == 6 and MANAGER.getsetting("CRK","notifval") == "0" then -- Disable when notification settings turned off in Cracker1000's Mod
+if iscrackmod == true and MANAGER.getsetting("CRK","notifval") == "0" then -- Disable when notification settings turned off in Cracker1000's Mod
     return
 end
 
@@ -7925,7 +7925,7 @@ function MaticzplNotifications.DrawNotifications()
         posX = 573
         posY = 435
     end
-	if tpt.version.modid == 6 then --Cracker1000's Mod
+	if iscrackmod == true then --Cracker1000's Mod
           getcrackertheme()
     end
     local w,h = gfx.textSize(number)
