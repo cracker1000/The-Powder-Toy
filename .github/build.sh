@@ -252,12 +252,6 @@ if [[ $stable_or_beta == yes ]] && [[ $MOD_ID != 0 ]]; then
 	# mods and snapshots both check their snapshot_id against whatever version starcatcher.us/TPT has
 	meson_configure+=$'\t'-Dsnapshot_id=$(echo $RELEASE_NAME | cut -d '.' -f 3) # $RELEASE_NAME is vX.Y.Z
 fi
-if [[ $RELEASE_TYPE == snapshot ]] || [[ $MOD_ID != 0 ]]; then
-	meson_configure+=$'\t'-Dupdate_server=starcatcher.us/TPT
-fi
-if [[ $RELEASE_TYPE != dev ]]; then
-	meson_configure+=$'\t'-Dignore_updates=false
-fi
 if [[ $BSH_HOST_PLATFORM-$BSH_HOST_LIBC == windows-mingw ]]; then
 	if [[ $BSH_BUILD_PLATFORM == linux ]]; then
 		meson_configure+=$'\t'--cross-file=.github/mingw-ghactions.ini
