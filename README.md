@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-Cracker1000's Mod - December 2022
-=======
+Cracker1000's Mod - 2023
+==
 The Powder Toy - January 2023
-==========================
->>>>>>> 225293cc (Update build number and readme date)
-
+==
 Get the latest version [from the Powder Toy website](https://powdertoy.co.uk/Discussions/Thread/View.html?Thread=23279).
 
 To use online features such as saving, you need to [register an account](https://powdertoy.co.uk/Register.html).
