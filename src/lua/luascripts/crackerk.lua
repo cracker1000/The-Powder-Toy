@@ -12,7 +12,7 @@ local tcount, posxt, posyt = 0,0,0
 elem.element(MISLT, elem.element(elem.DEFAULT_PT_DMND))
 elem.property(MISLT, "Name", "MIST")
 elem.property(MISLT, "Properties", elem.PROP_NOCTYPEDRAW)
-elem.property(MISLT, "Description", "Help: Missile Target Tool. Click once to place the holder and then click again to set the target. Places one at a time.")
+elem.property(MISLT, "Description", "Missile Target Tool. Click once to place the holder and then click again to set the target. Places one at a time.")
 elem.property(MISLT, "Color", 0xFFA500)
 elem.property(MISLT, "MenuSection", elem.SC_TOOL)
 elem.property(MISLT, "Update", function (i)
