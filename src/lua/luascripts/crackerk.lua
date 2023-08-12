@@ -1,6 +1,6 @@
 --Cracker1000 mod interface script--
 local passreal = "12345678"
-local crackversion = 54.1 --Next version: 54.2 
+local crackversion = 55.0 --Next version: 55.5 
 local passreal2 = "DMND"
 local motw = "."
 local specialmsgval = 0
@@ -2228,7 +2228,7 @@ end
 graphics.drawRect(1,1, 609, 370, MANAGER.getsetting("CRK", "ar"),MANAGER.getsetting("CRK", "ag"),MANAGER.getsetting("CRK", "ab"),110)
 graphics.fillRect(1,1, 609, 370, MANAGER.getsetting("CRK", "ar"),MANAGER.getsetting("CRK", "ag"),MANAGER.getsetting("CRK", "ab"),10)
 else
-graphics.drawText(30,47, "Preview not available because pulse theme is on. Note: Alpha slider can aslo be used for pulse theme.",255,55,55,255)
+graphics.drawText(30,47, "Preview not available because pulse theme is on. Note: Alpha slider can also be used for pulse theme.",255,55,55,255)
 end
 end
 newmenuth:onDraw(drawprev)
