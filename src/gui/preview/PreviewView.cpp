@@ -148,10 +148,15 @@ PreviewView::PreviewView(std::unique_ptr<VideoBuffer> newSavePreview):
 		AddComponent(avatarButton);
 	}
 
-	viewsLabel = new ui::Label(ui::Point((XRES/2)-80, (YRES/2)+4+15), ui::Point(80, 16), "");
+	viewsLabel = new ui::Label(ui::Point((XRES/2)-80, (YRES/2)+16), ui::Point(80, 16), "");
 	viewsLabel->Appearance.HorizontalAlign = ui::Appearance::AlignRight;
 	viewsLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
 	AddComponent(viewsLabel);
+
+    voteLabel = new ui::Label(ui::Point((XRES/2)-80, (YRES/2)+27), ui::Point(80, 16), "");
+    voteLabel->Appearance.HorizontalAlign = ui::Appearance::AlignRight;
+    voteLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
+    AddComponent(voteLabel);
 
 	pageInfo = new ui::Label(ui::Point((XRES/2) + 85, Size.Y+1), ui::Point(70, 16), "Page 1 of 1");
 	pageInfo->Appearance.HorizontalAlign = ui::Appearance::AlignCentre;
@@ -552,6 +557,8 @@ void PreviewView::NotifySaveChanged(PreviewModel * sender)
 		else
 			userIsAuthor = false;
 		viewsLabel->SetText(String::Build("\bgViews:\bw ", save->Views));
+        voteLabel->SetText(String::Build("\bgVotes: \x0F\x01\xFF\x01",votesUp,"\bw | \br",votesDown));
+
 		saveDescriptionLabel->SetText(save->Description);
 		if(save->Favourite)
 		{

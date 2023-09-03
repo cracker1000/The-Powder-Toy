@@ -227,7 +227,14 @@ void SaveButton::Draw(const Point& screenPos)
 		{
 			int x = screenPos.X-7+(Size.X-thumbBoxSize.X)/2+thumbBoxSize.X-(Graphics::TextSize(votesBackground).X - 1);
 			int y = screenPos.Y-23+(Size.Y-thumbBoxSize.Y)/2+thumbBoxSize.Y;
-			g->BlendText({ x, y }, votesBackground, 0x104810_rgb .WithAlpha(255));
+
+            auto color = 0x104810_rgb .WithAlpha(255);
+            if (save->votesUp <= save->votesDown)
+            {
+                color = 0xAA2020_rgb .WithAlpha(255);
+            }
+
+			g->BlendText({ x, y }, votesBackground, color);
 			g->BlendText({ x, y }, votesBackground2, 0xC0C0C0_rgb .WithAlpha(255));
 			g->BlendText({ x+3, y }, votesString, 0xFFFFFF_rgb .WithAlpha(255));
 		}
