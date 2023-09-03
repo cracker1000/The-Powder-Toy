@@ -703,6 +703,7 @@ void PreviewView::NotifyCommentsChanged(PreviewModel * sender)
 		int currentY = 0;//-yOffset;
 		ui::Label * tempUsername;
 		ui::Label * tempComment;
+        ui::Label * tempTimestamp;
 		ui::AvatarButton * tempAvatar;
 		for (size_t i = 0; i < comments.size(); i++)
 		{
@@ -736,6 +737,15 @@ void PreviewView::NotifyCommentsChanged(PreviewModel * sender)
 			{
 				authorNameFormatted = "\bl" + authorNameFormatted;
 			}
+
+            tempTimestamp = new ui::Label(ui::Point(31, currentY+3), ui::Point(Size.X-((XRES/2) + 13 + 26), 16), format::UnixtimeToDateMini(comments[i].createdTimestamp).FromUtf8());
+            tempTimestamp->Appearance.HorizontalAlign = ui::Appearance::AlignRight;
+            tempTimestamp->Appearance.VerticalAlign = ui::Appearance::AlignBottom;
+            tempTimestamp->SetTextColour(ui::Colour(255, 55, 55));
+
+            commentComponents.push_back(tempTimestamp);
+            commentsPanel->AddChild(tempTimestamp);
+
 			if (showAvatars)
 				tempUsername = new ui::Label(ui::Point(31, currentY+8), ui::Point(Size.X-((XRES/2) + 13 + 26), 14), authorNameFormatted);
 			else

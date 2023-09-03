@@ -8,4 +8,5 @@ struct Comment
 	bool authorIsSelf;
 	bool authorIsBanned;
 	String content;
+    time_t createdTimestamp;
 };
