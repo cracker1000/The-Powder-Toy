@@ -1,3 +1,52 @@
+Note: V55.1 is the latest version. Please update to it!
+
+v55.1
+Fix SING and ANTM destroying WALL element
+Add Vote background and counts to save browser (Thanks to Maticzpl)
+New additional stat option in quick settings (shows additional stats)
+Add Comment timestamps
+Make URS less colourful
+minor misc changes
+
+v55.0
+New quick options
+Removed password system
+Major rewrite of mod, now matches latest snapshot
+Mod can now save and load most of the settings
+Updated URS links
+Remove Z-Hole wall
+Fix Confirm prompts
+Wall element is now resistant towards WARP
+New slowmotion mode
+Cross hair is now in quick options
+Change the load animation back to default.
+
+Other changes from snapshots:
+Fix many-headed stickmen
+Approximate save previews with thumbnails if they are available
+Fix vote bars in previews touching the enclosing rectangles
+Request UTF-8 code page at startup
+Fix paste previews being positioned incorrectly
+Fix more reflection issues
+Fix some air simulation asymmetriesFix stamps being impossible to delete
+Fix custom elements disappearing on load
+Fix custom element types being mangled in secondary properties
+Improve determinism, useful for debugging
+Fix a particularly obscure water equalization crash
+Fix RIME's description (it is formed through deposition, not sublimation)
+Fix delete key not functioning correctly in textboxes when text is selected
+Add fs.isLink
+Avoid Year 2038 problem with save creation dates
+Make Grave (the key under Esc) exiting the console optional
+Rearrange settings view slightly
+Fix crash if an avatar is missing from the server
+Fix votes not making it to the server in some cases (don't worry, very obvious when it happens)
+Fix very early crash in on certain platforms if an element menu is scrolled too far right
+Fix logouts not actually destroying sessions
+Fix crash when overwriting a local save
+Fix sim.neighbours yielding the center particle
+Fix crash if a save thumbnail is missing from the server
+
 v54.1
 Add BIZR/BIZG/BIZS ctype serialization
 Fix potential crashes due to overeager operator[]s 
