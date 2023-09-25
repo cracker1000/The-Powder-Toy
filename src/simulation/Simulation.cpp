@@ -809,12 +809,12 @@ void Simulation::CreateLine(int x1, int y1, int x2, int y2, int c)
 
 inline int Simulation::is_wire(int x, int y)
 {
-	return bmap[y][x]==WL_DETECT || bmap[y][x]==WL_EWALL || bmap[y][x]==WL_ALLOWLIQUID || bmap[y][x]==WL_WALLELEC || bmap[y][x]==WL_ALLOWALLELEC || bmap[y][x]==WL_EHOLE || bmap[y][x]==WL_STASIS;
+	return bmap[y][x]==WL_DETECT || bmap[y][x]==WL_EWALL || bmap[y][x]==WL_ALLOWLIQUID || bmap[y][x]==WL_WALLELEC || bmap[y][x]==WL_ALLOWALLELEC || bmap[y][x]==WL_EHOLE || bmap[y][x]==WL_STASIS || bmap[y][x] == WL_ZHOLE;
 }
 
 inline int Simulation::is_wire_off(int x, int y)
 {
-	return (bmap[y][x]==WL_DETECT || bmap[y][x]==WL_EWALL || bmap[y][x]==WL_ALLOWLIQUID || bmap[y][x]==WL_WALLELEC || bmap[y][x]==WL_ALLOWALLELEC || bmap[y][x]==WL_EHOLE || bmap[y][x]==WL_STASIS) && emap[y][x]<8;
+	return (bmap[y][x]==WL_DETECT || bmap[y][x]==WL_EWALL || bmap[y][x]==WL_ALLOWLIQUID || bmap[y][x]==WL_WALLELEC || bmap[y][x]==WL_ALLOWALLELEC || bmap[y][x]==WL_EHOLE || bmap[y][x]==WL_STASIS || bmap[y][x]==WL_ZHOLE) && emap[y][x]<8;
 }
 
 // implement __builtin_ctz and __builtin_clz on msvc
@@ -1127,6 +1127,8 @@ int Simulation::eval_move(int pt, int nx, int ny, unsigned *rr) const
 			return 0;
 		if (bmap[ny/CELL][nx/CELL]==WL_EHOLE && !emap[ny/CELL][nx/CELL] && !(elements[pt].Properties&TYPE_SOLID) && !(elements[TYP(r)].Properties&TYPE_SOLID))
 			return 2;
+		if (bmap[ny / CELL][nx / CELL] == WL_ZHOLE && !emap[ny / CELL][nx / CELL] && !(elements[pt].Properties&TYPE_SOLID) && !(elements[TYP(r)].Properties&TYPE_SOLID))
+			return 2;
 	}
 	return result;
 }
@@ -1397,6 +1399,8 @@ int Simulation::try_move(int i, int x, int y, int nx, int ny)
 	}
 
 	if ((bmap[y/CELL][x/CELL]==WL_EHOLE && !emap[y/CELL][x/CELL]) && !(bmap[ny/CELL][nx/CELL]==WL_EHOLE && !emap[ny/CELL][nx/CELL]))
+		return 0;
+	if ((bmap[y / CELL][x / CELL] == WL_ZHOLE && !emap[y / CELL][x / CELL]) && !(bmap[ny / CELL][nx / CELL] == WL_ZHOLE && !emap[ny / CELL][nx / CELL]))
 		return 0;
 
 	int ri = ID(r); //ri is the particle number at r (pmap[ny][nx])
@@ -3625,7 +3629,7 @@ void Simulation::CheckStacking()
 			// Setting pmap_count[y][x] > NPART means BHOL will form in that spot
 			if (pmap_count[y][x]>5)
 			{
-				if (bmap[y/CELL][x/CELL]==WL_EHOLE)
+				if (bmap[y/CELL][x/CELL]==WL_EHOLE||(bmap[y / CELL][x / CELL] == WL_ZHOLE))
 				{
 					// Allow more stacking in E-hole
 					if (pmap_count[y][x]>1500)

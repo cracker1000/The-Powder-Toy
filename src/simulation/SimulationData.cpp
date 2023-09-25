@@ -70,6 +70,7 @@ static std::vector<wall_type> LoadWalls()
 		{0xDCDCDC_rgb, 0x000000_rgb, 1, Renderer::WallIcon, String("AIRBLOCK WALL"),   "DEFAULT_WL_NOAIR",  String("Allows all particles, but blocks air.")},
 		{0x808080_rgb, 0x000000_rgb, 0, Renderer::WallIcon, String("ERASEALL"),        "DEFAULT_WL_ERASEA", String("Erases walls, particles, and signs.")},
 		{0x800080_rgb, 0x000000_rgb, 0, Renderer::WallIcon, String("STASIS WALL"),     "DEFAULT_WL_STASIS", String("Freezes particles inside the wall in place until powered.")},
+		{0x171717_rgb, 0x343434_rgb, 0, Renderer::WallIcon, String("ZHOLE"),           "DEFAULT_WL_ZHOLE", String("Z-Hole, modified version of EHOLE that's not affected by SPRK")}
 	};
 }
 
