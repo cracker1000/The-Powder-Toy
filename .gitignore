@@ -13,8 +13,6 @@
 # Build files
 build*/*
 *.o
-*.exe
-*.dmg
 *.dll
 *.a
 *.la
