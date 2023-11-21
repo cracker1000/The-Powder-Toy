@@ -7,6 +7,8 @@
 #include "client/GameSave.h"
 #include "client/SaveFile.h"
 #include "gui/dialogues/ConfirmPrompt.h"
+#include "gui/dialogues/TextPrompt.h"
+#include "gui/dialogues/ErrorMessage.h"
 #include "tasks/TaskWindow.h"
 #include "tasks/Task.h"
 
@@ -73,6 +75,21 @@ void LocalBrowserController::removeSelectedC()
 
 	std::vector<ByteString> selected = browserModel->GetSelected();
 	new TaskWindow("Removing stamps", new RemoveSavesTask(this, selected));
+}
+
+void LocalBrowserController::RenameSelected() {
+	ByteString save = browserModel->GetSelected()[0];
+
+	new TextPrompt("Rename stamp", "Enter a new name for the stamp:", "", "[new name]", true, { [this, save] (String const &newName) {
+		if (newName.length() == 0) {
+			new ErrorMessage("Error renaming stamp", "You have to specify the filename.");
+			return;
+		}
+
+		Client::Ref().RenameStamp(save, newName.ToUtf8());
+
+		this->RefreshSavesList();
+	} });
 }
 
 void LocalBrowserController::RescanStamps()

@@ -48,7 +48,13 @@ LocalBrowserView::LocalBrowserView():
 	removeSelected = new ui::Button(ui::Point(((WINDOWW-100)/2), WINDOWH-18), ui::Point(100, 16), "Delete");
 	removeSelected->Visible = false;
 	removeSelected->SetActionCallback({ [this] { c->RemoveSelected(); } });
+
+	renameSelected = new ui::Button(ui::Point(((WINDOWW-100)/2+52), WINDOWH-18), ui::Point(100, 16), "Rename");
+	renameSelected->Visible = false;
+	renameSelected->SetActionCallback({ [this] { c->RenameSelected(); } });
+
 	AddComponent(removeSelected);
+	AddComponent(renameSelected);
 }
 
 void LocalBrowserView::textChanged()
@@ -179,15 +185,35 @@ void LocalBrowserView::NotifySelectedChanged(LocalBrowserModel * sender)
 		}
 	}
 
+	if (selected.size() == 1)
+	{
+		renameSelected->Visible = true;
+		
+		removeSelected->Position.X = (WINDOWW-100)/2-52;
+	}
+	else if (renameSelected->Visible)
+	{
+		renameSelected->Visible = false;
+
+		// please forgive me for hard-coding this
+		removeSelected->Position.X = (WINDOWW-100)/2;
+	}
+
 	if (selected.size())
 	{
 		removeSelected->Visible = true;
-		pageLabel->Visible = pageCountLabel->Visible = pageTextbox->Visible = false;
 	}
 	else if (removeSelected->Visible)
 	{
 		removeSelected->Visible = false;
+	}
+
+	if (!removeSelected->Visible && !renameSelected->Visible) {
 		pageLabel->Visible = pageCountLabel->Visible = pageTextbox->Visible = true;
+	}
+	else
+	{
+		pageLabel->Visible = pageCountLabel->Visible = pageTextbox->Visible = false;
 	}
 }
 
