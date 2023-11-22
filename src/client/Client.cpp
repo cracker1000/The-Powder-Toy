@@ -295,9 +295,11 @@ void Client::RenameStamp(ByteString stampID, ByteString newName)
 		return;
 	}
 
-	Platform::RenameFile(ByteString::Build(STAMPS_DIR, PATH_SEP_CHAR, stampID, ".stm"),
-					ByteString::Build(STAMPS_DIR, PATH_SEP_CHAR, newName, ".stm"), false);
-
+	if (!Platform::RenameFile(ByteString::Build(STAMPS_DIR, PATH_SEP_CHAR, stampID, ".stm"),
+		ByteString::Build(STAMPS_DIR, PATH_SEP_CHAR, newName, ".stm"), false)) {
+			new ErrorMessage("Error renaming stamp", "Could not rename the stamp.");
+			return;
+	}
 
 	std::replace(stampIDs.begin(), stampIDs.end(), stampID, newName);
 	WriteStamps();
