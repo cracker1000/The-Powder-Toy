@@ -1,4 +1,4 @@
-v57.2 (unreleased)
+v57.2
 New element: ALMN (Aluminium powder and solid) by @Rebmiami
 Ability to rename stamps. Rename option available in stamp browser.
 LDTC can now copy BIZR, BIZRG and BIZRS's wavelenght into FILT.
@@ -13,9 +13,6 @@ Changes from master branch:
 Remove unnecessary lua_pushlightuserdata usage, use commandInterface
 Add surface normal debug tool
 Expose debug constants to lua 
-
-todo:
-Surface normal tool toggle
 
 v57.1
 Add an option to customise the element that CEXP explodes into, also add gravity variable to it.
