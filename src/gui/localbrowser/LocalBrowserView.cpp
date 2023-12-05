@@ -42,15 +42,16 @@ LocalBrowserView::LocalBrowserView():
 	previousButton->SetActionCallback({ [this] { c->SetPageRelative(-1); } });
 	previousButton->Appearance.HorizontalAlign = ui::Appearance::AlignLeft;
 	previousButton->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
-
-	undeleteButton->SetActionCallback({ [this] { c->RescanStamps(); } });
-
+	
 	removeSelected = new ui::Button(ui::Point(((WINDOWW-100)/2), WINDOWH-18), ui::Point(100, 16), "Delete");
 	removeSelected->Visible = false;
 	removeSelected->SetActionCallback({ [this] { c->RemoveSelected(); } });
 	renameSelected = new ui::Button(ui::Point(((WINDOWW-100)/2+52), WINDOWH-18), ui::Point(100, 16), "Rename");
 	renameSelected->Visible = false;
 	renameSelected->SetActionCallback({ [this] { c->RenameSelected(); } });
+
+	undeleteButton->SetActionCallback({ [this] { renameSelected->Visible = false; removeSelected->Visible = false; pageLabel->Visible = false; c->RescanStamps(); } });
+	
 	AddComponent(renameSelected);
 	AddComponent(removeSelected);
 }
