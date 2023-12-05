@@ -1,4 +1,4 @@
-v57.2
+v57.5
 New element: ALMN (Aluminium powder and solid) by @Rebmiami
 Ability to rename stamps. Rename option available in stamp browser.
 LDTC can now copy BIZR, BIZRG and BIZRS's wavelenght into FILT.
