@@ -11,6 +11,7 @@
 #include "common/platform/Platform.h"
 #include "common/String.h"
 #include "graphics/Graphics.h"
+#include "gui/dialogues/ErrorMessage.h"
 #include "prefs/Prefs.h"
 #include "lua/CommandInterface.h"
 #include "Config.h"
@@ -286,7 +287,20 @@ void Client::DeleteStamp(ByteString stampID)
 		WriteStamps();
 	}
 }
+void Client::RenameStamp(ByteString stampID, ByteString newName)
+{
+	if (Platform::FileExists(ByteString::Build(STAMPS_DIR, PATH_SEP_CHAR, newName, ".stm"))) {
+		new ErrorMessage("Error renaming stamp", "A stamp with this name already exists.");
+		return;
+	}
 
+	Platform::RenameFile(ByteString::Build(STAMPS_DIR, PATH_SEP_CHAR, stampID, ".stm"),
+					ByteString::Build(STAMPS_DIR, PATH_SEP_CHAR, newName, ".stm"), false);
+
+
+	std::replace(stampIDs.begin(), stampIDs.end(), stampID, newName);
+	WriteStamps();
+}
 ByteString Client::AddStamp(std::unique_ptr<GameSave> saveData)
 {
 	auto now = (uint64_t)time(NULL);

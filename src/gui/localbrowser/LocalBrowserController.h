@@ -25,6 +25,7 @@ public:
 	bool GetMoveToFront();
 	void SetMoveToFront(bool move);
 	void SetPage(int page);
+	void RenameSelected();
 	void SetPageRelative(int offset);
 	void Update();
 	void Exit();

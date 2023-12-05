@@ -95,6 +95,7 @@ public:
 	void RescanStamps();
 	const std::vector<ByteString> &GetStamps() const;
 	void MoveStampToFront(ByteString stampID);
+	void RenameStamp(ByteString stampID, ByteString newName);
 
 	std::unique_ptr<SaveFile> LoadSaveFile(ByteString filename);
 
