@@ -1708,6 +1708,7 @@ tpt.el.rubr.menu=0
 tpt.el.dfom.menu=0
 tpt.el.digs.menu=0
 tpt.el.alum.menu=0
+tpt.el.almp.menu=0
 elem.property(PLNE, "MenuVisible", 0)
 elem.property(MISLT, "MenuVisible", 0)
 end
@@ -1767,6 +1768,7 @@ tpt.el.ball.menu=1
 tpt.el.rubr.menu=1
 tpt.el.dfom.menu=1
 tpt.el.digs.menu=1
+tpt.el.almp.menu=1
 tpt.el.alum.menu=1
 elem.property(PLNE, "MenuVisible", 1)
 elem.property(MISLT, "MenuVisible", 1)
