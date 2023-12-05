@@ -78,7 +78,9 @@ src>gui>search>Searchview.cpp
 (SPSH, 243); Lua element 
 (RUBR, 244);
 (DFOM 245);
-(DIGS 246)
+(DIGS 246);
+(ALUM 247);             Simulation.cpp and SPRK.cpp (SPRK conductance rules), ACID.cpp and CAUS.cpp, DMG.cpp, FIRE.cpp
+(ALMP 248)              BRMT.cpp
 
 For BTRY, replace this
  "if ((sim->elements[rt].Properties&PROP_CONDUCTS) && !(rt==PT_WATR||rt==PT_SLTW||rt==PT_NTCT||rt==PT_PTCT||rt==PT_INWR||rt == PT_FNTC||rt == PT_FPTC) && parts[ID(r)].life==0)"

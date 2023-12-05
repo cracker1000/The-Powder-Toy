@@ -1982,6 +1982,10 @@ int Simulation::create_part(int p, int x, int y, int t, int v)
 			FloodINST(x, y);
 			return index;
 		}
+		if (type == PT_ALUM && parts[index].ctype != PT_NONE)
+		{
+			return -1;
+		}
 		parts[index].type = PT_SPRK;
 		parts[index].life = 4;
 		parts[index].ctype = type;

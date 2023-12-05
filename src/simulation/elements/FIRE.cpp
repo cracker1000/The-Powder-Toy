@@ -258,6 +258,13 @@ int Element_FIRE_update(UPDATE_FUNC_ARGS)
 					{
 						parts[ID(r)].life++;
 					}
+					else if (rt == PT_LAVA && parts[ID(r)].ctype == PT_ALUM && parts[ID(r)].tmp3 < 1 && parts[i].ctype == PT_METL)
+					{
+						parts[i].tmp3 = 1;
+						parts[i].ctype = PT_ALUM;
+						parts[ID(r)].tmp3 = 1;
+						parts[ID(r)].ctype = PT_ALUM;
+					}
 				}
 
 				if ((surround_space || sim->elements[rt].Explosive) &&

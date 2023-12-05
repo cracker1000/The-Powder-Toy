@@ -317,6 +317,12 @@ static int update(UPDATE_FUNC_ARGS)
 						parts[ID(r)].life = 220;
 					}
 					continue;
+			    case PT_ALUM:
+					if (parts[ID(r)].ctype != PT_NONE)
+					{
+						continue;
+					}
+					break;
 				}
 
 				if (pavg == PT_INSL) continue; //Insulation blocks everything past here

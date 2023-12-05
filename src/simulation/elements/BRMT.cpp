@@ -61,7 +61,7 @@ static int update(UPDATE_FUNC_ARGS)
 					auto r = pmap[y+ry][x+rx];
 					if (!r)
 						continue;
-					if (TYP(r)==PT_BREC && sim->rng.chance(1, tempFactor))
+					if ((TYP(r)==PT_BREC || TYP(r)==PT_ALMP) && sim->rng.chance(1, tempFactor))
 					{
 						if (sim->rng.chance(1, 2))
 						{
