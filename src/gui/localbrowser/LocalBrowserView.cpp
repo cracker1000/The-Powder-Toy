@@ -202,7 +202,6 @@ if (selected.size() == 1)
 	{
 		removeSelected->Visible = false;
 	}
-
 	if (!removeSelected->Visible && !renameSelected->Visible) {
 		pageLabel->Visible = pageCountLabel->Visible = pageTextbox->Visible = true;
 	}
