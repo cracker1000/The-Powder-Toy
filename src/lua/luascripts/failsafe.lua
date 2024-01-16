@@ -24,7 +24,7 @@ end
 return false
 end
 
-if failsafe == 1 then
+if failsafe == nil then
 event.register(event.tick, warningmsg)
 event.register(event.mousedown, warningmsgclick)
 end
