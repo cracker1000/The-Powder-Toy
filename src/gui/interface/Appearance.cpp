@@ -20,8 +20,8 @@ namespace ui
 		TextActive(0x000000_rgb .WithAlpha(0xFF)),
 		TextDisabled(0x646464_rgb .WithAlpha(0xFF)),
 
-		BorderHover(0xFFFFFF_rgb .WithAlpha(0xFF)),
-		BorderInactive(0xC8C8C8_rgb .WithAlpha(0xFF)),
+		BorderHover(0x3C3C3C_rgb .WithAlpha(0xFF)),
+		BorderInactive(0x1E1E1E_rgb .WithAlpha(0xFF)),
 		BorderActive(0xEBEBEB_rgb .WithAlpha(0xFF)),
 		BorderFavorite(0xFFFF00_rgb .WithAlpha(0xFF)),
 		BorderDisabled(0x646464_rgb .WithAlpha(0xFF)),
