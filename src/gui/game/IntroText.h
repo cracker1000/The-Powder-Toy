@@ -57,7 +57,7 @@ inline ByteString IntroText()
 		"\bg *\bw There's a dedicated offline WIKI for the mod elements, make sure to check it out.\n"
 		"\bt *\bw You can unhide all the hidden elements using 'Hidden elements' option.\n"
 		"\bg *\bw There's a feedback option in the mod menu, report any bug or suggest changes using the same.\n"
-		"\bt *\bw Build Number: \bg"<< APP_VERSION.build <<"\bw Version: \bg"<< DISPLAY_VERSION[0] <<"."<< DISPLAY_VERSION[0]<<"\n\n"
+		"\bt *\bw Build Number: \bg"<< APP_VERSION.build <<"\bw Version: \bg"<< DISPLAY_VERSION[0] <<"."<< DISPLAY_VERSION[1]<<"\n\n"
 		"\bw  \bw Contributors: \bt@Cracker1000, @Xphere07, @Maticzpl, @RebMiami, @NF and @Grenadier.\n\n"
 		"\br   Press Any Key (except power) To Continue...";
 	return sb.Build();

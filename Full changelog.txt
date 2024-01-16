@@ -1,0 +1,376 @@
+v58.0 (Unreleased)
+Fix relative heat
+Add elements and wall
+Update to stable 98.0
+Fix starcatcher update checks
+Add ALUM
+Add vote counter and comment stamps
+
+v57.5
+New element: ALMN (Aluminium powder and solid) by @Rebmiami
+Ability to rename stamps. Rename option available in stamp browser.
+LDTC can now copy BIZR, BIZRG and BIZRS's wavelenght into FILT.
+Fix lag when using CEXP.
+Fix reset buttons not clearing crack menu options.
+Fix weird artifacts (Somewhat) on wheel graphics because of new changes made to graphic drawing in game.
+Quick options are now Advanced options.
+Fix black bars under cr menu window when offline.
+Make advanced options visible with light backgrounds
+DIGS is now complete. Now shows the element properties like temp., Pressure, etc.
+Changes from master branch:
+Remove unnecessary lua_pushlightuserdata usage, use commandInterface
+Add surface normal debug tool
+Expose debug constants to lua 
+
+v57.1
+Add an option to customise the element that CEXP explodes into, also add gravity variable to it.
+Add help text to autosave
+Element cleanup:
+Removed NUKE element
+New digital sign element (DIGS), use with different tmp modes.
+Fix some features not treating Zhole as a wall
+Changes from master branch:
+Fix spurious timeout errors from some callbacks
+Complain about missing custom elements when opening online saves 
+Auto-focus the input field in the tag list
+Fix prop tool not remembering settings in some cases 
+
+v57.0
+Fix relative heat setting requiring a reset after update.
+Update the tptmp script to v2.0.36.
+Additional stats, now called additional hud, now shows more information.
+Fix AMTR destroying wall element.
+Redesigned quick options, do not block solid edge mode.
+Add version info in intro text
+Add relative heat mode to quick settings
+changes from master branch:
+Make save history icon not so hard to find, and show up on all saves (not just your own) the icon is now shown whenever you hover over the save, not just when you hover over where the icon is supposed to be.
+Add bound checking to Simulation::clear_area
+Fix guess best scale prompt showing up even when it guesses the default
+
+v56.6
+Test update for win 11 users.
+Change reset button behaviour. Doesn't delete any script/ settings except the mod ones.
+Fix relative heat display not turning off actually when disabled from settings.
+Center sensors, search and pause icons.
+Fix a bug in the font editor where the last row of a symbol is cleared when shifting the whole symbol up.
+
+V56.5
+Use ERASEA instead of Eraser in quick options
+Make wall resistant  to DEST and BOMB
+Fix bat files
+Maticzpl's relative heat display mode (found in control centre)
+Make relative heat mode switch to heat display upon activation
+Merge commits from master branch
+Quick options > eraser now switches between wall erase tool and eraser based on selected category.
+Cr-menu buttons are larger now, displaying the entire text.
+Brightness settings got revamped, much simple to use.
+Reset button now asks for confirmation before resetting the mod.
+Fix 600 response errors for win 11 users.
+
+From master branch of vanilla tpt:
+Add blurry scaling option 
+Change sim.walls to use real wall identifiers
+Add ctrl+e shortcut to cycle through edge modes
+Add enums for gravity/air/edge modes, add more constants to Lua
+Add shortcut to toggle fullscreen (F11)
+Use mbedtls on windows
+Make Lua hook timeout configurable
+Add version info to bluescreen
+
+v56.0
+Add missing iscrackmod variable
+Additional stats show more data
+Fix custom can_move settings being reset after using tpt.el
+Improve NUKE.
+Update mod contritbutors list
+
+v55.5
+Update manager and tptmp to latest versions
+MFOM is now DFOM, a different element with more uses and somewhat same concept.
+Attempt to fix URS 600 errors for win11 users
+Merge fixes from master branch
+New element: NUKE
+Add Zhole back
+Find mode now works with PROP tool.
+
+v55.4
+Fix MFOM
+Fix PET graphics
+Fix some type in element editor
+
+v55.3
+Update internal tptmp script.
+Fix fuse not burning properly.
+Fix some rare crashes.
+Fix EMBR showing weird graphics with high life values.
+Fix save browser and render options not working properly.
+Use ui.beginConfirm for changelogs.
+New element: MFOM (Memory foam, shape changing element)
+
+v55.2
+Update script manager to v3.13, fixing search and other options not working in script manager.
+Fix errors with script using the older dialogue box functions.
+Fix stack tools crashing the game.
+Fix Additional stats blocking wavelengths in hud.
+Fix Neon mode not working because of a glitch in graphics code
+
+v55.1
+Fix SING and AMTR destroying WALL element
+Add Vote background and counts to save browser (Thanks to Maticzpl)
+New additional stat option in quick settings (shows additional stats)
+Add Comment timestamps
+Make URS less colourful
+minor misc changes
+
+v55.0
+New quick options
+Removed password system
+Major rewrite of mod, now matches latest snapshot
+Mod can now save and load most of the settings
+Updated URS links
+Remove Z-Hole wall
+Fix Confirm prompts
+Wall element is now resistant towards WARP
+New slowmotion mode
+Cross hair is now in quick options
+Change the load animation back to default.
+
+Other changes from snapshots:
+Fix many-headed stickmen
+Approximate save previews with thumbnails if they are available
+Fix vote bars in previews touching the enclosing rectangles
+Request UTF-8 code page at startup
+Fix paste previews being positioned incorrectly
+Fix more reflection issues
+Fix some air simulation asymmetriesFix stamps being impossible to delete
+Fix custom elements disappearing on load
+Fix custom element types being mangled in secondary properties
+Improve determinism, useful for debugging
+Fix a particularly obscure water equalization crash
+Fix RIME's description (it is formed through deposition, not sublimation)
+Fix delete key not functioning correctly in textboxes when text is selected
+Add fs.isLink
+Avoid Year 2038 problem with save creation dates
+Make Grave (the key under Esc) exiting the console optional
+Rearrange settings view slightly
+Fix crash if an avatar is missing from the server
+Fix votes not making it to the server in some cases (don't worry, very obvious when it happens)
+Fix very early crash in on certain platforms if an element menu is scrolled too far right
+Fix logouts not actually destroying sessions
+Fix crash when overwriting a local save
+Fix sim.neighbours yielding the center particle
+Fix crash if a save thumbnail is missing from the server
+
+v54.1
+Add BIZR/BIZG/BIZS ctype serialization
+Fix potential crashes due to overeager operator[]s 
+Stop pointing to starcatcher server for update checks
+Cap FPS in a more stable way
+Other fixes after v97.0 release
+new iscrackmod variable for scripts that need to detect crackmod
+
+v54.0:
+Match v97.0
+update tptmp to v2.0.28
+other fixes from master branch
+Fix URS not handling updates properly on linux.
+Add various checks to prevent renaming issues when updating
+Make appname a constant for updater.
+
+v53.1:
+Attempt to fix URS filedone errors.
+
+v53.0:
+Update tptmp to v2.0.27
+Fix maticzpl's embedded notification script not working because of a malformed URL
+Fix CLRC not sticking to COPR.
+Fix prop tool not setting x and y coordinates properly.
+Fix RUBR catching fire while bouncing off particles, better burn code.
+New reaction: OIL and GAS now dissolves RUBR. 
+Improve the pressure blocking code for wall element.
+URS now handles file renaming globally.
+
+v52.5 (Beta):
+New element: RUBR (rubber). Read wiki for more information.
+Match v97.0 beta.
+Add ability to change votes.
+Add temperature scales option, controls whether Celsuis, Kelvin, or Fahrenheit is default in the HUD, PROP tool, and console
+Configure the mod name, window title and app id.
+Fix colours for http links being shown wrong
+
+v52.0
+New element: (To be added soon)
+Major update to URS, much more simple and now supports scrolling changelogs.
+Make GLAS strengthening reaction more controllable and not so arbitrary
+.tmp2 is now shown for all the elements
+Big update to .tmp sensor (can now detect all sorts of .tmp properties, modes changed with .tmp3 values)
+Update wiki with new information (read wiki for new .tmp sensor changes!).
+Customise URS to properly support mac os updates
+Increase fuel limit for SPSH, improve graphics.
+Fix MIST and SPSH getting accepted as a valid ctype for CLNE and other elements.
+Fix status being accidentaly set to online when it's not.
+Fix introtext not hiding hud completely.
+Unify icons - the new icon looks similar to the old, but is now the same across Windows/Mac/Linux
+Render options now match vanilla one again, will be fixed properly in future.
+Add Lua support for partial sim updates
+Add warning while performing mod resets.
+Fix the zoom window producing out of bounds coordinates
+Fix lag when scrolling local save browser (it now caches thumbnails again)
+Fix local browser offering to open broken saves
+Fix possible crash when flood filling with particle limit filled
+Fix glitchy behavior when flood filling solid particles around detect wall
+Add evt.beforesim and evt.aftersim for running code only when simulation advances
+Add sim.updateUpTo and sim.lastUpdatedID, for handling partial sim updates in Lua
+Add sim.historyRestore and sim.historyForward
+Add underline escape sequence to text renderer (\bU)
+
+v51.1
+Fix potential crash when opening some saves.
+Turning off Mod elements now hides MIST and SPSH too.
+Fix multiple MIST bugs
+MOVS in now fully functional space ship element. Found under special menu.
+
+v51.0
+New element: MOVS (Moving solid). Controlled via dedicated controller.
+Improvements to URS updater
+URS now supports downgrading builds to previous versions too.
+Fix mist tool allowing users to place multiple MISL at once.
+Fix force update option if there's no connection.
+New Reaction: PHOT + GRPH = UV
+Cross-hair now shows particle counts for left and right selected elements.
+Split theme now applies to Cross-hair too.
+Other changes from master branch:
+Expose BZ2 to Lua
+Add inverted element filtering to CONV with tmp2 set to 1
+Make file browser respond to search query changes while loading files 
+Replace max/min pressure with constants
+Fix text in some buttons being cut off prematurely
+Add verb parameter to http.get/post
+
+v50.0
+Changelog for V50.0
+Revert changes that broke snapshots and URS updater.
+Fix ELEX turning into MIST Tool.
+Prevent CLNE and other elements from accepting MIST tool as a ctype.
+MIST tool uses sim.adjustcoords to support working with zoom window.
+Fix save titles and tags getting cut.
+Fix and Enable URS for MacOS ARM and x86 versions.
+Update the intro text.
+Enable Macos builds (Work In Progress)
+New Force Update option in control centre.
+Fixes for the URS and make it show the platform while updating./**
+
+v49.0: Broken update
+
+v48.0
+New TOOL: MIST MIssile Target, helps set the target coordinates for missile.
+Optimised checks for updates and motds, more efficient now.
+One file for all checks
+Rewrite parts of URS 
+Minor changes to ball element
+Fix URS not working properly on LINUX
+Optimised Autostamp feature.
+Sodium is now a solid, use pressure to powderise it.
+Rewrite sodium to be a bit more intresting.
+Merge changes from snapshots:
+Fix rare crash upon clearing the ambient temperature input box in settings
+Add http.getAuthToken
+Add clip rect feature to Graphics and gfx.setClipRect
+
+v47.5
+Add missing renderer option lines.
+New Neon Mode in control centre, makes everything super bright.
+New element: BALL, super bouncy rubber balls.
+New default theme.
+Allow pulse theme to work with split mode.
+Make pulse button toggle the mode
+Pulse theme no longer reverts the theme back to default when turned off.
+Split theme now applies to top bar aswell.
+Better failsafe module
+Merge changes from latest snapshot:
+Fix uninitialized stickmen
+Fix OOB read when parsing empty string as float
+Photon reflection fix (Minor)
+
+v47.0
+Optimised various startup checks
+More efficient checks for split theme
+Reduced the linux version file size by half
+New workflows
+Fix bug where clicks won't register while showing update notifications.
+URS updater now shows the progress of downloads
+More optimised updater.
+Split theme applies to other areas aswell
+
+V46.0
+Enable By date button when viewing Favorites
+New theme called split, inverts half of the user interface colour.
+Fix invalid stamps names being accepted
+Fix Focus mode not hiding topbar.
+URS now shows manual download links when updater fails.
+Adjust the vote count and comment time stamp preview in browser.
+Crop stamp thumbnails that don't fit even when resized.
+Make QRTZ slightly change color while growing.
+Drop support for mac os builds (for now)
+Fixes from master branch
+
+v45.0
+Fix upper bits of tmp3 and tmp4 getting saved in saves, causing issues for vanilla users.
+Settings is now Cr-Menu
+Add supoort for Win32
+Preliminary support for Mac (X86_64) versions only
+Add comment time stamps
+
+V44.0
+Fix version number in startup text
+Remove some restrictions making users unable to pulish saves
+Add some missing info in wiki
+
+V43.0
+Sodium under Vaccum now gives off yellow light.
+Fix TURB producing sprk loops
+Around 8% performance boost.
+Fix URS giving timeout errors for some users.
+Merges from latest snapshot
+Switch from Maticzpl's method to official one for dealing with new property alias.
+Improved interface for Startup elem selector.
+
+V42.0
+Fix saves from v97.0 error when loading some newer saves.
+New Feature: Startup elem selector, allows you to set default elements to load on startup.
+Remove Update MP option.
+Fix some typos in wiki.
+Make URS statuses somewhat less distracting.
+Optimised release process.
+
+ V41.0
+Fix cross-hair not hiding even when turned off
+Make sodium react with Cl2 only when above 50C and few other adjustments.
+Better handling for update failures.
+Update wiki
+
+V40.0
+Custom gravity settings.
+This update brings a new element called SODM (sodium).
+Update tptmp to v2.0.25
+Add support for showing changelogs to the URS system.
+Now it also shows the status while performing different update checks
+Fix cross-hair not hiding properly when using different modifier keys.
+Fix colour code for EMGT.
+
+V39.0:
+Performance improvements to EMGT, range extended from 20 to 40!
+Fix trees grown using seed getting covered with vine.
+Fix Cross-hair interfering with decorations when flood filling.
+URS 2.0:
+Better handling for linux and more optimised.
+Fix linux version not getting restarted after successful updates.
+
+V38.0 released:
+New URS (Unified Release System). Automatically downloads and applies updates when they are released, no need to manually download them.
+Updated tptmp to v2.0.24
+Improved and more efficient startup checks.
+
+
+v1.0 to v 37.0: Data deleted. URS will only show changelogs for v38.0 and higher.
