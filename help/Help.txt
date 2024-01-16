@@ -1,0 +1,110 @@
+//To future self, use this as a quick reference in case something goes wrong :P 
+1) Icon and intro text (src>gui>game)
+
+2)Scripts:
+Copy scripts in src> lua>scripts folder.
+add same settings for crackerk.lua and other scripts as eventcompat.lua in Luascriptinterface. 
+Load order:
+Manager
+TPTMP
+Crackerk
+failsafe
+
+4) TOOLS:
+Copy RSET.cpp
+Add ID in meson.build
+
+5) Dark theme:
+Copy appearence.cpp from gui>interface.
+
+6) HUD:
+Gameview.cpp (copy fpsinfo and other parts)
+
+8) Votes:
+src>gui>search>Searchview.cpp
+
+9)Elements:               Files Modified:
+(FPTC, 197);              SPRK.cpp, BTRY.cpp
+(FNTC, 192);              SPRK.cpp, BTRY.cpp
+(CLNT, 193);
+(LED, 194);                
+(TIMC, 195);               SPRK.cpp 
+(FUEL, 196);
+(DMRN, 198);             Simulation.cpp
+(PINV, 199);                SPRK.cpp and simulation.cpp (check for .life!)
+(WALL, 200);              VIRS.cpp, ANTM.cpp, SING.cpp and simulation.cpp (add exceptions for PROT and VIRS!)
+(COND, 201);
+(QGPP, 202);
+(UVRD, 203);             Simulation.cpp (Add with PROT)
+(SUN, 204);                Simulation.cpp (Add check for UV to not pass through)
+(TMPS, 205);
+(PHOS, 206);
+(CMNT, 207);
+(NTRG, 208);
+(PRMT, 209);
+(CLUD, 210);
+(BEE, 211);
+(ECLR, 212);              SPRK.cpp
+(CEXP, 213);                
+(LITH2,214),               SPRK.cpp
+(PROJ, 215); 
+(PPTI, 216);                SPRK.cpp
+(PPTO, 217);              SPRK.cpp
+(SEED, 218);    
+(CSNS, 219);    
+(CWIR, 220);
+(CLRC, 221);  
+(COPR, 222); 
+(PCON, 223);             SPRK.cpp
+(STRC, 224);        
+(TURB, 225);              
+(BFLM, 226);             VIRS.cpp (add exception!)
+(PET, 227);             
+(MISL 228);     
+(AMBE 229);               SPRK.cpp
+(CHLR 230);         
+(ACTY 231);    
+(ELEX 232);   
+(RADN 233);          
+(GRPH 234);      
+(BASE 235);                      
+(WHEL 236); 
+(NAPM 237); 
+(GSNS 238); 
+(MGNT 239); 
+(SODM, 240); 
+(BALL, 241); 
+(MIST, 242); Lua element 
+(SPSH, 243); Lua element 
+(RUBR, 244);
+(DFOM 245);
+(DIGS 246);
+(ALUM 247);             Simulation.cpp and SPRK.cpp (SPRK conductance rules), ACID.cpp and CAUS.cpp, DMG.cpp, FIRE.cpp
+(ALMP 248)              BRMT.cpp
+
+For BTRY, replace this
+ "if ((sim->elements[rt].Properties&PROP_CONDUCTS) && !(rt==PT_WATR||rt==PT_SLTW||rt==PT_NTCT||rt==PT_PTCT||rt==PT_INWR||rt == PT_FNTC||rt == PT_FPTC) && parts[ID(r)].life==0)"
+
+10) WALLS:
+Z-Hole (19), Simulationdata.cpp, simulationdata.h, simulation.cpp and src>graphics>Renderer.cpp (Place along with Ehole in all files.) 
+
+11) To cherry pick
+a) Run cherrypick.bat
+b) FIlter branch to upstream> cherrypick and commit.
+c) Done. 
+
+12) To make a new Pull Request:
+1) Copy New pr.bat to newmod main folder (or else it will fail to delete the help folder).
+2) Run new PR.bat
+3) Open gitbash> git checkout -b vanilla (in case it fails to checkout)
+4) git checkout -b <branch name here>
+5) Push commits> push to origin> Done.
+
+13 Update release process for contributors
+Make changes and commit them to suitable branch (master is stable here and bledge is the bleeding edge one)
+Make sure to update the version number in both crackerk.lua file and in introtext.h
+Update the changelogs in Fullchangelog.txt (URS uses it to show changelogs in game)
+Push a tag with following format r.x.y where "r." initiates the build process, x and y denotes the major and minor versions respectively.
+Download the artifacts when done and put them in releases (github release named latest, this is where downloads are hosted and also where URS looks for files when updating)
+Make sure to rename the windows 32 bit binary as powder32 separately before uploading to releases in above step.
+Once done, update the parameters in pastebin file (only accessible to cracker1000 at time of writing this, might open to all in future if required). 
