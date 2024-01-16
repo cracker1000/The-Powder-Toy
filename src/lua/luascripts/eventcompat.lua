@@ -1,3 +1,4 @@
+iscrackmod = true --global variable for detecting c1k mod in lua scripts
 if not event then
 	return
 end
