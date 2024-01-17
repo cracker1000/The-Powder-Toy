@@ -188,7 +188,7 @@ void Renderer::render_parts()
 	auto *parts = sim->parts;
 	if (relativeHeatDisplay) 
 	{
-		auto heatRange = GetMinMaxTemp();
+		auto heatRange = sim->GetMinMaxTemp();
 		float smooth = HEAT_DISPLAY_SMOOTHING;
 		minTemp = (heatRange.first + minTemp * smooth) / (smooth + 1); // Make smoother across frames
 		maxTemp = (heatRange.second + maxTemp * smooth) / (smooth + 1);
@@ -206,7 +206,6 @@ void Renderer::render_parts()
 		minTemp = MIN_TEMP;
 		maxTemp = MAX_TEMP;
 	}
-	
 	if (gridSize)//draws the grid
 	{
 		for (ny=0; ny<YRES; ny++)
