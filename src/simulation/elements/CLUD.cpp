@@ -103,7 +103,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		}
 		else
 		{
-			*firea = ren->rng.between(0, 15);
+			*firea = gfctx.rng.between(0, 15);
 			*fireb = 255-cpart->tmp/8;
 			*firer = 255-cpart->tmp/8;
 			*fireg = 255-cpart->tmp/8;

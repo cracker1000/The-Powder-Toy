@@ -51,6 +51,8 @@ constexpr int defaultSupportStrenght = 10;
 
 static Particle* getNeighbor(Simulation* sim, int x, int y)
 {
+	auto &sd = SimulationData::CRef();
+	auto &elements = sd.elements;
 	Particle* part = nullptr;
 	int pId = sim->pmap[y][x];
 	if (pId)
@@ -61,7 +63,7 @@ static Particle* getNeighbor(Simulation* sim, int x, int y)
 
 		//Only solids can support a structure
 		if (
-			!(sim->elements[TYP(pId)].Properties & TYPE_SOLID)
+			!(elements[TYP(pId)].Properties & TYPE_SOLID)
 			&&
 			part->type != PT_CNCT//Except for cnct
 		   ) 
@@ -83,12 +85,14 @@ static void collapse(Particle* self)
 
 static int evaluateDistance(Particle* neighbor,Simulation* sim)
 {
+	auto &sd = SimulationData::CRef();
+	auto &elements = sd.elements;
 	int distance;
 
 	if (neighbor->type != PT_STRC)
 	{
 		int pId = sim->pmap[(int)neighbor->y][(int)neighbor->x];
-		if (sim->elements[TYP(pId)].Properties & TYPE_SOLID)
+		if (elements[TYP(pId)].Properties & TYPE_SOLID)
 			distance = miscSideSupport;
 		else
 			distance = 0;

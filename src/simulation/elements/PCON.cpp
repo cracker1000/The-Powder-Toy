@@ -50,6 +50,8 @@ void Element::Element_PCON()
 
 static int update(UPDATE_FUNC_ARGS)
 {
+	auto &sd = SimulationData::CRef();
+	auto &elements = sd.elements;
 	if (parts[i].tmp2 != 10)
 	{
 		if (parts[i].tmp2 > 0)
@@ -77,7 +79,7 @@ static int update(UPDATE_FUNC_ARGS)
 	if (parts[i].tmp2 == 0)
 	{
 		int ctype = TYP(parts[i].ctype);
-		if (ctype <= 0 || ctype >= PT_NUM || !sim->elements[ctype].Enabled || ctype == PT_PCON)
+		if (ctype <= 0 || ctype >= PT_NUM || !elements[ctype].Enabled || ctype == PT_PCON)
 		{
 			for (auto rx = -1; rx < 2; rx++)
 				for (auto ry = -1; ry < 2; ry++)
@@ -102,7 +104,7 @@ static int update(UPDATE_FUNC_ARGS)
 		}
 		else
 		{
-			int restrictElement = sim->IsElement(parts[i].tmp) ? parts[i].tmp : 0;
+			int restrictElement = sd.IsElement(parts[i].tmp) ? parts[i].tmp : 0;
 			for (auto rx = -1; rx < 2; rx++)
 				for (auto ry = -1; ry < 2; ry++)
 					if (x + rx >= 0 && y + ry >= 0 && x + rx < XRES && y + ry < YRES)

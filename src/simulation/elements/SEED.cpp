@@ -133,12 +133,8 @@ static void create(ELEMENT_CREATE_FUNC_ARGS)
 }
 
 static int graphics(GRAPHICS_FUNC_ARGS)
-{
-	if (cpart->tmp == 2 && cpart->temp >= 275.15f)// Infinity Seeds.
-	{
-	 ren->BlendFilledEllipse(Vec2((int)(cpart->x+1.0f),(int)(cpart->y)),Vec2(2,2),RGBA<uint8_t>(150,75,0,240));
-	}                    
-	else if (cpart->temp < 275.15f) //Cold seeds.
+{             
+	if (cpart->temp < 275.15f) //Cold seeds.
 	{
 		*colr = 30;
 		*colg = 30;

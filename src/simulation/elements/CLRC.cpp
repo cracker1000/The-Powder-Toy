@@ -50,6 +50,8 @@ void Element::Element_CLRC()
 
 static int update(UPDATE_FUNC_ARGS)
 {
+	auto &sd = SimulationData::CRef();
+	auto &elements = sd.elements;
 	if (parts[i].life > 1)
 	{
 		parts[i].vx = 0;
@@ -64,7 +66,7 @@ static int update(UPDATE_FUNC_ARGS)
 				auto r = pmap[y + ry][x + rx];
 				if (!r)
 					continue;
-				if (sim->elements[TYP(r)].Properties&TYPE_SOLID||(parts[ID(r)].type == PT_COPR && parts[ID(r)].tmp2 == 0))
+				if (elements[TYP(r)].Properties&TYPE_SOLID||(parts[ID(r)].type == PT_COPR && parts[ID(r)].tmp2 == 0))
 				{
 					parts[i].life = 5;
 				}

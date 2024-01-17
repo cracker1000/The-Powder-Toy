@@ -230,7 +230,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		*colb = 40;
 	}
 	//wings
-	ren->DrawLine(Vec2((int)(cpart->x),(int)(cpart->y)),Vec2(ren->rng.between((int)(cpart->x-2.0f),(int)(cpart->x + 2.0f)),(int)(cpart->y - 1.0f)),RGB<uint8_t>(255, 255, 0));
+	//gfctx.ren->DrawLine(Vec2((int)(cpart->x),(int)(cpart->y)),Vec2(gfctx.rng.between((int)(cpart->x-2.0f),(int)(cpart->x + 2.0f)),(int)(cpart->y - 1.0f)),RGB<uint8_t>(255, 255, 0));
 	return 0;
 }
 
