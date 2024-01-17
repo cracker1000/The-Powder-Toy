@@ -1,10 +1,7 @@
 v58.0 (Unreleased)
 Fix relative heat
-Add elements and wall
-Update to stable 98.0
 Fix starcatcher update checks
-Add ALUM
-Add vote counter and comment stamps
+fix ALUM and other element files along with elex id check
 
 v57.5
 New element: ALMN (Aluminium powder and solid) by @Rebmiami
