@@ -45,10 +45,13 @@ constexpr int HEAT_DISPLAY_MIN_DIFF = 40;
 
 constexpr int NGOL = 24;
 
-constexpr int CIRCLE_BRUSH = 0;
-constexpr int SQUARE_BRUSH = 1;
-constexpr int TRI_BRUSH    = 2;
-constexpr int BRUSH_NUM    = 3;
+enum DefaultBrushes
+{
+	BRUSH_CIRCLE,
+	BRUSH_SQUARE,
+	BRUSH_TRIANGLE,
+	NUM_DEFAULTBRUSHES,
+};
 
 //Photon constants
 constexpr int SURF_RANGE     = 10;
