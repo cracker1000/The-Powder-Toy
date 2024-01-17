@@ -143,7 +143,7 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		return 0;
 	}
 
-	if (ren->rng.chance(1, 6))
+	if (gfctx.rng.chance(1, 6))
 	{
 		*pixel_mode |= PMODE_SPARK;
 	}

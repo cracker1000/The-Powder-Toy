@@ -186,9 +186,9 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 {
 	if (cpart->tmp3 > 0)
 	{
-		if (ren->rng.chance(1, 3))
+		if (gfctx.rng.chance(1, 3))
 		{
-			ren->BlendEllipse(Vec2((int)(cpart->x), (int)(cpart->y)), Vec2(cpart->life, cpart->life), RGBA<uint8_t>(40 + cpart->tmp * 70, 0, 40 + cpart->tmp2 * 70, 40));
+			gfctx.ren->BlendEllipse(Vec2((int)(cpart->x), (int)(cpart->y)), Vec2(cpart->life, cpart->life), RGBA<uint8_t>(40 + cpart->tmp * 70, 0, 40 + cpart->tmp2 * 70, 40));
 		}
 	}
 	return 0;

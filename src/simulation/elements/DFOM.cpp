@@ -132,9 +132,9 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 	if (cpart->tmp4 < 200 && cpart->tmp4 > 0)
 	{
 	*firea = 250;
-	*firer = ren->rng.between(50,255);
-	*fireg = ren->rng.between(50,255);
-	*fireb = ren->rng.between(50,255);
+	*firer = gfctx.rng.between(50,255);
+	*fireg = gfctx.rng.between(50,255);
+	*fireb = gfctx.rng.between(50,255);
 	}
 	else
 	{

@@ -50,6 +50,8 @@ void Element::Element_RUBR()
 
 static int update(UPDATE_FUNC_ARGS)
 {
+	auto &sd = SimulationData::CRef();
+	auto &elements = sd.elements;
 	if (parts[i].tmp2 == 1)
 	{
 		if (sim->rng.chance(1, 50))
@@ -87,7 +89,7 @@ static int update(UPDATE_FUNC_ARGS)
 				if (!r)
 					continue;
 				{
-					if (parts[ID(r)].type != PT_RUBR && parts[i].tmp == 1 && !(sim->elements[TYP(r)].Properties&TYPE_SOLID) && !(sim->elements[TYP(r)].Properties&TYPE_ENERGY))//Bouncy behaviour.
+					if (parts[ID(r)].type != PT_RUBR && parts[i].tmp == 1 && !(elements[TYP(r)].Properties&TYPE_SOLID) && !(elements[TYP(r)].Properties&TYPE_ENERGY))//Bouncy behaviour.
 					{
 						parts[ID(r)].vx = -1.3*(parts[ID(r)].vx);
 						parts[ID(r)].vy = -1.3*(parts[ID(r)].vy);

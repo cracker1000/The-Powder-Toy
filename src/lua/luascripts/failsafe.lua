@@ -25,7 +25,7 @@ return false
 end
 
 if failsafe == nil then
-event.register(event.tick, warningmsg)
-event.register(event.mousedown, warningmsgclick)
+--event.register(event.tick, warningmsg)
+--event.register(event.mousedown, warningmsgclick)
 end
 

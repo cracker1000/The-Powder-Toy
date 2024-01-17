@@ -107,31 +107,25 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 	{
 	if (cpart->tmp == 1) // Temp. [1]
 	{
-	cpart->dcolour = 0xFFFF0000;
-
-	ren->BlendText(Vec2((int)(cpart->x-8), (int)(cpart->y - 10)),String::Build(roundf(cpart->temp-273.15f)), RGBA<uint8_t>(*colr, *colg, *colb, 255));
+	gfctx.ren->BlendText(Vec2((int)(cpart->x-8), (int)(cpart->y - 10)),String::Build(roundf(cpart->temp-273.15f)), RGBA<uint8_t>(*colr, *colg, *colb, 255));
 	}
 	else if (cpart->tmp == 2) //Pressure [2]
 	{
-	cpart->dcolour = 0xFF478ED6;
-	ren->BlendText(Vec2((int)(cpart->x-2), (int)(cpart->y - 10)),String::Build(cpart->tmp2), RGBA<uint8_t>(*colr, *colg, *colb, 255));
+	gfctx.ren->BlendText(Vec2((int)(cpart->x-2), (int)(cpart->y - 10)),String::Build(cpart->tmp2), RGBA<uint8_t>(*colr, *colg, *colb, 255));
 	}
 	else if (cpart->tmp == 3) //Gravity [3]
 	{
-	cpart->dcolour = 0xFF00FF00;
-	ren->BlendText(Vec2((int)(cpart->x-2), (int)(cpart->y - 10)),String::Build(cpart->tmp3), RGBA<uint8_t>(*colr, *colg, *colb, 255));
+	gfctx.ren->BlendText(Vec2((int)(cpart->x-2), (int)(cpart->y - 10)),String::Build(cpart->tmp3), RGBA<uint8_t>(*colr, *colg, *colb, 255));
 	}
 	else if (cpart->tmp == 4) //Crack Mod [4]
 	{
-	cpart->dcolour = 0xFF8300FF;
-	ren->BlendFilledRect(RectSized(Vec2((int)(cpart->x - 22), (int)(cpart->y-13)),Vec2( 51, 13)),RGBA<uint8_t>(*colr, *colg, *colb,50));
-	ren->DrawRect(RectSized(Vec2((int)(cpart->x - 22), (int)(cpart->y-13)),Vec2( 51, 13)),RGB<uint8_t>(*colr, *colg, *colb));
-	ren->BlendText(Vec2((int)(cpart->x-20), (int)(cpart->y - 10)),"Crack Mod", RGBA<uint8_t>(*colr, *colg, *colb, 255));
+	gfctx.ren->BlendFilledRect(RectSized(Vec2((int)(cpart->x - 22), (int)(cpart->y-13)),Vec2( 51, 13)),RGBA<uint8_t>(*colr, *colg, *colb,50));
+	gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->x - 22), (int)(cpart->y-13)),Vec2( 51, 13)),RGB<uint8_t>(*colr, *colg, *colb));
+	gfctx.ren->BlendText(Vec2((int)(cpart->x-20), (int)(cpart->y - 10)),"Crack Mod", RGBA<uint8_t>(*colr, *colg, *colb, 255));
 	}
 	else if (cpart->tmp == 5) //Timer [5]
 	{
-	cpart->dcolour = 0xFFFFFFFF;
-	ren->BlendText(Vec2((int)(cpart->x-4), (int)(cpart->y - 10)),String::Build(cpart->tmp4), RGBA<uint8_t>(*colr, *colg, *colb, 255));
+	gfctx.ren->BlendText(Vec2((int)(cpart->x-4), (int)(cpart->y - 10)),String::Build(cpart->tmp4), RGBA<uint8_t>(*colr, *colg, *colb, 255));
 	}
 	}
 	return 0;

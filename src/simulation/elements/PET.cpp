@@ -343,32 +343,32 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 			mr = 250;
 			mg = 50;
 			mb = 50;
-	ren->BlendText(Vec2((int)(cpart->x + 9.0f), (int)(cpart->y - 17.0f)), "!", RGBA<uint8_t>(255, 0, 0, 255));
+	gfctx.ren->BlendText(Vec2((int)(cpart->x + 9.0f), (int)(cpart->y - 17.0f)), "!", RGBA<uint8_t>(255, 0, 0, 255));
 	}
 	if (cpart->tmp > 0 && cpart->tmp <5)
 	{
-	ren->BlendText(Vec2((int)(cpart->x - 10.0f), (int)(cpart->y - 27.0f)), "Stkm",  RGBA<uint8_t>(55, 255, 55, 250));
+	gfctx.ren->BlendText(Vec2((int)(cpart->x - 10.0f), (int)(cpart->y - 27.0f)), "Stkm",  RGBA<uint8_t>(55, 255, 55, 250));
 	}
 
 	if (cpart->vy > 0)
 	{
-	ren->BlendText(Vec2((int)(cpart->x - 2.0f), (int)(cpart->y + 3.0f)), "*", RGBA<uint8_t>(255, 255, 0, 255)); 
+	gfctx.ren->BlendText(Vec2((int)(cpart->x - 2.0f), (int)(cpart->y + 3.0f)), "*", RGBA<uint8_t>(255, 255, 0, 255)); 
 	}
 	// draw body
-	ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y - 10.0f)),Vec2(cpart->ctype, cpart->ctype), RGBA<uint8_t>(mr, mg, mb, 255));
-	ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y - 2.0f)), Vec2(cpart->ctype + 1, cpart->ctype + 1),RGBA<uint8_t>( 138, 138, 255, 205));
-	ren->DrawRect(RectSized(Vec2((int)(cpart->x - 1.0f), (int)(cpart->y - 11.0f)),Vec2( 3, 1)),RGB<uint8_t>( 0, 0, 0));
+	gfctx.ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y - 10.0f)),Vec2(cpart->ctype, cpart->ctype), RGBA<uint8_t>(mr, mg, mb, 255));
+	gfctx.ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y - 2.0f)), Vec2(cpart->ctype + 1, cpart->ctype + 1),RGBA<uint8_t>( 138, 138, 255, 205));
+	gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->x - 1.0f), (int)(cpart->y - 11.0f)),Vec2( 3, 1)),RGB<uint8_t>( 0, 0, 0));
 
 	// health bar
-	ren->DrawFilledRect(RectSized(Vec2((int)(cpart->x - 4.0f), (int)(cpart->y - 17.0f)), Vec2(cpart->life / 10, 1)), RGB<uint8_t>(mr, mg, mb));
-	ren->DrawRect(RectSized(Vec2((int)(cpart->x - 5.0f), (int)(cpart->y - 18.0f)),Vec2( 12, 3)), RGB<uint8_t>(138, 138, 255));
+	gfctx.ren->DrawFilledRect(RectSized(Vec2((int)(cpart->x - 4.0f), (int)(cpart->y - 17.0f)), Vec2(cpart->life / 10, 1)), RGB<uint8_t>(mr, mg, mb));
+	gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->x - 5.0f), (int)(cpart->y - 18.0f)),Vec2( 12, 3)), RGB<uint8_t>(138, 138, 255));
 
 	// Hand
-	ren->DrawRect(RectSized(Vec2((int)(cpart->x - 5.0f), (int)(cpart->y - 6.0f)),Vec2( 1, 4)), RGB<uint8_t>(255, 255, 255));
-	ren->DrawRect(RectSized(Vec2((int)(cpart->x + 5.0f), (int)(cpart->y - 6.0f)),Vec2( 1, 4)), RGB<uint8_t>(255, 255, 255));
+	gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->x - 5.0f), (int)(cpart->y - 6.0f)),Vec2( 1, 4)), RGB<uint8_t>(255, 255, 255));
+	gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->x + 5.0f), (int)(cpart->y - 6.0f)),Vec2( 1, 4)), RGB<uint8_t>(255, 255, 255));
 
 	// anteena
-	ren->DrawRect(RectSized(Vec2((int)(cpart->x - 4.0f), (int)(cpart->y - 13.0f)),Vec2( 1, 3)),RGB<uint8_t>(mr, mg, mb));
-	ren->DrawRect(RectSized(Vec2((int)(cpart->x + 4.0f), (int)(cpart->y - 13.0f)),Vec2( 1, 3)),RGB<uint8_t>(mr, mg, mb));
+	gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->x - 4.0f), (int)(cpart->y - 13.0f)),Vec2( 1, 3)),RGB<uint8_t>(mr, mg, mb));
+	gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->x + 4.0f), (int)(cpart->y - 13.0f)),Vec2( 1, 3)),RGB<uint8_t>(mr, mg, mb));
 	return 0;
 }

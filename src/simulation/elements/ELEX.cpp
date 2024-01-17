@@ -80,10 +80,10 @@ static int graphics(GRAPHICS_FUNC_ARGS)
 		cb = (int)(sin(frequency* cpart->tmp + 8) * 127 + 150);
 		if (cpart->tmp > 70)
 	{
-		ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y)), Vec2(ren->rng.between((int)(cpart->x - 9), (int)(cpart->x + 9)), ren->rng.between((int)(cpart->y - 9), (int)(cpart->y + 9))),RGB<uint8_t>(255, 255, 255));
+		gfctx.ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y)), Vec2(gfctx.rng.between((int)(cpart->x - 9), (int)(cpart->x + 9)), gfctx.rng.between((int)(cpart->y - 9), (int)(cpart->y + 9))),RGB<uint8_t>(255, 255, 255));
 	}
 	}
-	ren->BlendEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2( 2, 2), RGBA<uint8_t>(cr, cg, cb, 150));
-	ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2(1, 1), RGBA<uint8_t>(cr, cg, cb, 100));
+	gfctx.ren->BlendEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2( 2, 2), RGBA<uint8_t>(cr, cg, cb, 150));
+	gfctx.ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2(1, 1), RGBA<uint8_t>(cr, cg, cb, 100));
 	return 0;
 }

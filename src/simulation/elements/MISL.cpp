@@ -155,31 +155,31 @@ static int graphics(GRAPHICS_FUNC_ARGS) //Flare when activated.
 
 	if (cpart->tmp4 > 0) // pointer
 	{
-		ren->DrawRect(RectSized(Vec2((int)(cpart->tmp - 2), (int)(cpart->tmp2)),Vec2(5, 1)), RGB<uint8_t>(cr, cg, cb));
-		ren->DrawRect(RectSized(Vec2(cpart->tmp, cpart->tmp2 - 2),Vec2(1, 5)), RGB<uint8_t>(cr, cg, cb));
+		gfctx.ren->DrawRect(RectSized(Vec2((int)(cpart->tmp - 2), (int)(cpart->tmp2)),Vec2(5, 1)), RGB<uint8_t>(cr, cg, cb));
+		gfctx.ren->DrawRect(RectSized(Vec2(cpart->tmp, cpart->tmp2 - 2),Vec2(1, 5)), RGB<uint8_t>(cr, cg, cb));
 	}
 	//Body
 	if (cpart->life == 0)
 	{
-		ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y - 1)),Vec2((int)(cpart->x), (int)(cpart->y - 4)), RGB<uint8_t>(cr, cg, cb));
+		gfctx.ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y - 1)),Vec2((int)(cpart->x), (int)(cpart->y - 4)), RGB<uint8_t>(cr, cg, cb));
 	}
 	else
 	{
 		if (cpart->vy < 0)
 		{
-			ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y - 1)),Vec2((int)(cpart->x), (int)(cpart->y - 4)), RGB<uint8_t>(cr, cg, cb));
+			gfctx.ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y - 1)),Vec2((int)(cpart->x), (int)(cpart->y - 4)), RGB<uint8_t>(cr, cg, cb));
 		}
 		else if (cpart->vy > 0)
 		{
-			ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y - 1)),Vec2((int)(cpart->x), (int)(cpart->y + 4)), RGB<uint8_t>(cr, cg, cb));
+			gfctx.ren->DrawLine(Vec2((int)(cpart->x), (int)(cpart->y - 1)),Vec2((int)(cpart->x), (int)(cpart->y + 4)), RGB<uint8_t>(cr, cg, cb));
 		}
 		if (cpart->vx < 0)
 		{
-			ren->DrawLine(Vec2((int)(cpart->x+1), (int)(cpart->y)), Vec2((int)(cpart->x + 4),(int)(cpart->y)), RGB<uint8_t>(cr, cg, cb));
+			gfctx.ren->DrawLine(Vec2((int)(cpart->x+1), (int)(cpart->y)), Vec2((int)(cpart->x + 4),(int)(cpart->y)), RGB<uint8_t>(cr, cg, cb));
 		}
 		else if (cpart->vx > 0)
 		{
-			ren->DrawLine(Vec2((int)(cpart->x - 1), (int)(cpart->y)), Vec2((int)(cpart->x - 4), (int)(cpart->y)), RGB<uint8_t>(cr, cg, cb));
+			gfctx.ren->DrawLine(Vec2((int)(cpart->x - 1), (int)(cpart->y)), Vec2((int)(cpart->x - 4), (int)(cpart->y)), RGB<uint8_t>(cr, cg, cb));
 		}
 	}
 	return 0;

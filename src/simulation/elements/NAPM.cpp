@@ -46,6 +46,8 @@ void Element::Element_NAPM()
 
 static int update(UPDATE_FUNC_ARGS)
 {
+	auto &sd = SimulationData::CRef();
+	auto &elements = sd.elements;
 	if (parts[i].life > 1)
 	{
 		parts[i].vy = 0;
@@ -86,7 +88,7 @@ static int update(UPDATE_FUNC_ARGS)
 					r = sim->photons[y + ry][x + rx];
 				if (!r)
 					continue;
-				if (sim->elements[TYP(r)].Properties&TYPE_SOLID)
+				if (elements[TYP(r)].Properties&TYPE_SOLID)
 				{
 					parts[i].life = 5;
 				}

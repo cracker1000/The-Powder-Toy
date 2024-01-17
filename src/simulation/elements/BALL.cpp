@@ -46,7 +46,9 @@ void Element::Element_BALL()
 	Graphics = &graphics;
 }
 static int update(UPDATE_FUNC_ARGS)
-{
+{	
+	auto &sd = SimulationData::CRef();
+	auto &elements = sd.elements;
 	for (auto  rx = -3; rx <= 3; rx++)
 		for (auto  ry = -3; ry <= 3; ry++)
 			if (rx || ry)
@@ -56,7 +58,7 @@ static int update(UPDATE_FUNC_ARGS)
 					continue;
 				if (TYP(r) && TYP(r) != PT_BALL && parts[i].life < 2)
 				{
-					if (!(sim->elements[TYP(r)].Properties & TYPE_SOLID) && !(sim->elements[TYP(r)].Properties & TYPE_ENERGY))
+					if (!(elements[TYP(r)].Properties & TYPE_SOLID) && !(elements[TYP(r)].Properties & TYPE_ENERGY))
 					{
 						parts[ID(r)].vx = -1*parts[i].vx;
 						parts[ID(r)].vy = -1*parts[i].vy;
@@ -71,7 +73,7 @@ static int update(UPDATE_FUNC_ARGS)
 
 static int graphics(GRAPHICS_FUNC_ARGS)
 {
-	ren->BlendEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2(3,3), RGBA<uint8_t>(210, 4, 45, 255));
-	ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2(2, 2),RGBA<uint8_t>(210, 4, 45, 200));
+	gfctx.ren->BlendEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2(3,3), RGBA<uint8_t>(210, 4, 45, 255));
+	gfctx.ren->BlendFilledEllipse(Vec2((int)(cpart->x), (int)(cpart->y)),Vec2(2, 2),RGBA<uint8_t>(210, 4, 45, 200));
 	return 0;
 }
