@@ -165,7 +165,6 @@ public:
 	void BeforeSim();
 	void AfterSim();
 	void clear_area(int area_x, int area_y, int area_w, int area_h);
-    std::pair<float, float> GetMinMaxTemp();
 
 	void SetEdgeMode(int newEdgeMode);
 	void SetDecoSpace(int newDecoSpace);
