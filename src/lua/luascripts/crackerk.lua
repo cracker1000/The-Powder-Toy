@@ -1,5 +1,5 @@
 --Cracker1000 mod interface script--
-local crackversion = 57.5 --Next version: 58.0
+local crackversion = 58.0 --Next version: 58.5
 local motw = "."
 local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
@@ -447,7 +447,7 @@ return false
 end
 if clickcheck == 0 then
 clickcheck = 2
-crlog = http.get("https://raw.githubusercontent.com/cracker1000/The-Powder-Toy/Bledge/Full%20changelog.txt")
+crlog = http.get("https://raw.githubusercontent.com/cracker1000/The-Powder-Toy/Bledge-2024/Full%20changelog.txt")--Checks for changelogs here. Needs to be updated when a new branch is created.
 if checkos == "WIN64" then
 reqwin = http.get("https://github.com/cracker1000/The-Powder-Toy/releases/download/Latest/"..appname..".exe")
 elseif checkos == "LIN64" then
