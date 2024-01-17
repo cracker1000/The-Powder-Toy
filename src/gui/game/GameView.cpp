@@ -2280,7 +2280,7 @@ void GameView::OnDraw()
 		g->BlendFilledRect(RectSized(Vec2{ XRES-20-textWidth, 12 }, Vec2{ textWidth+8, 15 }), 0x000000_rgb .WithAlpha(127));
 		g->BlendText({ XRES-16-textWidth, 16 }, sampleInfo, 0xFF3214_rgb .WithAlpha(255));
 	}
-	else if(showHud)
+	else if(showHud && introText < 51)
 	{
 		//Draw info about simulation under cursor
 		int wavelengthGfx = 0;
@@ -2365,14 +2365,7 @@ void GameView::OnDraw()
 					else
 						sampleInfo << ", Tmp: " << sample.particle.tmp;
 				}
-
-				// only elements that use .tmp2 show it in the debug HUD
-				if (type == PT_CRAY || type == PT_DRAY || type == PT_EXOT || type == PT_LIGH || type == PT_SOAP || type == PT_TRON
-						|| type == PT_VIBR || type == PT_VIRS || type == PT_WARP || type == PT_LCRY || type == PT_CBNW || type == PT_TSNS
-						|| type == PT_DTEC || type == PT_LSNS || type == PT_PSTN || type == PT_LDTC || type == PT_VSNS || type == PT_LITH
-						|| type == PT_CONV || type == PT_ETRD)
-					sampleInfo << ", Tmp2: " << sample.particle.tmp2;
-
+				sampleInfo << ", Tmp2: " << sample.particle.tmp2;
 				sampleInfo << ", Pressure: " << sample.AirPressure;
 			}
 			else
@@ -2390,7 +2383,7 @@ void GameView::OnDraw()
 		}
 		else if (sample.isMouseInSim)
 		{
-			sampleInfo << "Empty, Pressure: " << sample.AirPressure;
+			sampleInfo << "Pressure: " << sample.AirPressure;
 		}
 		else
 		{
@@ -2398,14 +2391,18 @@ void GameView::OnDraw()
 		}
 
 		int textWidth = Graphics::TextSize(sampleInfo.Build()).X - 1;
-		g->BlendFilledRect(RectSized(Vec2{ XRES-20-textWidth, 12 }, Vec2{ textWidth+8, 15 }), 0x000000_rgb .WithAlpha(int(alpha*0.5f)));
-		g->BlendText({ XRES-16-textWidth, 16 }, sampleInfo.Build(), 0xFFFFFF_rgb .WithAlpha(int(alpha*0.75f)));
-
+		g->BlendFilledRect(RectSized(Vec2{6, 18 }, Vec2{ textWidth+8, 15 }), 0x000000_rgb .WithAlpha(int(alpha*0.5f)));
+		g->BlendText({8,22}, sampleInfo.Build(), RGBA<uint8_t>(225,225,225,250));
+		
 		if (wavelengthGfx)
 		{
-			int i, cr, cg, cb, j, h = 3, x = XRES-19-textWidth, y = 10;
+			int i, cr, cg, cb, j, h = 3, x = 6, y = 35;
+			if (showDebug)
+			{
+				y = 52;
+			}
 			int tmp;
-			g->BlendFilledRect(RectSized(Vec2{ x, y }, Vec2{ 30, h }), 0x404040_rgb .WithAlpha(alpha));
+			g->BlendFilledRect(RectSized(Vec2{570,3}, Vec2{ 30, h }), 0x404040_rgb .WithAlpha(alpha));
 			for (i = 0; i < 30; i++)
 			{
 				if ((wavelengthGfx >> i)&1)
@@ -2431,7 +2428,7 @@ void GameView::OnDraw()
 					cg *= tmp;
 					cb *= tmp;
 					for (j=0; j<h; j++)
-						g->BlendPixel({ x+29-i, y+j }, RGBA<uint8_t>(cr>255?255:cr, cg>255?255:cg, cb>255?255:cb, alpha));
+					g->BlendPixel({ 570+29-i, 3+j }, RGBA<uint8_t>(cr>255?255:cr, cg>255?255:cg, cb>255?255:cb, alpha));
 				}
 			}
 		}
@@ -2440,15 +2437,24 @@ void GameView::OnDraw()
 		{
 			StringBuilder sampleInfo;
 			sampleInfo << Format::Precision(2);
-
+			sampleInfo << "X:" << sample.PositionX << ", Y:" << sample.PositionY;
 			if (type)
-				sampleInfo << "#" << sample.ParticleID << ", ";
-
-			sampleInfo << "X:" << sample.PositionX << " Y:" << sample.PositionY;
-
+			sampleInfo << Format::Precision(1);
+					if (type)
+					{
+						sampleInfo << ", Vx: " << sample.particle.vx;
+						sampleInfo << ", Vy: " << sample.particle.vy;
+						if (sample.particle.dcolour)
+						{
+							sampleInfo << ", Dcolor: #" << Format::Uppercase() << Format::Hex() << sample.particle.dcolour;
+						}
+						sampleInfo << Format::Dec();
+						sampleInfo << ", t3: " << sample.particle.tmp3;
+						sampleInfo << ", t4: " << sample.particle.tmp4;
+						sampleInfo << ", #" << sample.ParticleID;
+					}
 			if (sample.Gravity)
 				sampleInfo << ", GX: " << sample.GravityVelocityX << " GY: " << sample.GravityVelocityY;
-
 			if (c->GetAHeatEnable())
 			{
 				sampleInfo << ", AHeat: ";
@@ -2456,8 +2462,8 @@ void GameView::OnDraw()
 			}
 
 			auto textWidth = Graphics::TextSize(sampleInfo.Build()).X - 1;
-			g->BlendFilledRect(RectSized(Vec2{ XRES-20-textWidth, 27 }, Vec2{ textWidth+8, 14 }), 0x000000_rgb .WithAlpha(int(alpha*0.5f)));
-			g->BlendText({ XRES-16-textWidth, 30 }, sampleInfo.Build(), 0xFFFFFF_rgb .WithAlpha(int(alpha*0.75f)));
+			g->BlendFilledRect(RectSized(Vec2{6,33}, Vec2{ textWidth+8, 14 }), 0x000000_rgb .WithAlpha(int(alpha*0.5f)));
+			g->BlendText({8,37}, sampleInfo.Build(), RGBA<uint8_t>(32,216,255,250));
 		}
 	}
 
@@ -2465,8 +2471,20 @@ void GameView::OnDraw()
 	{
 		//FPS and some version info
 		StringBuilder fpsInfo;
-		fpsInfo << Format::Precision(2) << "FPS: " << ui::Engine::Ref().GetFps();
-
+		fpsInfo << Format::Precision(0) << "FPS: " << ui::Engine::Ref().GetFps();
+		if (showDebug)
+		{
+		fpsInfo <<" ("<<(ui::Engine::Ref().GetFps()) / 60 * 100 << "%), ";
+		}
+		time_t rawtime;
+		struct tm * timeinfo;
+		char buffer[80];
+		time(&rawtime);
+		timeinfo = localtime(&rawtime);
+		strftime(buffer, 80, showDebug ?
+			"%Y-%m-%d, %I:%M:%S %p" :
+			", %I:%M %p", timeinfo);
+		fpsInfo << buffer << "";
 		if (showDebug)
 		{
 			if (ren->findingElement)
@@ -2485,8 +2503,8 @@ void GameView::OnDraw()
 
 		int textWidth = Graphics::TextSize(fpsInfo.Build()).X - 1;
 		int alpha = 255-introText*5;
-		g->BlendFilledRect(RectSized(Vec2{ 12, 12 }, Vec2{ textWidth+8, 15 }), 0x000000_rgb .WithAlpha(int(alpha*0.5)));
-		g->BlendText({ 16, 16 }, fpsInfo.Build(), 0x20D8FF_rgb .WithAlpha(int(alpha*0.75)));
+		g->BlendFilledRect(RectSized(Vec2{6,3}, Vec2{ textWidth+6, 15 }), RGBA<uint8_t>(40, 40, 40,120));
+		g->BlendText({8,7}, fpsInfo.Build(), RGBA<uint8_t>(225, 225, 225,250));
 	}
 
 	//Tooltips
