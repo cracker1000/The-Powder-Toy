@@ -7,7 +7,7 @@ add same settings for crackerk.lua and other scripts as eventcompat.lua in Luasc
 Load order:
 Manager
 TPTMP
-Crackerk
+Crackerk (adjust tag button size in src>gui>game>gameview> line ~280>tagbutton from 227 to 176)
 failsafe
 
 4) TOOLS:
