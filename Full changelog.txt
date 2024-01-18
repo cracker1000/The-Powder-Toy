@@ -23,10 +23,8 @@ Most weird mirrors now work as they did prior to the many PHOT refraction fixes
 
 todo:
 Fix relative heat
-update help.txt
 Fix starcatcher update checks
 Add feature and tool tips when hovering over buttons in cr-menu
-fix ALUM and other element files along with elex id check
 
 v57.5
 New element: ALMN (Aluminium powder and solid) by @Rebmiami
