@@ -89,6 +89,8 @@ For BTRY, replace this
 10) WALLS:
 Z-Hole (19), Simulationdata.cpp, simulationdata.h, simulation.cpp and src>graphics>Renderer.cpp (Place along with Ehole in all files.) 
 
+Bonus: Configure the update checks, app id and app name in meson options.txt and build.sh + prepare.py
+
 11) To cherry pick
 a) Run cherrypick.bat
 b) FIlter branch to upstream> cherrypick and commit.
