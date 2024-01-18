@@ -80,7 +80,7 @@ Maticzpl's  contributions.
 (RUBR, 244);
 (DFOM 245);
 (DIGS 246);
-(ALUM 247);               Simulation.cpp and SPRK.cpp (SPRK conductance rules), ACID.cpp and CAUS.cpp, DMG.cpp, FIRE.cpp
+(ALUM 247);               Simulation.cpp, simulationdata.cpp and SPRK.cpp (SPRK conductance rules), ACID.cpp and CAUS.cpp, DMG.cpp, FIRE.cpp
 (ALMP 248)                BRMT.cpp
 
 For BTRY, replace this
