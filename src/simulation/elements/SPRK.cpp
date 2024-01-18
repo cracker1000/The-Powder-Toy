@@ -92,6 +92,8 @@ static int update(UPDATE_FUNC_ARGS)
 		return 1;
 	case PT_NTCT:
 	case PT_PTCT:
+	case PT_FNTC:
+	case PT_FPTC:
 		Element_NTCT_update(UPDATE_FUNC_SUBCALL_ARGS);
 		break;
 	case PT_ETRD:
@@ -232,18 +234,65 @@ static int update(UPDATE_FUNC_ARGS)
 								parts[ID(r)].life = 9;
 							}
 						}
-						else if(parts[ID(r)].ctype==PT_NTCT||parts[ID(r)].ctype==PT_PTCT)
+						else if(parts[ID(r)].ctype==PT_NTCT||parts[ID(r)].ctype==PT_PTCT||parts[ID(r)].ctype==PT_FNTC||parts[ID(r)].ctype==PT_FPTC)
 							if (sender==PT_METL)
 							{
 								parts[ID(r)].temp = 473.0f;
 							}
 					}
 					continue;
-				case PT_PUMP: case PT_GPMP: case PT_HSWC: case PT_PBCN:
+					case PT_LITH2:
+					if (pavg != PT_INSL)
+					{
+						if (sender == PT_INST && parts[ID(r)].tmp2 == 10 && parts[ID(r)].tmp < parts[ID(r)].life)
+						{
+							parts[ID(r)].tmp += 1;
+						}
+						else if (parts[i].tmp2 < 4)
+						{
+							if (sender == PT_NSCN) parts[ID(r)].tmp2 = 10;
+							else if (sender == PT_PSCN && parts[ID(r)].tmp2 >= 10) parts[ID(r)].tmp2 = 9;
+						}
+					}
+					continue;
+					case PT_ECLR:
+				{
+					if (sender == PT_PSCN)
+					{
+						parts[ID(r)].life = 10;
+					}
+					if (sender == PT_NSCN)
+					{
+						parts[ID(r)].life = 0;
+					}
+				}
+					continue;
+					case PT_PPTI:
+					if (parts[i].tmp2 < 4)
+					{
+						if (sender == PT_NSCN) parts[ID(r)].tmp2 = 10;
+						else if (sender == PT_PSCN && parts[ID(r)].tmp2 >= 10) parts[ID(r)].tmp2 = 9;
+					}
+					continue;
+				case PT_PPTO:
+					if (parts[i].tmp2 < 4)
+					{
+						if (sender == PT_NSCN) parts[ID(r)].tmp2 = 10;
+						else if (sender == PT_PSCN && parts[ID(r)].tmp2 >= 10) parts[ID(r)].tmp2 = 9;
+					}
+					continue;
+				case PT_PUMP: case PT_GPMP: case PT_HSWC: case PT_PBCN: case PT_PINV: case PT_AMBE:
 					if (parts[i].life<4)// PROP_PTOGGLE, Maybe? We seem to use 2 different methods for handling actived elements, this one seems better. Yes, use this one for new elements, PCLN is different for compatibility with existing saves
 					{
 						if (sender==PT_PSCN) parts[ID(r)].life = 10;
 						else if (sender==PT_NSCN && parts[ID(r)].life>=10) parts[ID(r)].life = 9;
+					}
+					continue;
+					case PT_PCON:
+					if (parts[i].tmp2 < 4)
+					{
+						if (sender == PT_NSCN) parts[ID(r)].tmp2 = 10;
+						else if (sender == PT_PSCN && parts[ID(r)].tmp2 >= 10) parts[ID(r)].tmp2 = 9;
 					}
 					continue;
 				case PT_LCRY:
@@ -260,11 +309,11 @@ static int update(UPDATE_FUNC_ARGS)
 							Element_PPIP_flood_trigger(sim, x+rx, y+ry, sender);
 					}
 					continue;
-				case PT_NTCT: case PT_PTCT: case PT_INWR:
+				case PT_NTCT: case PT_PTCT: case PT_INWR: case PT_FNTC: case PT_FPTC:
 					if (sender==PT_METL && pavg!=PT_INSL && pavg!=PT_RSSS && parts[i].life<4)
 					{
 						parts[ID(r)].temp = 473.0f;
-						if (receiver==PT_NTCT||receiver==PT_PTCT)
+						if (receiver==PT_NTCT||receiver==PT_PTCT||receiver==PT_FPTC||receiver==PT_FNTC)
 							continue;
 					}
 					break;
@@ -293,7 +342,7 @@ static int update(UPDATE_FUNC_ARGS)
 						goto conduct;
 					continue;
 				case PT_SWCH:
-					if (receiver==PT_PSCN||receiver==PT_NSCN||receiver==PT_WATR||receiver==PT_SLTW||receiver==PT_NTCT||receiver==PT_PTCT||receiver==PT_INWR)
+					if (receiver==PT_PSCN||receiver==PT_NSCN||receiver==PT_WATR||receiver==PT_SLTW||receiver==PT_NTCT||receiver==PT_FNTC||receiver==PT_FPTC|receiver==PT_PTCT||receiver==PT_INWR)
 						continue;
 					break;
 				case PT_ETRD:
@@ -301,10 +350,12 @@ static int update(UPDATE_FUNC_ARGS)
 						goto conduct;
 					continue;
 				case PT_NTCT:
+				case PT_FNTC:
 					if (receiver==PT_PSCN || (receiver==PT_NSCN && parts[i].temp>373.0f))
 						goto conduct;
 					continue;
 				case PT_PTCT:
+				case PT_FPTC:
 					if (receiver==PT_PSCN || (receiver==PT_NSCN && parts[i].temp<373.0f))
 						goto conduct;
 					continue;
@@ -323,10 +374,12 @@ static int update(UPDATE_FUNC_ARGS)
 						goto conduct;
 					continue;
 				case PT_NTCT:
+				case PT_FNTC:
 					if (sender==PT_NSCN || (sender==PT_PSCN&&parts[ID(r)].temp>373.0f))
 						goto conduct;
 					continue;
 				case PT_PTCT:
+				case PT_FPTC:
 					if (sender==PT_NSCN || (sender==PT_PSCN&&parts[ID(r)].temp<373.0f))
 						goto conduct;
 					continue;

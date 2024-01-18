@@ -7,7 +7,7 @@ add same settings for crackerk.lua and other scripts as eventcompat.lua in Luasc
 Load order:
 Manager
 TPTMP
-Crackerk (adjust tag button size in src>gui>game>gameview> line ~280>tagbutton from 227 to 176)
+Crackerk (adjust tag button size in src>gui>game>gameview> line ~280 > tagbutton from 227 to 176)
 failsafe
 
 4) TOOLS:
@@ -20,23 +20,24 @@ Copy appearence.cpp from gui>interface.
 6) HUD:
 Gameview.cpp (copy fpsinfo and other parts)
 
-8) Votes:
+8) Votes and comment time stamps:
 src>gui>search>Searchview.cpp
+Maticzpl's  contributions.
 
 9)Elements:               Files Modified:
 (FPTC, 197);              SPRK.cpp, BTRY.cpp
 (FNTC, 192);              SPRK.cpp, BTRY.cpp
 (CLNT, 193);
 (LED, 194);                
-(TIMC, 195);               SPRK.cpp 
+(TIMC, 195);               
 (FUEL, 196);
-(DMRN, 198);             Simulation.cpp
-(PINV, 199);                SPRK.cpp and simulation.cpp (check for .life!)
-(WALL, 200);              VIRS.cpp, ANTM.cpp, SING.cpp and simulation.cpp (add exceptions for PROT and VIRS!)
+(DMRN, 198);             Simulationdata.cpp
+(PINV, 199);                SPRK.cpp and simulationdata.cpp (check for .life!)
+(WALL, 200);              VIRS.cpp, AMTR.cpp, SING.cpp and simulationdata.cpp (add exceptions for PROT and VIRS!)
 (COND, 201);
 (QGPP, 202);
-(UVRD, 203);             Simulation.cpp (Add with PROT)
-(SUN, 204);                Simulation.cpp (Add check for UV to not pass through)
+(UVRD, 203);             Simulationdata.cpp (Add with PROT)
+(SUN, 204);                Simulationdata.cpp (Add check for UV to not pass through)
 (TMPS, 205);
 (PHOS, 206);
 (CMNT, 207);
@@ -48,8 +49,8 @@ src>gui>search>Searchview.cpp
 (CEXP, 213);                
 (LITH2,214),               SPRK.cpp
 (PROJ, 215); 
-(PPTI, 216);                SPRK.cpp
-(PPTO, 217);              SPRK.cpp
+(PPTI, 216);               SPRK.cpp
+(PPTO, 217);             SPRK.cpp
 (SEED, 218);    
 (CSNS, 219);    
 (CWIR, 220);
@@ -58,7 +59,7 @@ src>gui>search>Searchview.cpp
 (PCON, 223);             SPRK.cpp
 (STRC, 224);        
 (TURB, 225);              
-(BFLM, 226);             VIRS.cpp (add exception!)
+(BFLM, 226);              VIRS.cpp (add exception!)
 (PET, 227);             
 (MISL 228);     
 (AMBE 229);               SPRK.cpp
@@ -74,13 +75,13 @@ src>gui>search>Searchview.cpp
 (MGNT 239); 
 (SODM, 240); 
 (BALL, 241); 
-(MIST, 242); Lua element 
-(SPSH, 243); Lua element 
+(MIST, 242);                Lua element 
+(SPSH, 243);              Lua element 
 (RUBR, 244);
 (DFOM 245);
 (DIGS 246);
-(ALUM 247);             Simulation.cpp and SPRK.cpp (SPRK conductance rules), ACID.cpp and CAUS.cpp, DMG.cpp, FIRE.cpp
-(ALMP 248)              BRMT.cpp
+(ALUM 247);               Simulation.cpp and SPRK.cpp (SPRK conductance rules), ACID.cpp and CAUS.cpp, DMG.cpp, FIRE.cpp
+(ALMP 248)                BRMT.cpp
 
 For BTRY, replace this
  "if ((sim->elements[rt].Properties&PROP_CONDUCTS) && !(rt==PT_WATR||rt==PT_SLTW||rt==PT_NTCT||rt==PT_PTCT||rt==PT_INWR||rt == PT_FNTC||rt == PT_FPTC) && parts[ID(r)].life==0)"

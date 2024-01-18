@@ -1,6 +1,31 @@
 v58.0 (Unreleased)
+Fix energy particles moving through powered portals.
+Changes to match v98.0
+Fix stamp renaming option making buttons overlap with each other.
+
+From Master branch
+Fix signs loading in the wrong place in really old saves
+Restore old SOAP foam behaviour and make it work with nonstandard gravity
+Add more characters to the font
+Add liquid resist RSST and solid resist RSSS
+Make TESC create LIGH with same deco color
+Allow setting ETRD min and max distance with tmp and tmp2
+Fix some pasted particles not getting cut off at the edges of the simulation
+Fix pasting sometimes getting interrupted by the particle limit
+Mark saves as being from the next version in dev builds
+Complain when pasting save data with missing elements
+Add includePressure parameter to sim.loadStamp
+Add sim.listStamps
+Fix Textbox width limiting content length
+Add link to the registration form to LoginView
+Retire tpt.beginGetScript in favour of tpt.installScriptManager
+Most weird mirrors now work as they did prior to the many PHOT refraction fixes
+
+todo:
 Fix relative heat
+update help.txt
 Fix starcatcher update checks
+Add feature and tool tips when hovering over buttons in cr-menu
 fix ALUM and other element files along with elex id check
 
 v57.5

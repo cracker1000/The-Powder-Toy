@@ -116,7 +116,7 @@ static int update(UPDATE_FUNC_ARGS)
 				auto r = pmap[y+ry][x+rx];
 				if (!r)
 					continue;
-				if (TYP(r)!=PT_DMND&& sim->rng.chance(1, 3))
+				if (TYP(r)!=PT_DMND && TYP(r)!= PT_WALL && sim->rng.chance(1, 3))
 				{
 					if (TYP(r)==PT_SING && parts[ID(r)].life >10)
 					{
