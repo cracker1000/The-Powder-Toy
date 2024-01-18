@@ -2868,6 +2868,7 @@ void LuaScriptInterface::initRendererAPI()
 		{"zoomEnabled", renderer_zoomEnabled},
 		{"zoomWindow", renderer_zoomWindowInfo},
 		{"zoomScope", renderer_zoomScopeInfo},
+        {"heatDisplayRelativeMode", renderer_heatDisplayRelativeMode},
 		{NULL, NULL}
 	};
 	luaL_register(l, "renderer", rendererAPIMethods);
@@ -3135,6 +3136,21 @@ int LuaScriptInterface::renderer_zoomScopeInfo(lua_State * l)
 	luacon_ren->zoomScopePosition = ui::Point(x, y);
 	luacon_ren->zoomScopeSize = s;
 	return 0;
+}
+
+int LuaScriptInterface::renderer_heatDisplayRelativeMode(lua_State * l)
+{
+	if (lua_gettop(l) == 0)
+	{
+		lua_pushboolean(l, luacon_ren->relativeHeatDisplay);
+		return 1;
+	}
+	else
+	{
+		luaL_checktype(l, -1, LUA_TBOOLEAN);
+		luacon_ren->relativeHeatDisplay = lua_toboolean(l, -1);
+		return 0;
+	}
 }
 
 void LuaScriptInterface::initElementsAPI()

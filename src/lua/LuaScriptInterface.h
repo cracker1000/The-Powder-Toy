@@ -128,6 +128,7 @@ class LuaScriptInterface: public TPTScriptInterface
 	static int renderer_zoomEnabled(lua_State *l);
 	static int renderer_zoomWindowInfo(lua_State *l);
 	static int renderer_zoomScopeInfo(lua_State *l);
+    static int renderer_heatDisplayRelativeMode(lua_State *l);
 
 	//Elements
 	void initElementsAPI();

@@ -187,6 +187,28 @@ void Renderer::render_parts()
 	if(!sim)
 		return;
 	auto *parts = sim->parts;
+
+    if (relativeHeatDisplay) 
+    {
+        auto heatRange = sim->GetMinMaxTemp();
+        float smooth = HEAT_DISPLAY_SMOOTHING;
+        minRecordedTemp = (heatRange.first + minRecordedTemp * smooth) / (smooth + 1); // Make smoother across frames
+        maxRecordedTemp = (heatRange.second + maxRecordedTemp * smooth) / (smooth + 1);
+        minRecordedTemp = std::max(minRecordedTemp, MIN_TEMP);
+        if (std::abs(minRecordedTemp - maxRecordedTemp) < HEAT_DISPLAY_MIN_DIFF)
+        {
+            maxRecordedTemp += HEAT_DISPLAY_MIN_DIFF - std::abs(minRecordedTemp - maxRecordedTemp);
+        }
+        float prevMax = maxRecordedTemp;
+        maxRecordedTemp = std::min(maxRecordedTemp, MAX_TEMP);
+        minRecordedTemp -= maxRecordedTemp - prevMax; // In case HEAT_DISPLAY_MIN_DIFF put it above MAX_TEMP
+    }
+    else 
+    {
+        minRecordedTemp = MIN_TEMP;
+        maxRecordedTemp = MAX_TEMP;
+    }
+
 	if (gridSize)//draws the grid
 	{
 		for (ny=0; ny<YRES; ny++)
@@ -294,10 +316,8 @@ void Renderer::render_parts()
 				//Alter colour based on display mode
 				if(colour_mode & COLOUR_HEAT)
 				{
-					constexpr float min_temp = MIN_TEMP;
-					constexpr float max_temp = MAX_TEMP;
 					firea = 255;
-					RGB<uint8_t> color = heatTableAt(int((sim->parts[i].temp - min_temp) / (max_temp - min_temp) * 1024));
+					RGB<uint8_t> color = heatTableAt(int((sim->parts[i].temp - minRecordedTemp) / (maxRecordedTemp - minRecordedTemp) * 1024));
 					firer = colr = color.Red;
 					fireg = colg = color.Green;
 					fireb = colb = color.Blue;
@@ -889,7 +909,7 @@ void Renderer::draw_air()
 			}
 			else if (display_mode & DISPLAY_AIRH)
 			{
-				c = RGB<uint8_t>::Unpack(HeatToColour(hv[y][x]));
+				c = RGB<uint8_t>::Unpack(HeatToColour(hv[y][x], minRecordedTemp, maxRecordedTemp));
 				//c = RGB<uint8_t>(clamp_flt(fabsf(vx[y][x]), 0.0f, 8.0f),//vx adds red
 				//	clamp_flt(hv[y][x], 0.0f, 1600.0f),//heat adds green
 				//	clamp_flt(fabsf(vy[y][x]), 0.0f, 8.0f)).Pack();//vy adds blue
@@ -1233,10 +1253,8 @@ void Renderer::render_fire()
 		}
 }
 
-int HeatToColour(float temp)
+int HeatToColour(float temp, float min_temp, float max_temp)
 {
-	constexpr float min_temp = MIN_TEMP;
-	constexpr float max_temp = MAX_TEMP;
 	RGB<uint8_t> color = Renderer::heatTableAt(int((temp - min_temp) / (max_temp - min_temp) * 1024));
 	color.Red   = uint8_t(color.Red   * 0.7f);
 	color.Green = uint8_t(color.Green * 0.7f);

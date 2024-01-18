@@ -3961,6 +3961,32 @@ Simulation::Simulation():
 	grav->gravity_mask();
 }
 
+std::pair<float, float> Simulation::GetMinMaxTemp() const {
+    std::pair<float, float> minMax(MAX_TEMP, MIN_TEMP);
+
+    for (int i = 0; i < NPART; i++)
+    {
+        if(parts[i].type != 0)
+        {
+            minMax.first = std::min(minMax.first, parts[i].temp);
+            minMax.second = std::max(minMax.second, parts[i].temp);
+        }
+    }
+
+    if (aheat_enable) {
+        for (int y = 0; y < YCELLS; y++)
+        {
+            for (int x = 0; x < XCELLS; x++)
+            {
+                minMax.first = std::min(minMax.first, air->hv[y][x]);
+                minMax.second = std::max(minMax.second, air->hv[y][x]);
+            }
+        }
+    }
+
+    return minMax;
+}
+
 constexpr size_t ce_log2(size_t n)
 {
 	return ((n < 2) ? 1 : 1 + ce_log2(n / 2));

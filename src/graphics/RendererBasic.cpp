@@ -236,13 +236,16 @@ Renderer::Renderer(Simulation *newSim):
 	debugLines(false),
 	sampleColor(0xFFFFFFFF),
     foundElements(0),
+    relativeHeatDisplay(true),
 	mousePos(0, 0),
 	zoomWindowPosition(0, 0),
 	zoomScopePosition(0, 0),
 	zoomScopeSize(32),
 	zoomEnabled(false),
 	ZFACTOR(8),
-	gridSize(0)
+	gridSize(0),
+    minRecordedTemp(R_TEMP + 273.15),
+    maxRecordedTemp(R_TEMP + 273.15 + HEAT_DISPLAY_MIN_DIFF)
 {
 	PopulateTables();
 

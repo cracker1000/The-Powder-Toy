@@ -40,6 +40,9 @@ constexpr float AIR_VADV   = 0.3f;
 constexpr float AIR_VLOSS  = 0.999f;
 constexpr float AIR_PLOSS  = 0.9999f;
 
+constexpr int HEAT_DISPLAY_SMOOTHING = 18;
+constexpr int HEAT_DISPLAY_MIN_DIFF = 40;
+
 constexpr int NGOL = 24;
 
 constexpr int CIRCLE_BRUSH = 0;
