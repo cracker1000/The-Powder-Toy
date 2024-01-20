@@ -1,6 +1,7 @@
-v58.0 (Unreleased)
+v58.0
 Fix energy particles moving through powered portals.
 Changes to match v98.0
+Add feature and tool tips when clicking on buttons in cr-menu.
 Fix stamp renaming option making buttons overlap with each other.
 From Master branch
 Fix signs loading in the wrong place in really old saves
@@ -19,11 +20,6 @@ Fix Textbox width limiting content length
 Add link to the registration form to LoginView
 Retire tpt.beginGetScript in favour of tpt.installScriptManager
 Most weird mirrors now work as they did prior to the many PHOT refraction fixes
-
-todo:
-Check label texts
-Refactor message system.
-Add feature and tool tips when hovering over buttons in cr-menu
 
 v57.5
 New element: ALMN (Aluminium powder and solid) by @Rebmiami

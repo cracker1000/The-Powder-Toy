@@ -3,6 +3,7 @@ local crackversion = 58.0 --Next version: 58.5
 local motw = "."
 local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
+cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features shown here."
 
 --TOOL for MISL
 local MISLT = elem.allocate("CR1K", "MIST")
@@ -308,7 +309,7 @@ local chud = Button:new(203,188,90,25, "Texter", "for text.")
 
 local brightness = Button:new(203,220,90,25, "Brightness", "Adjust brightness.")
 local brightSlider = Slider:new(320,220,70,27, 255)
-local brlabel2 = Label:new(348, 225, 10, 15, "("..brightSlider:value()..")")
+local brlabel2 = Label:new(340, 225, 32, 15, "("..brightSlider:value()..")")
 
 local Help = Button:new(396,60,90,25, "Random save", "Opens random save.")
 
@@ -716,6 +717,7 @@ end
 end
 
 shrtpre:action(function(sender)
+cracktip = "Invert-Tool: Automatically selects the opposite tool for you."
 clearsb()
 if MANAGER.getsetting("CRK","invtoolv") == "0" then
 print("Invert-Tool: Automatically selects the opposite tool")
@@ -729,6 +731,7 @@ end
 end)
 
 perfm:action(function(sender)
+cracktip = "Perfomance mode: Adjusts settings to help improve the game performance."
 clearsb()
 if perfmv == "1" then
 tpt.setdrawcap(30)
@@ -773,6 +776,7 @@ end
 end
 
 bar:action(function(sender)
+cracktip = "Auto save: Stamps the active part of simulation after fixed intervals."
 clearsb()
 if stamplb == "0" then
 stamplb = "1"
@@ -918,7 +922,7 @@ close()
 local editomenu = Window:new(-15,-15, 610, 382)
 local doned = Button:new(534,362,70,15, "Done", "Edit")
 local cancel = Button:new(464,362,70,15, "Cancel", "Hide.")
-local edmsg = Label:new(153,5,120, 10,"    Welcome to the Element Editor. Note: These changes are temporory and will not be saved!")
+local edmsg = Label:new(10,5,425, 15,"Welcome to the Element Editor. Note: These changes are temporory and will not be saved!")
 local edelnam = Textbox:new(10, 30, 100, 15, '', 'Elem to Edit.')
 local edelname = Textbox:new(10, 60, 100, 15, '', 'New Name.')
 local edelname2 = Textbox:new(10, 80, 100, 15, '', 'New Colour.')
@@ -937,22 +941,22 @@ local edelname14 = Textbox:new(10, 320, 100, 15, '', 'Advection.')
 local edelname15 = Textbox:new(10, 340, 100, 15, '', 'Melting point.')
 local edelname16 = Textbox:new(10, 360, 100, 15, '', 'Freezing point.')
 
-local ed0 = Label:new(170,33,120, 10,"Type the element name to be edited (Eg. STNE).")
-local ed1 = Label:new(106,63,70, 10,"New name.")
-local ed2 = Label:new(158,83,110, 10,"New colour, in hexadecimal (0xRRGGBB).")
-local ed3 = Label:new(183,103,120, 10,"Menu section, 1 to 14. 1 = Electronics, 14 = Tools.")
-local ed4 = Label:new(202,123,120, 10,"To show or hide the element from menu. 0 = Hide, 1 = Show.")
-local ed6 = Label:new(221,163,120, 10,"Explosiveness, 0 = No, 1 = with FIRE, 2 = FIRE or Pressure > 2.5.")
-local ed7 = Label:new(151,183,120, 10,"Heat conductivity. 0 = No, 255 = Max.")
-local ed8 = Label:new(137,203,120, 10,"Flamability, 0 to a few thousand.")
-local ed9 = Label:new(169,223,120, 10,"Weight , Eg. 1 = Gas, 2 = Light, 98 = Heavy.")
-local ed10 = Label:new(173,243,120, 10,"Acid resistance , Eg. 0 = No effect, 50 = Max.")
-local ed11 = Label:new(147,263,120, 10,"Temp. of element when it is spawned.")
-local ed12 = Label:new(211,283,120, 10,"How much the particle wiggles, mainly for gases, range 0 - 10.")
-local ed13 = Label:new(156,303,120, 10,"How fast the particle falls. -0.1 to 0.4.")
-local ed14 = Label:new(205,323,120, 10,"How much the particle is accelerated by moving air. -1 to 01")
-local ed15 = Label:new(160,343,120, 10,"Temp. at which element melts (in Celsius).")
-local ed16 = Label:new(164,363,120, 10,"Temp. at which element freezes (in Celsius).")
+local ed0 = Label:new(110,32,236, 12,"Type the element name to be edited (Eg. STNE).")
+local ed1 = Label:new(114,62,50, 12,"New name.")
+local ed2 = Label:new(114,82,194, 12,"New colour, in hexadecimal (0xRRGGBB).")
+local ed3 = Label:new(115,102,250, 12,"Menu section, 1 to 14. 1 = Electronics, 14 = Tools.")
+local ed4 = Label:new(114,122,289, 12,"To show or hide the element from menu. 0 = Hide, 1 = Show.")
+local ed6 = Label:new(112,162,335, 12,"Explosiveness, 0 = No, 1 = with FIRE, 2 = FIRE or Pressure > 2.5.")
+local ed7 = Label:new(112,182,195, 12,"Heat conductivity. 0 = No, 255 = Max.")
+local ed8 = Label:new(112,202,168, 12,"Flamability, 0 to a few thousand.")
+local ed9 = Label:new(112,222,232, 12,"Weight , Eg. 1 = Gas, 2 = Light, 98 = Heavy.")
+local ed10 = Label:new(106,242,250, 12,"Acid resistance , Eg. 0 = No effect, 50 = Max.")
+local ed11 = Label:new(108,262,193, 12,"Temp. of element when it is spawned.")
+local ed12 = Label:new(110,282,317, 12,"How much the particle wiggles, mainly for gases, range 0 - 10.")
+local ed13 = Label:new(108,302,210, 12,"How fast the particle falls. -0.1 to 0.4.")
+local ed14 = Label:new(117,322,290, 12,"How much the particle is accelerated by moving air. -1 to 01")
+local ed15 = Label:new(107,342,220, 12,"Temp. at which element melts (in Celsius).")
+local ed16 = Label:new(107,362,230, 12,"Temp. at which element freezes (in Celsius).")
 
 editomenu:addComponent(edmsg)
 editomenu:addComponent(doned)
@@ -995,7 +999,7 @@ ui.showWindow(editomenu)
 
 doned:action(function(sender)
 function errormsg()
-graphics.drawText(480,348,"Invalid element entered!", 255,0,0,255)
+graphics.drawText(470,348,"No/ Invalid element entered!", 255,0,0,255)
 end
 
 if edelnam:text() ~= nil then
@@ -1083,6 +1087,7 @@ sim.loadSave(randsav, 0)
 end)
 
 reminder:action(function(sender)
+cracktip = "Notifications for saves and votes. Use '?' button for more info."
 clearsb()
 if MANAGER.getsetting("CRK","notifval") == "0" then
 MANAGER.savesetting("CRK","notifval","1")
@@ -1110,6 +1115,7 @@ tpt.fillrect(-1,-1,630,425,0,0,0,255-MANAGER.getsetting("CRK", "brightness"))
 end
 
 brightness:action(function(sender)
+cracktip = "Brightness: Enables the slider for adjusting the mod brightness."
 clearsb()
 brightSlider:value (MANAGER.getsetting("CRK", "brightness"))
 brlabel2:text(tonumber(string.format("%.1f",brightSlider:value()/255*100)).."%")
@@ -1272,7 +1278,7 @@ local textTextbox = Textbox:new(5,2,596, 15,'', 'Type the text here. Press enter
 local place = Button:new(5,20,50,17,"Enter", "Toggle hidden elements.")
 local cancel= Button:new(60,20,50,17,"Close", "Cancel the element placement.")
 local textTextboxs = Textbox:new(116, 20, 42, 17, '', 'Element')
-local lno2  = Label:new(180, 20, 10, 17, "Fonts:")
+local lno2  = Label:new(168, 20, 30, 17, "Fonts:")
 local smalf = Button:new(210,20,40,17,"Normal", "5x7.")
 local bigf = Button:new(262,20,40,17,"Title", "7x10.")
 local titf = Button:new(314,20,40,17,"Bold", "7x10, Bold")
@@ -1483,8 +1489,8 @@ end
 end
 
 autohide:action(function(sender)
+cracktip = "Auto hide hud: Automatically hides the hud when working in that area."
 clearsb()
-
 if autoval == "1" then
 event.unregister(event.tick,autohidehud)
 event.register(event.tick,autohidehud)
@@ -1497,6 +1503,7 @@ end
 end)
 
 bug:action(function(sender)
+cracktip = "Feedback: Use for suggesting new stuff/ bug reports."
 clearsb()
 newmenu:addComponent(bug1)
 newmenu:addComponent(bug2)
@@ -1576,6 +1583,7 @@ tpt.el.vrsg.menu=0
 end
 
 bare:action(function(sender)
+cracktip = "Mod elements: Shows/ Hides the hidden elements in game."
 clearsb()
 if hidval == "1" then 
 hideno()
@@ -1774,6 +1782,7 @@ elem.property(PLNE, "MenuVisible", 1)
 elem.property(MISLT, "MenuVisible", 1)
 end
 bg:action(function(sender)
+cracktip = "Mod elements: Enables/ disables the mod elements in game."
 if MANAGER.getsetting("CRK","modelemval") == "1" then
 MANAGER.savesetting("CRK","modelemval","0")
 hidemodelem()
@@ -1974,10 +1983,10 @@ local rSlider = Slider:new(20, 166, 255, 17, 255)
 local gSlider = Slider:new(20, 187, 255, 17, 255)
 local bSlider = Slider:new(20, 208, 255, 17, 255)
 
-local alb = Label:new(290, 147, 10, 15)
-local rlb = Label:new(290, 168, 10, 15)
-local glb = Label:new(290, 189, 10, 15)
-local blb = Label:new(290, 210, 10, 15)
+local alb = Label:new(290, 147, 20, 15)
+local rlb = Label:new(290, 168, 20, 15)
+local glb = Label:new(290, 189, 20, 15)
+local blb = Label:new(290, 210, 20, 15)
 
 local newmenuth = Window:new(-15,-15, 609, 370)
 
@@ -2611,6 +2620,7 @@ end
 startupcheck()
 
 Ruler:action(function(sender)
+cracktip = "Ruler: Use with shift key. Shift + Drag to activate the ruler."
 clearsb()
 if MANAGER.getsetting("CRK","rulval") == "0" then
 MANAGER.savesetting("CRK", "rulval","1")
@@ -2636,6 +2646,7 @@ tpt.fillrect(612,0,17,424,0,0,0,focustime)
 end
 
 deletesparkButton:action(function(sender)
+cracktip = "Focus Mode: Darkens the entire interface when not in use."
 clearsb()
 if uival == "1" then
 event.unregister(event.tick,UIhide)
@@ -2651,6 +2662,7 @@ end
 end)
 
 FPS:action(function(sender)
+cracktip = "Frame limiter: Toggles the frame limiter for game engine."
 clearsb()
 if fpsval == "1" then
 tpt.setfpscap(2)
@@ -2730,17 +2742,17 @@ graphics.drawLine(12, 18,574,18,ar,ag,ab,al)
 graphics.drawRect(1,1, 609, 255,ar,ag,ab,110)
 graphics.fillRect(1,1, 609, 255,ar,ag,ab,15)
 end
-
 if MANAGER.getsetting("CRK", "brightstate") == "1" then
 cbrightness()
 end
-gfx.drawText(12,7,"Welcome to Mod Settings. Tip: 'J' Key can be used as a shortcut to open and close the menu. Status:",255,255,255,255) --Intro message
+gfx.drawText(12,7,"Mod version: V."..crackversion.." | Network Status:",255,255,255,255) --Intro message
+gfx.drawText(218,7," | "..cracktip,32,216,255,255) -- Tool tips
 if onlinestatus == 1 then --Online status
-gfx.drawText(498,7,"Online",95,255,95,255)
+gfx.drawText(186,7,"Online",95,255,95,255)
 elseif onlinestatus == 3 then
-gfx.drawText(498,7,"Report the error!",255,0,0,255)
+gfx.drawText(186,7,"Error!",255,0,0,255)
 else
-gfx.drawText(498,7,"Offline",255,95,95,255)
+gfx.drawText(186,7,"Offline",255,95,95,255)
 end
 if uival == "0" then --Focus Mode
 gfx.drawText(108,37,"ON",105,255,105,255)
@@ -2814,6 +2826,7 @@ close()
 end)
 
 passbut:action(function(sender)
+cracktip = "Enables advanced options like slow motion, extended hud, etc."
 if MANAGER.getsetting("CRK", "pass") == "1" then --Now quick settings
 event.unregister(event.tick,quickset)
 event.unregister(event.mousedown,quicksetmouse)
@@ -2826,6 +2839,7 @@ end
 end)
 
 function open()
+cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features shown here."
 ui.showWindow(newmenu) 
 newmenu:onDraw(drawglitch)
 newmenu:onKeyPress(keyclicky2)
