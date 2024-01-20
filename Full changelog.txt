@@ -2,7 +2,6 @@ v58.0 (Unreleased)
 Fix energy particles moving through powered portals.
 Changes to match v98.0
 Fix stamp renaming option making buttons overlap with each other.
-
 From Master branch
 Fix signs loading in the wrong place in really old saves
 Restore old SOAP foam behaviour and make it work with nonstandard gravity
@@ -22,8 +21,8 @@ Retire tpt.beginGetScript in favour of tpt.installScriptManager
 Most weird mirrors now work as they did prior to the many PHOT refraction fixes
 
 todo:
-Fix relative heat
-Fix starcatcher update checks
+Check label texts
+Refactor message system.
 Add feature and tool tips when hovering over buttons in cr-menu
 
 v57.5
