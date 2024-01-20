@@ -3984,6 +3984,12 @@ std::pair<float, float> Simulation::GetMinMaxTemp() const {
         }
     }
 
+	// In case there are no particles and ambient heat is disabled
+    if (minMax.first > minMax.second)
+    {
+        minMax = {MIN_TEMP, MAX_TEMP};
+    }
+
     return minMax;
 }
 
