@@ -301,7 +301,6 @@ if [[ $RELEASE_TYPE == snapshot ]] && [[ $MOD_ID != 0 ]]; then
 	>&2 echo "mods and snapshots do not mix"
 	exit 1
 fi
-fi
 if [[ $RELEASE_TYPE != dev ]]; then
 	meson_configure+=$'\t'-Dignore_updates=false
 fi

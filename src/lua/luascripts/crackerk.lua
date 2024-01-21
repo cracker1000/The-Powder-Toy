@@ -717,10 +717,8 @@ end
 end
 
 shrtpre:action(function(sender)
-cracktip = "Invert-Tool: Automatically selects the opposite tool for you."
 clearsb()
 if MANAGER.getsetting("CRK","invtoolv") == "0" then
-print("Invert-Tool: Automatically selects the opposite tool")
 event.unregister(event.tick,inverttool)
 event.register(event.tick,inverttool)
 MANAGER.savesetting("CRK","invtoolv","1")
@@ -731,7 +729,6 @@ end
 end)
 
 perfm:action(function(sender)
-cracktip = "Perfomance mode: Adjusts settings to help improve the game performance."
 clearsb()
 if perfmv == "1" then
 tpt.setdrawcap(30)
@@ -776,13 +773,11 @@ end
 end
 
 bar:action(function(sender)
-cracktip = "Auto save: Stamps the active part of simulation after fixed intervals."
 clearsb()
 if stamplb == "0" then
 stamplb = "1"
 event.unregister(event.tick,autosave)
 event.register(event.tick,autosave)
-print("Autosave: The mod will automatically stamp the current simulation after every few frames.")
 elseif stamplb == "1" then
 stamplb = "0"
 event.unregister(event.tick,autosave)
@@ -1082,12 +1077,11 @@ end)
 
 Help:action(function(sender)
 close()
-randsav = math.random(1,3046486)
+randsav = math.random(1,3073696)
 sim.loadSave(randsav, 0) 
 end)
 
 reminder:action(function(sender)
-cracktip = "Notifications for saves and votes. Use '?' button for more info."
 clearsb()
 if MANAGER.getsetting("CRK","notifval") == "0" then
 MANAGER.savesetting("CRK","notifval","1")
@@ -1115,7 +1109,6 @@ tpt.fillrect(-1,-1,630,425,0,0,0,255-MANAGER.getsetting("CRK", "brightness"))
 end
 
 brightness:action(function(sender)
-cracktip = "Brightness: Enables the slider for adjusting the mod brightness."
 clearsb()
 brightSlider:value (MANAGER.getsetting("CRK", "brightness"))
 brlabel2:text(tonumber(string.format("%.1f",brightSlider:value()/255*100)).."%")
@@ -1489,7 +1482,6 @@ end
 end
 
 autohide:action(function(sender)
-cracktip = "Auto hide hud: Automatically hides the hud when working in that area."
 clearsb()
 if autoval == "1" then
 event.unregister(event.tick,autohidehud)
@@ -1503,7 +1495,6 @@ end
 end)
 
 bug:action(function(sender)
-cracktip = "Feedback: Use for suggesting new stuff/ bug reports."
 clearsb()
 newmenu:addComponent(bug1)
 newmenu:addComponent(bug2)
@@ -1583,7 +1574,6 @@ tpt.el.vrsg.menu=0
 end
 
 bare:action(function(sender)
-cracktip = "Mod elements: Shows/ Hides the hidden elements in game."
 clearsb()
 if hidval == "1" then 
 hideno()
@@ -1782,7 +1772,6 @@ elem.property(PLNE, "MenuVisible", 1)
 elem.property(MISLT, "MenuVisible", 1)
 end
 bg:action(function(sender)
-cracktip = "Mod elements: Enables/ disables the mod elements in game."
 if MANAGER.getsetting("CRK","modelemval") == "1" then
 MANAGER.savesetting("CRK","modelemval","0")
 hidemodelem()
@@ -2620,12 +2609,10 @@ end
 startupcheck()
 
 Ruler:action(function(sender)
-cracktip = "Ruler: Use with shift key. Shift + Drag to activate the ruler."
 clearsb()
 if MANAGER.getsetting("CRK","rulval") == "0" then
 MANAGER.savesetting("CRK", "rulval","1")
 tpt.setdebug(0X4)
-print("Use shift + Drag to use Ruler")
 elseif MANAGER.getsetting("CRK","rulval") == "1" then
 tpt.setdebug(0X0)
 MANAGER.savesetting("CRK", "rulval","0")
@@ -2646,14 +2633,12 @@ tpt.fillrect(612,0,17,424,0,0,0,focustime)
 end
 
 deletesparkButton:action(function(sender)
-cracktip = "Focus Mode: Darkens the entire interface when not in use."
 clearsb()
 if uival == "1" then
 event.unregister(event.tick,UIhide)
 event.register(event.tick,UIhide)
 tpt.hud(0)
 uival = "0"
-print("Interface will now be out of focus when working in simulation area.")
 elseif uival == "0" then
 tpt.hud(1)
 event.unregister(event.tick,UIhide)
@@ -2662,7 +2647,6 @@ end
 end)
 
 FPS:action(function(sender)
-cracktip = "Frame limiter: Toggles the frame limiter for game engine."
 clearsb()
 if fpsval == "1" then
 tpt.setfpscap(2)
@@ -2826,7 +2810,6 @@ close()
 end)
 
 passbut:action(function(sender)
-cracktip = "Enables advanced options like slow motion, extended hud, etc."
 if MANAGER.getsetting("CRK", "pass") == "1" then --Now quick settings
 event.unregister(event.tick,quickset)
 event.unregister(event.mousedown,quicksetmouse)
@@ -2838,11 +2821,68 @@ MANAGER.savesetting("CRK", "pass","1")
 end
 end)
 
+function crtiploc(x,y)
+if x < 100 and x > 10 then -- Column 1
+if y > 28 and y < 53 then
+cracktip = "Focus Mode: Darkens the interface for better immersive experience."
+elseif y > 56 and y < 85 then
+cracktip = "Frame limiter: Toggles the frame limiter for game engine."
+elseif y > 95 and y < 116 then
+cracktip = "Reset: Can reset mod back to original state."
+elseif y > 125 and y < 147 then
+cracktip = "Stack tools: Useful for stacking/ destacking particles."
+elseif y > 157 and y < 182 then
+cracktip = "Ruler: Use with shift key. Shift + Drag to activate the ruler."
+elseif y > 189 and y < 213 then
+cracktip = "Auto save: Stamps the active part of simulation after fixed intervals."
+elseif y > 221 and y < 246 then
+cracktip = "Feedback: Use for suggesting new stuff/ bug reports."
+end
+end
+
+if x < 295 and x > 204 then -- Column 2
+if y > 28 and y < 53 then
+cracktip = "Wiki: Offline wiki for mod elements."
+elseif y > 56 and y < 85 then
+cracktip = "Hidden elements: Shows/ Hides the hidden elements in game."
+elseif y > 95 and y < 116 then
+cracktip = "Mod elements: Enables/ disables the mod elements in game."
+elseif y > 125 and y < 147 then
+cracktip = "Control centre: For customisation options like theme and other features."
+elseif y > 157 and y < 182 then
+cracktip = "Auto hide hud: Automatically hides the hud when working in that area."
+elseif y > 189 and y < 213 then
+cracktip = "Texter: Custom texter for writing element texts in game."
+elseif y > 221 and y < 246 then
+cracktip = "Brightness: Enables the slider for adjusting the mod brightness."
+end
+end
+
+if x < 487 and x > 397 then -- Column 3
+if y > 28 and y < 53 then
+cracktip = "Startup elements: Automatically selects the elements on mod launch."
+elseif y > 56 and y < 85 then
+cracktip = "Random save: Loads a random save id for fun."
+elseif y > 95 and y < 116 then
+cracktip = "Invert-Tool: Automatically selects the opposite tool for you."
+elseif y > 125 and y < 147 then
+cracktip = "Editor: Element editor for editing existing elements."
+elseif y > 157 and y < 182 then
+cracktip = "Performace mode: Adjusts various settings for better performance."
+elseif y > 189 and y < 213 then
+cracktip = "Advanced options: Enables extra hud, slow motion, etc."
+elseif y > 221 and y < 246 then
+cracktip = "Notifications: Notifies about save/ vote updates. Use '?' button for help."
+end
+end
+end
+
 function open()
 cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features shown here."
 ui.showWindow(newmenu) 
 newmenu:onDraw(drawglitch)
 newmenu:onKeyPress(keyclicky2)
+newmenu:onMouseMove(crtiploc)
 if motw ~= "." then
 MANAGER.savesetting("CRK","storedmotd",motw)
 end
