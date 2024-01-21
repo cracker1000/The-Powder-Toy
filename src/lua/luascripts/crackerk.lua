@@ -1999,7 +1999,7 @@ end
 local adminval = 0
 function drawprev()
 local barstat = "Long"
-graphics.drawText(255,7, "Welcome to the Control Centre V"..crackversion,255,255,255,255)
+graphics.drawText(255,7, "Welcome To The Control Centre",255,255,255,255)
 graphics.drawRect(20,38,573,26,255,255,255,255)
 graphics.drawText(321,173, "Red",255,0,0,255)
 graphics.drawText(321,194, "Green",0,255,0,255)
