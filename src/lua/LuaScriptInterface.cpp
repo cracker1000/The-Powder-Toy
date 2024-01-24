@@ -119,7 +119,7 @@ String LuaGetError()
 }
 
 LuaScriptInterface::LuaScriptInterface(GameController *newGameController, GameModel *newGameModel) :
-	TPTScriptInterface(newGameController, newGameModel),
+	CommandInterface(newGameController, newGameModel),
 	gameModel(newGameModel),
 	gameController(newGameController),
 	window(gameController->GetView()),
@@ -455,7 +455,7 @@ int LuaScriptInterface::Command(String command)
 	luacon_hasLastError = false;
 	if (command[0] == '!')
 	{
-		int ret = TPTScriptInterface::Command(command.Substr(1));
+		int ret = CommandInterface::Command(command.Substr(1));
 		lastError = GetLastError();
 		return ret;
 	}
@@ -704,7 +704,7 @@ String LuaScriptInterface::FormatCommand(String command)
 {
 	if(command.size() && command[0] == '!')
 	{
-		return "!" + TPTScriptInterface::FormatCommand(command.Substr(1));
+		return "!" + CommandInterface::FormatCommand(command.Substr(1));
 	}
 	else
 		return highlight(command);
