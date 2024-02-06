@@ -3387,7 +3387,8 @@ int LuaScriptInterface::renderer_heatDisplayRelativeMode(lua_State * l)
 		luaL_checktype(l, -1, LUA_TBOOLEAN);
 		luacon_ren->relativeHeatDisplay = lua_toboolean(l, -1);
 		return 0;
-		
+	}
+}
 static int elem_getByName(lua_State *L)
 {
 	lua_pushinteger(L, SimulationData::CRef().GetParticleType(tpt_lua_checkByteString(L, 1)));
