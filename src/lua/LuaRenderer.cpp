@@ -266,6 +266,24 @@ static int zoomScope(lua_State *L)
 	return 0;
 }
 
+static int heatDisplayRelativeMode(lua_State * l)
+{
+	auto *lsi = GetLSI();
+	auto *ren = lsi->ren;
+
+	if (lua_gettop(l) == 0)
+	{
+		lua_pushboolean(l, ren->relativeHeatDisplay);
+		return 1;
+	}
+	else
+	{
+		luaL_checktype(l, -1, LUA_TBOOLEAN);
+		ren->relativeHeatDisplay = lua_toboolean(l, -1);
+		return 0;
+	}
+}
+
 void LuaRenderer::Open(lua_State *L)
 {
 	static const luaL_Reg reg[] = {
@@ -284,6 +302,7 @@ void LuaRenderer::Open(lua_State *L)
 		LFUNC(zoomScope),
 		LFUNC(fireSize),
 		LFUNC(useDisplayPreset),
+		LFUNC(heatDisplayRelativeMode),
 #undef LFUNC
 		{ NULL, NULL }
 	};
