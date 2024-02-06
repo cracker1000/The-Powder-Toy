@@ -2,7 +2,7 @@
 #include "LuaScriptInterface.h"
 #include "gui/interface/Button.h"
 
-const char LuaButton::className[] = "button";
+const char LuaButton::className[] = "Button";
 
 #define method(class, name) {#name, &class::name}
 Luna<LuaButton>::RegType LuaButton::methods[] = {

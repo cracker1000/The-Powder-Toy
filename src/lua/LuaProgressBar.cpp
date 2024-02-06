@@ -2,7 +2,7 @@
 #include "LuaScriptInterface.h"
 #include "gui/interface/ProgressBar.h"
 
-const char LuaProgressBar::className[] = "progressBar";
+const char LuaProgressBar::className[] = "ProgressBar";
 
 #define method(class, name) {#name, &class::name}
 Luna<LuaProgressBar>::RegType LuaProgressBar::methods[] = {

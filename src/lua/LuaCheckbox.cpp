@@ -2,7 +2,7 @@
 #include "LuaScriptInterface.h"
 #include "gui/interface/Checkbox.h"
 
-const char LuaCheckbox::className[] = "checkbox";
+const char LuaCheckbox::className[] = "Checkbox";
 
 #define method(class, name) {#name, &class::name}
 Luna<LuaCheckbox>::RegType LuaCheckbox::methods[] = {

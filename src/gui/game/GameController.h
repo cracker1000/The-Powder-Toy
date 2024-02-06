@@ -126,7 +126,6 @@ public:
 	int GetEdgeMode();
 	void SetEdgeMode(int edgeMode);
 	void SetDebugFlags(unsigned int flags) { debugFlags = flags; }
-	unsigned int GetDebugFlags() const { return debugFlags; }
 	void SetActiveMenu(int menuID);
 	std::vector<Menu*> GetMenuList();
 	int GetNumMenus(bool onlyEnabled);

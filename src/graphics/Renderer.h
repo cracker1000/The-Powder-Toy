@@ -41,8 +41,6 @@ class Renderer: public RasterDrawMethods<Renderer>
 
 	friend struct RasterDrawMethods<Renderer>;
 
-	float fireIntensity = 1;
-
 public:
 	Vec2<int> Size() const
 	{
@@ -100,10 +98,6 @@ public:
 	void DrawSigns();
 	void render_gravlensing(const Video &source);
 	void render_fire();
-	float GetFireIntensity() const
-	{
-		return fireIntensity;
-	}
 	void prepare_alpha(int size, float intensity);
 	void render_parts();
 	void draw_grav_zones();

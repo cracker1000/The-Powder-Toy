@@ -2,7 +2,7 @@
 #include "LuaScriptInterface.h"
 #include "gui/interface/Slider.h"
 
-const char LuaSlider::className[] = "slider";
+const char LuaSlider::className[] = "Slider";
 
 #define method(class, name) {#name, &class::name}
 Luna<LuaSlider>::RegType LuaSlider::methods[] = {

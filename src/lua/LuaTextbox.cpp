@@ -2,7 +2,7 @@
 #include "LuaScriptInterface.h"
 #include "gui/interface/Textbox.h"
 
-const char LuaTextbox::className[] = "textbox";
+const char LuaTextbox::className[] = "Textbox";
 
 #define method(class, name) {#name, &class::name}
 Luna<LuaTextbox>::RegType LuaTextbox::methods[] = {

@@ -23,7 +23,7 @@ namespace LuaSocket
 		lua_newtable(l);
 		struct luaL_Reg socketMethods[] = {
 			{   "sleep", LuaSocket::Sleep   },
-			{ "getTime", LuaSocket::GetTime },
+			{ "gettime", LuaSocket::GetTime },
 			{      NULL, NULL                  },
 		};
 		luaL_register(l, NULL, socketMethods);

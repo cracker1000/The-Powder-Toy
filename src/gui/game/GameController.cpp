@@ -785,7 +785,7 @@ void GameController::ResetSpark()
 
 void GameController::SwitchGravity()
 {
-	gameModel->GetSimulation()->gravityMode = (gameModel->GetSimulation()->gravityMode + 1) % NUM_GRAVMODES;
+	gameModel->GetSimulation()->gravityMode = (gameModel->GetSimulation()->gravityMode + 1) % NUM_GRAV_MODES;
 
 	switch (gameModel->GetSimulation()->gravityMode)
 	{
@@ -806,23 +806,23 @@ void GameController::SwitchGravity()
 
 void GameController::SwitchAir()
 {
-	gameModel->GetSimulation()->air->airMode = (gameModel->GetSimulation()->air->airMode + 1) % NUM_AIRMODES;
+	gameModel->GetSimulation()->air->airMode = (gameModel->GetSimulation()->air->airMode + 1) % NUM_AIR_MODES;
 
 	switch (gameModel->GetSimulation()->air->airMode)
 	{
 	case AIR_ON:
 		gameModel->SetInfoTip("Air: On");
 		break;
-	case AIR_PRESSUREOFF:
+	case AIR_PRESSURE_OFF:
 		gameModel->SetInfoTip("Air: Pressure Off");
 		break;
-	case AIR_VELOCITYOFF:
+	case AIR_VELOCITY_OFF:
 		gameModel->SetInfoTip("Air: Velocity Off");
 		break;
 	case AIR_OFF:
 		gameModel->SetInfoTip("Air: Off");
 		break;
-	case AIR_NOUPDATE:
+	case AIR_NO_UPDATE:
 		gameModel->SetInfoTip("Air: No Update");
 		break;
 	}
@@ -1031,7 +1031,7 @@ int GameController::GetEdgeMode()
 
 void GameController::SetEdgeMode(int edgeMode)
 {
-	if (edgeMode < 0 || edgeMode >= NUM_EDGEMODES)
+	if (edgeMode < 0 || edgeMode >= NUM_EDGE_MODES)
 		edgeMode = 0;
 
 	gameModel->SetEdgeMode(edgeMode);
