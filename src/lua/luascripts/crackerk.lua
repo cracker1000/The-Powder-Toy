@@ -24,7 +24,7 @@ end
 function setcoord()
 pcall(tpt.set_property, "tmp", tpt.mousex, i)
 pcall(tpt.set_property, "tmp2", tpt.mousey, i)
-pcall(tpt.set_property, "type",228,i)
+pcall(tpt.set_property, "type",230,i)
 print("Target set ("..tpt.mousex..", "..tpt.mousey..")")
 end
 function setcoord2()

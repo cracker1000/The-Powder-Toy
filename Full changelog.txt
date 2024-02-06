@@ -1,6 +1,12 @@
 v58.5 (Final release)
-todo:
 Fix MIST tool.
+Fix ELEX turning into blacklisted elements
+
+todo:
+Fix labels getting cutoff in votes and comments
+Check element editor
+Merge in new changes
+Add MOVE Tool
 
 v58.0
 Elements:
