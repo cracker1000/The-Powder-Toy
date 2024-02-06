@@ -3,6 +3,7 @@ Fix MIST tool.
 Fix ELEX turning into blacklisted elements
 
 todo:
+Fix Relheat again :P
 Fix labels getting cutoff in votes and comments
 Check element editor
 Merge in new changes
