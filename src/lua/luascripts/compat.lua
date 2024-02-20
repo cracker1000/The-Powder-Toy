@@ -392,7 +392,7 @@ function tpt.toggle_pause()
 end
 
 function tpt.watertest()
-	sim.waterEqualization(not sim.waterEqualization())
+	sim.waterEqualization(sim.waterEqualization() == 1 and 0 or 1)
 	return sim.waterEqualization()
 end
 
@@ -690,9 +690,11 @@ function tpt_mt:__newindex(key, value)
 	elseif key == "brushx" then
 		local w, h = ui.brushRadius()
 		ui.brushRadius(value, h)
+		return
 	elseif key == "brushy" then
 		local w, h = ui.brushRadius()
 		ui.brushRadius(w, value)
+		return
 	elseif key == "decoSpace" then
 		return sim.decoSpace(value)
 	end
