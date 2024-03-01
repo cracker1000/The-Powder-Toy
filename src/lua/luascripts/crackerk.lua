@@ -2588,12 +2588,12 @@ if MANAGER.getsetting("CRK", "split") == "1" then
 splitval = 1
 end
 
---if MANAGER.getsetting("CRK", "relhdv") == "1" then
---ren.heatDisplayRelativeMode(true)
---print("Relative heat display mode is turned on.")
---elseif MANAGER.getsetting("CRK", "relhdv") == "0" then
---ren.heatDisplayRelativeMode(false)
---end
+if MANAGER.getsetting("CRK", "relhdv") == "1" then
+ren.heatDisplayRelativeMode(true)
+print("Relative heat display mode is turned on.")
+elseif MANAGER.getsetting("CRK", "relhdv") == "0" then
+ren.heatDisplayRelativeMode(false)
+end
 
 if MANAGER.getsetting("CRK", "hidestate") == "1" then
 hideno()
