@@ -8,7 +8,6 @@ gfx.fillRect(177,367,336,14,225,55,55,30)
 end
 gfx.drawText(180,370,"Fail Safe Module: Something went wrong, click here to reset the mod!",250,0,0,255)
 end
-
 function warningmsgclick()
 if tpt.mousex >176 and tpt.mousex <= 505 and tpt.mousey > 367 and tpt.mousey <= 380 then
 os.remove("dlf3.txt")
@@ -23,7 +22,6 @@ platform.restart()
 end
 return false
 end
-
 if failsafe == nil then
 event.register(event.tick, warningmsg)
 event.register(event.mousedown, warningmsgclick)

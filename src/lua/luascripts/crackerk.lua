@@ -1,5 +1,5 @@
 --Cracker1000 mod interface script--
-local crackversion = 58.5 --Next version: 59.0
+local crackversion = 59.0 --Next version: 59.5
 local motw = "."
 local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
@@ -2718,7 +2718,7 @@ graphics.drawText(posix2,259,motw,245,225,0,255)
 end
 end
 end
-
+local onlinestatusfeed = "Offline"
 function drawglitch()
 motwdisplay()
 if perfmv == "1" then
@@ -2729,14 +2729,13 @@ end
 if MANAGER.getsetting("CRK", "brightstate") == "1" then
 cbrightness()
 end
-gfx.drawText(12,7,"Mod version: V."..crackversion.." | Network Status:",255,255,255,255) --Intro message
-gfx.drawText(218,7," | "..cracktip,32,216,255,255) -- Tool tips
+gfx.drawText(12,7,"Mod version: V."..crackversion.." | Network: "..onlinestatusfeed.." | "..cracktip,32,216,255,255) --Intro message
 if onlinestatus == 1 then --Online status
-gfx.drawText(186,7,"Online",95,255,95,255)
+onlinestatusfeed = "Online"
 elseif onlinestatus == 3 then
-gfx.drawText(186,7,"Error!",255,0,0,255)
+onlinestatusfeed = "Error!"
 else
-gfx.drawText(186,7,"Offline",255,95,95,255)
+onlinestatusfeed = "Offline"
 end
 if uival == "0" then --Focus Mode
 gfx.drawText(108,37,"ON",105,255,105,255)

@@ -2,14 +2,13 @@ v59.0 (Final release)
 Fix MIST tool.
 Fix ELEX turning into blacklisted elements
 Fix Relative heat
+Fix network status overlapping with mod version
 
 todo:
-Fix network status overlapping with mod version
 Fix sliders and text not working 
 Fix labels getting cutoff in votes and comments
 Check element editor
 Merge in new changes
-Add MOVE Tool
 
 v58.0
 Elements:
