@@ -4,12 +4,19 @@ Fix ELEX turning into blacklisted elements
 Fix Relative heat
 Fix network status overlapping with mod version
 Fix sliders sticking to same value
-Add various development options for scripts.
-Merge in new changes
+Fix errors straight away crashing the game
+Add various development options for crack script.
+
+Merge in new changes from master branch:
+Make element search scrollable
+draw air before "beforesimdraw" event is fired, so that graphics work in velocity / pressure display modes
+Add some sign api constants
+compat.lua: Fix tpt.brushx, tpt.brushy, and tpt.watertest
+Fix crash if tpt.installScriptManager fails
 
 todo:
 Bring back the old help text and get length of text.
-Fix errors crashing straight away crashing the game.
+
 
 v58.0
 Elements:

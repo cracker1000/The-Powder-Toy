@@ -1,13 +1,17 @@
 --Cracker1000 mod interface script--
---Development controls
+--Development controls 1= enable & 0 = disable the feature/ setting.
 local crackversion = 59.0 -- Next version: 59.5, Defines the internal mod version for update checks.
 local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
 enfailsafe = 1 -- Enable/ Disable the failsafe module. (Meant to be a global variable)
 --end
+if enscript == 0 or enupdater == 0 or enfailsafe == 0 then
+print("Reminder: Crack mod developer settings has been modified!")
+end
 if enscript == 0 then
 return
 end
+
 local motw = "."
 local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
