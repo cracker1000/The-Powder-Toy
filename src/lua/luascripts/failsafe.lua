@@ -22,7 +22,7 @@ platform.restart()
 end
 return false
 end
-if failsafe == nil then
+if failsafe == nil and enfailsafe ~= 0 then
 event.register(event.tick, warningmsg)
 event.register(event.mousedown, warningmsgclick)
 end

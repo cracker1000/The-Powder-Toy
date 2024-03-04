@@ -1,5 +1,13 @@
 --Cracker1000 mod interface script--
-local crackversion = 59.0 --Next version: 59.5
+--Development controls
+local crackversion = 59.0 -- Next version: 59.5, Defines the internal mod version for update checks.
+local enscript = 1 -- Enable/ Disable the internal crack script.
+local enupdater = 1 -- Enable/ Disable the updater and message check.
+enfailsafe = 1 -- Enable/ Disable the failsafe module. (Meant to be a global variable)
+--end
+if enscript == 0 then
+return
+end
 local motw = "."
 local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
@@ -2529,11 +2537,14 @@ end
 --Quick settings end
 
 function startupcheck()
+if enupdater ~= 0 then
 event.register(event.tick,errormesg)
-fs.makeDirectory("scripts")
 event.register(event.tick,writefile2)
+else
+print("URS updater disabled, please turn it on!")
+end
 interface.addComponent(toggle)
-
+fs.makeDirectory("scripts")
 if MANAGER.getsetting("CRK","loadelem") == "1" then
 tpt.selectedl = MANAGER.getsetting("CRK","primaryele")
 tpt.selectedr = MANAGER.getsetting("CRK","secondaryele")

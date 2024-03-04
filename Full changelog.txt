@@ -3,12 +3,13 @@ Fix MIST tool.
 Fix ELEX turning into blacklisted elements
 Fix Relative heat
 Fix network status overlapping with mod version
+Fix sliders sticking to same value
+Add various development options for scripts.
+Merge in new changes
 
 todo:
-Fix sliders and text not working 
-Fix labels getting cutoff in votes and comments
-Check element editor
-Merge in new changes
+Bring back the old help text and get length of text.
+Fix errors crashing straight away crashing the game.
 
 v58.0
 Elements:
