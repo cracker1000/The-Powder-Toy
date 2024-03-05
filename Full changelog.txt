@@ -1,13 +1,13 @@
-v59.0 (Final release)
+v59.0
 Fix MIST tool.
-Fix ELEX turning into blacklisted elements
-Fix Relative heat
+Fix ELEX turning into blacklisted elements.
+Fix Relative heat.
 Fix network status overlapping with mod version, now adjusts the position based on text length.
-Fix sliders sticking to same value
-Fix errors straight away crashing the game
+Fix sliders sticking to same value.
+Fix warnings or errors straight away crashing the game.
 Fix graphical errors and warnings when running an external broken tptmp script (Thanks to jacob1 for pointing it out).
 Fix labels getting cut
-Add various development options for crack script.
+Add various development variables for crack script.
 Wait for a few frames before scrolling the text in message. Also, opening the menu now resets the message.
 New graphics for autosave feature.
 
@@ -16,13 +16,7 @@ Make element search scrollable
 draw air before "beforesimdraw" event is fired, so that graphics work in velocity / pressure display modes
 Add some sign api constants
 compat.lua: Fix tpt.brushx, tpt.brushy, and tpt.watertest
-Fix crash if tpt.installScriptManager fails
-
-todo:
-
-Fix crashes
-
-
+Fix crash if tpt.installScriptManager fails.
 
 v58.0
 Elements:

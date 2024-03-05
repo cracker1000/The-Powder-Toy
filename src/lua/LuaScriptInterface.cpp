@@ -208,7 +208,6 @@ LuaScriptInterface::LuaScriptInterface(GameController *newGameController, GameMo
 			}
 		}
 	}
-	lua_pop(L, 1);
 }
 
 void LuaScriptInterface::InitCustomCanMove()
