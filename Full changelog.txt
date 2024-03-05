@@ -6,8 +6,10 @@ Fix network status overlapping with mod version, now adjusts the position based 
 Fix sliders sticking to same value
 Fix errors straight away crashing the game
 Fix graphical errors and warnings when running an external broken tptmp script (Thanks to jacob1 for pointing it out).
+Fix labels getting cut
 Add various development options for crack script.
 Wait for a few frames before scrolling the text in message. Also, opening the menu now resets the message.
+New graphics for autosave feature.
 
 Merge in new changes from master branch:
 Make element search scrollable
@@ -17,6 +19,7 @@ compat.lua: Fix tpt.brushx, tpt.brushy, and tpt.watertest
 Fix crash if tpt.installScriptManager fails
 
 todo:
+
 Fix crashes
 
 

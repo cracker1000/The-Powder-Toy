@@ -5,7 +5,7 @@ local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
 enfailsafe = 1 -- Enable/ Disable the failsafe module. (Meant to be a global variable)
 --end
-if enscript == 0 or enupdater == 0 or enfailsafe == 0 then
+if enscript ~= 1 or enupdater ~= 1 or enfailsafe ~= 1 then
 print("Reminder: Crack mod developer settings has been modified!")
 end
 if enscript == 0 then
@@ -1832,7 +1832,9 @@ tpt.drawrect(1,1,609,381,ar,ag,ab,al)
 end
 --Autosave
 if stamplb == "1" then
-graphics.drawText(8,370,"AutoSave", 32,255,32,220)
+graphics.drawText(7,370,"AutoSave", 32,255,32,220)
+graphics.fillRect(7,365,44,3, 255,255,0,100)
+graphics.drawRect(7,365,savetime/8,2, 255,255,0,250)
 end
 --Split theme
 local spr, spb,spg = ar,ag,ab

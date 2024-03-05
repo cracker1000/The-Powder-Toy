@@ -747,7 +747,7 @@ void PreviewView::NotifyCommentsChanged(PreviewModel * sender)
 
             tempTimestamp = new ui::Label(ui::Point(31, currentY+3), ui::Point(Size.X-((XRES/2) + 13 + 26), 16), format::UnixtimeToDateMini(comments[i].createdTimestamp).FromUtf8());
             tempTimestamp->Appearance.HorizontalAlign = ui::Appearance::AlignRight;
-            tempTimestamp->Appearance.VerticalAlign = ui::Appearance::AlignBottom;
+            tempTimestamp->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
             tempTimestamp->SetTextColour(ui::Colour(255, 55, 55));
 
             commentComponents.push_back(tempTimestamp);
