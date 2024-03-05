@@ -11,7 +11,6 @@ end
 if enscript == 0 then
 return
 end
-
 local motw = "."
 local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
@@ -1880,7 +1879,9 @@ tpt.drawrect(613,1,14,14,ar,ag,ab,al)
 tpt.drawrect(613,33,14,14,ar,ag,ab,al)
 tpt.drawrect(613,65,14,14,ar,ag,ab,al)
 --MP and manager
+if TPTMP ~= nil then
 tpt.drawrect(613,103,14,14,ar,ag,ab,al)
+end
 --right
 tpt.drawrect(613,136,14,14,ar,ag,ab,al)
 tpt.drawrect(613,168,14,14,ar,ag,ab,al)
@@ -2714,11 +2715,15 @@ clearm()
 barlength = 1
 end
 local posix2 = posix + 10
+local waitformsg = 0 -- Frames to wait before long messages start scrolling.
 function motwdisplay()
 if motw ~= "." and onlinestatus == 1 then --Prevent black bars when offline.
 if posix > 600 then
+waitformsg = waitformsg + 1
+if waitformsg > 150 then
 if posix2 > -1*(posix)then
 posix2 = posix2 - 1
+end
 end
 if posix2 <= -1*(posix) then
 posix2 = posix + 10
@@ -2733,7 +2738,7 @@ graphics.drawText(posix2,259,motw,245,225,0,255)
 end
 end
 end
-local onlinestatusfeed = "Offline"
+
 function drawglitch()
 motwdisplay()
 if perfmv == "1" then
@@ -2744,14 +2749,17 @@ end
 if MANAGER.getsetting("CRK", "brightstate") == "1" then
 cbrightness()
 end
-gfx.drawText(12,7,"Mod version: V."..crackversion.." | Network: "..onlinestatusfeed.." | "..cracktip,32,216,255,255) --Intro message
+
+gfx.drawText(12,7,"Mod version: V."..crackversion.." | Network:",255,255,255,255) --Intro message
 if onlinestatus == 1 then --Online status
-onlinestatusfeed = "Online"
+gfx.drawText(139+gfx.textSize(crackversion),7,"Online",100,255,100,255)
 elseif onlinestatus == 3 then
-onlinestatusfeed = "Error!"
+gfx.drawText(139+gfx.textSize(crackversion),7,"Error!",255,100,100,255)
 else
-onlinestatusfeed = "Offline"
+gfx.drawText(139+gfx.textSize(crackversion),7,"Offline",255,100,100,255)
 end
+gfx.drawText(170+gfx.textSize(crackversion),7," | "..cracktip,32,216,255,255) --Help text
+
 if uival == "0" then --Focus Mode
 gfx.drawText(108,37,"ON",105,255,105,255)
 else
@@ -2892,6 +2900,8 @@ end
 end
 
 function open()
+waitformsg = 0 --Reset timer for motw.
+posix2 = posix - graphics.textSize(motw)
 cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features shown here."
 ui.showWindow(newmenu) 
 newmenu:onDraw(drawglitch)
@@ -2939,8 +2949,14 @@ end
 end
 
 function keyclicky(key)
-if (key == 106) and TPTMP.chatHidden == true and shrtv == "1" then
+if (key == 106) and shrtv == "1" then
+if TPTMP ~= nil then
+if TPTMP.chatHidden == true then
 open()
+end
+else
+open()
+end
 end
 end
 event.register(event.keypress,keyclicky)

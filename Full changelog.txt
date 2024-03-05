@@ -2,10 +2,12 @@ v59.0 (Final release)
 Fix MIST tool.
 Fix ELEX turning into blacklisted elements
 Fix Relative heat
-Fix network status overlapping with mod version
+Fix network status overlapping with mod version, now adjusts the position based on text length.
 Fix sliders sticking to same value
 Fix errors straight away crashing the game
+Fix graphical errors and warnings when running an external broken tptmp script (Thanks to jacob1 for pointing it out).
 Add various development options for crack script.
+Wait for a few frames before scrolling the text in message. Also, opening the menu now resets the message.
 
 Merge in new changes from master branch:
 Make element search scrollable
@@ -15,7 +17,8 @@ compat.lua: Fix tpt.brushx, tpt.brushy, and tpt.watertest
 Fix crash if tpt.installScriptManager fails
 
 todo:
-Bring back the old help text and get length of text.
+Fix crashes
+
 
 
 v58.0
