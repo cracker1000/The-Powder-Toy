@@ -1,3 +1,11 @@
+v60.0 (Unreleased final build)
+Fix element search window showing wrong element descriptions.
+
+todo:
+Add launch stats
+Update to latest tptmp and/ or manager if available.
+Fix veiw count labels getting cut
+
 v59.0
 Fix MIST tool.
 Fix ELEX turning into blacklisted elements.
