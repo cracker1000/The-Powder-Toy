@@ -1,6 +1,6 @@
 --Cracker1000 mod interface script--
 --Development controls 1= enable & 0 = disable the feature/ setting.
-local crackversion = 59.0 -- Next version: 59.5, Defines the internal mod version for update checks.
+local crackversion = 60.0 -- Next version: 60.0 (End of life support), Defines the internal mod version for update checks.
 local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
 enfailsafe = 1 -- Enable/ Disable the failsafe module. (Meant to be a global variable)
@@ -1233,31 +1233,6 @@ end
 graphics.drawRect(drawpos,363,42,19,32,216,255,255)
 end
 
-function keyclicky23(key23)
-if disabletype == 0 then
-if (key23 == 13) then
-placetext()
-elseif (key23 == 1073741906) and tonumber(linenumber) > 1  then
-if ffix == "1" then
-yvalue = yvalue - 14
-linenumber = linenumber - 1
-elseif ffix == "0" then
-yvalue = yvalue - 10
-linenumber = linenumber - 1
-end
-elseif (key23 == 1073741905) and tonumber(linenumber) < 31 then
-if ffix == "1" then
-yvalue = yvalue + 14
-linenumber = linenumber + 1
-elseif ffix == "0" then
-yvalue = yvalue + 10
-linenumber = linenumber + 1
-end
-end
-end
-end
-newmenu4:onKeyPress(keyclicky23)
-
 chud:action(function(sender)
 disabletype = 0
 drawpos = 213
@@ -1289,6 +1264,42 @@ local titf = Button:new(314,20,40,17,"Bold", "7x10, Bold")
 local clrsc = Button:new(448,20,80,17,"Clear Textbox", "Clear text")
 local clrsc2 = Button:new(532,20,70,17,"Clear Screen", "Clear text")
 local titf2 = Button:new(366,20,40,17,"Real.", "7x10, Bold")
+
+function closetexter()
+tpt.hud(1)
+newmenu4:removeComponent(textTextbox)
+newmenu4:removeComponent(textTextboxs)
+tpt.unregister_step(drawblip)
+ui.closeWindow(newmenu4)
+end
+
+function keyclicky23(key23)
+if disabletype == 0 then
+if (key23 == 27) then --Exit on pressing esc.
+closetexter()
+end
+if (key23 == 13) then
+placetext()
+elseif (key23 == 1073741906) and tonumber(linenumber) > 1  then
+if ffix == "1" then
+yvalue = yvalue - 14
+linenumber = linenumber - 1
+elseif ffix == "0" then
+yvalue = yvalue - 10
+linenumber = linenumber - 1
+end
+elseif (key23 == 1073741905) and tonumber(linenumber) < 31 then
+if ffix == "1" then
+yvalue = yvalue + 14
+linenumber = linenumber + 1
+elseif ffix == "0" then
+yvalue = yvalue + 10
+linenumber = linenumber + 1
+end
+end
+end
+end
+newmenu4:onKeyPress(keyclicky23)
 
 newmenu4:addComponent(textTextbox)
 newmenu4:addComponent(textTextboxs)
@@ -1367,11 +1378,7 @@ fsize = "Realistic"
 end)
 
 cancel:action(function(sender)
-tpt.hud(1)
-newmenu4:removeComponent(textTextbox)
-newmenu4:removeComponent(textTextboxs)
-tpt.unregister_step(drawblip)
-ui.closeWindow(newmenu4)
+closetexter()
 end)
 
 clrsc:action(function(sender)
@@ -2388,7 +2395,7 @@ relativeheatvalue = "ON"
 else
 relativeheatvalue = "OFF"
 end
-statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Relative heat: "..relativeheatvalue
+statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Relative heat: "..relativeheatvalue.." Launches: "..MANAGER.getsetting("CRK","launchstat")
 graphics.fillRect(6,staty-3,gfx.textSize(statstring)+1,13,10,10,10,130)
 graphics.drawText(7,staty,statstring,32,216,255,255)
 if ren.debugHUD() == 0 then
@@ -2552,6 +2559,7 @@ print("URS updater disabled, please turn it on!")
 end
 interface.addComponent(toggle)
 fs.makeDirectory("scripts")
+
 if MANAGER.getsetting("CRK","loadelem") == "1" then
 tpt.selectedl = MANAGER.getsetting("CRK","primaryele")
 tpt.selectedr = MANAGER.getsetting("CRK","secondaryele")
@@ -2574,6 +2582,12 @@ end
 if MANAGER.getsetting("CRK","pass") == "1" then
 event.register(event.tick,quickset)
 event.register(event.mousedown,quicksetmouse)
+end
+
+if MANAGER.getsetting("CRK","launchstat") == nil then --Launch stats
+MANAGER.savesetting("CRK","launchstat",1)
+else
+MANAGER.savesetting("CRK","launchstat",tonumber(MANAGER.getsetting("CRK","launchstat"))+1)
 end
 
 if MANAGER.getsetting("CRK","relhdv") == nil then --Special handling just for new features

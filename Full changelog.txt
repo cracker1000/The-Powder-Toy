@@ -1,9 +1,9 @@
 v60.0 (Unreleased final build)
 Fix element search window showing wrong element descriptions.
+Add esc key shortcut to close texter
+Add launch stats to extra hud
 
 todo:
-Add esc key shortcut to close texter
-Add launch stats
 Update to latest tptmp and/ or manager if available.
 Fix veiw count labels getting cut
 
