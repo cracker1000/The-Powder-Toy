@@ -2395,7 +2395,7 @@ relativeheatvalue = "ON"
 else
 relativeheatvalue = "OFF"
 end
-statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Relative heat: "..relativeheatvalue.." Launches: "..MANAGER.getsetting("CRK","launchstat")
+statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Relative heat: "..relativeheatvalue..", Launches: "..MANAGER.getsetting("CRK","launchstat")
 graphics.fillRect(6,staty-3,gfx.textSize(statstring)+1,13,10,10,10,130)
 graphics.drawText(7,staty,statstring,32,216,255,255)
 if ren.debugHUD() == 0 then
