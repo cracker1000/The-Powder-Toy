@@ -1,8 +1,17 @@
 name: build
+
 on:
   push:
+    branches:
+      - '*'
     tags:
-      - 'r*.*'
+      - 'v*.*'
+      - 'snapshot-*'
+      - 'tptlibsdev-*'
+  pull_request:
+    branches:
+      - '*'
+
 jobs:
   prepare:
     runs-on: ubuntu-latest
