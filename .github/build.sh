@@ -288,13 +288,6 @@ if [[ $RELEASE_TYPE == snapshot ]] && [[ $MOD_ID != 0 ]]; then
 	>&2 echo "mods and snapshots do not mix"
 	exit 1
 fi
-if [[ $RELEASE_TYPE == snapshot ]] || [[ $MOD_ID != 0 ]]; then
-	meson_configure+=$'\t'-Dupdate_server=starcatcher.us/TPT
-	if [[ $BSH_HOST_PLATFORM == emscripten ]]; then
-		meson_configure+=$'\t'-Dserver=tptserv.starcatcher.us
-		meson_configure+=$'\t'-Dstatic_server=tptserv.starcatcher.us/Static
-	fi
-fi
 if [[ $RELEASE_TYPE != dev ]]; then
 	meson_configure+=$'\t'-Dignore_updates=false
 fi
