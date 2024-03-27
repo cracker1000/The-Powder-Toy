@@ -1,6 +1,6 @@
 --Cracker1000 mod interface script--
 --Development controls 1 = enable & 0 = disable the feature/ setting. (Do not change unless you know what you are doing)
-local crackversion = 60.0 -- Next version: Nil (End of life support), Defines the internal mod version for update checks.
+local crackversion = 60.0 -- Next version: Nil (End of the life support), Defines the internal mod version for update checks.
 local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
 enfailsafe = 1 -- Enable/ Disable the failsafe module. (Meant to be a global variable)
