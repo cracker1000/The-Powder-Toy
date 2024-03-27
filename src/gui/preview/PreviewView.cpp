@@ -152,7 +152,7 @@ PreviewView::PreviewView(std::unique_ptr<VideoBuffer> newSavePreview):
 	viewsLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
 	AddComponent(viewsLabel);
 
-    voteLabel = new ui::Label(ui::Point((XRES/2)-80, (YRES/2)+27), ui::Point(80, 16), "");
+    voteLabel = new ui::Label(ui::Point((XRES/2)-80, (YRES/2)+29), ui::Point(80, 16), "");
     voteLabel->Appearance.HorizontalAlign = ui::Appearance::AlignRight;
     voteLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
     AddComponent(voteLabel);
