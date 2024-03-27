@@ -10,6 +10,7 @@ simulation_tool_names = [
 	'AMBM',
 	'AMBP',
 	'RSET',
+	'LEVI',
 ]
 
 simulation_tool_src = []

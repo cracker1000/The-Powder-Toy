@@ -1,19 +1,22 @@
 v60.0 (Unreleased final build)
-Fix element search window showing wrong element descriptions.
 Update version to v98.0
 Add esc key shortcut to close texter
 Add launch stats to extra hud
+New tool: MOVE
+
 From master branch:
-Move unlisted stamps to the back
+Fix element search window showing wrong element descriptions.
+Fix local saves being sorted Z-A instead of A-Z
+Fix some label cutoff and component overlap bugs
 Fix panels forwarding clicks from anywhere
-Fix save history button not working except on your own saves
-Limit saves with ETRD with .tmp or .tmp2 set and Resist  to 98.0
 Fix renderer crashing due to SimulationData not being instantiated early enough
+Fix save history button not working except on your own saves
+Move unlisted stamps to the back
+Limit saves with ETRD with .tmp or .tmp2 set and Resist  to 98.0
 Add limit onto various textboxes, now that textbox width no longer artificially limits it
 
 todo:
 Update to latest tptmp and/ or manager if available.
-Fix veiw count labels getting cut
 
 v59.0
 Fix MIST tool.

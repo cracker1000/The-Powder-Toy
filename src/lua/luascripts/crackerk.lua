@@ -1,6 +1,6 @@
 --Cracker1000 mod interface script--
---Development controls 1= enable & 0 = disable the feature/ setting.
-local crackversion = 60.0 -- Next version: 60.0 (End of life support), Defines the internal mod version for update checks.
+--Development controls 1 = enable & 0 = disable the feature/ setting. (Do not change unless you know what you are doing)
+local crackversion = 60.0 -- Next version: Nil (End of life support), Defines the internal mod version for update checks.
 local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
 enfailsafe = 1 -- Enable/ Disable the failsafe module. (Meant to be a global variable)
@@ -2395,7 +2395,7 @@ relativeheatvalue = "ON"
 else
 relativeheatvalue = "OFF"
 end
-statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Relative heat: "..relativeheatvalue..", Launches: "..MANAGER.getsetting("CRK","launchstat")
+statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Rel. heat: "..relativeheatvalue..", Launches: "..MANAGER.getsetting("CRK","launchstat")
 graphics.fillRect(6,staty-3,gfx.textSize(statstring)+1,13,10,10,10,130)
 graphics.drawText(7,staty,statstring,32,216,255,255)
 if ren.debugHUD() == 0 then
