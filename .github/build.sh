@@ -70,13 +70,12 @@ if [[ -z ${BSH_NO_PACKAGES-} ]]; then
 		;;
 	windows)
 		if [[ $BSH_BUILD_PLATFORM-$BSH_HOST_LIBC == windows-mingw ]]; then
-			pacman -S --noconfirm --needed mingw-w64-ucrt-x86_64-gcc
+			pacman -Syu --noconfirm --needed mingw-w64-ucrt-x86_64-gcc
 			if [[ $BSH_STATIC_DYNAMIC == static ]]; then
-				pacman -S --noconfirm --needed mingw-w64-ucrt-x86_64-{cmake,7zip,jq} patch
+				pacman -S --noconfirm --needed mingw-w64-ucrt-x86_64-{cmake,7zip} patch
 			else
-				pacman -S --noconfirm --needed mingw-w64-ucrt-x86_64-{pkgconf,bzip2,luajit,jsoncpp,curl,SDL2,libpng,meson,fftw,jq}
+				pacman -S --noconfirm --needed mingw-w64-ucrt-x86_64-{pkgconf,bzip2,luajit,jsoncpp,curl,SDL2,libpng,meson,fftw}
 			fi
-			export PKG_CONFIG=$(which pkg-config.exe)
 		fi
 		;;
 	linux)
@@ -219,9 +218,23 @@ if [[ $PACKAGE_MODE == nolua ]]; then
 fi
 if [[ $PACKAGE_MODE == backendvs ]]; then
 	meson_configure+=$'\t'-Dbackend=vs
-	# meson 1.2.3 configures vs projects that bring their own manifest, which conflicts with ours
-	# TODO: remove this patch once https://github.com/mesonbuild/meson/pull/12472 makes it into a release that we can use
-	meson_configure+=$'\t'-Dwindows_utf8cp=false
+	echo "NOTE: patching CREATEPROCESS_MANIFEST_RESOURCE_ID out of powder-res.template.rc"
+	echo "TODO: remove this patch once https://github.com/mesonbuild/meson/pull/12472 makes it into a release"
+	echo "TODO: also remove the relevant note from the building guide"
+	git apply <<PATCH
+diff --git a/resources/powder-res.template.rc b/resources/powder-res.template.rc
+index 1dc26c78..2094049f 100644
+--- a/resources/powder-res.template.rc
++++ b/resources/powder-res.template.rc
+@@ -7,7 +7,6 @@
+ 
+ IDI_ICON ICON DISCARDABLE "@ICON_EXE_ICO@"
+ IDI_DOC_ICON ICON DISCARDABLE "@ICON_CPS_ICO@"
+-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "@WINUTF8_XML@"
+ 
+ VS_VERSION_INFO VERSIONINFO
+ FILEVERSION @DISPLAY_VERSION_MAJOR@,@DISPLAY_VERSION_MINOR@,0,@BUILD_NUM@
+PATCH
 fi
 if [[ $BSH_STATIC_DYNAMIC == static ]]; then
 	meson_configure+=$'\t'-Dstatic=prebuilt
@@ -293,9 +306,6 @@ if [[ $RELEASE_TYPE != dev ]]; then
 fi
 if [[ "$BSH_HOST_PLATFORM-$BSH_HOST_LIBC" == "windows-mingw" ]]; then
 	meson_configure+=$'\t'--cross-file=.github/mingw-ghactions.ini
-	# there is some mingw bug that only ever manifests on ghactions which makes MakeIco.exe use tons of memory and fail
-	# TODO: remove this hack once we figure out how to fix that
-	meson_configure+=$'\t'-Dwindows_icons=false
 fi
 if [[ $BSH_DEBUG_RELEASE-$BSH_STATIC_DYNAMIC == release-static ]]; then
 	meson_configure+=$'\t'-Db_lto=true
