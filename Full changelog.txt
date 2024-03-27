@@ -1,4 +1,4 @@
-v60.0 (Unreleased final build)
+v60.0
 Update version to v98.0
 Add esc key shortcut to close texter
 Add launch stats to extra hud
