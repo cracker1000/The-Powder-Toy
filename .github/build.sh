@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -198,7 +199,7 @@ meson_configure+=$'\t'-Dapp_exe=$APP_EXE
 meson_configure+=$'\t'-Dapp_id=$APP_ID
 meson_configure+=$'\t'-Dapp_data=$APP_DATA
 meson_configure+=$'\t'-Dapp_vendor=$APP_VENDOR
-meson_configure+=$'\t'-Dstrip=false
+meson_configure+=$'\t'-Db_strip=false
 meson_configure+=$'\t'-Db_staticpic=false
 meson_configure+=$'\t'-Dmod_id=$MOD_ID
 case $BSH_HOST_ARCH-$BSH_HOST_PLATFORM-$BSH_HOST_LIBC-$BSH_DEBUG_RELEASE in
@@ -286,13 +287,6 @@ fi
 if [[ $RELEASE_TYPE == snapshot ]] && [[ $MOD_ID != 0 ]]; then
 	>&2 echo "mods and snapshots do not mix"
 	exit 1
-fi
-if [[ $RELEASE_TYPE == snapshot ]] || [[ $MOD_ID != 0 ]]; then
-	meson_configure+=$'\t'-Dupdate_server=starcatcher.us/TPT
-	if [[ $BSH_HOST_PLATFORM == emscripten ]]; then
-		meson_configure+=$'\t'-Dserver=tptserv.starcatcher.us
-		meson_configure+=$'\t'-Dstatic_server=tptserv.starcatcher.us/Static
-	fi
 fi
 if [[ $RELEASE_TYPE != dev ]]; then
 	meson_configure+=$'\t'-Dignore_updates=false
