@@ -152,7 +152,7 @@ PreviewView::PreviewView(std::unique_ptr<VideoBuffer> newSavePreview):
 	viewsLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
 	AddComponent(viewsLabel);
 
-    voteLabel = new ui::Label(ui::Point((XRES/2)-80, (YRES/2)+27), ui::Point(80, 16), "");
+    voteLabel = new ui::Label(ui::Point((XRES/2)-80, (YRES/2)+30), ui::Point(80, 16), "");
     voteLabel->Appearance.HorizontalAlign = ui::Appearance::AlignRight;
     voteLabel->Appearance.VerticalAlign = ui::Appearance::AlignMiddle;
     AddComponent(voteLabel);
@@ -556,7 +556,7 @@ void PreviewView::NotifySaveChanged(PreviewModel * sender)
 		else
 			userIsAuthor = false;
 		viewsLabel->SetText(String::Build("\bgViews:\bw ", save->Views));
-        voteLabel->SetText(String::Build("\bgVotes: \x0F\x01\xFF\x01",votesUp,"\bw | \br",votesDown));
+        voteLabel->SetText(String::Build("\x0F\x01\xFF\x01",votesUp,"\bw | \br",votesDown));
 
 		saveDescriptionLabel->SetText(save->Description);
 		if(save->Favourite)

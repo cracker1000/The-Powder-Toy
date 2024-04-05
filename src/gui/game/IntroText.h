@@ -49,7 +49,7 @@ inline ByteString IntroText()
 	sb << "\bo                                           |-----------------------------------|\n"
 		"\bw                                            Welcome To The Cracker1000's Mod \n"
 		"\bo                                           |-----------------------------------|\n"
-		"                                                   \br<< \bwVersion: 60.0\br >>"
+		"                                                   \br<< \bwVersion: 60.2\br >>"
 		"\n\n   \boImportant Instructions (Do Not Skip):\n"
 		"\bt *\bw There's a new 'Cr-Menu' button at the bottom, press it to open the Mod menu ('J' key acts as a shortcut).\n"
 		"\bg *\bw Texter, element editor, autosave and various other features can be found in Cr-Menu\n"

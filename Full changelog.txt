@@ -1,3 +1,10 @@
+v60.2
+Update base version to v98.2, fixing save from a new version error
+Use create_part in resist reactions, and set CarriesCtypeIn for RSSS
+Fix RSST/RSSS not respecting the CarriesCtypeIn field
+Stop scrolling in ScrollPanels on mousedown
+Fix vote label text getting cut in some saves
+
 v60.0
 Update version to v98.0
 Add esc key shortcut to close texter
