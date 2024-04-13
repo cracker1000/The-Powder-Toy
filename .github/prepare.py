@@ -103,7 +103,7 @@ for        arch,     platform,         libc,   statdyn, bplatform,         runso
 #	(  'x86_64',    'windows',      'mingw', 'dynamic',   'linux', 'ubuntu-20.04',     '',   False,    False,      None,         None,                    None,   'debug',       10 ), # ubuntu-20.04 doesn't have ucrt64-capable mingw >_>
 #	(  'x86_64',    'windows',      'mingw', 'dynamic',   'linux', 'ubuntu-20.04',     '',   False,    False,      None,         None,                    None, 'release',       10 ), # ubuntu-20.04 doesn't have ucrt64-capable mingw >_>
 #	(  'x86_64',    'windows',      'mingw',  'static', 'windows', 'windows-2019', '.exe',   False,    False,      None,         None,                    None,   'debug',        0 ), # priority = 0: static debug build
-	(  'x86_64',    'windows',      'mingw',  'static', 'windows', 'windows-2019', '.exe',   False,     True,    '.dbg',         None,                    None, 'release',       10 ),
+#	(  'x86_64',    'windows',      'mingw',  'static', 'windows', 'windows-2019', '.exe',   False,     True,    '.dbg',         None,                    None, 'release',       10 ),
 #	(  'x86_64',    'windows',      'mingw', 'dynamic', 'windows', 'windows-2019', '.exe',   False,    False,      None,         None,                    None,   'debug',       10 ),
 #	(  'x86_64',    'windows',      'mingw', 'dynamic', 'windows', 'windows-2019', '.exe',   False,    False,      None,         None,                    None, 'release',       10 ),
 #	(  'x86_64',    'windows',       'msvc',  'static', 'windows', 'windows-2019', '.exe',   False,    False,      None,         None,                    None,   'debug',        0 ), # priority = 0: static debug build

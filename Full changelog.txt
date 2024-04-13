@@ -1,5 +1,9 @@
 v60.3
-Open the update process to contributors
+Fix votes overlapping with save descriptions
+
+todo:
+Merge in searchbar changes
+Auto hide hud is now advanced hud (moved from advanced options to main menu)
 Relative heat changes by Maticzpl (WIP)
 
 v60.2
