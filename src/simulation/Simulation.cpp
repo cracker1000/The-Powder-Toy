@@ -3966,7 +3966,9 @@ std::pair<float, float> Simulation::GetMinMaxTemp() const {
 
     for (int i = 0; i < NPART; i++)
     {
-        if(parts[i].type != 0)
+        int type = parts[i].type;
+        auto elemData = SimulationData::CRef().elements[type];
+        if(type != 0 && elemData.HeatConduct != 0)
         {
             minMax.first = std::min(minMax.first, parts[i].temp);
             minMax.second = std::max(minMax.second, parts[i].temp);

@@ -194,13 +194,11 @@ void Renderer::render_parts()
         float smooth = HEAT_DISPLAY_SMOOTHING;
         minRecordedTemp = (heatRange.first + minRecordedTemp * smooth) / (smooth + 1); // Make smoother across frames
         maxRecordedTemp = (heatRange.second + maxRecordedTemp * smooth) / (smooth + 1);
-        minRecordedTemp = std::max(minRecordedTemp, MIN_TEMP);
         if (std::abs(minRecordedTemp - maxRecordedTemp) < HEAT_DISPLAY_MIN_DIFF)
         {
             maxRecordedTemp += HEAT_DISPLAY_MIN_DIFF - std::abs(minRecordedTemp - maxRecordedTemp);
         }
         float prevMax = maxRecordedTemp;
-        maxRecordedTemp = std::min(maxRecordedTemp, MAX_TEMP);
         minRecordedTemp -= maxRecordedTemp - prevMax; // In case HEAT_DISPLAY_MIN_DIFF put it above MAX_TEMP
     }
     else 
