@@ -1,8 +1,10 @@
---Cracker1000 mod interface script--
+--Cracker1000's mod interface script--
 --Development controls 1 = enable & 0 = disable the feature/ setting. (Do not change unless you know what you are doing)
-local crackversion = 60.2 -- Next version: Nil (End of life support), Defines the internal mod version for update checks.
+local crackversion = 60.3 -- Next version: v60.4 (End of life support), Defines the internal mod version for update checks.
 local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
+local appname = "powder" --Appname for updates and stuff.
+local req2 = http.get("https://pastebin.com/raw/9yJRRimM") --Link for checking updates, messages and other stuff.
 enfailsafe = 1 -- Enable/ Disable the failsafe module. (Meant to be a global variable)
 --end
 if enscript ~= 1 or enupdater ~= 1 or enfailsafe ~= 1 then
@@ -388,7 +390,6 @@ newmenu:removeComponent(brlabel2)
 newmenu:removeComponent(brightSlider)
 end
 
-local req2 = http.get("https://pastebin.com/raw/9yJRRimM")
 local timermotd = 0
 local posix = 0
 local onlinestatus = 0 
@@ -402,7 +403,6 @@ local checkos, clickcheck = platform.platform(), 0
 local errtext = "URS updater: checking for updates.."
 local timeout = 0
 local errorcode = "No error to report"
-local appname = "powder"
 
 function updatermod()
 updatetimer = updatetimer + 1
@@ -2918,7 +2918,7 @@ end
 function open()
 waitformsg = 0 --Reset timer for motw.
 posix2 = posix - graphics.textSize(motw)
-cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features shown here."
+cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features is shown here."
 ui.showWindow(newmenu) 
 newmenu:onDraw(drawglitch)
 newmenu:onKeyPress(keyclicky2)

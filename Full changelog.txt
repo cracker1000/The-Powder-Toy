@@ -1,3 +1,7 @@
+v60.3
+Open the update process to contributors
+Relative heat changes by Maticzpl (WIP)
+
 v60.2
 Update base version to v98.2, fixing save from a new version error
 Use create_part in resist reactions, and set CarriesCtypeIn for RSSS
