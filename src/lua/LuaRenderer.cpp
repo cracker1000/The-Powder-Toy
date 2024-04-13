@@ -284,6 +284,16 @@ static int heatDisplayRelativeMode(lua_State * l)
 	}
 }
 
+static int relativeHeatDisplayRange(lua_State * l)
+{
+	auto *lsi = GetLSI();
+	auto *ren = lsi->ren;
+
+    lua_pushnumber(l, ren->minRecordedTemp);
+    lua_pushnumber(l, ren->maxRecordedTemp);
+    return 2;
+}
+
 void LuaRenderer::Open(lua_State *L)
 {
 	static const luaL_Reg reg[] = {
@@ -303,6 +313,7 @@ void LuaRenderer::Open(lua_State *L)
 		LFUNC(fireSize),
 		LFUNC(useDisplayPreset),
 		LFUNC(heatDisplayRelativeMode),
+		LFUNC(relativeHeatDisplayRange),
 #undef LFUNC
 		{ NULL, NULL }
 	};

@@ -79,6 +79,8 @@ public:
 	std::optional<FindingElement> findingElement;
 	int foundElements;
     bool relativeHeatDisplay;
+    float minRecordedTemp;
+    float maxRecordedTemp;
 
 	//Mouse position for debug information
 	ui::Point mousePos;
@@ -164,6 +166,4 @@ public:
 
 private:
 	int gridSize;
-    float minRecordedTemp;
-    float maxRecordedTemp;
 };
