@@ -1,2 +1,2 @@
 # Important file for mod updates and stuff, DO NOT TOUCH unless you know what you are doing #
-Version: 60.2, specialmsgmode: 0, Motd:.
+Version: 60.2, specialmsgmode: 0, Motd: Test message for v60.3
