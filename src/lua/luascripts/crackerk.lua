@@ -2929,7 +2929,7 @@ cracktip = "Editor: Element editor for editing existing elements."
 elseif y > 157 and y < 182 then
 cracktip = "Performace mode: Adjusts various settings for better performance."
 elseif y > 189 and y < 213 then
-cracktip = "Advanced options: Enables extra hud, slow motion, etc."
+cracktip = "Advanced options: Enables extra options like cross-hair, slow motion, etc."
 elseif y > 221 and y < 246 then
 cracktip = "Notifications: Notifies about save/ vote updates. Use '?' button for help."
 end
