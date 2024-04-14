@@ -46,6 +46,10 @@ void Element::Element_CEXP()
 }
 static int update(UPDATE_FUNC_ARGS)
 {
+	if (parts[i].ctype == PT_CEXP) //Prevent game crashes if ctype is set to CEXP.
+	{
+	  parts[i].ctype = PT_PLSM;
+	}
 	for (auto rx = -2; rx <= 2; rx++)
 		{
 			for (auto ry = -2; ry <= 2; ry++)

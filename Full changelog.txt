@@ -2,6 +2,8 @@ v60.3
 Fix votes overlapping with save descriptions.
 Add day/week/month/year selector in the search (by @savask)
 Auto-hide hud is now replaced with advanced hud. (Auto hide is now located under advanced settings.)
+Fix CEXP crashing the game if its ctype was set to CEXP
+Allow Z-HOLE to contain larger stacks of particles (9000 is the particle limit)
 
 todo:
 Relative heat changes (by @Maticzpl)

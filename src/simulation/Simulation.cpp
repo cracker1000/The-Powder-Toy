@@ -3633,7 +3633,16 @@ void Simulation::CheckStacking()
 			// Setting pmap_count[y][x] > NPART means BHOL will form in that spot
 			if (pmap_count[y][x]>5)
 			{
-				if (bmap[y/CELL][x/CELL]==WL_EHOLE||(bmap[y / CELL][x / CELL] == WL_ZHOLE))
+				if (bmap[y/CELL][x/CELL]==WL_ZHOLE)
+				{
+					// Allow even more stacking in Z-hole
+					if (pmap_count[y][x]>9000)
+					{
+						pmap_count[y][x] = pmap_count[y][x] + NPART;
+						excessive_stacking_found = 1;
+					}
+				}
+				else if (bmap[y/CELL][x/CELL]==WL_EHOLE)
 				{
 					// Allow more stacking in E-hole
 					if (pmap_count[y][x]>1500)
