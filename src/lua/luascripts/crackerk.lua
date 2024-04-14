@@ -329,7 +329,7 @@ local bg = Button:new(203,92,90,25,"Mod Elements", "")
 
 local mp = Button:new(203,124,90,25,"Control Centre", "Changes game's theme")
 
-local autohide = Button:new(203,156,90,25, "Auto Hide HUD", "Hide.")
+local autohide = Button:new(203,156,90,25, "Extended hud", "Hide.")
 
 local chud = Button:new(203,188,90,25, "Texter", "for text.")
 
@@ -1512,16 +1512,44 @@ tpt.hud(1)
 end
 end
 
+local timehr, timemin, timesec, starttime = 0, 0, 0, os.clock()
+local staty = 36
+local statstring 
+local function extstat()
+if MANAGER.getsetting("CRK","extraval") == "1" and MANAGER.getsetting("CRK", "pass") == "1" and tpt.hud() == 1 then
+timesec = os.difftime(os.clock(), starttime)
+if timesec > 59 then
+timemin = timemin + 1
+starttime = os.clock()
+end
+if timemin > 59 then
+timehr= timehr + 1
+end
+local relativeheatvalue = "OFF"
+if MANAGER.getsetting("CRK", "relhdv") == "1" then
+relativeheatvalue = "ON"
+else
+relativeheatvalue = "OFF"
+end
+statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Rel. heat: "..relativeheatvalue..", Launches: "..MANAGER.getsetting("CRK","launchstat")
+graphics.fillRect(6,staty-3,gfx.textSize(statstring)+1,13,10,10,10,130)
+graphics.drawText(7,staty,statstring,32,216,255,255)
+if ren.debugHUD() == 0 then
+staty = 36
+else
+staty = 50
+end
+end
+end
+
 autohide:action(function(sender)
 clearsb()
-if autoval == "1" then
-event.unregister(event.tick,autohidehud)
-event.register(event.tick,autohidehud)
-autoval = "0"
-elseif autoval == "0" then
-event.unregister(event.tick,autohidehud)
-autoval = "1"
-tpt.hud(1)
+if MANAGER.getsetting("CRK","extraval") == "0" then
+MANAGER.savesetting("CRK","extraval","1")
+event.register(event.tick,extstat)
+elseif MANAGER.getsetting("CRK","extraval") == "1" then
+MANAGER.savesetting("CRK","extraval","0")
+event.unregister(event.tick,extstat)
 end
 end)
 
@@ -2392,35 +2420,6 @@ slo2 = 0
 sim.framerender(1)
 end
 end
-local timehr, timemin, timesec, starttime = 0, 0, 0, os.clock()
-local staty = 36
-local statstring 
-local function extstat()
-if MANAGER.getsetting("CRK","extraval") == "1" and MANAGER.getsetting("CRK", "pass") == "1" and tpt.hud() == 1 then
-timesec = os.difftime(os.clock(), starttime)
-if timesec > 59 then
-timemin = timemin + 1
-starttime = os.clock()
-end
-if timemin > 59 then
-timehr= timehr + 1
-end
-local relativeheatvalue = "OFF"
-if MANAGER.getsetting("CRK", "relhdv") == "1" then
-relativeheatvalue = "ON"
-else
-relativeheatvalue = "OFF"
-end
-statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Rel. heat: "..relativeheatvalue..", Launches: "..MANAGER.getsetting("CRK","launchstat")
-graphics.fillRect(6,staty-3,gfx.textSize(statstring)+1,13,10,10,10,130)
-graphics.drawText(7,staty,statstring,32,216,255,255)
-if ren.debugHUD() == 0 then
-staty = 36
-else
-staty = 50
-end
-end
-end
 
 local function quickset()
 gfx.fillCircle(14,175,8,8,10,10,10,255) -- Dark background
@@ -2459,7 +2458,7 @@ else
 gfx.fillCircle(14,250,8,8,85,85,255,190)
 end
 gfx.drawText(12,246,"E",105,105,255,255)
-if MANAGER.getsetting("CRK","extraval") == "0" then
+if autoval == "1" then
 gfx.fillCircle(14,275,8,8,155,155,155,80)
 else
 gfx.fillCircle(14,275,8,8,255,255,255,190)
@@ -2487,7 +2486,7 @@ gfx.drawText(27,247,"Element/ Wall",105,105,255,255)
 end
 end
 if tpt.mousex > 7 and tpt.mousex < 22 and tpt.mousey > 268 and tpt.mousey < 283 then -- Extra information in hud
-gfx.drawText(27,272,"Additional HUD",255,255,255,255)
+gfx.drawText(27,272,"Auto hide HUD",255,255,255,255)
 end
 if tpt.mousex > 7 and tpt.mousex < 22 and tpt.mousey > 292 and tpt.mousey < 312 then -- Relative heat
 gfx.drawText(27,297,"Relative heat",131,0,255,255)
@@ -2524,13 +2523,15 @@ event.unregister(event.tick,slowmo)
 end
 return false
 end
-if tpt.mousex > 7 and tpt.mousex < 22 and tpt.mousey > 268 and tpt.mousey < 283 then -- Extra infor.
-if MANAGER.getsetting("CRK","extraval") == "0" then
-MANAGER.savesetting("CRK","extraval","1")
-event.register(event.tick,extstat)
-elseif MANAGER.getsetting("CRK","extraval") == "1" then
-MANAGER.savesetting("CRK","extraval","0")
-event.unregister(event.tick,extstat)
+if tpt.mousex > 7 and tpt.mousex < 22 and tpt.mousey > 268 and tpt.mousey < 283 then -- Auto hide hud
+if autoval == "1" then
+event.unregister(event.tick,autohidehud)
+event.register(event.tick,autohidehud)
+autoval = "0"
+elseif autoval == "0" then
+event.unregister(event.tick,autohidehud)
+autoval = "1"
+tpt.hud(1)
 end
 return false
 end
@@ -2826,7 +2827,7 @@ gfx.drawText(301,101,"ON",105,255,105,255)
 else
 gfx.drawText(301,101,"OFF",255,105,105,255)
 end
-if autoval == "0" then --Auto hide hud
+if MANAGER.getsetting("CRK","extraval") == "1" then --Extended hud
 gfx.drawText(301,165,"ON",105,255,105,255)
 else
 gfx.drawText(301,165,"OFF",255,105,105,255)
@@ -2908,7 +2909,7 @@ cracktip = "Mod elements: Enables/ disables the mod elements in game."
 elseif y > 125 and y < 147 then
 cracktip = "Control centre: For customisation options like theme and other features."
 elseif y > 157 and y < 182 then
-cracktip = "Auto hide hud: Automatically hides the hud when working in that area."
+cracktip = "Extended hud: Shows extra information and game statistics when turned on."
 elseif y > 189 and y < 213 then
 cracktip = "Texter: Custom texter for writing element texts in game."
 elseif y > 221 and y < 246 then

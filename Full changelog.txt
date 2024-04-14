@@ -1,10 +1,10 @@
 v60.3
-Fix votes overlapping with save descriptions
+Fix votes overlapping with save descriptions.
+Add day/week/month/year selector in the search (by @savask)
+Auto-hide hud is now replaced with advanced hud. (Auto hide is now located under advanced settings.)
 
 todo:
-Merge in searchbar changes
-Auto hide hud is now advanced hud (moved from advanced options to main menu)
-Relative heat changes by Maticzpl (WIP)
+Relative heat changes (by @Maticzpl)
 
 v60.2
 Update base version to v98.2, fixing save from a new version error
