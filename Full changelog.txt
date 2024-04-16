@@ -1,12 +1,11 @@
 v60.3
+Relative heat changes (by @Maticzpl): Min. and Max. temp are now shown in hud when relative heat is on
+Smoother relative heat changes and ignore particles that don't conduct heat (like WIFI).
 Fix votes overlapping with save descriptions.
 Add day/week/month/year selector in the search (by @savask)
 Auto-hide hud is now replaced with advanced hud. (Auto hide is now located under advanced settings.)
 Fix CEXP crashing the game if its ctype was set to CEXP
 Allow Z-HOLE to contain larger stacks of particles (9000 is the particle limit)
-
-todo:
-Relative heat changes (by @Maticzpl)
 
 v60.2
 Update base version to v98.2, fixing save from a new version error
