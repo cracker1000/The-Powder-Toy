@@ -18,16 +18,15 @@ local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
 cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features is shown here."
 
-
 function drawRelativeHeatRange()
-if ren.debugHud() and ren.displayModes()[1] == 8 then
+if ren.debugHud() and ren.displayModes()[1] == 8 and tpt.hud() == 1  then
 local min, max = ren.relativeHeatDisplayRange()
 min = min - 273.15
 max = max - 273.15
 local text = string.format("\x0F\x2b\x01\xff%.0fC\bg - \x0F\xFF\x01\xDB%.0fC",min, max)
 local tw, th = gfx.textSize(text)
-gfx.fillRect(sim.XRES - 9 - tw - 3, 6 - 3, tw + 6, th + 4, 0, 0, 0, 128)
-gfx.drawText(sim.XRES - 9 - tw, 6, text)
+gfx.fillRect(550-tw,8,tw+55,12, 0, 0, 0, 130)
+gfx.drawText(552-tw,10,"Rel. Temp: "..text)
 end
 end
 
@@ -2555,6 +2554,7 @@ if MANAGER.getsetting("CRK","relhdv") == "0" then
 MANAGER.savesetting("CRK", "relhdv", "1")
 ren.heatDisplayRelativeMode(true)
 tpt.display_mode(5)
+event.unregister(event.TICK, drawRelativeHeatRange)
 event.register(event.TICK, drawRelativeHeatRange)
 print("Relative heat display mode: ON")
 elseif MANAGER.getsetting("CRK","relhdv") == "1" then
@@ -2641,6 +2641,7 @@ end
 
 if MANAGER.getsetting("CRK", "relhdv") == "1" then
 ren.heatDisplayRelativeMode(true)
+event.unregister(event.TICK, drawRelativeHeatRange)
 event.register(event.TICK, drawRelativeHeatRange)
 print("Relative heat display mode is turned on.")
 elseif MANAGER.getsetting("CRK", "relhdv") == "0" then
