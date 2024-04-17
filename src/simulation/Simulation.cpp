@@ -2244,6 +2244,13 @@ void Simulation::UpdateParticles(int start, int end)
 				continue;
 			}
 
+            auto elemData = SimulationData::CRef().elements[t];
+            if(elemData.HeatConduct != 0)
+            {
+                cachedMinMaxTemp.first = std::min(cachedMinMaxTemp.first, parts[i].temp);
+                cachedMinMaxTemp.second = std::max(cachedMinMaxTemp.second, parts[i].temp);
+            }
+
 			// Make sure that STASIS'd particles don't tick.
 			if (bmap[y/CELL][x/CELL] == WL_STASIS && emap[y/CELL][x/CELL]<8) {
 				continue;
@@ -3694,6 +3701,8 @@ void Simulation::CheckStacking()
 //updates pmap, gol, and some other simulation stuff (but not particles)
 void Simulation::BeforeSim()
 {
+    cachedMinMaxTemp = {MAX_TEMP, MIN_TEMP};
+
 	if (!sys_pause||framerender)
 	{
 		air->update_air();
@@ -3927,7 +3936,8 @@ Simulation::Simulation():
 	framerender(0),
 	pretty_powder(0),
 	sandcolour_frame(0),
-	deco_space(DECOSPACE_SRGB)
+	deco_space(DECOSPACE_SRGB),
+    cachedMinMaxTemp(MAX_TEMP, MIN_TEMP)
 {
 	int tportal_rx[] = {-1, 0, 1, 1, 1, 0,-1,-1};
 	int tportal_ry[] = {-1,-1,-1, 0, 1, 1, 1, 0};
@@ -3971,13 +3981,18 @@ Simulation::Simulation():
 }
 
 std::pair<float, float> Simulation::GetMinMaxTemp() const {
+    if (cachedMinMaxTemp.first != MAX_TEMP || cachedMinMaxTemp.second != MIN_TEMP)
+        return cachedMinMaxTemp;
+
+
     std::pair<float, float> minMax(MAX_TEMP, MIN_TEMP);
 
+    auto &sd = SimulationData::CRef();
+    auto &elemData = sd.elements;
     for (int i = 0; i < NPART; i++)
     {
         int type = parts[i].type;
-        auto elemData = SimulationData::CRef().elements[type];
-        if(type != 0 && elemData.HeatConduct != 0)
+        if(type != 0 && elemData[type].HeatConduct != 0)
         {
             minMax.first = std::min(minMax.first, parts[i].temp);
             minMax.second = std::max(minMax.second, parts[i].temp);

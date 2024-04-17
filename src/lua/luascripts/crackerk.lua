@@ -1502,9 +1502,18 @@ end
 function drawRelativeHeatRange() --Relative heat display range
 if ren.debugHud() and ren.displayModes()[1] == 8 and tpt.hud() == 1  then
 local min, max = ren.relativeHeatDisplayRange()
+local unit = "C"
+if sim.temperatureScale() == 0 then
+unit = "K"
+elseif sim.temperatureScale() == 1 then
 min = min - 273.15
 max = max - 273.15
-local text = string.format("Min: \x0F\x2b\x01\xff%.0fC\bg - \bwMax: \x0F\xFF\x01\xDB%.0fC",min, max)
+elseif sim.temperatureScale() == 2 then
+unit = "F"
+min = ((min - 273.15) * 9 / 5) + 32
+max = ((max - 273.15) * 9 / 5) + 32
+end
+local text = string.format("Min: \x0F\x2b\x01\xff%.0f%s\bg - \bwMax: \x0F\xFF\x01\xDB%.0f%s",min, unit, max, unit)
 local tw, th = gfx.textSize(text)
 gfx.fillRect(598-tw,7,tw+4,12, 0, 0, 0, 130)
 gfx.drawText(600-tw,9,text)

@@ -216,6 +216,7 @@ public:
 	~Simulation();
 
 	bool useLuaCallbacks = false;
+    std::pair<float, float> cachedMinMaxTemp;
 
 private:
 	CoordStack& getCoordStackSingleton();
