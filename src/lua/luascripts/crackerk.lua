@@ -18,18 +18,6 @@ local specialmsgval = 0
 local dr, dg, db, da, defaulttheme = 131,0,255,255, "Default"
 cracktip = "Tip: 'J' key is shortcut for menu. Help text for mod features is shown here."
 
-function drawRelativeHeatRange()
-if ren.debugHud() and ren.displayModes()[1] == 8 and tpt.hud() == 1  then
-local min, max = ren.relativeHeatDisplayRange()
-min = min - 273.15
-max = max - 273.15
-local text = string.format("\x0F\x2b\x01\xff%.0fC\bg - \x0F\xFF\x01\xDB%.0fC",min, max)
-local tw, th = gfx.textSize(text)
-gfx.fillRect(550-tw,8,tw+55,12, 0, 0, 0, 130)
-gfx.drawText(552-tw,10,"Rel. Temp: "..text)
-end
-end
-
 --TOOL for MISL
 local MISLT = elem.allocate("CR1K", "MIST")
 local tcount, posxt, posyt = 0,0,0
@@ -328,7 +316,7 @@ local bg = Button:new(203,92,90,25,"Mod Elements", "")
 
 local mp = Button:new(203,124,90,25,"Control Centre", "Changes game's theme")
 
-local autohide = Button:new(203,156,90,25, "Extended hud", "Hide.")
+local autohide = Button:new(203,156,90,25, "Extended HUD", "Hide.")
 
 local chud = Button:new(203,188,90,25, "Texter", "for text.")
 
@@ -1511,7 +1499,19 @@ tpt.hud(1)
 end
 end
 
-local timehr, timemin, timesec, starttime = 0, 0, 0, os.clock()
+function drawRelativeHeatRange() --Relative heat display range
+if ren.debugHud() and ren.displayModes()[1] == 8 and tpt.hud() == 1  then
+local min, max = ren.relativeHeatDisplayRange()
+min = min - 273.15
+max = max - 273.15
+local text = string.format("Min: \x0F\x2b\x01\xff%.0fC\bg - \bwMax: \x0F\xFF\x01\xDB%.0fC",min, max)
+local tw, th = gfx.textSize(text)
+gfx.fillRect(598-tw,7,tw+4,12, 0, 0, 0, 130)
+gfx.drawText(600-tw,9,text)
+end
+end
+
+local timehr, timemin, timesec, starttime = 0, 0, 0, os.clock() --Extended HUD
 local staty = 36
 local statstring 
 local function extstat()
@@ -1530,7 +1530,7 @@ relativeheatvalue = "ON"
 else
 relativeheatvalue = "OFF"
 end
-statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Elem. P:"..sim.elementCount(elem[tpt.selectedl])..", S:"..sim.elementCount(elem[tpt.selectedr])..", Rel. heat: "..relativeheatvalue..", Launches: "..MANAGER.getsetting("CRK","launchstat")
+statstring = "Time elapsed: "..timehr.." Hr. "..timemin.." Min. "..timesec.." Sec, Element count ("..sim.elementCount(elem[tpt.selectedl]).."/ "..sim.elementCount(elem[tpt.selectedr]).."), Rel. heat: "..relativeheatvalue..", Launches: "..MANAGER.getsetting("CRK","launchstat")
 graphics.fillRect(6,staty-3,gfx.textSize(statstring)+1,13,10,10,10,130)
 graphics.drawText(7,staty,statstring,32,216,255,255)
 if ren.debugHUD() == 0 then
@@ -2240,7 +2240,6 @@ tpt.setfire(1)
 end
 end)
 
-
 relativeHeatDisplay:action(function (sender)
 if MANAGER.getsetting("CRK", "relhdv") == "0" then
 MANAGER.savesetting("CRK", "relhdv", "1")
@@ -2910,7 +2909,7 @@ cracktip = "Mod elements: Enables/ disables the mod elements in game."
 elseif y > 125 and y < 147 then
 cracktip = "Control centre: For customisation options like theme and other features."
 elseif y > 157 and y < 182 then
-cracktip = "Extended hud: Shows extra information and game statistics when turned on."
+cracktip = "Extended HUD: Shows extra information and game statistics when turned on."
 elseif y > 189 and y < 213 then
 cracktip = "Texter: Custom texter for writing element texts in game."
 elseif y > 221 and y < 246 then
