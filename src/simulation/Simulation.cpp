@@ -2244,14 +2244,6 @@ void Simulation::UpdateParticles(int start, int end)
 				continue;
 			}
 
-
-            auto elemData = SimulationData::CRef().elements[t];
-            if(elemData.HeatConduct != 0)
-            {
-                minMaxDynamicTemp.first = std::min(minMaxDynamicTemp.first, parts[i].temp);
-                minMaxDynamicTemp.second = std::max(minMaxDynamicTemp.second, parts[i].temp);
-            }
-
 			// Make sure that STASIS'd particles don't tick.
 			if (bmap[y/CELL][x/CELL] == WL_STASIS && emap[y/CELL][x/CELL]<8) {
 				continue;
@@ -3702,8 +3694,6 @@ void Simulation::CheckStacking()
 //updates pmap, gol, and some other simulation stuff (but not particles)
 void Simulation::BeforeSim()
 {
-    minMaxDynamicTemp = {MAX_TEMP, MIN_TEMP};
-
 	if (!sys_pause||framerender)
 	{
 		air->update_air();
@@ -3937,8 +3927,7 @@ Simulation::Simulation():
 	framerender(0),
 	pretty_powder(0),
 	sandcolour_frame(0),
-	deco_space(DECOSPACE_SRGB),
-    minMaxDynamicTemp(MAX_TEMP, MIN_TEMP)
+	deco_space(DECOSPACE_SRGB)
 {
 	int tportal_rx[] = {-1, 0, 1, 1, 1, 0,-1,-1};
 	int tportal_ry[] = {-1,-1,-1, 0, 1, 1, 1, 0};
@@ -3979,6 +3968,40 @@ Simulation::Simulation():
 	clear_sim();
 
 	grav->gravity_mask();
+}
+
+std::pair<float, float> Simulation::GetMinMaxTemp() const {
+    std::pair<float, float> minMax(MAX_TEMP, MIN_TEMP);
+
+    for (int i = 0; i < NPART; i++)
+    {
+        int type = parts[i].type;
+        auto elemData = SimulationData::CRef().elements[type];
+        if(type != 0 && elemData.HeatConduct != 0)
+        {
+            minMax.first = std::min(minMax.first, parts[i].temp);
+            minMax.second = std::max(minMax.second, parts[i].temp);
+        }
+    }
+
+    if (aheat_enable) {
+        for (int y = 0; y < YCELLS; y++)
+        {
+            for (int x = 0; x < XCELLS; x++)
+            {
+                minMax.first = std::min(minMax.first, air->hv[y][x]);
+                minMax.second = std::max(minMax.second, air->hv[y][x]);
+            }
+        }
+    }
+
+	// In case there are no particles and ambient heat is disabled
+    if (minMax.first > minMax.second)
+    {
+        minMax = {MIN_TEMP, MAX_TEMP};
+    }
+
+    return minMax;
 }
 
 constexpr size_t ce_log2(size_t n)
