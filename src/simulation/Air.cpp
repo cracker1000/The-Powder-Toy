@@ -110,6 +110,9 @@ void Air::update_airh(void)
 					vy[y][x] += weight * convGravY;
 				}
 			}
+            
+            sim.minMaxDynamicTemp.first = std::min(sim.minMaxDynamicTemp.first, hv[y][x]);
+            sim.minMaxDynamicTemp.second = std::max(sim.minMaxDynamicTemp.second, hv[y][x]);
 		}
 	}
 	memcpy(hv, ohv, sizeof(hv));

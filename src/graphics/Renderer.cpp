@@ -188,9 +188,15 @@ void Renderer::render_parts()
 		return;
 	auto *parts = sim->parts;
 
-    if (relativeHeatDisplay) 
+    if (relativeHeatDisplay && colour_mode & COLOUR_HEAT) 
     {
-        auto heatRange = sim->GetMinMaxTemp();
+        auto heatRange = sim->minMaxDynamicTemp;
+
+        if (heatRange.first > heatRange.second)
+        {
+            heatRange = {MIN_TEMP, MAX_TEMP};
+        }
+
         float smooth = HEAT_DISPLAY_SMOOTHING;
         minRecordedTemp = (heatRange.first + minRecordedTemp * smooth) / (smooth + 1); // Make smoother across frames
         maxRecordedTemp = (heatRange.second + maxRecordedTemp * smooth) / (smooth + 1);
