@@ -1,3 +1,6 @@
+v60.4
+Fix PHOT passing through everything
+
 v60.3
 Relative heat changes (by @Maticzpl): Min. and Max. temp are now shown in hud when relative heat is on
 Smoother relative heat changes and ignore particles that don't conduct heat (like WIFI).
