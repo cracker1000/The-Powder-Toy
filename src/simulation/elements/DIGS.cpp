@@ -10,7 +10,7 @@ void Element::Element_DIGS()
 	Name = "DIGS";
 	Colour = 0xFFFFFFFF_rgb;
 	MenuVisible = 1;
-	MenuSection = SC_SPECIAL;
+	MenuSection = SC_POWERED;
 	Enabled = 1;
 
 	Advection = 0.0f;

@@ -1,5 +1,6 @@
 v60.5
 Fix missing elements warning when opening saves made with resist element
+Fix BEE graphics.
 Make Z-Hole less colourful
 Move Relative heat to main menu
  
