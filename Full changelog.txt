@@ -1,3 +1,8 @@
+v60.5
+Fix missing elements warning when opening saves made with resist element
+Make Z-Hole less colourful
+Move Relative heat to main menu
+ 
 v60.4
 Fix PHOT passing through everything
 

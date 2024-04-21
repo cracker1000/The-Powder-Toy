@@ -1,6 +1,6 @@
 --Cracker1000's mod interface script--
 --Development controls 1 = enable & 0 = disable the feature/ setting. (Do not change unless you know what you are doing)
-local crackversion = 60.4 -- Next version: v60.5 (End of life support), Defines the internal mod version for update checks.
+local crackversion = 60.5 -- Next version: v60.6 (End of life support), Defines the internal mod version for update checks.
 local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
 local appname = "powder" --Appname for updates and stuff.
@@ -289,7 +289,8 @@ end
 local toggle = Button:new(419,408,50,15, "Cr-Menu", "Open Mod Settings.")
 local newmenu = Window:new(-15,-15, 609, 255)
 
-local deletesparkButton =  Button:new(10,28,90,25,"Focus Mode", "shows UI related stuff.")
+local deletesparkButton = Button:new(10,28,90,25,"Relative heat", "Relative heat display by maticzpl")
+local relheathelp = Button:new(130,32,15,15, "?", "Help")
 
 local FPS = Button:new(10,60,90,25, "Frame limiter", "Turns the frame limiter on/off.")
 
@@ -378,6 +379,7 @@ newmenu:removeComponent(edito)
 newmenu:removeComponent(perfm)
 newmenu:removeComponent(passbut)
 newmenu:removeComponent(upmp)
+newmenu:removeComponent(relheathelp)
 newmenu:removeComponent(reminderhelp)
 end
 
@@ -491,7 +493,7 @@ end
 end
 if clickcheck ~= 0 then --Changelogs
 if tpt.mousex > 299 and tpt.mousex < 386 and tpt.mousey > 284 and tpt.mousey < 296 then
-interface.beginConfirm("URS updater changelog. Your Ver.: v."..crackversion,crdata)
+interface.beginConfirm("URS updater changelog. Your Version: v."..crackversion,crdata)
 end
 return false
 end
@@ -1108,6 +1110,11 @@ event.unregister(event.mousemove,MaticzplNotifications.Mouse)
 event.unregister(event.mousedown,MaticzplNotifications.OnClick)
 event.unregister(event.mousewheel,MaticzplNotifications.Scroll)
 end
+end)
+
+relheathelp:action(function(sender)
+close()
+interface.beginMessageBox(" Relative heat display help","A more realistic heat display mode. Turning it on will use the min. and max. temp. values of particles present on screen instead of default limits. Turn on debug hud for actual values. \n\nCredit: @Maticzpl")
 end)
 
 reminderhelp:action(function(sender)
@@ -2028,7 +2035,7 @@ local bogb1 = Button:new(124,333,60,25,"Borders", "Draw Borders")
 
 local jkey = Button:new(124,300,60,25,"J-Shortcut", "Toggle Shortcut")
 local neonmode = Button:new(224,300,60,25,"Neon Mode", "Toggle fire strength")
-local relativeHeatDisplay = Button:new(324,300,80,25,"Relative Heat", "Makes heat display adjust to the temperature range in save")
+local relativeHeatDisplay = Button:new(324,300,80,25,"Focus mode", "Dimmen the interface for a better immersive experience.")
 local relativeHeathelp = Button:new(434,302,20,20,"?", "Help text for relative heat display.")
 local bg7 = Button:new(224,333,60,25,"Developer", "Disable inbuilt scripts")
 
@@ -2125,11 +2132,12 @@ gfx.drawText(290,309,"ON",105,255,105,255)
 else
 gfx.drawText(290,309,"OFF",255,105,105,255)
 end
-if MANAGER.getsetting("CRK", "relhdv") == "1" then
-gfx.drawText(410,309,"ON",105,255,105,255)
+if uival == "0" then
+gfx.drawText(412,309,"ON",105,255,105,255)
 else
-gfx.drawText(410,309,"OFF",255,105,105,255)
+gfx.drawText(412,309,"OFF",255,105,105,255)
 end
+
 
 if MANAGER.getsetting("CRK", "savergb") ~= "1" then
 if MANAGER.getsetting("CRK","split") ~= "1" then
@@ -2249,26 +2257,22 @@ tpt.setfire(1)
 end
 end)
 
-relativeHeatDisplay:action(function (sender)
-if MANAGER.getsetting("CRK", "relhdv") == "0" then
-MANAGER.savesetting("CRK", "relhdv", "1")
-ren.heatDisplayRelativeMode(true)
-tpt.display_mode(5)
-event.register(event.TICK, drawRelativeHeatRange)
-print("Relative heat display mode:  Makes heat display adjust to the temperature range in save.")
-elseif MANAGER.getsetting("CRK", "relhdv") == "1" then
-MANAGER.savesetting("CRK", "relhdv", "0")
-ren.heatDisplayRelativeMode(false)
-tpt.display_mode(3)
-event.unregister(event.TICK, drawRelativeHeatRange)
-print("Relative heat display mode turned off.")
+relativeHeatDisplay:action(function (sender) -- Note that this button was switched with relative heat display so do not get confused, it actually toggles focus mode now.
+if uival == "1" then
+event.unregister(event.tick,UIhide)
+event.register(event.tick,UIhide)
+tpt.hud(0)
+uival = "0"
+elseif uival == "0" then
+tpt.hud(1)
+event.unregister(event.tick,UIhide)
+uival = "1"
 end
 end)
 
 relativeHeathelp:action(function (sender)
-interface.beginMessageBox(" Relative heat display help", "This display mode changes the min and max temp values to that of the particles present in the simulation instead of pre defined ones. Thus making heat display adjust colours to the actual temp. range of particles on screen.")
+interface.beginMessageBox(" Focus mode help", "Dimmens the entire interface when not in use for a better immersive experience. Also hides the HUD.")
 end)
-
 
 mpop:action(function(sender)
 ui.closeWindow(newmenuth)
@@ -2696,15 +2700,16 @@ end
 
 deletesparkButton:action(function(sender)
 clearsb()
-if uival == "1" then
-event.unregister(event.tick,UIhide)
-event.register(event.tick,UIhide)
-tpt.hud(0)
-uival = "0"
-elseif uival == "0" then
-tpt.hud(1)
-event.unregister(event.tick,UIhide)
-uival = "1"
+if MANAGER.getsetting("CRK", "relhdv") == "0" then
+MANAGER.savesetting("CRK", "relhdv", "1")
+ren.heatDisplayRelativeMode(true)
+tpt.display_mode(5)
+event.register(event.TICK, drawRelativeHeatRange)
+elseif MANAGER.getsetting("CRK", "relhdv") == "1" then
+MANAGER.savesetting("CRK", "relhdv", "0")
+ren.heatDisplayRelativeMode(false)
+tpt.display_mode(3)
+event.unregister(event.TICK, drawRelativeHeatRange)
 end
 end)
 
@@ -2806,7 +2811,7 @@ gfx.drawText(139+gfx.textSize(crackversion),7,"Offline",255,100,100,255)
 end
 gfx.drawText(170+gfx.textSize(crackversion),7," | "..cracktip,32,216,255,255) --Help text
 
-if uival == "0" then --Focus Mode
+if MANAGER.getsetting("CRK", "relhdv") == "1" then --Relative heat display
 gfx.drawText(108,37,"ON",105,255,105,255)
 else
 gfx.drawText(108,37,"OFF",255,105,105,255)
@@ -2892,7 +2897,7 @@ end)
 function crtiploc(x,y)
 if x < 100 and x > 10 then -- Column 1
 if y > 28 and y < 53 then
-cracktip = "Focus Mode: Darkens the interface for better immersive experience."
+cracktip = "Relative heat: Use Min. and Max. temp. for heat display (Use ? for help)."
 elseif y > 56 and y < 85 then
 cracktip = "Frame limiter: Toggles the frame limiter for game engine."
 elseif y > 95 and y < 116 then
@@ -2981,6 +2986,7 @@ newmenu:addComponent(edito)
 newmenu:addComponent(perfm)
 newmenu:addComponent(passbut)
 newmenu:addComponent(upmp)
+newmenu:addComponent(relheathelp)
 newmenu:addComponent(reminderhelp)
 end
 
