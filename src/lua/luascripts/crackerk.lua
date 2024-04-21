@@ -1530,8 +1530,9 @@ end
 local timehr, timemin, timesec, starttime = 0, 0, 0, os.clock() --Extended HUD
 local staty = 36
 local statstring 
+
 local function extstat()
-if MANAGER.getsetting("CRK","extraval") == "1" and MANAGER.getsetting("CRK", "pass") == "1" and tpt.hud() == 1 then
+if MANAGER.getsetting("CRK","extraval") == "1" and tpt.hud() == 1 then
 timesec = os.difftime(os.clock(), starttime)
 if timesec > 59 then
 timemin = timemin + 1

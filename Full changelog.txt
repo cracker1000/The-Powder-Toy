@@ -1,6 +1,7 @@
 v60.5
 Fix missing elements warning when opening saves made with resist element
 Fix BEE graphics.
+Fix extended hud not turning on if advanced options were turned off.
 Make Z-Hole less colourful
 Move Relative heat to main menu
  
