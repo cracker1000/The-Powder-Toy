@@ -46,6 +46,7 @@ class PreviewView: public ui::Window
 	ui::Label *pageInfo{};
 	ui::Label *saveDescriptionLabel{};
 	ui::Label *viewsLabel{};
+    ui::Label * voteLabel;
 	ui::Label *saveIDLabel{};
 	ui::Label *saveIDLabel2{};
 	ui::CopyTextButton *saveIDButton{};
