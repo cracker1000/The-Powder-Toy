@@ -18,7 +18,7 @@ struct Particle;
 
 struct GraphicsFuncContext
 {
-	const RendererSettings *ren;
+	RendererSettings *ren;
 	const RenderableSimulation *sim;
 	RNG rng;
 	const Particle *pipeSubcallCpart;

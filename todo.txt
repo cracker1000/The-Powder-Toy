@@ -1,4 +1,21 @@
-Add elements and walls
+Add wall
 Add comment time stamps
-Fix crackerk.lua errors
+Update HUD
+Check GSNS, ALUM
+Config all the mod id and other settings, update version and check URS
+Fix PPTI and PPTO
+Update mod wiki
+Fix MIST tool and SPSH
+Add WHEL, BEE and STRC
+Add various checks in SPRK.cpp and other places
 other misc. stuff
+Check ELEX turning into restricted elements
+List of elements removed,
+	'LITH2',  Removed
+                'TURB',  Removed
+	'PET',    Removed 
+	'SODM', Removed
+	'BALL',   Removed
+	'DIGS',   Removed
+	'BASE',   Replaced
+		
