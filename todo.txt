@@ -1,7 +1,7 @@
 Make relative heat button do something
-Fix tag button overlapping with mod button
 Update HUD
 Check GSNS, ALUM
+Update help.txt (optional)
 Config all the mod id and other settings, update version and check URS (make sure it doesn't check for updates on starcather to avoid accidental updates)
 Fix PPTI and PPTO
 Update mod wiki and fix mod element hide button warning
