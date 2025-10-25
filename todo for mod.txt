@@ -1,0 +1,10 @@
+Add elements and walls
+Fix internal crackerk script
+Comments time stamp
+Make relative heat do something
+Update HUD
+other misc. stuff
+
+
+
+
