@@ -3,6 +3,9 @@
 #include "common/platform/Platform.h"
 #include "common/tpt-rand.h"
 #include "compat_lua.h"
+#include "manager_lua.h"
+#include "tptmp_lua.h"
+#include "crackerk_lua.h"
 #include "gui/game/GameController.h"
 #include "gui/game/GameModel.h"
 #include "gui/game/GameView.h"
@@ -174,6 +177,21 @@ LuaScriptInterface::LuaScriptInterface(GameController *newGameController, GameMo
 	if (luaL_loadbuffer(L, compatSpan.data(), compatSpan.size(), "@[built-in compat.lua]") || tpt_lua_pcall(L, 0, 0, 0, eventTraitNone))
 	{
 		throw std::runtime_error(ByteString("failed to load built-in compat: ") + tpt_lua_toByteString(L, -1));
+	}
+	auto managerSpan = manager_lua.AsCharSpan();
+	if (luaL_loadbuffer(L, managerSpan.data(), managerSpan.size(), "@[built-in manager.lua]") || tpt_lua_pcall(L, 0, 0, 0, eventTraitInterface))
+	{
+		//Ignore
+	}
+	auto tptmpSpan = tptmp_lua.AsCharSpan();
+	if (luaL_loadbuffer(L,tptmpSpan.data(), tptmpSpan.size(), "@[built-in tptmp.lua]") || tpt_lua_pcall(L, 0, 0, 0, eventTraitInterface))
+	{
+		//Ignore
+	}
+	auto crackerkSpan = crackerk_lua.AsCharSpan();
+	if (luaL_loadbuffer(L,crackerkSpan.data(), crackerkSpan.size(), "@[built-in crackerk.lua]") || tpt_lua_pcall(L, 0, 0, 0, eventTraitInterface))
+	{
+		//Ignore
 	}
 }
 

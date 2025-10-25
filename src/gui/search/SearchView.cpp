@@ -617,7 +617,6 @@ void SearchView::NotifySaveListChanged(SearchModel * sender)
 			});
 			if(user)
 				saveButton->SetSelectable(true);
-			if (user && (saves[i]->GetUserName() == user->Username || user->UserElevation == User::ElevationAdmin || user->UserElevation == User::ElevationMod))
 				saveButton->SetShowVotes(true);
 			saveButtons.push_back(saveButton);
 			AddComponent(saveButton);

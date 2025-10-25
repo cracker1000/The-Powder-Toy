@@ -1,6 +1,5 @@
 # Misc extensions, system files
 *.zip
-*.txt
 *.gz
 *.out
 *.sh
@@ -34,7 +33,6 @@ config.log
 /recordings/
 *.def
 *.pref
-*.lua
 screenshot_*
 
 # Visual studio
