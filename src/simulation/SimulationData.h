@@ -47,6 +47,7 @@ constexpr int WL_ALLOWAIR     =  9;
 constexpr int WL_ALLOWPOWDER  = 10;
 constexpr int WL_ALLOWALLELEC = 11;
 constexpr int WL_EHOLE        = 12;
+constexpr int WL_ZHOLE        = 19;
 constexpr int WL_ALLOWGAS     = 13;
 constexpr int WL_GRAV         = 14;
 constexpr int WL_ALLOWENERGY  = 15;
@@ -55,7 +56,7 @@ constexpr int WL_ERASEALL     = 17;
 constexpr int WL_STASIS       = 18;
 constexpr int WL_FLOODHELPER  =255;
 
-constexpr int UI_WALLCOUNT = 19;
+constexpr int UI_WALLCOUNT = 20;
 
 constexpr int OLD_SPC_AIR = 236;
 constexpr int SPC_AIR     = 256;

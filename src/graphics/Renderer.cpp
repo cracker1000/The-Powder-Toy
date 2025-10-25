@@ -156,6 +156,7 @@ std::unique_ptr<VideoBuffer> Renderer::WallIcon(int wallID, Vec2<int> size)
 				texture->DrawPixel(pos, 0x808080_rgb);
 		break;
 	case WL_EHOLE:
+	case WL_ZHOLE:
 	case WL_STASIS:
 		// .....  #######
 		// .#.#.#  ###.#.
@@ -1068,7 +1069,7 @@ void Renderer::DrawWalls()
 									video[{ x * CELL + i, y * CELL + j }] = 0x808080_rgb .Pack();
 							}
 					}
-					else if (wt == WL_EHOLE)
+					else if (wt == WL_EHOLE||wt == WL_ZHOLE)
 					{
 						if (powered)
 						{
@@ -1192,7 +1193,7 @@ void Renderer::DrawWalls()
 										DrawBlob({ x*CELL+i, y*CELL+j }, 0x808080_rgb);
 								}
 						}
-						else if (wt == WL_EHOLE)
+					else if (wt == WL_EHOLE||wt == WL_ZHOLE)
 						{
 							if (powered)
 							{
