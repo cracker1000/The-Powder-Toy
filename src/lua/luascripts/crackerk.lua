@@ -75,6 +75,8 @@ end
 return false
 end
 --TOOL end
+
+--PLNE Interface
 local Exitplne = Button:new(10,295,20,12, "X", "Disable Space ship")
 local PLNEBST = Button:new(55,295,20,12, "BST", "Toggle Booster.")
 local planebwd = Button:new(10,322,20,15, "Ul", "Move Up + Left")
@@ -1505,27 +1507,6 @@ tpt.hud(1)
 end
 end
 
-function drawRelativeHeatRange() --Relative heat display range
-if ren.debugHud() and ren.displayModes()[1] == 8 and tpt.hud() == 1  then
-local min, max = ren.relativeHeatDisplayRange()
-local unit = "C"
-if sim.temperatureScale() == 0 then
-unit = "K"
-elseif sim.temperatureScale() == 1 then
-min = min - 273.15
-max = max - 273.15
-elseif sim.temperatureScale() == 2 then
-unit = "F"
-min = ((min - 273.15) * 9 / 5) + 32
-max = ((max - 273.15) * 9 / 5) + 32
-end
-local text = string.format("Min: \x0F\x2b\x01\xff%.0f%s\bg - \bwMax: \x0F\xFF\x01\xDB%.0f%s",min, unit, max, unit)
-local tw, th = gfx.textSize(text)
-gfx.fillRect(598-tw,7,tw+4,12, 0, 0, 0, 130)
-gfx.drawText(600-tw,9,text)
-end
-end
-
 local timehr, timemin, timesec, starttime = 0, 0, 0, os.clock() --Extended HUD
 local staty = 36
 local statstring 
@@ -1729,7 +1710,6 @@ tpt.el.fntc.menu=0
 tpt.el.fptc.menu=0
 tpt.el.cwir.menu=0
 tpt.el.copr.menu=0
-tpt.el.lbtr.menu=0
 tpt.el.led.menu=0
 tpt.el.timc.menu=0
 tpt.el.pinv.menu=0
@@ -1742,7 +1722,6 @@ tpt.el.csns.menu=0
 tpt.el.thmo.menu=0
 tpt.el.eclr.menu=0
 tpt.el.proj.menu=0
-tpt.el.turb.menu=0
 tpt.el.misl.menu=0
 tpt.el.cexp.menu=0
 tpt.el.bflm.menu=0
@@ -1756,29 +1735,21 @@ tpt.el.phos.menu=0
 tpt.el.cmnt.menu=0
 tpt.el.seed.menu=0
 tpt.el.dmrn.menu=0
-tpt.el.strc.menu=0
 tpt.el.prmt.menu=0
 tpt.el.uv.menu=0
-tpt.el.strc.menu=0
 tpt.el.wall.menu=0
 tpt.el.sun.menu=0
-tpt.el.bee.menu=0
-tpt.el.pet.menu=0
 tpt.el.cl.menu=0
 tpt.el.acty.menu=0
 tpt.el.elex.menu=0
 tpt.el.radn.menu=0
 tpt.el.grph.menu=0
 tpt.el.base.menu=0
-tpt.el.whel.menu=0
 tpt.el.napm.menu=0
 tpt.el.gsns.menu=0
 tpt.el.emgt.menu=0
-tpt.el.sodm.menu=0
-tpt.el.ball.menu=0
 tpt.el.rubr.menu=0
 tpt.el.dfom.menu=0
-tpt.el.digs.menu=0
 tpt.el.alum.menu=0
 tpt.el.almp.menu=0
 elem.property(PLNE, "MenuVisible", 0)
@@ -1790,7 +1761,6 @@ tpt.el.fntc.menu=1
 tpt.el.fptc.menu=1
 tpt.el.cwir.menu=1
 tpt.el.copr.menu=1
-tpt.el.lbtr.menu=1
 tpt.el.led.menu=1
 tpt.el.timc.menu=1
 tpt.el.pinv.menu=1
@@ -1803,7 +1773,6 @@ tpt.el.csns.menu=1
 tpt.el.thmo.menu=1
 tpt.el.eclr.menu=1
 tpt.el.proj.menu=1
-tpt.el.turb.menu=1
 tpt.el.misl.menu=1
 tpt.el.cexp.menu=1
 tpt.el.bflm.menu=1
@@ -1817,29 +1786,21 @@ tpt.el.phos.menu=1
 tpt.el.cmnt.menu=1
 tpt.el.seed.menu=1
 tpt.el.dmrn.menu=1
-tpt.el.strc.menu=1
 tpt.el.prmt.menu=1
 tpt.el.uv.menu=1
-tpt.el.strc.menu=1
 tpt.el.wall.menu=1
 tpt.el.sun.menu=1
-tpt.el.bee.menu=1
-tpt.el.pet.menu=1
 tpt.el.cl.menu=1
 tpt.el.acty.menu=1
 tpt.el.elex.menu=1
 tpt.el.radn.menu=1
 tpt.el.grph.menu=1
 tpt.el.base.menu=1
-tpt.el.whel.menu=1
 tpt.el.napm.menu=1
 tpt.el.gsns.menu=1
 tpt.el.emgt.menu=1
-tpt.el.sodm.menu=1
-tpt.el.ball.menu=1
 tpt.el.rubr.menu=1
 tpt.el.dfom.menu=1
-tpt.el.digs.menu=1
 tpt.el.almp.menu=1
 tpt.el.alum.menu=1
 elem.property(PLNE, "MenuVisible", 1)

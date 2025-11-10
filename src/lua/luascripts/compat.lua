@@ -1,3 +1,4 @@
+iscrackmod = true --global variable for detecting c1k mod in lua scripts
 bz2.compressLimit       = bz2.COMPRESS_LIMIT
 bz2.compressNomem       = bz2.COMPRESS_NOMEM
 bz2.decompressBad       = bz2.DECOMPRESS_BAD

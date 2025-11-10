@@ -178,6 +178,8 @@ LuaScriptInterface::LuaScriptInterface(GameController *newGameController, GameMo
 	{
 		throw std::runtime_error(ByteString("failed to load built-in compat: ") + tpt_lua_toByteString(L, -1));
 	}
+	if (!Platform::FileExists("deleteme.txt"))
+	{
 	auto managerSpan = manager_lua.AsCharSpan();
 	if (luaL_loadbuffer(L, managerSpan.data(), managerSpan.size(), "@[built-in manager.lua]") || tpt_lua_pcall(L, 0, 0, 0, eventTraitInterface))
 	{
@@ -188,10 +190,14 @@ LuaScriptInterface::LuaScriptInterface(GameController *newGameController, GameMo
 	{
 		//Ignore
 	}
+	if (!Platform::FileExists("debugmode.txt"))
+		{
 	auto crackerkSpan = crackerk_lua.AsCharSpan();
 	if (luaL_loadbuffer(L,crackerkSpan.data(), crackerkSpan.size(), "@[built-in crackerk.lua]") || tpt_lua_pcall(L, 0, 0, 0, eventTraitInterface))
 	{
 		//Ignore
+	}
+		}
 	}
 }
 
