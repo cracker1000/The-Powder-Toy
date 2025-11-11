@@ -1,13 +1,19 @@
 v62.0
 Fix internal variable used for detecting the mod.
 Fix developer settings.
+Fix FNTC and FPTC
 Fix hide mod elements button.
+
 Update to latest master.
 todo
 Update Mod wiki
 Fix SPSH
 Add sprk.cpp things
 Make relative heat do something.
+
+V61.0
+Jump update, detailed changelog will be released with next update
+
 v60.5
 Fix missing elements warning when opening saves made with resist element
 Fix BEE graphics.

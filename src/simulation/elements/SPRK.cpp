@@ -92,6 +92,8 @@ static int update(UPDATE_FUNC_ARGS)
 		return 1;
 	case PT_NTCT:
 	case PT_PTCT:
+	case PT_FPTC:
+	case PT_FNTC:
 		Element_NTCT_update(UPDATE_FUNC_SUBCALL_ARGS);
 		break;
 	case PT_ETRD:
@@ -234,7 +236,7 @@ static int update(UPDATE_FUNC_ARGS)
 								parts[ID(r)].life = 9;
 							}
 						}
-						else if(parts[ID(r)].ctype==PT_NTCT||parts[ID(r)].ctype==PT_PTCT)
+						else if(parts[ID(r)].ctype==PT_NTCT||parts[ID(r)].ctype==PT_FPTC||parts[ID(r)].ctype==PT_FNTC||parts[ID(r)].ctype==PT_FPTC)
 							if (sender==PT_METL)
 							{
 								parts[ID(r)].temp = 473.0f;
@@ -262,11 +264,11 @@ static int update(UPDATE_FUNC_ARGS)
 							Element_PPIP_flood_trigger(sim, x+rx, y+ry, sender);
 					}
 					continue;
-				case PT_NTCT: case PT_PTCT: case PT_INWR:
+				case PT_NTCT: case PT_PTCT: case PT_INWR: case PT_FNTC: case PT_FPTC:
 					if (sender==PT_METL && pavg!=PT_INSL && pavg!=PT_RSSS && parts[i].life<4)
 					{
 						parts[ID(r)].temp = 473.0f;
-						if (receiver==PT_NTCT||receiver==PT_PTCT)
+						if (receiver==PT_NTCT||receiver==PT_PTCT||receiver==PT_FNTC||receiver==PT_FPTC)
 							continue;
 					}
 					break;
@@ -297,7 +299,7 @@ static int update(UPDATE_FUNC_ARGS)
 							return true;
 						return false;
 					case PT_SWCH:
-						if (receiver==PT_PSCN||receiver==PT_NSCN||receiver==PT_WATR||receiver==PT_SLTW||receiver==PT_NTCT||receiver==PT_PTCT||receiver==PT_INWR)
+						if (receiver==PT_PSCN||receiver==PT_NSCN||receiver==PT_WATR||receiver==PT_SLTW||receiver==PT_NTCT||receiver==PT_FNTC||receiver==PT_PTCT||receiver==PT_INWR)
 							return false;
 						break;
 					case PT_ETRD:
@@ -305,6 +307,7 @@ static int update(UPDATE_FUNC_ARGS)
 							return true;
 						return false;
 					case PT_NTCT:
+					case PT_FNTC:
 						if (receiver==PT_PSCN || (receiver==PT_NSCN && parts[i].temp>373.0f))
 							return true;
 						return false;
@@ -327,6 +330,7 @@ static int update(UPDATE_FUNC_ARGS)
 							return true;
 						return false;
 					case PT_NTCT:
+					case PT_FNTC:
 						if (sender==PT_NSCN || (sender==PT_PSCN&&parts[ID(r)].temp>373.0f))
 							return true;
 						return false;

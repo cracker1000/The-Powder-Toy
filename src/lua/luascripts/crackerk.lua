@@ -1,6 +1,6 @@
 --Cracker1000's mod interface script--
 --Development controls 1 = enable & 0 = disable the feature/ setting. (Do not change unless you know what you are doing)
-local crackversion = 61.0 -- Next version: v60.6 (End of life support), Defines the internal mod version for update checks.
+local crackversion = 61.0 -- Next version: v63.0, Defines the internal mod version for update checks.
 local enscript = 1 -- Enable/ Disable the internal crack script.
 local enupdater = 1 -- Enable/ Disable the updater and message check.
 local appname = "powder" --Appname for updates and stuff.

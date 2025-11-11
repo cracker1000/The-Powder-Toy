@@ -62,7 +62,7 @@ static int update(UPDATE_FUNC_ARGS)
 				auto pavg = sim->parts_avg(i,ID(r),PT_INSL);
 				if (pavg!=PT_INSL && pavg!=PT_RSSS)
 				{
-					if ((elements[rt].Properties&PROP_CONDUCTS) && !(rt==PT_WATR||rt==PT_SLTW||rt==PT_NTCT||rt==PT_PTCT||rt==PT_INWR) && parts[ID(r)].life==0)
+					if ((elements[rt].Properties&PROP_CONDUCTS) && !(rt==PT_WATR||rt==PT_SLTW||rt==PT_NTCT||rt==PT_PTCT||rt==PT_INWR||rt == PT_FNTC||rt == PT_FPTC) && parts[ID(r)].life==0)
 					{
 						parts[ID(r)].life = 4;
 						parts[ID(r)].ctype = rt;
